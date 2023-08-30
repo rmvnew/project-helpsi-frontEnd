@@ -1,8 +1,8 @@
-# PROJECT HELPSI FRONTEND
+# Project Helpsi Frontend
 iniciando desenvolvimento de telas
 
-# TELAS CRIADAS CONFORME O DESIGNER UX/UI
+# Telas criadas conforme o designer UX/UI
 Telas: PERFIL | LOGIN | CADASTRO
 
-# TECNOLOGIAS UTILIZADAS:
+# Tecnologias utilizadas:
 HTML | CSS | *JS --> (ainda não foi utilizado)
