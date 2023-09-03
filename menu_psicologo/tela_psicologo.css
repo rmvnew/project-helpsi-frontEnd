@@ -1,0 +1,123 @@
+/* Reset de margens e preenchimento padrão para o corpo */
+body {
+    background-color: #9de0ad;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: #594f4f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+/* Estilo do logotipo */
+.logo img {
+    max-height: 80px;
+}
+
+/* Estilo do botão de alternar o menu */
+.botao-menu {
+    text-align: left;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+#alternar-menu {
+    background-color: #594f4f;
+    color: #9de0ad;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: block; /* Tornar o botão visível por padrão */
+}
+
+/* Estilo do menu */
+.menu {
+    background-color: #594f4f;
+    position: absolute;
+    top: 0;
+    left: -250px; /* Esconde o menu inicialmente */
+    width: 250px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza verticalmente o conteúdo do menu */
+    transition: left 0.3s;
+}
+
+/* Classe .aberto adicionada quando o menu está visível */
+.menu.aberto {
+    left: 0;
+}
+
+/* Estilo do botão de fechar o menu */
+#fechar-menu {
+    background-color: #594f4f;
+    color: #9de0ad;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+    margin-top: 80px; /* Espaçamento superior maior para distanciar do topo */
+}
+
+/* Estilo da lista de opções do menu */
+.opcoes-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo dos itens do menu com espaçamento vertical */
+.opcoes-menu li {
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px; /* Espaçamento superior para os itens do menu */
+}
+
+/* Estilo dos links dos itens do menu */
+.opcoes-menu li a {
+    text-decoration: none;
+    color: #9de0ad;
+    display: flex;
+    align-items: center;
+}
+
+/* Espaçamento entre ícones e texto */
+.opcoes-menu i {
+    margin-right: 10px;
+}
+
+/* Esconde o botão de alternar o menu quando o menu está aberto */
+.menu.aberto + .botao-menu #alternar-menu {
+    display: none;
+}
+
+/* Estilos gerais */
+
+/* Estilo do conteúdo principal */
+.conteudo-principal {
+    background-color: #9de0ad;
+}
+
+/* Estilo do conteúdo principal */
+.conteudo-principal {
+    
+    padding: 20px; /* Espaçamento interno para melhor aparência */
+    text-align: center; /* Centralizar o conteúdo horizontalmente */
+    margin-top: 80px; /* Espaçamento superior para evitar sobreposição com o cabeçalho */
+}
+
