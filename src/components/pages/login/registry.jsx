@@ -6,7 +6,7 @@ import {
   MainContainer,
   WelcomeText,
   LoginButton,
-} from "../login/style";
+} from "./style";
 import logo from "../../../img/helpsi_logo_1.png";
 import { Link } from "react-router-dom";
 
