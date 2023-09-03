@@ -138,7 +138,7 @@ export const LoginButton = styled.button`
   background-color: var(--bg-dark);
   color: #ffffff;
   border: none;
-  padding: 10px 43%;
+  padding: 10px 43px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
@@ -176,4 +176,10 @@ export const LoginOptions = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+
+  @media (max-width: 500px) {
+    p {
+      font-size: .8rem;
+    }
+  }
 `;

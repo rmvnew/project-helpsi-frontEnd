@@ -37,7 +37,7 @@ function Registry() {
             <LoginOptions>
               <p>Já possui uma conta?</p>
               <p>
-                <Link to="/">Faça login</Link>
+                <Link to="/login">Faça login</Link>
               </p>
             </LoginOptions>
           </LoginForm>

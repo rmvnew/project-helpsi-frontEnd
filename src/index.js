@@ -17,16 +17,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Profile />,
+      },
+      {
+        path: "/login",
         element: <Login />,
       },
       {
         path: "/registry",
         element: <Registry />,
       },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
+      
     ],
   },
 ]);
