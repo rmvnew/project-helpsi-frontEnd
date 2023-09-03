@@ -12,3 +12,9 @@ body {
   box-sizing: border-box;
   font-family: "Urbanist", sans-serif;
 }
+
+
+:root {
+  --bg-primary: #9de0ad;
+  --bg-dark: #594f4f;
+}

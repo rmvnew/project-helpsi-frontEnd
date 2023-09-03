@@ -21,7 +21,7 @@ export const Container = styled.div`
 export const LeftContainer = styled.div`
   width: 400px;
   padding: 20px;
-  background-color: #9de0ad;
+  background-color: var(--bg-primary);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@ export const WelcomeText = styled.div`
   font-weight: bolder;
   line-height: 2.4rem;
   margin-bottom: 24.3px;
-  color: #594f4f;
+  color: var(--bg-dark);
 
   @media (max-width: 768px) {
     width: 100%;
@@ -77,7 +77,7 @@ export const WelcomeText = styled.div`
 
 export const MainContainer = styled.div`
   padding: 20px;
-  background-color: #9de0ad;
+  background-color: var(--bg-primary);
   background-image: url(${casal});
   background-size: cover;
   background-position: center center;
@@ -108,7 +108,7 @@ export const LoginForm = styled.div`
   }
 
   a {
-    color: #594f4f;
+    color: var(--bg-dark);
     text-decoration: none;
   }
 
@@ -125,7 +125,7 @@ export const PasswordReset = styled.div`
   margin-top: 5px;
 
   a {
-    color: #594f4f;
+    color: var(--bg-dark);
     text-decoration: underline;
   }
 
@@ -135,7 +135,7 @@ export const PasswordReset = styled.div`
 `;
 
 export const LoginButton = styled.button`
-  background-color: #594f4f;
+  background-color: var(--bg-dark);
   color: #ffffff;
   border: none;
   padding: 10px 43%;
@@ -150,7 +150,6 @@ export const LoginButton = styled.button`
     background-color: #45ada8;
   }
 `;
-
 
 export const GoogleButton = styled.a`
   display: flex;
