@@ -6,6 +6,7 @@ import {
   MainContainer,
   WelcomeText,
   LoginButton,
+  LoginOptions,
 } from "./style";
 import logo from "../../../img/helpsi_logo_1.png";
 import { Link } from "react-router-dom";
@@ -33,10 +34,12 @@ function Registry() {
             <input type="password" placeholder="Senha" />
             <input type="password" placeholder="Repetir a senha" />
             <LoginButton>Registrar</LoginButton>
-
-            <p>
-              Já possui uma conta? <Link to="/">Faça login</Link>
-            </p>
+            <LoginOptions>
+              <p>Já possui uma conta?</p>
+              <p>
+                <Link to="/">Faça login</Link>
+              </p>
+            </LoginOptions>
           </LoginForm>
         </LeftContainer>
 

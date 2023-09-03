@@ -6,6 +6,7 @@ import {
   LeftContainer,
   LoginButton,
   LoginForm,
+  LoginOptions,
   Logo,
   MainContainer,
   PasswordReset,
@@ -41,10 +42,12 @@ function Login() {
               <img src={google} alt="Google Icon" />
               Logar com o Google
             </GoogleButton>
-            <p>
-              Não tem uma conta?
-              <Link to="/registry">Registre-se aqui</Link>
-            </p>
+            <LoginOptions>
+              <p>Não tem uma conta?</p>
+              <p>
+                <Link to="/registry">Registre-se aqui</Link>
+              </p>
+            </LoginOptions>
           </LoginForm>
         </LeftContainer>
         <MainContainer />

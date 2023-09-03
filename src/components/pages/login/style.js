@@ -146,16 +146,11 @@ export const LoginButton = styled.button`
   margin-bottom: 10px;
   width: 100%;
 
-  :hover {
+  &:hover {
     background-color: #45ada8;
   }
 `;
 
-export const LoginOptions = styled.div`
-  margin-top: 20px;
-  text-align: center;
-  color: #594f4f;
-`;
 
 export const GoogleButton = styled.a`
   display: flex;
@@ -176,4 +171,10 @@ export const GoogleButton = styled.a`
     height: 20px;
     margin-right: 10px;
   }
+`;
+
+export const LoginOptions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
