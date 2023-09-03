@@ -6,7 +6,6 @@ import {
   LeftContainer,
   LoginButton,
   LoginForm,
-  LoginOptions,
   Logo,
   MainContainer,
   PasswordReset,
@@ -37,22 +36,18 @@ function Login() {
               <Link to="#">Esqueceu sua senha?</Link>
             </PasswordReset>
             <LoginButton>Entrar</LoginButton>
-            <LoginOptions>
-              ou
-              <GoogleButton href="https://www.google.com">
-                <img src={google} alt="Google Icon" />
-                Logar com o Google
-              </GoogleButton>
-              <p>
-                Não tem uma conta?
-                <Link to="/registry">
-                  Registre-se aqui
-                </Link>
-              </p>
-            </LoginOptions>
+            ou
+            <GoogleButton href="https://www.google.com">
+              <img src={google} alt="Google Icon" />
+              Logar com o Google
+            </GoogleButton>
+            <p>
+              Não tem uma conta?
+              <Link to="/registry">Registre-se aqui</Link>
+            </p>
           </LoginForm>
         </LeftContainer>
-        <MainContainer/>
+        <MainContainer />
       </Container>
     </>
   );

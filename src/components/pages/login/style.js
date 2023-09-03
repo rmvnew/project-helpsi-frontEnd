@@ -51,6 +51,8 @@ export const Logo = styled.div`
   }
 
   @media (max-width: 768px) {
+    margin-top: 10%;
+
     img {
       max-width: 9rem;
     }
@@ -58,15 +60,16 @@ export const Logo = styled.div`
 `;
 
 export const WelcomeText = styled.div`
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: bolder;
   line-height: 2.4rem;
   margin-bottom: 24.3px;
   color: #594f4f;
 
   @media (max-width: 768px) {
+    width: 100%;
     h2 {
-      font-size: 14px;
+      font-size: 1rem;
       margin-top: 10px;
     }
   }
@@ -89,6 +92,7 @@ export const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 85%;
 
   input {
     width: 100%;
@@ -97,6 +101,20 @@ export const LoginForm = styled.div`
     border: 1px solid #ccc;
     border-radius: 5px;
   }
+
+  p {
+    margin-top: 70px;
+    color: #666;
+  }
+
+  a {
+    color: #594f4f;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 70%;
+  }
 `;
 
 export const PasswordReset = styled.div`
@@ -104,6 +122,7 @@ export const PasswordReset = styled.div`
   top: -4px;
   margin-left: 9rem;
   font-size: 12px;
+  margin-top: 5px;
 
   a {
     color: #594f4f;
@@ -124,26 +143,18 @@ export const LoginButton = styled.button`
   cursor: pointer;
   font-weight: bold;
   margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
 
   :hover {
     background-color: #45ada8;
   }
-`
+`;
 
 export const LoginOptions = styled.div`
   margin-top: 20px;
   text-align: center;
   color: #594f4f;
-
-  a {
-    color: #594f4f;
-    text-decoration: none;
-  }
-
-  p {
-    margin-top: 70px;
-    color: #666;
-  }
 `;
 
 export const GoogleButton = styled.a`
@@ -158,6 +169,7 @@ export const GoogleButton = styled.a`
   text-decoration: none;
   transition: background-color 0.3s;
   margin-top: 10px;
+  width: 100%;
 
   img {
     width: 20px;
