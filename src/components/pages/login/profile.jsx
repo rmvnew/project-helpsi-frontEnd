@@ -6,7 +6,7 @@ import {
   Logo,
   MainContainer,
   WelcomeText,
-} from "../login/style";
+} from "./style";
 import logo from "../../../img/helpsi_logo_1.png";
 
 function Profile() {
