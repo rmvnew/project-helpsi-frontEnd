@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import casal from "../../../img/casal.svg";
+import casal from "../../../../img/casal.svg";
 
 export const Container = styled.div`
   display: grid;
@@ -71,6 +71,10 @@ export const WelcomeText = styled.div`
     font-size: 1rem;
   }
 
+  h2 {
+    text-align: center;
+  }
+
   @media (max-width: 768px) {
     width: 100%;
     h2 {
@@ -113,8 +117,14 @@ export const LoginForm = styled.div`
   }
 
   a {
-    color: var(--bg-dark);
+    color: var(--bg-primary);
+    background-color: var(--bg-dark);
     text-decoration: none;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-align: center;
     
   }
 
