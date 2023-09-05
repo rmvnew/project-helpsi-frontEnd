@@ -32,6 +32,7 @@ export const LoginForm = styled.div`
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: sans-serif;
 
     &::placeholder {
       color: #88888a;
@@ -46,6 +47,10 @@ export const LoginForm = styled.div`
     border-radius: 5px;
     background-color: white;
     color: #88888a;
+  }
+
+  option {
+    color: var(--bg-dark);
   }
 
   p {
@@ -89,7 +94,7 @@ export const GoogleButton = styled.div`
   justify-content: center;
   font-family: sans-serif;
   font-weight: bold;
-  font-size: .9rem;
+  font-size: 0.9rem;
   align-items: center;
   gap: 10px;
   padding: 10px 30px;

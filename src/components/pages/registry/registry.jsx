@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   LoginForm,
   WelcomeText,
@@ -14,6 +18,91 @@ import logo from "../../../img/helpsi_logo_1.png";
 import google from "../../../img/google.png";
 
 function Registry() {
+  const API_URL = "http://localhost:3000/api/v1/user";
+  const PROFILE_API_URL = "http://localhost:3000/api/v1/profile";
+
+  // Initialize state for user data and profile options
+  const [userData, setUserData] = useState({
+    user_name: "",
+    user_email: "",
+    user_phone: "",
+    user_date_of_birth: "",
+    user_profile_id: "", // Set a default value
+    user_password: "",
+    user_password_confirm: "", // New field for password confirmation
+  });
+  const [profileOptions, setProfileOptions] = useState([]);
+
+  // Fetch profile options from the API
+  useEffect(() => {
+    axios
+      .get(PROFILE_API_URL)
+      .then((response) => {
+        // Extract profile options from the API response
+        const options = response.data.map((profile) => ({
+          label: profile.profile_name,
+          value: profile.profile_id,
+        }));
+        // Set the profile options in state
+        setProfileOptions(options);
+      })
+      .catch((error) => {
+        const message =
+          error.response.data.message ??
+          'Não foi possível buscar "Tipos de Problemas"';
+
+        toast.error(message);
+      });
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+  };
+
+  // Function to send user data to the API
+  const sendUserDataToAPI = () => {
+    // Check if the password and password confirmation match
+    if (userData.user_password !== userData.user_password_confirm) {
+      toast.error("As senhas não coincidem.");
+      return;
+    }
+
+    axios
+      .post(API_URL, userData)
+      .then((response) => {
+        // Handle the API response here
+        console.log("API response:", response.data);
+        toast.success("Cadastro realizado com sucesso!");
+        // Limpe os campos do formulário definindo o estado userData para valores vazios
+        setUserData({
+          user_name: "",
+          user_email: "",
+          user_phone: "",
+          user_date_of_birth: "",
+          user_profile_id: "",
+          user_password: "",
+          user_password_confirm: "",
+        });
+      })
+      .catch((error) => {
+        const message =
+          error.response.data.message ??
+          'Ocorreu um erro ao cadastrar. Certifique-se de selecionar um perfil.';
+
+        toast.error(message);
+      });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendUserDataToAPI();
+  };
+
   return (
     <>
       <Container>
@@ -26,21 +115,68 @@ function Registry() {
             <h2>Informações de acesso</h2>
           </WelcomeText>
 
-          <LoginForm>
-            <input type="text" placeholder="Nome completo" />
-            <input type="email" placeholder="Email" />
-            <input type="number" placeholder="Telefone (WhatsApp)" />
-            <input type="text" placeholder="Data de nascimento" />
-            <input type="password" placeholder="Senha" />
-            <input type="password" placeholder="Confimar a senha" />
-            <select>
-              <option>Selecione seu perfil</option>
+          <LoginForm onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Nome completo"
+              name="user_name"
+              value={userData.user_name}
+              onChange={handleInputChange}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="user_email"
+              value={userData.user_email}
+              onChange={handleInputChange}
+            />
+            <input
+              type="number"
+              placeholder="Telefone (WhatsApp)"
+              name="user_phone"
+              value={userData.user_phone}
+              onChange={handleInputChange}
+            />
+            <input
+              type="text"
+              placeholder="Data de nascimento"
+              name="user_date_of_birth"
+              value={userData.user_date_of_birth}
+              onChange={handleInputChange}
+            />
+            <input
+              type="password"
+              placeholder="Senha"
+              name="user_password"
+              value={userData.user_password}
+              onChange={handleInputChange}
+            />
+            <input
+              type="password"
+              placeholder="Confirmar senha"
+              name="user_password_confirm"
+              value={userData.user_password_confirm}
+              onChange={handleInputChange}
+            />
+            <select
+              name="user_profile_id"
+              value={userData.user_profile_id}
+              onChange={handleInputChange}
+            >
+              <option value="">Selecione seu perfil</option>
+              {profileOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
             <p>
               Ao clicar em continuar, você estará concordando com o nosso
               <strong> termo de uso.</strong>
             </p>
-            <LoginButton>Aceitar e continuar</LoginButton>
+            <LoginButton type="button" onClick={sendUserDataToAPI}>
+              Aceitar e continuar
+            </LoginButton>
             <GoogleButton href="https://www.google.com">
               <img src={google} alt="Google Icon" />
               Registre-se usando o google
@@ -50,6 +186,7 @@ function Registry() {
 
         <MainContainer></MainContainer>
       </Container>
+      <ToastContainer />
     </>
   );
 }
