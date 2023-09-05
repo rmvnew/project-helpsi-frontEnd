@@ -8,8 +8,9 @@ import {
   WelcomeText,
 } from "./style";
 import logo from "../../../img/helpsi_logo_1.png";
+import { Link } from "react-router-dom";
 
-function Profile() {
+function Start() {
   return (
     <>
       <Container>
@@ -20,12 +21,11 @@ function Profile() {
 
           <WelcomeText>
             <h2>Seja bem vindo!</h2>
-            <p>Você está acessando sua conta como:</p>
           </WelcomeText>
 
           <LoginForm>
-            <LoginButton>Sou um Cliente</LoginButton>
-            <LoginButton>Sou um Psicólogo</LoginButton>
+            <LoginButton><Link to="/login">Já possui uma conta?</Link></LoginButton>
+            <LoginButton><Link to="/registry">Criar Conta</Link></LoginButton>
           </LoginForm>
         </LeftContainer>
 
@@ -35,4 +35,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Start;

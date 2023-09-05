@@ -151,6 +151,10 @@ export const LoginButton = styled.button`
   margin-bottom: 10px;
   width: 100%;
 
+  a {
+    color: var(--bg-primary);
+  }
+
   &:hover {
     background-color: #45ada8;
   }

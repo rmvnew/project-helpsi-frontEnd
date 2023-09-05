@@ -7,7 +7,7 @@ import "./index.css";
 import App from "./App";
 import Login from "./components/pages/login/login";
 import Registry from "./components/pages/login/registry";
-import Profile from "./components/pages/login/profile";
+import Start from "./components/pages/login/start";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Profile />,
+        element: <Start />,
       },
       {
         path: "/login",
