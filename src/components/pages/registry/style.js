@@ -32,6 +32,20 @@ export const LoginForm = styled.div`
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+
+    &::placeholder {
+      color: #88888a;
+    }
+  }
+
+  select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #88888a;
   }
 
   p {

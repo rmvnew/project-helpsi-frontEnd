@@ -28,10 +28,14 @@ function Registry() {
 
           <LoginForm>
             <input type="text" placeholder="Nome completo" />
-            <input type="number" placeholder="Telefone (WhatsApp)" />
             <input type="email" placeholder="Email" />
+            <input type="number" placeholder="Telefone (WhatsApp)" />
+            <input type="text" placeholder="Data de nascimento" />
             <input type="password" placeholder="Senha" />
             <input type="password" placeholder="Confimar a senha" />
+            <select>
+              <option>Selecione seu perfil</option>
+            </select>
             <p>
               Ao clicar em continuar, você estará concordando com o nosso
               <strong> termo de uso.</strong>
