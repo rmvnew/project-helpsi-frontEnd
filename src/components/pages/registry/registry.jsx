@@ -1,16 +1,17 @@
 import {
-  Container,
-  LeftContainer,
   LoginForm,
-  Logo,
-  MainContainer,
   WelcomeText,
   LoginButton,
-  GoogleButton
+  GoogleButton,
 } from "../registry/style";
-import logo from "../../../../img/helpsi_logo_1.png";
-import google from "../../../../img/google.png";
-
+import {
+  Container,
+  LeftContainer,
+  Logo,
+  MainContainer,
+} from "../../layout/loginContainer";
+import logo from "../../../img/helpsi_logo_1.png";
+import google from "../../../img/google.png";
 
 function Registry() {
   return (
@@ -22,9 +23,7 @@ function Registry() {
           </Logo>
 
           <WelcomeText>
-            <h2>
-              Informações de acesso
-            </h2>
+            <h2>Informações de acesso</h2>
           </WelcomeText>
 
           <LoginForm>

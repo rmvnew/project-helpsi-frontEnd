@@ -1,12 +1,6 @@
-import {
-  Container,
-  LeftContainer,
-  LoginForm,
-  Logo,
-  MainContainer,
-  WelcomeText,
-} from "../start/style";
-import logo from "../../../../img/helpsi_logo_1.png";
+import { LoginForm, WelcomeText } from "./style";
+import { Container, LeftContainer, Logo, MainContainer } from "../../layout/loginContainer";
+import logo from "../../../img/helpsi_logo_1.png";
 import { Link } from "react-router-dom";
 
 function Start() {

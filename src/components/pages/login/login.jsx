@@ -1,18 +1,15 @@
 import logo from "../../../img/helpsi_logo_1.png";
 import google from "../../../img/google.png";
 import {
-  Container,
   GoogleButton,
-  LeftContainer,
   LoginButton,
   LoginForm,
   LoginOptions,
-  Logo,
-  MainContainer,
   PasswordReset,
   WelcomeText,
 } from "./style";
 import { Link } from "react-router-dom";
+import { Container, LeftContainer, Logo, MainContainer } from "../../layout/loginContainer";
 
 function Login() {
   return (
@@ -50,7 +47,7 @@ function Login() {
             </LoginOptions>
           </LoginForm>
         </LeftContainer>
-        <MainContainer />
+        <MainContainer/>
       </Container>
     </>
   );

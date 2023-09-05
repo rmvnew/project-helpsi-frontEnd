@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
 import App from "./App";
+import Start from "./components/pages/start/start";
 import Login from "./components/pages/login/login";
+import Registry from "./components/pages/registry/registry";
 
-import Start from "./components/pages/login/start/start";
-import Registry from "./components/pages/login/registry/registry";
 
 
 const router = createBrowserRouter([
