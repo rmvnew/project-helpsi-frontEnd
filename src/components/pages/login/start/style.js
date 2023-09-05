@@ -131,6 +131,10 @@ export const LoginForm = styled.div`
   @media (max-width: 768px) {
     width: 70%;
   }
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const PasswordReset = styled.div`
