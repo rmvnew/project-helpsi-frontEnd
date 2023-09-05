@@ -6,8 +6,9 @@ import "./index.css";
 
 import App from "./App";
 import Login from "./components/pages/login/login";
-import Registry from "./components/pages/login/registry";
+
 import Start from "./components/pages/login/start/start";
+import Registry from "./components/pages/login/registry/registry";
 
 
 const router = createBrowserRouter([
