@@ -26,13 +26,13 @@ function Login() {
           <WelcomeText>
             <h2>
               Que bom te ver por aqui! <br />
-              acesse sua conta
             </h2>
+            <p>Acesse sua conta agora mesmo.</p>
           </WelcomeText>
 
           <LoginForm>
-            <input type="number_format" placeholder="Digite seu CPF" />
-            <input type="password" placeholder="Senha" />
+            <input type="email" placeholder="Digite seu email" />
+            <input type="password" placeholder="Digite sua senha" />
             <PasswordReset>
               <Link to="#">Esqueceu sua senha?</Link>
             </PasswordReset>

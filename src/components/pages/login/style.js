@@ -43,10 +43,10 @@ export const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-top: -32px;
+  margin-top: 10%;
 
   img {
-    max-width: 90%;
+    width: 100%;
     height: auto;
   }
 
@@ -54,17 +54,22 @@ export const Logo = styled.div`
     margin-top: 10%;
 
     img {
-      max-width: 9rem;
+      width: 300px;
     }
   }
 `;
 
 export const WelcomeText = styled.div`
-  font-size: 1.3rem;
-  font-weight: bolder;
+  width: 90%;
+  font-size: 1.1rem;
   line-height: 2.4rem;
-  margin-bottom: 24.3px;
   color: var(--bg-dark);
+
+  p {
+    margin-top: 20px;
+    font-family: sans-serif;
+    font-size: 1rem;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -136,7 +141,7 @@ export const PasswordReset = styled.div`
 
 export const LoginButton = styled.button`
   background-color: var(--bg-dark);
-  color: #ffffff;
+  color: var(--bg-primary);
   border: none;
   padding: 10px 43px;
   border-radius: 5px;
@@ -177,9 +182,13 @@ export const LoginOptions = styled.div`
   align-items: center;
   gap: 10px;
 
+  p {
+    font-family: sans-serif;
+  }
+
   @media (max-width: 500px) {
     p {
-      font-size: .8rem;
+      font-size: 0.8rem;
     }
   }
 `;
