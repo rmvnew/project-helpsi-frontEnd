@@ -9,6 +9,7 @@ import Start from "./components/pages/Start";
 import Login from "./components/pages/Login";
 import Registry from "./components/pages/Registry";
 import Home from "./components/pages/Home";
+import RecoverPass from "./components/pages/RecoverPassword";
 
 
 
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
         path: "/home",
         element: <Home />,
       },
+      {
+        path: "/recoverPassword",
+        element: <RecoverPass />,
+      },
+      
       
     ],
   },

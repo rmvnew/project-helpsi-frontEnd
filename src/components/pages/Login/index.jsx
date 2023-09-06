@@ -91,7 +91,7 @@ function Login() {
               onChange={handleInputChange}
             />
             <PasswordReset>
-              <Link to="#">Esqueceu sua senha?</Link>
+              <Link to="/recoverPassword">Esqueceu sua senha?</Link>
             </PasswordReset>
             <LoginButton onClick={handleLoginClick}>Entrar</LoginButton>
             ou
