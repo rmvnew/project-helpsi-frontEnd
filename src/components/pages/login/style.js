@@ -34,6 +34,7 @@ export const LoginForm = styled.div`
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: sans-serif;
   }
 
   p {
