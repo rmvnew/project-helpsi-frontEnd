@@ -7,7 +7,7 @@ import {
   WelcomeText,
   LoginButton,
   GoogleButton,
-} from "../registry/style";
+} from "./style";
 import {
   Container,
   LeftContainer,

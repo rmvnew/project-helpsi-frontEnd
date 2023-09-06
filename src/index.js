@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
 import App from "./App";
-import Start from "./components/pages/start/start";
-import Login from "./components/pages/login/login";
-import Registry from "./components/pages/registry/registry";
-import Home from "./components/pages/home";
+import Start from "./components/pages/Start";
+import Login from "./components/pages/Login";
+import Registry from "./components/pages/Registry";
+import Home from "./components/pages/Home";
 
 
 
