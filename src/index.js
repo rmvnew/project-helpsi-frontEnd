@@ -10,6 +10,7 @@ import Login from "./components/pages/Login";
 import Registry from "./components/pages/Registry";
 import Home from "./components/pages/Home";
 import RecoverPass from "./components/pages/RecoverPassword";
+import CheckCode from "./components/pages/CheckCode";
 
 
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/recoverPassword",
         element: <RecoverPass />,
+      },
+      {
+        path: "/checkcode",
+        element: <CheckCode />,
       },
       
       

@@ -3,15 +3,11 @@ import casal from "../../img/casal.svg";
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: 316px 1fr;
   min-height: 100vh;
   background-color: #f0f0f0;
   background-image: url(${casal});
   background-size: cover;
-
-  @media (min-width: 769px) {
-    grid-template-columns: 400px 1fr;
-  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -19,18 +15,14 @@ export const Container = styled.div`
 `;
 
 export const LeftContainer = styled.div`
-  width: 400px;
+
+  width: 316px;
   padding: 20px;
   background-color: var(--bg-primary);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media (min-width: 769px) {
-    width: 400px;
-    padding: 20px;
-  }
 
   @media (max-width: 768px) {
     width: 100%;
