@@ -1,5 +1,7 @@
-import logo from "../../../img/helpsi_logo_1.png";
-import google from "../../../img/google.png";
+import React, { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   GoogleButton,
   LoginButton,
@@ -8,10 +10,56 @@ import {
   PasswordReset,
   WelcomeText,
 } from "./style";
-import { Link } from "react-router-dom";
-import { Container, LeftContainer, Logo, MainContainer } from "../../layout/loginContainer";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Container,
+  LeftContainer,
+  Logo,
+  MainContainer,
+} from "../../layout/loginContainer";
+import logo from "../../../img/helpsi_logo_1.png";
+import google from "../../../img/google.png";
 
 function Login() {
+  const API_URL = "http://localhost:3000/api/v1/auth/login";
+
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({
+      ...credentials,
+      [name]: value,
+    });
+  };
+
+  const sendLoginDataToAPI = async () => {
+    try {
+      const response = await axios.post(API_URL, credentials);
+
+      console.log("API response:", response.data);
+
+      if (response.status === 200) {
+        navigate("/home");
+      } else {
+        toast.error("Erro ao fazer login. Verifique suas credenciais.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+
+      toast.error("Erro ao fazer login. Verifique suas credenciais.");
+    }
+  };
+
+  const handleLoginClick = () => {
+    sendLoginDataToAPI();
+  };
+
   return (
     <>
       <Container>
@@ -28,12 +76,24 @@ function Login() {
           </WelcomeText>
 
           <LoginForm>
-            <input type="email" placeholder="Digite seu email" />
-            <input type="password" placeholder="Digite sua senha" />
+            <input
+              type="email"
+              placeholder="Digite seu email"
+              name="email"
+              value={credentials.email}
+              onChange={handleInputChange}
+            />
+            <input
+              type="password"
+              placeholder="Digite sua senha"
+              name="password"
+              value={credentials.password}
+              onChange={handleInputChange}
+            />
             <PasswordReset>
               <Link to="#">Esqueceu sua senha?</Link>
             </PasswordReset>
-            <LoginButton>Entrar</LoginButton>
+            <LoginButton onClick={handleLoginClick}>Entrar</LoginButton>
             ou
             <GoogleButton href="https://www.google.com">
               <img src={google} alt="Google Icon" />
@@ -47,8 +107,9 @@ function Login() {
             </LoginOptions>
           </LoginForm>
         </LeftContainer>
-        <MainContainer/>
+        <MainContainer />
       </Container>
+      <ToastContainer />
     </>
   );
 }

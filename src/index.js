@@ -8,6 +8,7 @@ import App from "./App";
 import Start from "./components/pages/start/start";
 import Login from "./components/pages/login/login";
 import Registry from "./components/pages/registry/registry";
+import Home from "./components/pages/home";
 
 
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/registry",
         element: <Registry />,
+      },
+      {
+        path: "/home",
+        element: <Home />,
       },
       
     ],
