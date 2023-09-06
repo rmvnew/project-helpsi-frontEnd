@@ -112,10 +112,11 @@ export const GoogleButton = styled.a`
 export const LoginOptions = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 
   p {
     font-family: sans-serif;
+    font-size: .8rem;
   }
 
   @media (max-width: 500px) {

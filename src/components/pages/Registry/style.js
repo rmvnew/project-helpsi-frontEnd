@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const WelcomeText = styled.div`
-  width: 90%;
-  font-size: 1.1rem;
+  width: 100%;
+  font-size: 1rem;
   line-height: 2.4rem;
   color: var(--bg-dark);
 
@@ -24,7 +24,7 @@ export const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 85%;
+  width: 90%;
 
   input {
     width: 100%;
@@ -57,6 +57,7 @@ export const LoginForm = styled.div`
     margin-top: 20px;
     margin-bottom: 50px;
     font-family: sans-serif;
+    font-size: .8rem;
     color: var(--bg-dark);
   }
   @media (max-width: 768px) {
@@ -64,7 +65,7 @@ export const LoginForm = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 100%;
+    width: 90%;
   }
 `;
 
@@ -94,7 +95,7 @@ export const GoogleButton = styled.div`
   justify-content: center;
   font-family: sans-serif;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.6rem;
   align-items: center;
   gap: 10px;
   padding: 10px 30px;

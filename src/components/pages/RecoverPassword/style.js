@@ -12,11 +12,15 @@ export const WelcomeText = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 70%;
     h2 {
-      font-size: 1rem;
+      font-size: 1.5rem;
       margin-top: 10px;
     }
+  }
+
+  @media (max-width: 500px) {
+    width: 90%;
   }
 `;
 
@@ -48,6 +52,10 @@ export const LoginForm = styled.div`
 
   @media (max-width: 768px) {
     width: 70%;
+  }
+
+  @media (max-width: 500px) {
+    width: 90%;
   }
 `;
 
