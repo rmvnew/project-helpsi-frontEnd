@@ -1,6 +1,11 @@
-import logo from "../../../assets/img/logo.svg";
+import React from "react";
 import { ToastContainer } from "react-toastify";
-import { LoginButton, LoginForm, Resend, WelcomeText } from "./style";
+import {
+  LoginButton,
+  LoginForm,
+  Resend,
+  WelcomeText,
+} from "./style";
 import {
   Container,
   LeftContainer,
@@ -8,13 +13,13 @@ import {
   MainContainer,
 } from "../../layout/loginContainer";
 
-export const CheckCode = () => {
+const CheckCode: React.FC = () => {
   return (
     <>
       <Container>
         <LeftContainer>
           <Logo>
-            <img src={logo} alt="Logo da Empresa" />
+          <img src={require('../../../assets/img/logo.svg')} alt="" />
           </Logo>
           <WelcomeText>
             <h2>Verificando...</h2>
@@ -38,3 +43,5 @@ export const CheckCode = () => {
     </>
   );
 };
+
+export default CheckCode;
