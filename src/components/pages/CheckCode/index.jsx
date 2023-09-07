@@ -1,12 +1,12 @@
+import logo from "../../../assets/img/logo.svg";
+import { ToastContainer } from "react-toastify";
 import { LoginButton, LoginForm, Resend, WelcomeText } from "./style";
-import logo from "../../../img/logo.svg";
 import {
   Container,
   LeftContainer,
   Logo,
   MainContainer,
 } from "../../layout/loginContainer";
-import { ToastContainer } from "react-toastify";
 
 function RecoverPass() {
   return (

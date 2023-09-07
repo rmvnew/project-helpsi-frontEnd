@@ -1,12 +1,12 @@
+import logo from "../../../assets/img/logo.svg";
 import { LoginButton, LoginForm, WelcomeText } from "./style";
-import logo from "../../../img/logo.svg";
+import { ToastContainer } from "react-toastify";
 import {
   Container,
   LeftContainer,
   Logo,
   MainContainer,
 } from "../../layout/loginContainer";
-import { ToastContainer } from "react-toastify";
 
 function RecoverPass() {
   return (
@@ -19,7 +19,8 @@ function RecoverPass() {
           <WelcomeText>
             <h2>Você esqueceu sua senha?</h2>
             <p>
-              Não se preocupe! Acontece. Por favor, insira o endereço de e-mail vinculado à sua conta.
+              Não se preocupe! Acontece. Por favor, insira o endereço de e-mail
+              vinculado à sua conta.
             </p>
           </WelcomeText>
           <LoginForm>

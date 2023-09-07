@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import logo from "../../../assets/img/logo.svg";
+import google from "../../../assets/img/google.png";
+import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { LoginForm, WelcomeText, LoginButton, GoogleButton } from "./style";
 import {
   Container,
@@ -9,8 +11,6 @@ import {
   Logo,
   MainContainer,
 } from "../../layout/loginContainer";
-import logo from "../../../img/logo.svg";
-import google from "../../../img/google.png";
 
 function Registry() {
   const API_URL = "http://localhost:3000/api/v1/user";

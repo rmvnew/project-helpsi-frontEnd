@@ -1,7 +1,16 @@
-import React, { useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import logo from "../../../assets/img/logo.svg";
+import google from "../../../assets/img/google.png";
+import {
+  Container,
+  LeftContainer,
+  Logo,
+  MainContainer,
+} from "../../layout/loginContainer";
 import {
   GoogleButton,
   LoginButton,
@@ -10,15 +19,6 @@ import {
   PasswordReset,
   WelcomeText,
 } from "./style";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  Container,
-  LeftContainer,
-  Logo,
-  MainContainer,
-} from "../../layout/loginContainer";
-import logo from "../../../img/logo.svg";
-import google from "../../../img/google.png";
 
 function Login() {
   const API_URL = "http://localhost:3000/api/v1/auth/login";
