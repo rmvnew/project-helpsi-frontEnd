@@ -2,19 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  LoginForm,
-  WelcomeText,
-  LoginButton,
-  GoogleButton,
-} from "./style";
+import { LoginForm, WelcomeText, LoginButton, GoogleButton } from "./style";
 import {
   Container,
   LeftContainer,
   Logo,
   MainContainer,
 } from "../../layout/loginContainer";
-import logo from "../../../img/helpsi_logo_1.png";
+import logo from "../../../img/logo.svg";
 import google from "../../../img/google.png";
 
 function Registry() {

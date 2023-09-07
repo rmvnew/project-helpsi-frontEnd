@@ -48,7 +48,7 @@ export const LoginForm = styled.div`
 
 export const LoginButton = styled.button`
   background-color: var(--bg-dark);
-  color: var(--bg-primary);
+  color: white;
   border: none;
   padding: 10px 43px;
   border-radius: 5px;
@@ -58,12 +58,8 @@ export const LoginButton = styled.button`
   margin-bottom: 10px;
   width: 90%;
 
-  a {
-    color: var(--bg-primary);
-  }
-
   &:hover {
-    background-color: #45ada8;
+    background-color: var(--bg-hover-button);
   }
 
   @media (max-width: 768px) {

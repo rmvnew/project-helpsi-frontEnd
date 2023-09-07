@@ -17,7 +17,7 @@ import {
   Logo,
   MainContainer,
 } from "../../layout/loginContainer";
-import logo from "../../../img/helpsi_logo_1.png";
+import logo from "../../../img/logo.svg";
 import google from "../../../img/google.png";
 
 function Login() {

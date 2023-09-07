@@ -1,5 +1,5 @@
 import { LoginButton, LoginForm, WelcomeText } from "./style";
-import logo from "../../../img/helpsi_logo_1.png";
+import logo from "../../../img/logo.svg";
 import {
   Container,
   LeftContainer,

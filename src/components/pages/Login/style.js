@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 export const WelcomeText = styled.div`
-  width: 90%;
-  font-size: 1.1rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
   line-height: 2.4rem;
   color: var(--bg-dark);
 
   p {
     margin-top: 20px;
     font-family: sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   @media (max-width: 768px) {
@@ -69,7 +70,7 @@ export const PasswordReset = styled.div`
 
 export const LoginButton = styled.button`
   background-color: var(--bg-dark);
-  color: var(--bg-primary);
+  color: white;
   border: none;
   padding: 10px 43px;
   border-radius: 5px;
@@ -79,12 +80,8 @@ export const LoginButton = styled.button`
   margin-bottom: 10px;
   width: 100%;
 
-  a {
-    color: var(--bg-primary);
-  }
-
   &:hover {
-    background-color: #45ada8;
+    background-color: var(--bg-hover-button);
   }
 `;
 
@@ -116,7 +113,7 @@ export const LoginOptions = styled.div`
 
   p {
     font-family: sans-serif;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 
   @media (max-width: 500px) {

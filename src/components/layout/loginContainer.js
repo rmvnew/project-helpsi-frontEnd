@@ -15,12 +15,12 @@ export const Container = styled.div`
 `;
 
 export const LeftContainer = styled.div`
-
   width: 316px;
   padding: 20px;
   background-color: var(--bg-primary);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
 
@@ -32,19 +32,12 @@ export const LeftContainer = styled.div`
 `;
 
 export const Logo = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 10%;
-
+    
   img {
     width: 100%;
-    height: auto;
   }
 
   @media (max-width: 768px) {
-    margin-top: 10%;
-
     img {
       width: 300px;
     }
