@@ -5,13 +5,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
 import App from "./App";
-import Login from "./components/pages/Login";
-import Registry from "./components/pages/Registry";
-import Home from "./components/pages/Home";
-import RecoverPass from "./components/pages/RecoverPassword";
-import CheckCode from "./components/pages/CheckCode";
-
-
+import { CheckCode } from "./components/pages/CheckCode";
+import { Home } from "./components/pages/Home";
+import { Login } from "./components/pages/Login";
+import { RecoverPass } from "./components/pages/RecoverPassword";
+import { Registry } from "./components/pages/Registry";
 
 const router = createBrowserRouter([
   {

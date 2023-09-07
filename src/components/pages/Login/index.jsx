@@ -20,7 +20,8 @@ import {
   WelcomeText,
 } from "./style";
 
-function Login() {
+export const Login = () => {
+
   const API_URL = "http://localhost:3000/api/v1/auth/login";
 
   const [credentials, setCredentials] = useState({
@@ -112,6 +113,4 @@ function Login() {
       <ToastContainer />
     </>
   );
-}
-
-export default Login;
+};

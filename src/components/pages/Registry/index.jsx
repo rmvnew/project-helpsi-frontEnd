@@ -12,7 +12,7 @@ import {
   MainContainer,
 } from "../../layout/loginContainer";
 
-function Registry() {
+export const Registry = () => {
   const API_URL = "http://localhost:3000/api/v1/user";
   const PROFILE_API_URL = "http://localhost:3000/api/v1/profile";
 
@@ -179,5 +179,3 @@ function Registry() {
     </>
   );
 }
-
-export default Registry;

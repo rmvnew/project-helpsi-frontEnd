@@ -8,7 +8,7 @@ import {
   MainContainer,
 } from "../../layout/loginContainer";
 
-function RecoverPass() {
+export const CheckCode = () => {
   return (
     <>
       <Container>
@@ -37,6 +37,4 @@ function RecoverPass() {
       <ToastContainer />
     </>
   );
-}
-
-export default RecoverPass;
+};

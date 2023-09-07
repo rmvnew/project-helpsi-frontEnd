@@ -8,7 +8,7 @@ import {
   MainContainer,
 } from "../../layout/loginContainer";
 
-function RecoverPass() {
+export const RecoverPass = () => {
   return (
     <>
       <Container>
@@ -33,6 +33,4 @@ function RecoverPass() {
       <ToastContainer />
     </>
   );
-}
-
-export default RecoverPass;
+};
