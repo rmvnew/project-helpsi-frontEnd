@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom"
-import Login from "../components/pages/Login"
-import { Registry } from "../components/pages/Registry"
-import CheckCode from "../components/pages/CheckCode"
-import { Home } from "../components/pages/Home"
-import { RecoverPass } from "../components/pages/RecoverPassword"
+import Login from "../pages/Login"
+import { Registry } from "../pages/Registry"
+import CheckCode from "../pages/CheckCode"
+import { Home } from "../pages/Home"
+import { RecoverPass } from "../pages/RecoverPassword"
 
 export const AppRoutes = () => {
     return (

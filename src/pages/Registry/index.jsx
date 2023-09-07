@@ -1,12 +1,12 @@
-import logo from "../../../assets/img/logo.svg";
-import google from "../../../assets/img/google.png";
+import logo from "../../assets/img/logo.svg";
+import google from "../../assets/img/google.png";
 import { LoginForm, WelcomeText, LoginButton, GoogleButton } from "./style";
 import {
   Container,
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../layout/loginContainer";
+} from "../../components/layout/loginContainer";
 
 export const Registry = () => {
   return (

@@ -1,13 +1,12 @@
-import React from "react";
-import logo from "../../../assets/img/logo.svg";
-import googleImage from "../../../assets/img/google.png"; // Importe a imagem do Google desta forma
+import logo from "../../assets/img/logo.svg";
+import googleImage from "../../assets/img/google.png";
 import { Link } from "react-router-dom";
 import {
   Container,
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../layout/loginContainer";
+} from "../../components/layout/loginContainer";
 import {
   GoogleButton,
   LoginButton,

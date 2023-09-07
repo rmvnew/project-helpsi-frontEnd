@@ -1,4 +1,4 @@
-import logo from "../../../assets/img/logo.svg";
+import logo from "../../assets/img/logo.svg";
 import { LoginButton, LoginForm, WelcomeText } from "./style";
 import { ToastContainer } from "react-toastify";
 import {
@@ -6,7 +6,7 @@ import {
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../layout/loginContainer";
+} from "../../components/layout/loginContainer";
 
 export const RecoverPass = () => {
   return (

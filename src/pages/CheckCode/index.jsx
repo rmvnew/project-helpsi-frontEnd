@@ -1,25 +1,20 @@
-import React from "react";
 import { ToastContainer } from "react-toastify";
-import {
-  LoginButton,
-  LoginForm,
-  Resend,
-  WelcomeText,
-} from "./style";
+import { LoginButton, LoginForm, Resend, WelcomeText } from "./style";
 import {
   Container,
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../layout/loginContainer";
+} from "../../components/layout/loginContainer";
+import { ReactComponent as LogoHelpsi } from "../../assets/img/logo.svg";
 
-const CheckCode: React.FC = () => {
+const CheckCode = () => {
   return (
     <>
       <Container>
         <LeftContainer>
           <Logo>
-          <img src={require('../../../assets/img/logo.svg')} alt="" />
+            <LogoHelpsi />
           </Logo>
           <WelcomeText>
             <h2>Verificando...</h2>
