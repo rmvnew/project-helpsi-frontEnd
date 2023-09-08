@@ -36,11 +36,17 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   const handleLogin = async () => {
     if (email && password) {
       const isLogged = await auth.signin(email, password);
       if (isLogged.status) {
-        navigate("/");
+        navigate("/teste");
       } 
     } else {
       toast.error("Erro ao fazer login. Verifique suas credenciais.");
@@ -59,7 +65,7 @@ const Login = () => {
             <p>Acesse sua conta agora mesmo.</p>
           </WelcomeText>
 
-          <LoginForm>
+          <LoginForm onKeyPress={handleKeyPress}>
             <input
               type="email"
               value={email}
