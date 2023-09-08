@@ -46,7 +46,7 @@ const Login = () => {
     if (email && password) {
       const isLogged = await auth.signin(email, password);
       if (isLogged.status) {
-        navigate("/teste");
+        navigate("/");
       } 
     } else {
       toast.error("Erro ao fazer login. Verifique suas credenciais.");
