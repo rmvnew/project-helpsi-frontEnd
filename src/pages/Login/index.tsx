@@ -45,12 +45,10 @@ const Login = () => {
   const handleLogin = async () => {
     if (email && password) {
       const isLogged = await auth.signin(email, password);
-      if (isLogged.status) {
+      if (isLogged) {
         navigate("/");
       } 
-    } else {
-      toast.error("Erro ao fazer login. Verifique suas credenciais.");
-    }
+    } 
   };
 
   return (
