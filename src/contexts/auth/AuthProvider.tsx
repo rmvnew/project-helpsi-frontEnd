@@ -25,10 +25,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       }
     };
     validateToken();
-  }, []);
+  }, [api, storageData]);
 
-  const signin = async (email: string, password: string, twoFactorCode:string) => {
-    const data = await api.signin(email, password, twoFactorCode);
+  const signin = async (email: string, password: string) => {
+    const data = await api.signin(email, password);
 
     if (data && data.status === undefined) {
       setUser(data);

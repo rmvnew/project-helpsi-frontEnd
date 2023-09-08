@@ -33,11 +33,11 @@ export const useApi = () => ({
         }
 
     },
-    signin: async (email: string, password: string, twoFactorCode: string) => {
+    signin: async (email: string, password: string) => {
 
         try {
 
-            const response = await api.post('/auth/login', { email, password, twoFactorCode })
+            const response = await api.post('/auth/login', { email, password})
 
             return response.data
 

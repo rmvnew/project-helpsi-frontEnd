@@ -26,7 +26,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [code, setCode] = useState('')
+
 
   const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -38,7 +38,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (email && password) {
-      const isLogged = await auth.signin(email, password, code);
+      const isLogged = await auth.signin(email, password);
       if (isLogged.status) {
         navigate("/");
       } 
