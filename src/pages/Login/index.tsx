@@ -26,6 +26,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [code, setCode] = useState('')
 
   const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -37,14 +38,12 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (email && password) {
-      const isLogged = await auth.signin(email, password);
-      if (isLogged) {
+      const isLogged = await auth.signin(email, password, code);
+      if (isLogged.status) {
         navigate("/");
-      } else {
-        toast.error("Erro ao fazer login. Verifique suas credenciais.");
-      }
+      } 
     } else {
-      toast.error("Por favor, preencha todos os campos.");
+      toast.error("Erro ao fazer login. Verifique suas credenciais.");
     }
   };
 
