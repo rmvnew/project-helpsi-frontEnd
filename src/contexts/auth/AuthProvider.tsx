@@ -37,9 +37,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       localStorage.setItem("userLogin", data.login);
       localStorage.setItem("userProfile", data.profile);
 
-      // Exibe uma notificação de sucesso ao fazer login
-      toast.success("Login bem-sucedido!");
-
       return {
         message: "pass",
         code: 200,
@@ -51,7 +48,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       data && data.message ? data.message : "Error: No message provided";
     let code = data ? data.code : 0;
 
-    // Exibe uma notificação de erro ao falhar o login
     toast.error(`Erro ao fazer login: ${message}`);
 
     return {
@@ -65,9 +61,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     setUser(null);
     setToken("");
     await api.logout();
-
-    // Exibe uma notificação ao fazer logout
-    toast.info("Logout realizado com sucesso!");
   };
 
   const setToken = (token: string) => {
@@ -77,7 +70,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   return (
     <AuthContext.Provider value={{ user, signin, signout }}>
       {children}
-      <ToastContainer /> {/* Componente para exibir as notificações */}
+      <ToastContainer /> {}
     </AuthContext.Provider>
   );
 };
