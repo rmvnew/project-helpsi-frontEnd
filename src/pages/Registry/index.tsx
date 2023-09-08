@@ -1,5 +1,3 @@
-import logo from "../../assets/img/logo.svg";
-import google from "../../assets/img/google.png";
 import { LoginForm, WelcomeText, LoginButton, GoogleButton } from "./style";
 import {
   Container,
@@ -7,6 +5,8 @@ import {
   Logo,
   MainContainer,
 } from "../../components/layout/loginContainer";
+import { LogoHelpsi } from "../../components/imgComponents/Logo";
+import { GoogleLogo } from "../../components/imgComponents/GoogleLogo";
 
 export const Registry = () => {
   return (
@@ -14,7 +14,7 @@ export const Registry = () => {
       <Container>
         <LeftContainer>
           <Logo>
-            <img src={logo} alt="Logo da Empresa" />
+            <LogoHelpsi />
           </Logo>
 
           <WelcomeText>
@@ -38,7 +38,7 @@ export const Registry = () => {
             />
             <LoginButton type="button">Aceitar e continuar</LoginButton>
             <GoogleButton>
-              <img src={google} alt="Google Icon" />
+              <GoogleLogo />
               Registre-se usando o google
             </GoogleButton>
           </LoginForm>

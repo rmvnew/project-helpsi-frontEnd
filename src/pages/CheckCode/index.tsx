@@ -6,7 +6,8 @@ import {
   Logo,
   MainContainer,
 } from "../../components/layout/loginContainer";
-import { ReactComponent as LogoHelpsi } from "../../assets/img/logo.svg";
+import { LogoHelpsi } from "../../components/imgComponents/Logo";
+
 
 const CheckCode = () => {
   return (
