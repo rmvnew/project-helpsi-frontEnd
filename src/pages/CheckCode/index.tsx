@@ -5,8 +5,9 @@ import {
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../components/layout/loginContainer";
-import { LogoHelpsi } from "../../components/imgComponents/Logo";
+} from "../../components/Layout/Container/loginContainer";
+import { LogoHelpsi } from "../../assets/imgComponents/Logo";
+
 
 
 const CheckCode = () => {

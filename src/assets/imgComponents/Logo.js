@@ -1,7 +1,7 @@
 import logo from "../../assets/img/logo.svg";
 import {
     Logo
-  } from "../layout/loginContainer";
+  } from "../Layout/Container/loginContainer";
 
 export const LogoHelpsi = () => {
   return (

@@ -4,9 +4,9 @@ import {
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../components/layout/loginContainer";
-import { LogoHelpsi } from "../../components/imgComponents/Logo";
-import { GoogleLogo } from "../../components/imgComponents/GoogleLogo";
+} from "../../components/Layout/Container/loginContainer";
+import { LogoHelpsi } from "../../assets/imgComponents/Logo";
+import { GoogleLogo } from "../../assets/imgComponents/GoogleLogo";
 
 export const Registry = () => {
   return (

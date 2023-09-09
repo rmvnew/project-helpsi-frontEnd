@@ -2,7 +2,7 @@ import {
   Container,
   LeftContainer,
   MainContainer,
-} from "../../components/layout/loginContainer";
+} from "../../components/Layout/Container/loginContainer";
 import {
   GoogleButton,
   LoginButton,
@@ -14,11 +14,11 @@ import {
 
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useContext, useState } from "react";
-import { LogoHelpsi } from "../../components/imgComponents/Logo";
-import { GoogleLogo } from "../../components/imgComponents/GoogleLogo";
 import { AuthContext } from "../../contexts/auth/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LogoHelpsi } from "../../assets/imgComponents/Logo";
+import { GoogleLogo } from "../../assets/imgComponents/GoogleLogo";
 
 const Login = () => {
   const auth = useContext(AuthContext);
@@ -55,7 +55,7 @@ const Login = () => {
     <>
       <Container>
         <LeftContainer>
-          <LogoHelpsi />
+          <LogoHelpsi/>
           <WelcomeText>
             <h2>
               Que bom te ver por aqui! <br />
