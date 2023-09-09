@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import casal from "../../assets/img/casal.svg";
+import casal from "../../../../assets/img/casal.svg";
 
 export const Container = styled.div`
   display: grid;

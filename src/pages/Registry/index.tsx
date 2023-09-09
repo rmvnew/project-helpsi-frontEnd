@@ -4,7 +4,7 @@ import {
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../components/Layout/Container/loginContainer";
+} from "../../components/Layout/Container/Login/style";
 import { LogoHelpsi } from "../../assets/imgComponents/Logo";
 import { GoogleLogo } from "../../assets/imgComponents/GoogleLogo";
 

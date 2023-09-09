@@ -5,6 +5,7 @@ import CheckCode from "../pages/CheckCode";
 import { Home } from "../pages/Home";
 import { RecoverPass } from "../pages/RecoverPassword";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
+import Sidebar from "../components/Layout/Sidebar";
 
 export const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ export const AppRoutes = () => {
         }
       />
       <Route path="/recoverpass" element={<RecoverPass />} />
+      <Route path="/sidebar" element={<Sidebar />} />
     </Routes>
   );
 };
