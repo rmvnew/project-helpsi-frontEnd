@@ -5,7 +5,6 @@ import CheckCode from "../pages/CheckCode";
 import { Home } from "../pages/Home";
 import { RecoverPass } from "../pages/RecoverPassword";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
-import Sidebar from "../components/Layout/Sidebar";
 
 export const AppRoutes = () => {
   return (
@@ -13,16 +12,8 @@ export const AppRoutes = () => {
       <Route path="/Login" element={<Login />} />
       <Route path="/registry" element={<Registry />} />
       <Route path="/CheckCode" element={<CheckCode />} />
-      <Route
-        path="/"
-        element={
-          <RequireAuth>
-            <Home />
-          </RequireAuth>
-        }
-      />
+      <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
       <Route path="/recoverpass" element={<RecoverPass />} />
-      <Route path="/sidebar" element={<Sidebar />} />
     </Routes>
   );
 };

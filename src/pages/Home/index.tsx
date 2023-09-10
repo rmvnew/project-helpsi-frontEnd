@@ -5,23 +5,21 @@ import {
   Container,
   MainContainer,
 } from "../../components/Layout/Container/style";
+import Sidebar from "../../components/Layout/Sidebar";
+
 
 export const Home = () => {
   const auth = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await auth.signout();
-    navigate("/login");
-  };
+  
 
   return (
     <>
+    <Sidebar/>
       <Container>
         <MainContainer>
           <h2>Olá {auth.user?.name} </h2>
           <p>Voce esta logado</p>
-          <button onClick={handleLogout}>Sair</button>
+          
         </MainContainer>
       </Container>
     </>
