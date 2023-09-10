@@ -1,145 +1,131 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import DescriptionIcon from "@mui/icons-material/Description";
+import HomeIcon from "@mui/icons-material/Home";
 import styled from "styled-components";
-import {
-  Menu,
-  Close,
-  Home,
-  Business,
-  Person,
-  Settings,
-} from "@mui/icons-material";
-import App from "../../../App";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
 
-const PageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+const SidebarContainer = styled.div<{ open: boolean }>`
+  width: ${(props) => (props.open ? "170px" : "60px")};
+  height: 100%;
+  background-color: var(--bg-primary);
+  color: var(--bg-dark);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: width 0.3s;
 `;
 
-const Header = styled.header`
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
+const SidebarHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px;
 `;
 
-const Greetings = styled.div`
-  font-size: 24px;
+const SidebarContent = styled.div`
+  padding: 15px;
 `;
 
-const MainContent = styled.div`
-  display: flex;
-`;
-
-const SidebarWrapper = styled.div<{ isOpen: boolean }>`
-  background-color: #333;
-  color: #fff;
-  width: ${(props) => (props.isOpen ? "250px" : "60px")};
-  min-height: 100vh;
-  padding: 20px;
-  transition: width 0.3s ease-in-out;
-
-  h2 {
-    margin-top: 0;
-    display: ${(props) => (props.isOpen ? "block" : "none")};
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  ul li {
-    padding: 10px 0;
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-  }
-
-  ul li span {
-    display: ${(props) => (props.isOpen ? "inline" : "none")};
-    margin-left: 10px;
-  }
-
-  ul li:hover {
-    background-color: #555;
-    cursor: pointer;
-  }
-
-  @media (max-width: 768px) {
-    width: ${(props) => (props.isOpen ? "100%" : "60px")};
-  }
-`;
-
-const ToggleButton = styled.button`
-  background-color: #333;
-  color: #fff;
+const SidebarButton = styled.button`
+  background: transparent;
   border: none;
-  padding: 10px;
-  font-size: 24px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
+  color: var(--bg-dark);
+  font-size: 20px;
+  padding: 5px;
 `;
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const SidebarItem = styled.div<{ open: boolean }>`
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  align-items: center;
+  margin-bottom: 10px;
+
+  &:hover {
+    border-radius: 3px;
+    background: var(--bg-hover-primary);
+  }
+
+  ${(props) =>
+    !props.open &&
+    `
+    ${SidebarText} {
+      display: none;
+    }
+  `}
+`;
+
+const SidebarIcon = styled.div`
+  margin-right: 10px;
+  transition: background-color 0.3s;
+`;
+
+const SidebarText = styled.div`
+  color: var(--bg-dark);
+`;
+
+const LogoutButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--bg-dark);
+`;
+
+const SidebarMenuItem: React.FC<{
+  open: boolean;
+  icon: React.ReactNode;
+  text: string;
+}> = ({ open, icon, text }) => (
+  <SidebarItem open={open}>
+    <SidebarIcon>{icon}</SidebarIcon>
+    <SidebarText>{text}</SidebarText>
+  </SidebarItem>
+);
+
+const Sidebar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await auth.signout();
+    navigate("/login");
+  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768 && isOpen) {
-        setIsOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isOpen]);
-
   return (
-    <PageWrapper>
-      <Header>
-        <ToggleButton onClick={toggleSidebar}>
-          {isOpen ? <Close /> : <Menu />}
-        </ToggleButton>
-        <Greetings>Bem-vindo, usuário!</Greetings>
-      </Header>
-      <MainContent>
-        <SidebarWrapper isOpen={isOpen}>
-          <ul>
-            <li>
-              <Home />
-              <span>Home</span>
-            </li>
-            <li>
-              <Business />
-              <span>Business</span>
-            </li>
-            <li>
-              <Person />
-              <span>Profile</span>
-            </li>
-            <li>
-              <Settings />
-              <span>Settings</span>
-            </li>
-          </ul>
-        </SidebarWrapper>
-        {<App/>}
-      </MainContent>
-    </PageWrapper>
+    <SidebarContainer open={isOpen}>
+      <SidebarHeader>
+        <SidebarButton onClick={toggleSidebar}>
+          {isOpen ? <CloseIcon /> : <MenuIcon />}
+        </SidebarButton>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarMenuItem open={isOpen} icon={<HomeIcon />} text="Home" />
+        <SidebarMenuItem open={isOpen} icon={<AccountBoxIcon />} text="Pacientes" />
+        <SidebarMenuItem open={isOpen} icon={<DescriptionIcon />} text="Prontuário" />
+        
+        <SidebarItem open={isOpen}>
+          <SidebarIcon>
+            <ExitToAppIcon />
+          </SidebarIcon>
+          <SidebarText>
+            <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
+          </SidebarText>
+        </SidebarItem>
+      </SidebarContent>
+    </SidebarContainer>
   );
 };
 
