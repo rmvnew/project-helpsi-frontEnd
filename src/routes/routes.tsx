@@ -1,17 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "../pages/Login";
-import { Registry } from "../pages/Registry";
-import CheckCode from "../pages/CheckCode";
+import Login from "../pages/Login/Signin";
+import CheckCode from "../pages/Login/CheckCode";
 import { Home } from "../pages/Home";
-import { RecoverPass } from "../pages/RecoverPassword";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
+
+import { SignUp } from "../pages/Login/Signup";
+import { RecoverPass } from "../pages/Login/RecoverPassword";
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/Login" element={<Login />} />
-      <Route path="/registry" element={<Registry />} />
-      <Route path="/CheckCode" element={<CheckCode />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/checkCode" element={<CheckCode />} />
       <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
       <Route path="/recoverpass" element={<RecoverPass />} />
     </Routes>

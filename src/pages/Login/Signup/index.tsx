@@ -4,11 +4,11 @@ import {
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../components/Layout/Container/Login/style";
-import { LogoHelpsi } from "../../assets/imgComponents/Logo";
-import { GoogleLogo } from "../../assets/imgComponents/GoogleLogo";
+} from "../../../components/Layout/Container/Login/style";
+import { LogoHelpsi } from "../../../assets/imgComponents/Logo";
+import { GoogleLogo } from "../../../assets/imgComponents/GoogleLogo";
 
-export const Registry = () => {
+export const SignUp = () => {
   return (
     <>
       <Container>

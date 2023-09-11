@@ -5,8 +5,8 @@ import {
   LeftContainer,
   Logo,
   MainContainer,
-} from "../../components/Layout/Container/Login/style";
-import { LogoHelpsi } from "../../assets/imgComponents/Logo";
+} from "../../../components/Layout/Container/Login/style";
+import { LogoHelpsi } from "../../../assets/imgComponents/Logo";
 
 
 
