@@ -3,9 +3,9 @@ import Login from "../pages/Login/Signin";
 import CheckCode from "../pages/Login/CheckCode";
 import { Home } from "../pages/Home";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
-
 import { SignUp } from "../pages/Login/Signup";
-import { RecoverPass } from "../pages/Login/RecoverPassword";
+import RecoverPass from "../pages/Login/RecoverPass";
+
 
 export const AppRoutes = () => {
   return (
