@@ -27,7 +27,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -36,7 +35,7 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent) => {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       handleLogin();
     }
@@ -47,15 +46,15 @@ const Login = () => {
       const isLogged = await auth.signin(email, password);
       if (isLogged) {
         navigate("/");
-      } 
-    } 
+      }
+    }
   };
 
   return (
     <>
       <Container>
         <LeftContainer>
-          <LogoHelpsi/>
+          <LogoHelpsi />
           <WelcomeText>
             <h2>
               Que bom te ver por aqui! <br />
@@ -63,7 +62,7 @@ const Login = () => {
             <p>Acesse sua conta agora mesmo.</p>
           </WelcomeText>
 
-          <LoginForm onKeyPress={handleKeyPress}>
+          <LoginForm onKeyDown={handleKeyDown}>
             <input
               type="email"
               value={email}
