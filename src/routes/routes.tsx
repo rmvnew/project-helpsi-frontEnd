@@ -1,11 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Login/Signin";
-import { Home } from "../pages/Home";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
 import { SignUp } from "../pages/Login/Signup";
 import RecoverPass from "../pages/Login/RecoverPass";
 import ResetPass from "../pages/Login/ResetPass";
-
+import Home from "../pages/Home";
 
 export const AppRoutes = () => {
   return (

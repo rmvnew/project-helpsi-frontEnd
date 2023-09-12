@@ -113,9 +113,17 @@ const Sidebar: React.FC = () => {
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenuItem open={isOpen} icon={<HomeIcon />} text="Home" />
-        <SidebarMenuItem open={isOpen} icon={<AccountBoxIcon />} text="Pacientes" />
-        <SidebarMenuItem open={isOpen} icon={<DescriptionIcon />} text="Prontuário" />
-        
+        <SidebarMenuItem
+          open={isOpen}
+          icon={<AccountBoxIcon />}
+          text="Pacientes"
+        />
+        <SidebarMenuItem
+          open={isOpen}
+          icon={<DescriptionIcon />}
+          text="Prontuário"
+        />
+
         <SidebarItem open={isOpen}>
           <SidebarIcon>
             <ExitToAppIcon />

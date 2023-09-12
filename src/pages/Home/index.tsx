@@ -1,23 +1,20 @@
 import { useContext } from "react";
-import { AuthContext } from "../../contexts/auth/AuthContext";
-import {
-  Container,
-  MainContainer,
-} from "../../components/Layout/Container/style";
 import Sidebar from "../../components/Layout/Sidebar";
+import { AuthContext } from "../../contexts/auth/AuthContext";
+import { ContainerWrapper, HeaderWrapper } from "../../components/Layout/Container/style";
 
-export const Home = () => {
+
+
+const Home = () => {
+
   const auth = useContext(AuthContext);
-
   return (
-    <>
+    <div>
+      <HeaderWrapper />
       <Sidebar />
-      <Container>
-        <MainContainer>
-          <h2>Olá {auth.user?.name} </h2>
-          <p>Voce esta logado</p>
-        </MainContainer>
-      </Container>
-    </>
+      <ContainerWrapper><h1>Olá, {auth.user?.name}</h1></ContainerWrapper>
+    </div>
   );
 };
+
+export default Home;
