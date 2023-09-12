@@ -26,14 +26,13 @@ export const WelcomeText = styled.div`
 
 export const LoginForm = styled.div`
   margin-top: 40px;
-  gap: 15px;
   display: flex;
-  justify-content: center;
-  width: 90%;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
 
   input {
-    height: 42.05px;
-    width: 49.06px;
+    width: 100%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
@@ -69,6 +68,8 @@ export const LoginButton = styled.button`
 
 export const Resend = styled.span`
   color: var(--bg-dark);
+  text-align: center;
   font-family: sans-serif;
+  cursor: pointer;
   margin-top: 10%;
 `;
