@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);  // Adicione o estado de carregamento aqui
   const api = useApi();
   const storageData = localStorage.getItem("authToken");
 
@@ -23,6 +24,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       } else {
         setUser(null);
       }
+      setLoading(false); // defina o carregamento como false após validar o token
     };
     validateToken();
   }, [api, storageData]);
@@ -68,9 +70,9 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signin, signout }}>
+    <AuthContext.Provider value={{ user, signin, signout, loading }}>
       {children}
-      <ToastContainer /> {}
+      <ToastContainer />
     </AuthContext.Provider>
   );
 };
