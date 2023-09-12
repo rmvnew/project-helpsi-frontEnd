@@ -11,6 +11,7 @@ import { api } from "../../../hooks/useApi";
 import { ChangeEvent, useState } from "react";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { ErrorResponse } from "../../../interface/error.interface";
 
 const RecoverPass = () => {
   const [email, setEmail] = useState("");
