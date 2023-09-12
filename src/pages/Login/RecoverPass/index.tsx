@@ -6,7 +6,7 @@ import {
   Logo,
   MainContainer,
 } from "../../../components/Layout/Container/Login/style";
-import { LogoHelpsi } from "../../../assets/imgComponents/Logo";
+import  LogoHelpsi  from "../../../assets/img/logo.svg";
 import { api } from "../../../hooks/useApi";
 import { ChangeEvent, useState } from "react";
 import { AxiosError } from "axios";
@@ -45,7 +45,7 @@ const RecoverPass = () => {
       <Container>
         <LeftContainer>
           <Logo>
-            <LogoHelpsi />
+            <img src={LogoHelpsi} alt="Logo da empresa" />
           </Logo>
           <WelcomeText>
             <h2>Você esqueceu sua senha?</h2>

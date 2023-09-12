@@ -1,8 +1,8 @@
 import { useState, ChangeEvent, KeyboardEvent, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
-import { LogoHelpsi } from "../../../assets/imgComponents/Logo";
-import { GoogleLogo } from "../../../assets/imgComponents/GoogleLogo";
+import  LogoHelpsi  from "../../../assets/img/logo.svg";
+import  GoogleLogo  from "../../../assets/img/google.png";
 import {
   Container,
   LeftContainer,
@@ -51,7 +51,7 @@ const Login = () => {
     <>
       <Container>
         <LeftContainer>
-          <LogoHelpsi />
+        <img src={LogoHelpsi} alt="Logo da empresa" />
           <WelcomeText>
             <h2>
               Que bom te ver por aqui! <br />
@@ -80,7 +80,7 @@ const Login = () => {
             <LoginButton onClick={handleLogin}>Entrar</LoginButton>
             ou
             <GoogleButton>
-              <GoogleLogo />
+            <img src={GoogleLogo} alt="Logo Google" />
               Logar com o Google
             </GoogleButton>
             <LoginOptions>

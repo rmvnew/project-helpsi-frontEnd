@@ -5,8 +5,8 @@ import {
   Logo,
   MainContainer,
 } from "../../../components/Layout/Container/Login/style";
-import { LogoHelpsi } from "../../../assets/imgComponents/Logo";
-import { GoogleLogo } from "../../../assets/imgComponents/GoogleLogo";
+import  LogoHelpsi  from "../../../assets/img/logo.svg";
+import  GoogleLogo  from "../../../assets/img/google.png";
 
 export const SignUp = () => {
   return (
@@ -14,7 +14,7 @@ export const SignUp = () => {
       <Container>
         <LeftContainer>
           <Logo>
-            <LogoHelpsi />
+          <img src={LogoHelpsi} alt="Logo da empresa" />
           </Logo>
 
           <WelcomeText>
@@ -38,7 +38,7 @@ export const SignUp = () => {
             />
             <LoginButton type="button">Aceitar e continuar</LoginButton>
             <GoogleButton>
-              <GoogleLogo />
+            <img src={GoogleLogo} alt="Logo Google" />
               Registre-se usando o google
             </GoogleButton>
           </LoginForm>

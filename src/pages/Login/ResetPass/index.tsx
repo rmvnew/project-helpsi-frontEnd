@@ -8,7 +8,7 @@ import {
   Logo,
   MainContainer,
 } from "../../../components/Layout/Container/Login/style";
-import { LogoHelpsi } from "../../../assets/imgComponents/Logo";
+import LogoHelpsi  from "../../../assets/img/logo.svg";
 import { api } from "../../../hooks/useApi";
 import { ResetPassInterface } from "../../../interface/resetPass.interface";
 import { AxiosError } from "axios";
@@ -73,7 +73,7 @@ const ResetPass: React.FC = () => {
       <Container>
         <LeftContainer>
           <Logo>
-            <LogoHelpsi />
+          <img src={LogoHelpsi} alt="Logo da empresa" />
           </Logo>
           <WelcomeText>
             <h2>Verificando...</h2>
