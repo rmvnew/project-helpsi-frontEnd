@@ -64,6 +64,7 @@ export const IconeGoogle = styled.button`
   gap: 5px;
   border: none;
   border-radius: 5px;
+  color: var(--bg-dark);
   img {
     width: 15px;
   }

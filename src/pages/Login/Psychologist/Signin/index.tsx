@@ -7,10 +7,39 @@ import {
   LoginBackground,
   LoginContainer,
 } from "../../../../components/Layout/ContainerLogin/styled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, IconeGoogle, Span, TextContainer } from "./styled";
+import { toast } from "react-toastify";
+import { ChangeEvent, KeyboardEvent,useContext, useState } from "react";
+import { AuthContext } from "../../../../contexts/auth/AuthContext";
 
 export const SignInPsy = () => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ email: "", password: "" });
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleLogin();
+    }
+  };
+
+  const handleLogin = async () => {
+    const { email, password } = form;
+    if (email && password) {
+      const isLogged = await auth.signin(email, password);
+      if (isLogged) {
+        navigate("/");
+      } else {
+        toast.error("Erro ao fazer login. Verifique suas credenciais.", {});
+      }
+    }
+  };
   return (
     <LoginBackground>
       <LoginContainer>
@@ -20,27 +49,27 @@ export const SignInPsy = () => {
             <h2>Que bom te ver por aqui!</h2>
             <p>Acesse sua conta agora mesmo</p>
           </TextContainer>
-          <Form>
+          <Form onKeyDown={handleKeyDown}>
             <input
               type="email"
-              id="email"
               name="email"
+              value={form.email}
+              onChange={handleInputChange}
               placeholder="Digite seu email"
               required
             />
 
             <input
               type="password"
-              id="password"
               name="password"
+              value={form.password}
+              onChange={handleInputChange}
               placeholder="Digite sua senha"
               required
             />
 
             <Link to="/recover-pass">Esqueceu sua senha</Link>
-            <button type="submit">
-              <Link to="/home-psy">Entrar</Link>
-            </button>
+            <button onClick={handleLogin}>Entrar</button>
           </Form>
           ou
           <IconeGoogle>
