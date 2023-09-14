@@ -1,11 +1,5 @@
 import { LoginButton, LoginForm, WelcomeText } from "./style";
 import { ToastContainer, toast } from "react-toastify";
-import {
-  Container,
-  LeftContainer,
-  Logo,
-  MainContainer,
-} from "../../../components/Layout/Container/Login/style";
 import  LogoHelpsi  from "../../../assets/img/logo.svg";
 import { api } from "../../../hooks/useApi";
 import { ChangeEvent, useState } from "react";
@@ -42,11 +36,11 @@ const RecoverPass = () => {
   };
   return (
     <>
-      <Container>
-        <LeftContainer>
-          <Logo>
+      <div>
+        <div>
+          <div>
             <img src={LogoHelpsi} alt="Logo da empresa" />
-          </Logo>
+          </div>
           <WelcomeText>
             <h2>Você esqueceu sua senha?</h2>
             <p>
@@ -63,9 +57,9 @@ const RecoverPass = () => {
             />
             <LoginButton onClick={sendRecoveryCode}>Envie o código</LoginButton>
           </LoginForm>
-        </LeftContainer>
-        <MainContainer />
-      </Container>
+        </div>
+        <div />
+      </div>
       <ToastContainer />
     </>
   );

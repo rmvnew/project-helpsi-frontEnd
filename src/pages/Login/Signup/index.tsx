@@ -1,21 +1,15 @@
 import { LoginForm, WelcomeText, LoginButton, GoogleButton } from "./style";
-import {
-  Container,
-  LeftContainer,
-  Logo,
-  MainContainer,
-} from "../../../components/Layout/Container/Login/style";
 import  LogoHelpsi  from "../../../assets/img/logo.svg";
 import  GoogleLogo  from "../../../assets/img/google.png";
 
 export const SignUp = () => {
   return (
     <>
-      <Container>
-        <LeftContainer>
-          <Logo>
+      <div>
+        <div>
+          <div>
           <img src={LogoHelpsi} alt="Logo da empresa" />
-          </Logo>
+          </div>
 
           <WelcomeText>
             <h2>Informações de acesso</h2>
@@ -42,9 +36,9 @@ export const SignUp = () => {
               Registre-se usando o google
             </GoogleButton>
           </LoginForm>
-        </LeftContainer>
-        <MainContainer />
-      </Container>
+        </div>
+        <div />
+      </div>
     </>
   );
 };

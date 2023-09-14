@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { LoginButton, LoginForm, Resend, WelcomeText } from "./style";
-import {
-  Container,
-  LeftContainer,
-  Logo,
-  MainContainer,
-} from "../../../components/Layout/Container/Login/style";
 import LogoHelpsi  from "../../../assets/img/logo.svg";
 import { api } from "../../../hooks/useApi";
 import { ResetPassInterface } from "../../../interface/resetPass.interface";
@@ -70,11 +64,11 @@ const ResetPass: React.FC = () => {
 
   return (
     <>
-      <Container>
-        <LeftContainer>
-          <Logo>
+      <div>
+        <div>
+          <div>
           <img src={LogoHelpsi} alt="Logo da empresa" />
-          </Logo>
+          </div>
           <WelcomeText>
             <h2>Verificando...</h2>
             <p>
@@ -110,9 +104,9 @@ const ResetPass: React.FC = () => {
             Não recebeu o código? Digite seu email clique em 
             <strong>Reenviar</strong>
           </Resend>
-        </LeftContainer>
-        <MainContainer />
-      </Container>
+        </div>
+        <div />
+      </div>
       <ToastContainer />
     </>
   );

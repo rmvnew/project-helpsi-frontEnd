@@ -4,11 +4,6 @@ import { AuthContext } from "../../../contexts/auth/AuthContext";
 import  LogoHelpsi  from "../../../assets/img/logo.svg";
 import  GoogleLogo  from "../../../assets/img/google.png";
 import {
-  Container,
-  LeftContainer,
-  MainContainer,
-} from "../../../components/Layout/Container/Login/style";
-import {
   GoogleButton,
   LoginButton,
   LoginForm,
@@ -49,8 +44,8 @@ const Login = () => {
 
   return (
     <>
-      <Container>
-        <LeftContainer>
+      <div>
+        <div>
         <img src={LogoHelpsi} alt="Logo da empresa" />
           <WelcomeText>
             <h2>
@@ -90,9 +85,9 @@ const Login = () => {
               </p>
             </LoginOptions>
           </LoginForm>
-        </LeftContainer>
-        <MainContainer />
-      </Container>
+        </div>
+        <div />
+      </div>
       <ToastContainer />
     </>
   );
