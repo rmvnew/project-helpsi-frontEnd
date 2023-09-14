@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Sidebar from "../../components/Layout/Sidebar";
+import Sidebar from "../../components/Layout/Sidebar/Psychologist";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import { ContainerWrapper, HeaderWrapper } from "../../components/Layout/Container/style";
 
