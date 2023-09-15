@@ -28,6 +28,21 @@ export const LoginContainer = styled.div`
   }
 `;
 
+export const TextContainer = styled.div`
+ 
+  width: 80%;
+
+  h1 {
+ 
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-family: sans-serif;
+    color: var(--bg-dark);
+  }
+`;
+
 export const FormGroup = styled.div`
   width: 100%;
   height: 100%;

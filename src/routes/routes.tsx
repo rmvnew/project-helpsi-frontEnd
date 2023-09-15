@@ -5,6 +5,7 @@ import { SignIn } from "../pages/Login/Patient/Signin";
 import { HomePsy } from "../pages/Home/Psychologist";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
 import { StartLogin } from "../pages/Login/Start";
+import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRoutes = () => {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin-psy" element={<SignInPsy />} />
+      <Route path="/recover-pass" element={<RecoverPass />} />
     </Routes>
   );
 };

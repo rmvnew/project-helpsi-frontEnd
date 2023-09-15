@@ -17,7 +17,7 @@ export const StartLogin = () => {
         <LoginContainer>
           <FormGroup>
             <img src={logo} alt="logo da empresa" />
-            <span>Você procura por atendimento?</span>
+            <h1>Você procura por atendimento?</h1>
             <Btn>
               <Link to="/signin">Sim</Link>
               <Link to="/signin-psy">Sou psicólogo e quero atender</Link>
