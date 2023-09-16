@@ -6,7 +6,7 @@ import {
   LoginBackground,
   LoginContainer,
   TextContainer,
-} from "../../../components/Layout/ContainerLogin/styled";
+} from "../../../components/Layout/Container/ContainerLogin/styled";
 import logo from "../../../assets/img/logo.svg";
 import bonecos from "../../../assets/img/Psychologist.svg";
 import LockIcon from "@mui/icons-material/Lock";

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import backgroundImage from "../../../assets/img/background.svg";
+import backgroundImage from "../../../../assets/img/background.svg";
 
 export const LoginBackground = styled.body`
   background-image: url(${backgroundImage});

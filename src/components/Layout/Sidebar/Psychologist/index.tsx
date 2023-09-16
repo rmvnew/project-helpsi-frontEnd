@@ -16,14 +16,17 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MenuIcon from "@material-ui/icons/Menu";
 import { AuthContext } from "../../../../contexts/auth/AuthContext";
 
-
 const StyledDrawer = styled.div<{ open: boolean }>`
-  width: ${(props) => (props.open ? "210px" : "60px")};
+  width: ${(props) => (props.open ? "200px" : "60px")};
   transition: width 0.3s;
   border-right: 1px solid #ddd;
   background-color: var(--bg-primary);
   height: 100vh;
   overflow-x: hidden;
+
+  position: fixed;
+  top: 0;
+  left: 0;
 `;
 
 const StyledContainer = styled.div`
@@ -83,8 +86,8 @@ const Sidebar = () => {
   };
 
   const renderMenuItem = (item: MenuItem) => (
-    <StyledListItem 
-      button 
+    <StyledListItem
+      button
       onClick={item.label === "Sair" ? handleLogout : undefined}
     >
       <StyledListItemIcon>

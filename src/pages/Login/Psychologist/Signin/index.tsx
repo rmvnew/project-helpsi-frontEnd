@@ -6,7 +6,7 @@ import {
   Image,
   LoginBackground,
   LoginContainer,
-} from "../../../../components/Layout/ContainerLogin/styled";
+} from "../../../../components/Layout/Container/ContainerLogin/styled";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, IconeGoogle, Span, TextContainer } from "./styled";
 import { toast } from "react-toastify";

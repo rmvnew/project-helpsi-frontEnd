@@ -7,7 +7,7 @@ import {
   LoginBackground,
   LoginContainer,
   TextContainer,
-} from "../../../../components/Layout/ContainerLogin/styled";
+} from "../../../../components/Layout/Container/ContainerLogin/styled";
 import { Span } from "../../Start/styled";
 import { Form } from "./styled";
 
