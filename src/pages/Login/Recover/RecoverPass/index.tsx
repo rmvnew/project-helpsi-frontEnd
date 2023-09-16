@@ -11,8 +11,46 @@ import {
 } from "../../../../components/Layout/Container/ContainerLogin/styled";
 
 import { Form } from "./styled";
+import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../../../hooks/useApi";
+import { ToastContainer, toast } from "react-toastify";
+import { AxiosError } from "axios";
+import { ErrorResponse } from "../../../../interface/error.interface";
 
 export const RecoverPass = () => {
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.target.value);
+
+  const sendRecoveryCode = async () => {
+    try {
+      await api.post(`/user/recover-code?email=${encodeURIComponent(email)}`);
+      toast.success("Código de recuperação enviado com sucesso!");
+      navigate("/reset-pass");
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const handleError = (error: unknown) => {
+    const axiosErr = error as AxiosError<ErrorResponse>;
+
+    const errorMessage =
+      axiosErr?.response?.data?.message ||
+      "Erro ao enviar o código de recuperação.";
+
+    console.error("Detalhes do erro:", axiosErr.response || error);
+    toast.error(errorMessage);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendRecoveryCode();
+  };
+
   return (
     <>
       <LoginBackground>
@@ -26,9 +64,14 @@ export const RecoverPass = () => {
                 e-mail vinculado à sua conta
               </p>
             </TextContainer>
-            <Form>
-              <input type="text" placeholder="Digite seu email" />
-              <button>Envie o código</button>
+            <Form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Digite seu email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+              <button type="submit">Envie o código</button>
             </Form>
             <Span>
               <LockIcon />
@@ -40,6 +83,7 @@ export const RecoverPass = () => {
           </Image>
         </LoginContainer>
       </LoginBackground>
+      <ToastContainer />
     </>
   );
 };
