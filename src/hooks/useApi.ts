@@ -1,14 +1,10 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 export const api = axios.create({
   baseURL: apiUrl,
 });
-
-let lastTokenValidationResult: AxiosResponse<any, any> | null;
-let lastValidationTimestamp = 0;
-const validationCacheTime = 600000; // Tempo de cache em milissegundos (10 minutos)
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("authToken");
@@ -17,39 +13,9 @@ api.interceptors.request.use((config) => {
 });
 
 export const useApi = () => ({
-  validateToken: async () => {
-    const currentTime = Date.now();
-
-    // Verifica se o resultado do cache ainda é válido
-    if (
-      lastTokenValidationResult &&
-      currentTime - lastValidationTimestamp <= validationCacheTime
-    ) {
-      return lastTokenValidationResult;
-    }
-
-    try {
-      const token = localStorage.getItem("authToken");
-
-      const response = await api.post(
-        "/auth/validate",
-        { token },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      lastTokenValidationResult = response;
-      lastValidationTimestamp = currentTime;
-
-      return response;
-    } catch (error) {
-      console.log("Token validation failed:", error);
-      return null;
-    }
-  },
   signin: async (email: string, password: string) => {
     try {
       const response = await api.post("/auth/login", { email, password });
-
       return response.data;
     } catch (error: any) {
       if (error.response) {

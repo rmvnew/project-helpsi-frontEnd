@@ -10,7 +10,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { Form, IconeGoogle, Span, TextContainer } from "./styled";
 import { toast } from "react-toastify";
-import { ChangeEvent, KeyboardEvent,useContext, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useContext, useState } from "react";
 import { AuthContext } from "../../../../contexts/auth/AuthContext";
 
 export const SignInPsy = () => {
@@ -23,6 +23,11 @@ export const SignInPsy = () => {
     setForm({ ...form, [name]: value });
   };
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleLogin();
+  };
+
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Enter") {
       handleLogin();
@@ -33,13 +38,14 @@ export const SignInPsy = () => {
     const { email, password } = form;
     if (email && password) {
       const isLogged = await auth.signin(email, password);
-      if (isLogged) {
-        navigate("/");
+      if (isLogged && isLogged.status) {
+        navigate("/");  // Make sure the path exists in your app routes
       } else {
         toast.error("Erro ao fazer login. Verifique suas credenciais.", {});
       }
     }
   };
+
   return (
     <LoginBackground>
       <LoginContainer>
@@ -49,7 +55,7 @@ export const SignInPsy = () => {
             <h2>Que bom te ver por aqui!</h2>
             <p>Acesse sua conta agora mesmo</p>
           </TextContainer>
-          <Form onKeyDown={handleKeyDown}>
+          <Form onSubmit={handleFormSubmit} onKeyDown={handleKeyDown}>
             <input
               type="email"
               name="email"
@@ -69,7 +75,7 @@ export const SignInPsy = () => {
             />
 
             <Link to="/recover-pass">Esqueceu sua senha</Link>
-            <button onClick={handleLogin}>Entrar</button>
+            <button type="submit">Entrar</button>
           </Form>
           ou
           <IconeGoogle>

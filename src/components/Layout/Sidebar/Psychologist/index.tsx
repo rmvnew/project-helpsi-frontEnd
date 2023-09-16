@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import {
   List,
@@ -14,8 +14,9 @@ import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MenuIcon from "@material-ui/icons/Menu";
+import { AuthContext } from "../../../../contexts/auth/AuthContext";
 
-// Styles
+
 const StyledDrawer = styled.div<{ open: boolean }>`
   width: ${(props) => (props.open ? "210px" : "60px")};
   transition: width 0.3s;
@@ -53,7 +54,6 @@ const StyledListItem = styled(ListItem)`
   }
 `;
 
-// Mobile Check Hook
 const useMobileCheck = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -72,14 +72,21 @@ type MenuItem = {
   path?: string;
 };
 
-// Main Component
 const Sidebar = () => {
   const isMobile = useMobileCheck();
+  const auth = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(!isMobile);
   const [prontuarioOpen, setProntuarioOpen] = useState(false);
 
+  const handleLogout = () => {
+    auth.signout();
+  };
+
   const renderMenuItem = (item: MenuItem) => (
-    <StyledListItem button>
+    <StyledListItem 
+      button 
+      onClick={item.label === "Sair" ? handleLogout : undefined}
+    >
       <StyledListItemIcon>
         <StyledIcon>{item.icon}</StyledIcon>
       </StyledListItemIcon>
@@ -133,7 +140,6 @@ const Sidebar = () => {
   );
 };
 
-// Menu Items
 const primaryMenuItems: MenuItem[] = [
   { label: "Home", icon: <HomeIcon /> },
   { label: "Prontuário", icon: <FolderIcon /> },

@@ -4,30 +4,45 @@ import { useApi } from "../../hooks/useApi";
 import { AuthContext } from "./AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import jwtDecode from "jwt-decode";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);  // Adicione o estado de carregamento aqui
+  const [loading, setLoading] = useState(true); // Adicione o estado de carregamento aqui
   const api = useApi();
   const storageData = localStorage.getItem("authToken");
 
   useEffect(() => {
-    const validateToken = async () => {
-      if (storageData) {
-        const data = await api.validateToken();
+    if (storageData) {
+      try {
+        const decodedToken: any = jwtDecode(storageData);
 
-        if (data && data.data) {
-          setUser(data.data);
+        // Check token expiration
+        if (decodedToken.exp * 1000 > Date.now()) {
+          // Token is still valid
+          const userData: User = {
+            name: decodedToken.name,
+            email: decodedToken.email,
+            // ... any other fields from your User type that can be extracted from the JWT
+          };
+          setUser(userData);
         } else {
+          // Token is expired
           setUser(null);
+          localStorage.removeItem("authToken");
+          toast.error("Sua sessão expirou. Por favor, faça login novamente.");
         }
-      } else {
+      } catch (error) {
+        // Invalid token format or decoding error
         setUser(null);
+        localStorage.removeItem("authToken");
+        toast.error("Erro ao decodificar o token.");
       }
-      setLoading(false); // defina o carregamento como false após validar o token
-    };
-    validateToken();
-  }, [api, storageData]);
+    } else {
+      setUser(null);
+    }
+    setLoading(false);
+  }, [storageData]);
 
   const signin = async (email: string, password: string) => {
     const data = await api.signin(email, password);
@@ -62,6 +77,9 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const signout = async () => {
     setUser(null);
     setToken("");
+
+    localStorage.removeItem("userLogin");
+    localStorage.removeItem("userProfile");
     await api.logout();
   };
 

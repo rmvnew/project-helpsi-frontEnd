@@ -5,8 +5,9 @@ import { HomePsy } from "../pages/Home/Psychologist";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
 import { SignInPsy } from "../pages/Login/Psychologist/Signin";
 import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
-import { SignIn } from "../pages/Login/Patient/Signin";
 import { SignUp } from "../pages/Login/Patient/Signup";
+import { SignIn } from "../pages/Login/Patient/Signin";
+import { Home } from "../pages/Home/Patient";
 
 export const AppRoutes = () => {
   return (
@@ -16,6 +17,14 @@ export const AppRoutes = () => {
         element={
           <RequireAuth>
             <HomePsy />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          <RequireAuth>
+            <Home />
           </RequireAuth>
         }
       />

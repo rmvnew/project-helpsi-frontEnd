@@ -1,10 +1,10 @@
 import Sidebar from "../../../components/Layout/Sidebar/Psychologist";
 
-export const HomePsy = () => {
+export const Home = () => {
   return (
     <>
       <Sidebar />
-      <h1>logado</h1>
+      <h1>Home paciente</h1>
     </>
   );
 };
