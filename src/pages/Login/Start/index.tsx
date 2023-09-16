@@ -5,6 +5,7 @@ import {
   Image,
   LoginBackground,
   LoginContainer,
+  TextContainer,
 } from "../../../components/Layout/ContainerLogin/styled";
 import logo from "../../../assets/img/logo.svg";
 import bonecos from "../../../assets/img/Psychologist.svg";
@@ -17,7 +18,10 @@ export const StartLogin = () => {
         <LoginContainer>
           <FormGroup>
             <img src={logo} alt="logo da empresa" />
-            <h1>Você procura por atendimento?</h1>
+            <TextContainer>
+              <h2>Você procura por atendimento?</h2>
+            </TextContainer>
+
             <Btn>
               <Link to="/signin">Sim</Link>
               <Link to="/signin-psy">Sou psicólogo e quero atender</Link>

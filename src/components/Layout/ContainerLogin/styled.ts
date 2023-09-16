@@ -29,11 +29,10 @@ export const LoginContainer = styled.div`
 `;
 
 export const TextContainer = styled.div`
- 
+  text-align: center;
   width: 80%;
 
-  h1 {
- 
+  h2 {
     margin-bottom: 10px;
   }
 

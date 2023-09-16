@@ -10,7 +10,7 @@ export const Form = styled.form`
 
   input {
     font-family: sans-serif;
-    width: 85%;
+    width: 80%;
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -21,7 +21,7 @@ export const Form = styled.form`
     text-align: center;
     border-radius: 5px;
     border: none;
-    width: 85%;
+    width: 80%;
     background-color: var(--bg-dark);
     color: white;
     cursor: pointer;

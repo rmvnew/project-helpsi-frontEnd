@@ -19,7 +19,7 @@ export const RecoverPass = () => {
           <FormGroup>
             <img src={logo} alt="logo da empresa" />
             <TextContainer>
-              <h1>Você esqueceu sua senha?</h1>
+              <h2>Você esqueceu sua senha?</h2>
               <p>
                 Não se preocupe! Acontece. Por favor, insira o endereço de
                 e-mail vinculado à sua conta

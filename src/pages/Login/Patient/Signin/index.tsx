@@ -1,5 +1,5 @@
 import Logo from "../../../../assets/img/logo.svg";
-import Google from "../../../../assets/img/google.png";
+import Google from "../../../../assets/img/google.svg";
 import Bonecos from "../../../../assets/img/Psychologist.svg";
 import {
   FormGroup,
