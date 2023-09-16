@@ -61,6 +61,7 @@ export const FormGroup = styled.div`
 `;
 
 export const Btn = styled.div`
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 5px;
