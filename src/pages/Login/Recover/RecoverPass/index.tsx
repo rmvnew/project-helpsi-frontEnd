@@ -6,9 +6,10 @@ import {
   Image,
   LoginBackground,
   LoginContainer,
+  Span,
   TextContainer,
 } from "../../../../components/Layout/Container/ContainerLogin/styled";
-import { Span } from "../../Start/styled";
+
 import { Form } from "./styled";
 
 export const RecoverPass = () => {

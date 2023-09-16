@@ -91,3 +91,14 @@ export const Image = styled.div`
     display: none;
   }
 `;
+
+export const Span = styled.span`
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 15px;
+  }
+`;

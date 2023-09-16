@@ -5,12 +5,13 @@ import {
   Image,
   LoginBackground,
   LoginContainer,
+  Span,
   TextContainer,
 } from "../../../components/Layout/Container/ContainerLogin/styled";
 import logo from "../../../assets/img/logo.svg";
 import bonecos from "../../../assets/img/Psychologist.svg";
 import LockIcon from "@mui/icons-material/Lock";
-import { Span } from "./styled";
+
 export const StartLogin = () => {
   return (
     <>
