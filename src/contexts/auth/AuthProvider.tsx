@@ -8,7 +8,7 @@ import jwtDecode from "jwt-decode";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true); // Adicione o estado de carregamento aqui
+  const [loading, setLoading] = useState(true);
   const api = useApi();
   const storageData = localStorage.getItem("authToken");
 
@@ -17,13 +17,12 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       try {
         const decodedToken: any = jwtDecode(storageData);
 
-        // Check token expiration
         if (decodedToken.exp * 1000 > Date.now()) {
-          // Token is still valid
+          
           const userData: User = {
             name: decodedToken.name,
             email: decodedToken.email,
-            // ... any other fields from your User type that can be extracted from the JWT
+            
           };
           setUser(userData);
         } else {
@@ -33,7 +32,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
           toast.error("Sua sessão expirou. Por favor, faça login novamente.");
         }
       } catch (error) {
-        // Invalid token format or decoding error
+        
         setUser(null);
         localStorage.removeItem("authToken");
         toast.error("Erro ao decodificar o token.");
@@ -64,8 +63,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     let message =
       data && data.message ? data.message : "Error: No message provided";
     let code = data ? data.code : 0;
-
-    toast.error(`Erro ao fazer login: ${message}`);
 
     return {
       message: message,

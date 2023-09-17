@@ -30,7 +30,7 @@ export const SignIn = () => {
   };
 
   const handleLogin = async () => {
-    setIsLoggingIn(true); // Inicia o processo de login
+    setIsLoggingIn(true);
 
     const { email, password } = form;
     if (email && password) {
@@ -42,7 +42,7 @@ export const SignIn = () => {
       }
     }
 
-    setIsLoggingIn(false); // Termina o processo de login
+    setIsLoggingIn(false);
   };
 
   return (
