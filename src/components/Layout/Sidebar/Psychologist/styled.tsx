@@ -9,26 +9,35 @@ import {
 export const MENU_COLOR = "#594f4f";
 
 export const StyledDrawer = styled.div<{ open: boolean }>`
-  width: ${(props) => (props.open ? "160px" : "55px")};
+  width: ${(props) => (props.open ? "200px" : "55px")};
   transition: width 0.3s;
   border-right: 1px solid #ddd;
   background-color: var(--bg-primary);
-  height: 100vh;
+  height: 100%; 
   overflow-x: hidden;
-  position: fixed;
+  position: relative; 
   top: 0;
   left: 0;
 `;
 
 export const StyledContainer = styled.div`
   display: flex;
+  padding: 50px 0;
   flex-direction: column;
   justify-content: space-between;
-  height: 85%;
+  height: 100%;
+  background-color: var(--bg-primary);
   color: var(--bg-dark);
 `;
 
 export const StyledIconButton = styled(IconButton)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3000; 
+  height: 60px;
+  width: 70px;
+
   @media (min-width: 768px) {
     display: none;
   }
@@ -52,14 +61,14 @@ export const StyledListItemIcon = styled(ListItemIcon)`
 export const StyledListItem = styled(ListItem)<{ selected?: boolean }>`
   &:hover {
     border-left: 2px solid var(--bg-dark);
-    background-color: #F3F3F3;
+    background-color: #f3f3f3;
   }
 
   ${(props) =>
     props.selected &&
     css`
       border-left: 2px solid var(--bg-dark);
-      background-color: #F3F3F3;
+      background-color: #f3f3f3;
     `}
 `;
 
