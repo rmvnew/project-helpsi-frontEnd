@@ -71,6 +71,33 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     };
   };
 
+  const signinWithGoogle = async (idToken: string) => {
+    const data = await api.signinWithGoogle(idToken);
+
+    if (data && data.status === undefined) {
+      setUser(data);
+      setToken(data.access_token);
+
+      localStorage.setItem("userLogin", data.login);
+      localStorage.setItem("userProfile", data.profile);
+
+      return {
+        message: "pass",
+        code: 200,
+        status: true,
+      };
+    }
+
+    let message = data && data.message ? data.message : "Error: No message provided";
+    let code = data ? data.code : 0;
+
+    return {
+      message: message,
+      code: code,
+      status: false,
+    };
+  };
+
   const signout = async () => {
     setUser(null);
     setToken("");
@@ -85,7 +112,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signin, signout, loading }}>
+    <AuthContext.Provider value={{ user, signin, signout, loading, signinWithGoogle }}>
       {children}
       <ToastContainer />
     </AuthContext.Provider>

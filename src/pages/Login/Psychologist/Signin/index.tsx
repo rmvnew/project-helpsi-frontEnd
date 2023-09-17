@@ -17,7 +17,7 @@ export const SignInPsy = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
-  const [isLoggingIn, setIsLoggingIn] = useState(false); // Adicionado o estado
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

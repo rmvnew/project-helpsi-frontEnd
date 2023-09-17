@@ -1,3 +1,5 @@
+import React, { ChangeEvent, useContext, useState } from "react";
+import { GoogleLogin } from "react-google-login";
 import Logo from "../../../../assets/img/logo.svg";
 import google from "../../../../assets/img/google.svg";
 import Bonecos from "../../../../assets/img/Psychologist.svg";
@@ -10,7 +12,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Google, Span, TextContainer } from "./styled";
 import { ToastContainer, toast } from "react-toastify";
-import { ChangeEvent, useContext, useState } from "react";
 import { AuthContext } from "../../../../contexts/auth/AuthContext";
 
 export const SignIn = () => {
@@ -31,18 +32,32 @@ export const SignIn = () => {
 
   const handleLogin = async () => {
     setIsLoggingIn(true);
-
     const { email, password } = form;
     if (email && password) {
       const isLogged = await auth.signin(email, password);
       if (isLogged && isLogged.status) {
         navigate("/home");
       } else {
-        toast.error("Erro ao fazer login. Verifique suas credenciais.", {});
+        toast.error("Erro ao fazer login. Verifique suas credenciais.");
       }
     }
-
     setIsLoggingIn(false);
+  };
+
+  const handleGoogleSuccess = async (response: any) => {
+    if (response.tokenId) {
+      const result = await auth.signinWithGoogle(response.tokenId);
+      if (result && result.status) {
+        navigate("/home");
+      } else {
+        toast.error(result.message || "Erro ao fazer login com o Google.");
+      }
+    }
+  };
+
+  const handleGoogleFailure = (error: any) => {
+    console.error("Erro no login com o Google:", error);
+    
   };
 
   return (
@@ -63,7 +78,6 @@ export const SignIn = () => {
               placeholder="Digite seu email"
               required
             />
-
             <input
               type="password"
               name="password"
@@ -72,17 +86,27 @@ export const SignIn = () => {
               placeholder="Digite sua senha"
               required
             />
-
             <Link to="/recover-pass">Esqueceu sua senha</Link>
             <button type="submit">
               {isLoggingIn ? "Entrando..." : "Entrar"}
             </button>
           </Form>
           ou
-          <Google>
-            <img src={google} alt="icone google" />
-            <span>Entrar com o Google</span>
-          </Google>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID ?? ""}
+            onSuccess={handleGoogleSuccess}
+            onFailure={handleGoogleFailure}
+            cookiePolicy={"single_host_origin"}
+            render={(renderProps) => (
+              <Google
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <img src={google} alt="icone google" />
+                <span>Entrar com o Google</span>
+              </Google>
+            )}
+          />
           <Span>
             Não tem uma conta?
             <Link to="/signup-psy"> Registre-se aqui</Link>

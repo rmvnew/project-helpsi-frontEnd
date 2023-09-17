@@ -35,6 +35,28 @@ export const useApi = () => ({
     }
   },
 
+  signinWithGoogle: async (idToken: string) => {
+    try {
+      const response = await api.post("/auth/google-login", { idToken });
+      return response.data;
+    } catch (error: any) {
+      const hasResponseError = error.response;
+      const errorMessage = hasResponseError
+        ? error.response.data.error
+        : error.message;
+      const errorCode = hasResponseError ? error.response.status : 0;
+
+      if (!hasResponseError) {
+        console.error("Error without response", error);
+      }
+
+      return {
+        message: errorMessage,
+        code: errorCode,
+        status: false,
+      };
+    }
+  },
   logout: async () => {
     try {
       const token = localStorage.getItem("authToken");
