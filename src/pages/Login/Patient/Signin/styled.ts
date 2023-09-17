@@ -54,7 +54,7 @@ export const Form = styled.form`
   }
 `;
 
-export const IconeGoogle = styled.button`
+export const Google = styled.button`
   width: 80%;
   cursor: pointer;
   display: flex;
@@ -67,10 +67,15 @@ export const IconeGoogle = styled.button`
   img {
     width: 15px;
   }
+  span {
+    color: var(--bg-dark);
+  }
 `;
 
 export const Span = styled.span`
   font-family: sans-serif;
+  text-align: center;
+  font-size: 0.8rem;
 
   a {
     color: var(--bg-dark);

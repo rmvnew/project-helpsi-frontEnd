@@ -25,6 +25,7 @@ export const Form = styled.form`
   }
 
   a {
+    font-size: .8rem;
     width: 80%;
     margin-top: 5px;
     display: flex;
@@ -72,6 +73,8 @@ export const IconeGoogle = styled.button`
 
 export const Span = styled.span`
   font-family: sans-serif;
+  text-align: center;
+  font-size: 0.8rem;
 
   a {
     color: var(--bg-dark);

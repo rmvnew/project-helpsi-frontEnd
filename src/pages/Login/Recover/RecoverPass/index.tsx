@@ -52,38 +52,36 @@ export const RecoverPass = () => {
   };
 
   return (
-    <>
-      <LoginBackground>
-        <LoginContainer>
-          <FormGroup>
-            <img src={logo} alt="logo da empresa" />
-            <TextContainer>
-              <h2>Você esqueceu sua senha?</h2>
-              <p>
-                Não se preocupe! Acontece. Por favor, insira o endereço de
-                e-mail vinculado à sua conta
-              </p>
-            </TextContainer>
-            <Form onSubmit={handleSubmit}>
-              <input
-                type="email"
-                placeholder="Digite seu email"
-                value={email}
-                onChange={handleEmailChange}
-              />
-              <button type="submit">Envie o código</button>
-            </Form>
-            <Span>
-              <LockIcon />
-              Dados protegidos
-            </Span>
-          </FormGroup>
-          <Image>
-            <img src={bonecos} alt="" />
-          </Image>
-        </LoginContainer>
-      </LoginBackground>
+    <LoginBackground>
+      <LoginContainer>
+        <FormGroup>
+          <img src={logo} alt="logo da empresa" />
+          <TextContainer>
+            <h2>Você esqueceu sua senha?</h2>
+            <p>
+              Não se preocupe! Acontece. Por favor, insira o endereço de e-mail
+              vinculado à sua conta
+            </p>
+          </TextContainer>
+          <Form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="Digite seu email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <button type="submit">Envie o código</button>
+          </Form>
+          <Span>
+            <LockIcon />
+            Dados protegidos
+          </Span>
+        </FormGroup>
+        <Image>
+          <img src={bonecos} alt="" />
+        </Image>
+      </LoginContainer>
       <ToastContainer />
-    </>
+    </LoginBackground>
   );
 };

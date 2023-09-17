@@ -1,5 +1,5 @@
 import Logo from "../../../../assets/img/logo.svg";
-import Google from "../../../../assets/img/google.svg";
+import google from "../../../../assets/img/google.svg";
 import Bonecos from "../../../../assets/img/Psychologist.svg";
 import {
   FormGroup,
@@ -8,7 +8,7 @@ import {
   LoginContainer,
 } from "../../../../components/Layout/Container/ContainerLogin/styled";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, IconeGoogle, Span, TextContainer } from "./styled";
+import { Form, Google, Span, TextContainer } from "./styled";
 import { toast } from "react-toastify";
 import { ChangeEvent, KeyboardEvent, useContext, useState } from "react";
 import { AuthContext } from "../../../../contexts/auth/AuthContext";
@@ -78,10 +78,10 @@ export const SignIn = () => {
             <button type="submit">Entrar</button>
           </Form>
           ou
-          <IconeGoogle>
-            <img src={Google} alt="Ícone do Google" />
+          <Google>
+            <img src={google} alt="icone google" />
             <span>Entrar com o Google</span>
-          </IconeGoogle>
+          </Google>
           <Span>
             Não tem uma conta?
             <Link to="/signup-psy"> Registre-se aqui</Link>

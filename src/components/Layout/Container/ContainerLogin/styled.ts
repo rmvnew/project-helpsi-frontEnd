@@ -15,7 +15,7 @@ export const LoginBackground = styled.body`
 export const LoginContainer = styled.div`
   background-color: var(--bg-primary);
   height: 600px;
-  min-width: 90vw;
+  width: 90vw;
   color: var(--bg-dark);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -24,8 +24,9 @@ export const LoginContainer = styled.div`
   align-items: center;
 
   @media (min-width: 768px) {
-    min-width: 45vw;
+    width: 70vw;
   }
+
 `;
 
 export const TextContainer = styled.div`
@@ -55,8 +56,8 @@ export const FormGroup = styled.div`
     width: 250px;
   }
 
-  @media (min-width: 768px) {
-    width: 50%;
+  @media (min-width: 900px) {
+    width: 40%;
   }
 `;
 
@@ -88,7 +89,7 @@ export const Image = styled.div`
   img {
     width: 400px;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `;
