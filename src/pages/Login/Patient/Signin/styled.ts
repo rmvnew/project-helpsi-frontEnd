@@ -25,6 +25,7 @@ export const Form = styled.form`
   }
 
   a {
+    font-size: .8rem;
     width: 80%;
     margin-top: 5px;
     display: flex;

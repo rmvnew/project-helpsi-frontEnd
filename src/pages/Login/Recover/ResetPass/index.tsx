@@ -28,7 +28,8 @@ export const ResetPass = () => {
   });
 
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [isResetting, setIsResetting] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,35 +38,38 @@ export const ResetPass = () => {
   };
 
   const sendCode = async () => {
+    setIsResetting(true);
     try {
       const { code, password, email } = form;
-
+      
       if (password !== confirmPassword) {
         toast.error("A senha e a confirmação da senha não coincidem.");
         return;
       }
-
+      
       await api.post(
         `/user/resetPass?code=${code}&password=${encodeURIComponent(
           password
         )}&email=${encodeURIComponent(email)}`
       );
+
       toast.success("Senha alterada com sucesso");
       navigate("/start-login");
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsResetting(false);
     }
   };
 
   const sendRecoveryCode = async () => {
+    if (!form.email) {
+      toast.info("Por favor, preencha o campo de email e tente novamente.");
+      return;
+    }
+
     try {
-      if (!form.email) {
-        toast.info("Por favor, preencha o campo de email e tente novamente.");
-        return;
-      }
-      await api.post(
-        `/user/recover-code?email=${encodeURIComponent(form.email)}`
-      );
+      await api.post(`/user/recover-code?email=${encodeURIComponent(form.email)}`);
       toast.success("Código de recuperação enviado com sucesso!");
     } catch (error) {
       handleError(error);
@@ -79,9 +83,7 @@ export const ResetPass = () => {
 
   const handleError = (error: unknown) => {
     const axiosErr = error as AxiosError<ErrorResponse>;
-    const errorMessage =
-      axiosErr?.response?.data?.message ||
-      "Erro ao enviar o código de recuperação.";
+    const errorMessage = axiosErr?.response?.data?.message || "Erro ao enviar o código de recuperação.";
     console.error("Detalhes do erro:", axiosErr.response || error);
     toast.error(errorMessage);
   };
@@ -130,7 +132,9 @@ export const ResetPass = () => {
               name="email"
               required
             />
-            <button type="submit">Redefinir senha</button>
+            <button type="submit">
+              {isResetting ? "Redefinindo..." : "Redefinir senha"}
+            </button>
           </Form>
           <Resend onClick={sendRecoveryCode}>
             Não recebeu o código? Digite seu email e clique em

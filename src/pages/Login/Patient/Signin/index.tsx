@@ -9,14 +9,15 @@ import {
 } from "../../../../components/Layout/Container/ContainerLogin/styled";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Google, Span, TextContainer } from "./styled";
-import { toast } from "react-toastify";
-import { ChangeEvent, KeyboardEvent, useContext, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { ChangeEvent, useContext, useState } from "react";
 import { AuthContext } from "../../../../contexts/auth/AuthContext";
 
 export const SignIn = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -28,13 +29,9 @@ export const SignIn = () => {
     handleLogin();
   };
 
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "Enter") {
-      handleLogin();
-    }
-  };
-
   const handleLogin = async () => {
+    setIsLoggingIn(true); // Inicia o processo de login
+
     const { email, password } = form;
     if (email && password) {
       const isLogged = await auth.signin(email, password);
@@ -44,6 +41,8 @@ export const SignIn = () => {
         toast.error("Erro ao fazer login. Verifique suas credenciais.", {});
       }
     }
+
+    setIsLoggingIn(false); // Termina o processo de login
   };
 
   return (
@@ -55,7 +54,7 @@ export const SignIn = () => {
             <h2>Que bom te ver por aqui!</h2>
             <p>Acesse sua conta agora mesmo</p>
           </TextContainer>
-          <Form onSubmit={handleFormSubmit} onKeyDown={handleKeyDown}>
+          <Form onSubmit={handleFormSubmit}>
             <input
               type="email"
               name="email"
@@ -75,7 +74,9 @@ export const SignIn = () => {
             />
 
             <Link to="/recover-pass">Esqueceu sua senha</Link>
-            <button type="submit">Entrar</button>
+            <button type="submit">
+              {isLoggingIn ? "Entrando..." : "Entrar"}
+            </button>
           </Form>
           ou
           <Google>
@@ -91,6 +92,7 @@ export const SignIn = () => {
           <img src={Bonecos} alt="Psychologist" />
         </Image>
       </LoginContainer>
+      <ToastContainer />
     </LoginBackground>
   );
 };
