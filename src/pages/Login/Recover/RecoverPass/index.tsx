@@ -20,18 +20,22 @@ import { ErrorResponse } from "../../../../interface/error.interface";
 
 export const RecoverPass = () => {
   const [email, setEmail] = useState("");
+  const [isSending, setIsSending] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
 
   const sendRecoveryCode = async () => {
+    setIsSending(true)
     try {
       await api.post(`/user/recover-code?email=${encodeURIComponent(email)}`);
       toast.success("Código de recuperação enviado com sucesso!");
       navigate("/reset-pass");
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -70,7 +74,9 @@ export const RecoverPass = () => {
               value={email}
               onChange={handleEmailChange}
             />
-            <button type="submit">Envie o código</button>
+            <button type="submit">
+              {isSending ? "Enviando..." : "Envie o código"}
+            </button>
           </Form>
           <Span>
             <LockIcon />
