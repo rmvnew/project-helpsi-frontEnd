@@ -23,8 +23,11 @@ export const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     width: 70vw;
+  }
+  @media (min-width: 1300px) {
+    width: 50vw;
   }
 
 `;
