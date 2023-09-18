@@ -5,7 +5,7 @@ import {
 import { ContainerWrapper } from "../../../components/Layout/Container/style";
 import { HeaderWrapper } from "../../../components/Layout/Header";
 import Sidebar from "../../../components/Layout/Sidebar/Patient";
-
+import "./style.css";
 
 export const Home = () => {
   return (
@@ -13,10 +13,11 @@ export const Home = () => {
       <ContainerWrapper>
         <Sidebar />
         <HeaderWrapper />
-
         <Container>
           <Main>
-            <h1 style={{ color: "red" }}>Tela de Paciente</h1>
+            <div className="">
+              <h1>Tela de Paciente</h1>
+            </div>
           </Main>
         </Container>
       </ContainerWrapper>

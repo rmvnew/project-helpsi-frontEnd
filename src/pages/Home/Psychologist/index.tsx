@@ -2,7 +2,7 @@ import { Container, Main } from "../../../components/Layout/Container/ContainerH
 import { ContainerWrapper } from "../../../components/Layout/Container/style";
 import { HeaderWrapper } from "../../../components/Layout/Header";
 import SidebarPsy from "../../../components/Layout/Sidebar/Psychologist";
-
+import "./style.css";
 
 export const HomePsy = () => {
   return (
@@ -12,7 +12,9 @@ export const HomePsy = () => {
         <Container>
           <HeaderWrapper />
           <Main>
-            <h1 style={{ color: "red" }}>Tela de Psicologo</h1>
+            <div className="">
+              <h1>Tela de Psicologo</h1>
+            </div>
           </Main>
         </Container>
       </ContainerWrapper>
