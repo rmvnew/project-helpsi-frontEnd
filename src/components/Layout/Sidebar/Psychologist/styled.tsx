@@ -36,7 +36,7 @@ export const StyledIconButton = styled(IconButton)`
   left: 0;
   z-index: 3000; 
   height: 60px;
-  width: 70px;
+  width: 53px;
 
   @media (min-width: 768px) {
     display: none;

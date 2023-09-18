@@ -12,6 +12,8 @@ export const Header = styled.header`
   top: 0;
   left: 0;
   z-index: 1000;
+  transform: translateY(0.1s);
+  transition: transform 0.5s ease-in-out;
 
   span {
     padding: 0 50px;

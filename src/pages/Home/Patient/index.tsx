@@ -10,8 +10,9 @@ export const Home = () => {
   return (
     <>
       <ContainerWrapper>
-        <HeaderWrapper />
         <Sidebar />
+        <HeaderWrapper />
+
         <Container>
           <Main>
             <h1 style={{ color: "red" }}>Tela de Paciente</h1>
