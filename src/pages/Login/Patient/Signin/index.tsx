@@ -109,7 +109,7 @@ export const SignIn = () => {
           />
           <Span>
             Não tem uma conta?
-            <Link to="/signup-psy"> Registre-se aqui</Link>
+            <Link to="/signup"> Registre-se aqui</Link>
           </Span>
         </FormGroup>
         <Image>

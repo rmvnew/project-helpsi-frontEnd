@@ -19,7 +19,7 @@ export const Form = styled.form`
   input {
     font-family: sans-serif;
     width: 80%;
-    padding: 10px;
+    padding: 13px;
     border: none;
     border-radius: 5px;
   }

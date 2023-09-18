@@ -13,11 +13,11 @@ export const Form = styled.form`
     width: 80%;
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 13px;
   }
 
   button {
-    padding: 8px;
+    padding: 10px;
     text-align: center;
     border-radius: 5px;
     border: none;

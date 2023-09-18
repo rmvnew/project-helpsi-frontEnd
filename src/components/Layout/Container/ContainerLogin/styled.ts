@@ -70,7 +70,7 @@ export const Btn = styled.div`
   flex-direction: column;
   gap: 5px;
   a {
-    padding: 8px;
+    padding: 10px;
     text-align: center;
     border-radius: 5px;
     border: none;
