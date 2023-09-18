@@ -4,7 +4,8 @@ import {
 } from "../../../components/Layout/Container/ContainerHome/styled";
 import { ContainerWrapper } from "../../../components/Layout/Container/style";
 import { HeaderWrapper } from "../../../components/Layout/Header";
-import Sidebar from "../../../components/Layout/Sidebar/Psychologist";
+import Sidebar from "../../../components/Layout/Sidebar/Patient";
+
 
 export const Home = () => {
   return (

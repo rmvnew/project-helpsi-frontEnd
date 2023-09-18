@@ -22,7 +22,7 @@ import {
   ExpandLess as ExpandLessIcon,
 } from "@material-ui/icons";
 
-const Sidebar = () => {
+const SidebarPsy = () => {
   const auth = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [prontuarioOpen, setProntuarioOpen] = useState(false);
@@ -142,4 +142,4 @@ const secondaryMenuItems = [
   { label: "Sair", icon: <ExitToAppIcon /> },
 ];
 
-export default Sidebar;
+export default SidebarPsy;
