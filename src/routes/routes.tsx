@@ -5,10 +5,12 @@ import { Home } from "../pages/Home/Patient";
 import { HomePsy } from "../pages/Home/Psychologist";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
 import { SignInPsy } from "../pages/Login/Psychologist/Signin";
+import { SignUpPsy } from "../pages/Login/Psychologist/Signup";
 import { SignIn } from "../pages/Login/Patient/Signin";
 import { SignUp } from "../pages/Login/Patient/Signup";
 import { ResetPass } from "../pages/Login/Recover/ResetPass";
 import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
+
 
 export const AppRoutes = () => {
   return (
@@ -33,6 +35,7 @@ export const AppRoutes = () => {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/signin-psy" element={<SignInPsy />} />
+      <Route path="/signup-psy" element={<SignUpPsy />} />
       <Route path="/recover-pass" element={<RecoverPass />} />
       <Route path="/reset-pass" element={<ResetPass />} />
     </Routes>
