@@ -1,15 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 
 import { StartLogin } from "../pages/Login/Start";
+import { Home } from "../pages/Home/Patient";
 import { HomePsy } from "../pages/Home/Psychologist";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
 import { SignInPsy } from "../pages/Login/Psychologist/Signin";
-import { SignUp } from "../pages/Login/Patient/Signup";
 import { SignIn } from "../pages/Login/Patient/Signin";
-import { Home } from "../pages/Home/Patient";
+import { SignUp } from "../pages/Login/Patient/Signup";
 import { ResetPass } from "../pages/Login/Recover/ResetPass";
 import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
-
 
 export const AppRoutes = () => {
   return (
