@@ -15,14 +15,13 @@ import { Form } from "./styled";
 import Logo from "../../../../assets/img/logo.svg";
 import Bonecos from "../../../../assets/img/Psychologist.svg";
 import "react-toastify/dist/ReactToastify.css";
-
-import { FormData } from "../../../../interface/signup.interface";
 import { validateDate } from "../../../../common/utils/validade";
 import { useNavigate } from "react-router-dom";
+import { SignUpInterfacePatient } from "../../../../interface/signup.interface";
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<SignUpInterfacePatient>({
     user_name: "",
     user_email: "",
     user_password: "",
