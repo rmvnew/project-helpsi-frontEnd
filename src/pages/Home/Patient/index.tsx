@@ -3,16 +3,14 @@ import {
   Main,
 } from "../../../components/Layout/Container/ContainerHome/styled";
 import { ContainerWrapper } from "../../../components/Layout/Container/style";
-import { HeaderWrapper } from "../../../components/Layout/Header";
-import Sidebar from "../../../components/Layout/Sidebar/Patient";
+import Header from "../../../components/Layout/Header";
 import "./style.css";
 
 export const Home = () => {
   return (
     <>
       <ContainerWrapper>
-        <Sidebar />
-        <HeaderWrapper />
+        <Header />
         <Container>
           <Main>
             <div className="">
