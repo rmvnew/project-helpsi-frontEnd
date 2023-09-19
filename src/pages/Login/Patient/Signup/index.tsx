@@ -74,7 +74,7 @@ export const SignUp = () => {
 
       if (response.data) {
         toast.success("Registro realizado com sucesso!");
-        navigate("/signin");
+        navigate("/signin/patient");
       }
     } catch {
       displayError("Erro ao registrar");

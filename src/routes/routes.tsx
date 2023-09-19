@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-
 import { StartLogin } from "../pages/Login/Start";
 import { Home } from "../pages/Home/Patient";
 import { HomePsy } from "../pages/Home/Psychologist";
@@ -11,12 +10,11 @@ import { SignUp } from "../pages/Login/Patient/Signup";
 import { ResetPass } from "../pages/Login/Recover/ResetPass";
 import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
 
-
 export const AppRoutes = () => {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/home/patient"
         element={
           <RequireAuth>
             <HomePsy />
@@ -24,20 +22,20 @@ export const AppRoutes = () => {
         }
       />
       <Route
-        path="/home"
+        path="/home/psy"
         element={
           <RequireAuth>
             <Home />
           </RequireAuth>
         }
       />
-      <Route path="/start-login" element={<StartLogin />} />
-      <Route path="/signin" element={<SignIn />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/signin-psy" element={<SignInPsy />} />
-      <Route path="/signup-psy" element={<SignUpPsy />} />
-      <Route path="/recover-pass" element={<RecoverPass />} />
-      <Route path="/reset-pass" element={<ResetPass />} />
+      <Route path="/" element={<StartLogin />} />
+      <Route path="/login/recover-pass" element={<RecoverPass />} />
+      <Route path="/login/reset-pass" element={<ResetPass />} />
+      <Route path="/signin/patient" element={<SignIn />} />
+      <Route path="/signup/patient" element={<SignUp />} />
+      <Route path="/signin/psy" element={<SignInPsy />} />
+      <Route path="/signup/psy" element={<SignUpPsy />} />
     </Routes>
   );
 };

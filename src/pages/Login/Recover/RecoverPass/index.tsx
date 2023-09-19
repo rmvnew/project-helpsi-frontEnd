@@ -31,7 +31,7 @@ export const RecoverPass = () => {
     try {
       await api.post(`/user/recover-code?email=${encodeURIComponent(email)}`);
       toast.success("Código de recuperação enviado com sucesso!");
-      navigate("/reset-pass");
+      navigate("/login/reset-pass");
     } catch (error) {
       handleError(error);
     } finally {

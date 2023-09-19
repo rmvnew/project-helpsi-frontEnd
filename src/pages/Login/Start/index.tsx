@@ -24,8 +24,8 @@ export const StartLogin = () => {
             </TextContainer>
 
             <Btn>
-              <Link to="/signin">Sim</Link>
-              <Link to="/signin-psy">Sou psicólogo e quero atender</Link>
+              <Link to="/signin/patient">Sim</Link>
+              <Link to="/signin/psy">Sou psicólogo e quero atender</Link>
             </Btn>
             <Span>
               <LockIcon />

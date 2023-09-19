@@ -37,7 +37,7 @@ export const SignInPsy = () => {
     if (email && password) {
       const isLogged = await auth.signin(email, password);
       if (isLogged && isLogged.status) {
-        navigate("/");
+        navigate("/home/patient");
       } else {
         toast.error("Erro ao fazer login. Verifique suas credenciais.", {});
       }
@@ -86,7 +86,7 @@ export const SignInPsy = () => {
           </IconeGoogle>
           <Span>
             Não tem uma conta?
-            <Link to="/signup-psy"> Registre-se aqui</Link>
+            <Link to="/signup/psy"> Registre-se aqui</Link>
           </Span>
         </FormGroup>
         <Image>
