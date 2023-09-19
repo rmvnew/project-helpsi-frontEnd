@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-
 import { StartLogin } from "../pages/Login/Start";
 import { Home } from "../pages/Home/Patient";
 import { HomePsy } from "../pages/Home/Psychologist";

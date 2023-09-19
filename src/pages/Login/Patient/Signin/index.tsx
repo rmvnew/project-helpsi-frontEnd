@@ -48,7 +48,7 @@ export const SignIn = () => {
     if (response.tokenId) {
       const result = await auth.signinWithGoogle(response.tokenId);
       if (result && result.status) {
-        navigate("/home");
+        navigate("/home/patient");
       } else {
         toast.error(result.message || "Erro ao fazer login com o Google.");
       }
@@ -109,7 +109,7 @@ export const SignIn = () => {
           />
           <Span>
             Não tem uma conta?
-            <Link to="/signup"> Registre-se aqui</Link>
+            <Link to="/signup/patient"> Registre-se aqui</Link>
           </Span>
         </FormGroup>
         <Image>
