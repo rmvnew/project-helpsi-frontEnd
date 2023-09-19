@@ -16,10 +16,12 @@ import Logo from "../../../../assets/img/logo.svg";
 import Bonecos from "../../../../assets/img/Psychologist.svg";
 import "react-toastify/dist/ReactToastify.css";
 
-import { FormData } from "../../../../interface/signin.interface";
+import { FormData } from "../../../../interface/signup.interface";
 import { validateDate } from "../../../../common/utils/validade";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     user_name: "",
     user_email: "",
@@ -71,8 +73,8 @@ export const SignUp = () => {
       });
 
       if (response.data) {
-        console.log(response.data);
         toast.success("Registro realizado com sucesso!");
+        navigate("/signin");
       }
     } catch {
       displayError("Erro ao registrar");
