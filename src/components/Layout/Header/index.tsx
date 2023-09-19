@@ -12,6 +12,10 @@ const HeaderContainer = styled.header`
   padding: 15px 50px;
   background-color: #ecf0f1;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 998px) {
+    display: none;
+  }
 `;
 
 const Logo = styled.img`
