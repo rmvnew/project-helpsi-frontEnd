@@ -3,7 +3,6 @@ import { Btn, MyProfile, UserProfile } from "./styled";
 import Avatar from "react-avatar";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 
 const styles = {
