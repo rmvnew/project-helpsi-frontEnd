@@ -63,7 +63,7 @@ export const NavLinks = styled.nav`
 export const UserProfile = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 
   span {
     color: var(--bg-dark);
@@ -74,6 +74,17 @@ export const UserProfile = styled.div`
       font-size: 0.8rem;
     }
   }
+`;
+
+export const Btn = styled.div `
+  
+  margin-left: 4px;
+`
+
+export const MyProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 `;
 
 export const DropdownMenu = styled.div<DropdownMenuProps>`
