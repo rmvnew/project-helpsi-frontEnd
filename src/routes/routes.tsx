@@ -13,8 +13,8 @@ import { Scheduling } from "../pages/Scheduling";
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/home/psy" element={<HomePsy />} />
-      <Route path="/home/patient" element={<Home />} />
+      <Route path="/home/patient" element={<HomePsy />} />
+      <Route path="/home/psy" element={<Home />} />
       <Route path="/" element={<StartLogin />} />
       <Route path="/login/recover-pass" element={<RecoverPass />} />
       <Route path="/login/reset-pass" element={<ResetPass />} />
