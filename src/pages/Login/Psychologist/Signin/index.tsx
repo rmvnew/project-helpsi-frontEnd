@@ -37,7 +37,7 @@ export const SignInPsy = () => {
     if (email && password) {
       const isLogged = await auth.signin(email, password);
       if (isLogged && isLogged.status) {
-        navigate("/home/patient");
+        navigate("/home/psy");
       } else {
         toast.error("Erro ao fazer login. Verifique suas credenciais.", {});
       }
