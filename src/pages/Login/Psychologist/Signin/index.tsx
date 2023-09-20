@@ -74,7 +74,7 @@ export const SignInPsy = () => {
               required
             />
 
-            <Link to="/recover-pass">Esqueceu sua senha</Link>
+            <Link to="/login/recover-pass">Esqueceu sua senha</Link>
             <button type="submit">
               {isLoggingIn ? "Entrando..." : "Entrar"}
             </button>
