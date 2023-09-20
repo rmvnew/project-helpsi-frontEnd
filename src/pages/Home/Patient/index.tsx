@@ -10,7 +10,9 @@ export const Home = () => {
       <ContainerWrapper>
         <Container>
           <Main>
-            <h1 style={{ color: "red" }}>Tela de Paciente</h1>
+            <div className="">
+              <h1>Tela de Paciente</h1>
+            </div>
           </Main>
         </Container>
       </ContainerWrapper>

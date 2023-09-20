@@ -1,17 +1,18 @@
 import {
   Container,
   Main,
-} from "../../../components/Layout/Container/ContainerHome/styled";
-import { ContainerWrapper } from "../../../components/Layout/Container/style";
+} from "../../components/Layout/Container/ContainerHome/styled";
+import { ContainerWrapper } from "../../components/Layout/Container/style";
+import "./style.css";
 
-export const HomePsy = () => {
+export const Scheduling = () => {
   return (
     <>
       <ContainerWrapper>
         <Container>
           <Main>
             <div className="">
-              <h1>Tela de Psicologo</h1>
+              <h1>Tela de agendamento</h1>
             </div>
           </Main>
         </Container>
