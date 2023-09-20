@@ -9,12 +9,27 @@ import { SignUp } from "../pages/Login/Patient/Signup";
 import { ResetPass } from "../pages/Login/Recover/ResetPass";
 import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
 import { Scheduling } from "../pages/Scheduling";
+import { RequireAuth } from "../contexts/auth/RequireAuth";
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/home/psy" element={<HomePsy />} />
-      <Route path="/home/patient" element={<Home />} />
+      <Route
+        path="/home/psy"
+        element={
+          <RequireAuth>
+            <HomePsy />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/home/patient"
+        element={
+          <RequireAuth>
+            <Home />
+          </RequireAuth>
+        }
+      />
       <Route path="/" element={<StartLogin />} />
       <Route path="/login/recover-pass" element={<RecoverPass />} />
       <Route path="/login/reset-pass" element={<ResetPass />} />

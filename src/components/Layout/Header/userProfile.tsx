@@ -18,6 +18,20 @@ const styles = {
   dropDownIcon: {
     color: "#594f4fd0",
   },
+  menuButton: {
+    background: "#9de0ad",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    padding: "8px 12px",
+    margin: "4px",
+    cursor: "pointer",
+    outline: "none",
+    transition: "background 0.3s",
+    "&:hover": {
+      background: "#7ebc89",
+    },
+  },
 };
 
 function useMenu() {
@@ -39,13 +53,12 @@ function useMenu() {
 }
 
 export const UserProfileSection = () => {
-  const { signout } = useContext(AuthContext);
-  const { anchorEl, openMenu, closeMenu } = useMenu();
+  const auth = useContext(AuthContext);
 
   const handleLogout = async () => {
-    await signout();
-    closeMenu();
+    await auth.signout();
   };
+  const { anchorEl, openMenu, closeMenu } = useMenu();
 
   return (
     <UserProfile>
@@ -66,9 +79,18 @@ export const UserProfileSection = () => {
         <ArrowDropDownIcon style={styles.dropDownIcon} />
       </Btn>
 
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={closeMenu}>
-        <MenuItem onClick={closeMenu}>Config</MenuItem>
-        <MenuItem onClick={handleLogout}>Sair</MenuItem>
+      <Menu
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={closeMenu}
+      >
+        <button style={styles.menuButton} onClick={closeMenu}>
+          Config
+        </button>
+        <button style={styles.menuButton} onClick={handleLogout}>
+          Sair
+        </button>
       </Menu>
     </UserProfile>
   );
