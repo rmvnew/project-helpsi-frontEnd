@@ -39,27 +39,6 @@ export const RightSection = styled.div`
   font-size: 1.2rem;
 `;
 
-export const NavLinks = styled.nav`
-  display: flex;
-  gap: 50px;
-  margin-right: 30px;
-  position: relative;
-
-  a {
-    color: var(--bg-dark);
-    text-decoration: none;
-    border-bottom: 4px solid transparent;
-
-    &:hover {
-      border-bottom: 4px solid var(--bg-dark);
-    }
-  }
-
-  @media (max-width: 998px) {
-    display: none;
-  }
-`;
-
 export const UserProfile = styled.div`
   display: flex;
   align-items: center;
@@ -76,10 +55,9 @@ export const UserProfile = styled.div`
   }
 `;
 
-export const Btn = styled.div `
-  
+export const Btn = styled.div`
   margin-left: 4px;
-`
+`;
 
 export const MyProfile = styled.div`
   display: flex;
