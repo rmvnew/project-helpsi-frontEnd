@@ -1,19 +1,20 @@
-import Logo from "../../../../assets/img/logo.svg";
-import Google from "../../../../assets/img/google.svg";
-import Bonecos from "../../../../assets/img/Psychologist.svg";
+import React, { ChangeEvent, useContext, useState } from "react";
+import { GoogleLogin } from "react-google-login";
+import Logo from "../../../assets/img/logo.svg";
+import google from "../../../assets/img/google.svg";
+import Bonecos from "../../../assets/img/Psychologist.svg";
 import {
   FormGroup,
   Image,
   LoginBackground,
   LoginContainer,
-} from "../../../../components/Layout/Container/ContainerLogin/styled";
+} from "../../../components/Layout/Container/ContainerLogin/styled";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, IconeGoogle, Span, TextContainer } from "./styled";
+import { Form, Google, Span, TextContainer } from "./styled";
 import { ToastContainer, toast } from "react-toastify";
-import { ChangeEvent, useContext, useState } from "react";
-import { AuthContext } from "../../../../contexts/auth/AuthContext";
+import { AuthContext } from "../../../contexts/auth/AuthContext";
 
-export const SignInPsy = () => {
+export const SignIn = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
@@ -29,21 +30,34 @@ export const SignInPsy = () => {
     handleLogin();
   };
 
-
   const handleLogin = async () => {
     setIsLoggingIn(true);
-
     const { email, password } = form;
     if (email && password) {
       const isLogged = await auth.signin(email, password);
       if (isLogged && isLogged.status) {
-        navigate("/home/psy");
+        navigate("/");
       } else {
-        toast.error("Erro ao fazer login. Verifique suas credenciais.", {});
+        toast.error("Erro ao fazer login. Verifique suas credenciais.");
       }
     }
-
     setIsLoggingIn(false);
+  };
+
+  const handleGoogleSuccess = async (response: any) => {
+    if (response.tokenId) {
+      const result = await auth.signinWithGoogle(response.tokenId);
+      if (result && result.status) {
+        navigate("/home/patient");
+      } else {
+        toast.error(result.message || "Erro ao fazer login com o Google.");
+      }
+    }
+  };
+
+  const handleGoogleFailure = (error: any) => {
+    console.error("Erro no login com o Google:", error);
+    
   };
 
   return (
@@ -64,7 +78,6 @@ export const SignInPsy = () => {
               placeholder="Digite seu email"
               required
             />
-
             <input
               type="password"
               name="password"
@@ -73,20 +86,30 @@ export const SignInPsy = () => {
               placeholder="Digite sua senha"
               required
             />
-
-            <Link to="/recover-pass">Esqueceu sua senha</Link>
+            <Link to="/login/recover-pass">Esqueceu sua senha</Link>
             <button type="submit">
               {isLoggingIn ? "Entrando..." : "Entrar"}
             </button>
           </Form>
           ou
-          <IconeGoogle>
-            <img src={Google} alt="Ícone do Google" />
-            <span>Entrar com o Google</span>
-          </IconeGoogle>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID ?? ""}
+            onSuccess={handleGoogleSuccess}
+            onFailure={handleGoogleFailure}
+            cookiePolicy={"single_host_origin"}
+            render={(renderProps) => (
+              <Google
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <img src={google} alt="icone google" />
+                <span>Entrar com o Google</span>
+              </Google>
+            )}
+          />
           <Span>
             Não tem uma conta?
-            <Link to="/signup/psy"> Registre-se aqui</Link>
+            <Link to="/signup"> Registre-se aqui</Link>
           </Span>
         </FormGroup>
         <Image>
