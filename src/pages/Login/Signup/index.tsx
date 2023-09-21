@@ -1,7 +1,13 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { ChangeEvent, FormEvent} from "react";
+import { ToastContainer } from "react-toastify";
+import { useSignUpLogic } from "../../../hooks/useSignUp";
+import { useFormValidation } from "../../../hooks/useFormValidation";
+import { Form } from "./styled";
+
 import LockIcon from "@mui/icons-material/Lock";
+import Logo from "../../../assets/img/logo.svg";
+import Bonecos from "../../../assets/img/Psychologist.svg";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   FormGroup,
@@ -10,81 +16,30 @@ import {
   LoginContainer,
   Span,
   TextContainer,
-} from "../../../../components/Layout/Container/ContainerLogin/styled";
-import { Form } from "./styled";
-import Logo from "../../../../assets/img/logo.svg";
-import Bonecos from "../../../../assets/img/Psychologist.svg";
-import "react-toastify/dist/ReactToastify.css";
-import { validateDate } from "../../../../common/utils/validade";
-import { useNavigate } from "react-router-dom";
-import { SignUpInterfacePatient } from "../../../../interface/signup.interface";
+} from "../../../components/Layout/Container/ContainerLogin/styled";
+
+
 
 export const SignUp = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState<SignUpInterfacePatient>({
-    user_name: "",
-    user_email: "",
-    user_password: "",
-    user_password_confirmation: "",
-    user_date_of_birth: "",
-  });
 
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const api = process.env.REACT_APP_API_BASE_URL;
+  const { formData, setFormData, isSubmitting, setIsSubmitting } =
+    useSignUpLogic();
 
-  const {
-    user_name,
-    user_email,
-    user_password,
-    user_password_confirmation,
-    user_date_of_birth,
-  } = formData;
+  const { validateForm } = useFormValidation(
+    formData,
+    setIsSubmitting
+  );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const arePasswordsEqual = () => user_password === user_password_confirmation;
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    if (!arePasswordsEqual()) {
-      displayError("Senhas não são iguais!");
-      return;
+    if (validateForm()) {
+      setIsSubmitting(true);
     }
-
-    if (!user_date_of_birth || !validateDate(user_date_of_birth)) {
-      displayError(
-        "Por favor, insira sua data de nascimento no formato correto: DD/MM/YYYY."
-      );
-      return;
-    }
-
-    try {
-      const response = await axios.post(`${api}/user/patient/public`, {
-        user_name,
-        user_email,
-        user_password,
-        user_date_of_birth,
-      });
-
-      if (response.data) {
-        toast.success("Registro realizado com sucesso!");
-        navigate("/signin/patient");
-      }
-    } catch {
-      displayError("Erro ao registrar");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const displayError = (message: string) => {
-    toast.error(message);
-    setIsSubmitting(false);
   };
 
   return (
@@ -95,12 +50,14 @@ export const SignUp = () => {
           <TextContainer>
             <h2>Informações de acesso</h2>
           </TextContainer>
+
           <Form onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Nome completo"
               required
               name="user_name"
+              value={formData.user_name}
               onChange={handleChange}
             />
             <input
@@ -108,6 +65,7 @@ export const SignUp = () => {
               placeholder="Digite seu email"
               required
               name="user_email"
+              value={formData.user_email}
               onChange={handleChange}
             />
             <input
@@ -115,6 +73,7 @@ export const SignUp = () => {
               placeholder="Crie uma senha"
               required
               name="user_password"
+              value={formData.user_password}
               onChange={handleChange}
             />
             <input
@@ -122,6 +81,7 @@ export const SignUp = () => {
               placeholder="Confirme a senha"
               required
               name="user_password_confirmation"
+              value={formData.user_password_confirmation}
               onChange={handleChange}
             />
             <input
@@ -129,6 +89,7 @@ export const SignUp = () => {
               placeholder="Nascimento (DD/MM/YYYY)"
               required
               name="user_date_of_birth"
+              value={formData.user_date_of_birth}
               onChange={handleChange}
             />
             <p>
