@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent} from "react";
+import { ChangeEvent, FormEvent } from "react";
 import { ToastContainer } from "react-toastify";
 import { useSignUpLogic } from "../../../hooks/useSignUp";
 import { useFormValidation } from "../../../hooks/useFormValidation";
@@ -18,17 +18,11 @@ import {
   TextContainer,
 } from "../../../components/Layout/Container/ContainerLogin/styled";
 
-
-
 export const SignUp = () => {
-
   const { formData, setFormData, isSubmitting, setIsSubmitting } =
     useSignUpLogic();
 
-  const { validateForm } = useFormValidation(
-    formData,
-    setIsSubmitting
-  );
+  const { validateForm } = useFormValidation(formData, setIsSubmitting);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
