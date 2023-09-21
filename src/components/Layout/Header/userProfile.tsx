@@ -66,7 +66,12 @@ export const UserProfileSection = () => {
         <ArrowDropDownIcon style={styles.dropDownIcon} />
       </Btn>
 
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={closeMenu}>
+      <Menu
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={closeMenu}
+      >
         <MenuItem onClick={closeMenu}>Config</MenuItem>
         <MenuItem onClick={handleLogout}>Sair</MenuItem>
       </Menu>
