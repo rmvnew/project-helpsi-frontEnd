@@ -53,7 +53,7 @@ function useMenu() {
 }
 
 export const UserProfileSection = () => {
-  const { signout } = useContext(AuthContext);
+
   const { anchorEl, openMenu, closeMenu } = useMenu();
   const auth = useContext(AuthContext);
   const formattedName = getFormattedName(auth.user?.name);

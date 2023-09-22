@@ -6,12 +6,19 @@ import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
 import { Scheduling } from "../pages/Scheduling";
 import { SignIn } from "../pages/Login/Signin";
 import { SignUp } from "../pages/Login/Signup";
-
+import { RequireAuth } from "../contexts/auth/RequireAuth";
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <RequireAuth>
+            <Home />
+          </RequireAuth>
+        }
+      />
       <Route path="/home/psy" element={<HomePsy />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />

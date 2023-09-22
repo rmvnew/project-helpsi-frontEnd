@@ -5,13 +5,12 @@ import {
   toast,
   useNavigate,
 } from "../common/utils/imports/signin";
-import { getFormattedName } from "../common/utils/functions/toTitleCase";
 
 export const useLoginFunctions = () => {
   const auth = useContext(AuthContext);
-  const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const navigate = useNavigate();
   
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +23,6 @@ export const useLoginFunctions = () => {
     handleLogin();
   };
 
-
   const handleLogin = async () => {
     setIsLoggingIn(true);
     const { email, password } = form;
@@ -32,8 +30,7 @@ export const useLoginFunctions = () => {
       const isLogged = await auth.signin(email, password);
       if (isLogged && isLogged.status) {
         navigate("/");
-        const formattedName = getFormattedName(auth.user?.name);
-        toast.success(`Bem vindo, ${formattedName} !!!`);
+        toast.success(`Bem vindo !!!`);
       } else {
         toast.error("Erro ao fazer login. Verifique suas credenciais.");
       }
@@ -45,7 +42,7 @@ export const useLoginFunctions = () => {
     if (response.tokenId) {
       const result = await auth.signinWithGoogle(response.tokenId);
       if (result && result.status) {
-        navigate("/home/patient");
+        navigate("/");
       } else {
         toast.error(result.message || "Erro ao fazer login com o Google.");
       }
