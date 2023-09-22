@@ -5,16 +5,17 @@ import logo from "../../../../assets/img/logo.svg";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
-import { Sidebar, SidebarLink, SubItems } from "../styled";
+import { Sidebar, SidebarLink } from "../styled";
 import { DocumentsLink } from "../../Header/psy/documents";
 import { SidebarPsyProps } from "../../../../interface/sidebar.interface";
+import { SubItemsWrapper } from "../SubItemsWrapper";
 
 const SidebarComponent: React.FC<SidebarPsyProps> = ({
   isSidebarOpen,
   isDocumentsExpanded,
   toggleDocuments,
 }) => (
-  <Sidebar isOpen={isSidebarOpen}>
+  <Sidebar open={isSidebarOpen}>
     <img src={logo} alt="logo da empresa" style={{ width: "150px" }} />
     <SidebarLink>
       <Link to="/">
@@ -30,14 +31,13 @@ const SidebarComponent: React.FC<SidebarPsyProps> = ({
       />
     </SidebarLink>
 
-    <SubItems isVisible={isDocumentsExpanded}>
+    <SubItemsWrapper visible={isDocumentsExpanded}>
       <Link to="/relatorio">Relatório</Link>
       <Link to="/laudo">Laudo</Link>
       <Link to="/declaracao">Declaração</Link>
       <Link to="/recibos">Recibos</Link>
       <Link to="/encaminhamentos">Encaminhamentos</Link>
-    </SubItems>
-
+      </SubItemsWrapper>
     <SidebarLink>
       <Link to="/link">
         <PeopleAltOutlinedIcon />

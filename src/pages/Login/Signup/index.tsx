@@ -4,7 +4,6 @@ import { useSignUpLogic } from "../../../hooks/useSignUp";
 import { useFormValidation } from "../../../hooks/useFormValidation";
 import { Form } from "./styled";
 
-import LockIcon from "@mui/icons-material/Lock";
 import Logo from "../../../assets/img/logo.svg";
 import Bonecos from "../../../assets/img/Psychologist.svg";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,9 +13,9 @@ import {
   Image,
   LoginBackground,
   LoginContainer,
-  Span,
   TextContainer,
 } from "../../../components/Layout/Container/ContainerLogin/styled";
+import { Link } from "react-router-dom";
 
 export const SignUp = () => {
   const { formData, setFormData, isSubmitting, setIsSubmitting } =
@@ -94,10 +93,7 @@ export const SignUp = () => {
               {isSubmitting ? "Cadastrando..." : "Aceitar e continuar"}
             </button>
           </Form>
-          <Span>
-            <LockIcon />
-            Dados protegidos
-          </Span>
+          <Link to="/">Já tem uma conta? <strong>Faça login</strong></Link>
         </FormGroup>
         <Image>
           <img src={Bonecos} alt="bonecos" />

@@ -26,7 +26,7 @@ export const useSignUpLogic = () => {
         const message =
           response.data.message ?? "Cadastro realizado com sucesso";
         toast.success(message);
-        navigate("/signin");
+        navigate("/");
       })
       .catch((error) => {
         const message = error.response.data.message ?? "Erro ao cadastrar";

@@ -59,6 +59,12 @@ export const FormGroup = styled.div`
     width: 250px;
   }
 
+  a {
+    color: var(--bg-dark);
+    font-family: sans-serif;
+    text-decoration: none;
+  }
+
   @media (min-width: 900px) {
     width: 40%;
   }
@@ -106,4 +112,5 @@ export const Span = styled.span`
   svg {
     width: 15px;
   }
+
 `;

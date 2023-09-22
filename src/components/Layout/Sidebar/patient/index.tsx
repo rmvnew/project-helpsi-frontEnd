@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 
 import logo from "../../../../assets/img/logo.svg";
 
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
-import { Sidebar, SidebarLink, SubItems } from "../styled";
+import { Sidebar, SidebarLink } from "../styled";
 import { ScheduleLink } from "../../Header/patient/schedule";
 import { SidebarPatientProps } from "../../../../interface/sidebar.interface";
 import { DailyLink } from "../../Header/patient/daily";
+import { SubItemsWrapper } from "../SubItemsWrapper";
 
 const SidebarComponent: React.FC<SidebarPatientProps> = ({
   isSidebarOpen,
@@ -16,7 +17,7 @@ const SidebarComponent: React.FC<SidebarPatientProps> = ({
   toggleSchedule,
   toggleDaily,
 }) => (
-  <Sidebar isOpen={isSidebarOpen}>
+  <Sidebar open={isSidebarOpen}>
     <img src={logo} alt="logo da empresa" style={{ width: "150px" }} />
     <SidebarLink>
       <Link to="/">
@@ -32,19 +33,18 @@ const SidebarComponent: React.FC<SidebarPatientProps> = ({
       />
     </SidebarLink>
 
-    <SubItems isVisible={isScheduleExpanded}>
+    <SubItemsWrapper visible={isScheduleExpanded}>
       <Link to="/">Online</Link>
       <Link to="/">Presencial</Link>
-    </SubItems>
+    </SubItemsWrapper>
 
     <SidebarLink>
       <DailyLink isDailyExpanded={isDailyExpanded} toggleDaily={toggleDaily} />
     </SidebarLink>
 
-    <SubItems isVisible={isDailyExpanded}>
+    <SubItemsWrapper visible={isDailyExpanded}>
       <Link to="/">Histórico</Link>
-      
-    </SubItems>
+    </SubItemsWrapper>
   </Sidebar>
 );
 

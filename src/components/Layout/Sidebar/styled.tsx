@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { SidebarProps } from "../../../types/Boolean";
+import { SubItemsProps } from "../../../types/Boolean";
 
-export const Sidebar = styled.div<SidebarProps>`
+export const Sidebar = styled.div<{ open?: boolean }>`
   position: fixed;
   top: 0;
-  left: ${(props) => (props.isOpen ? "0" : "-300px")};
+  left: ${(props) => (props.open ? "0" : "-300px")};
   height: 100%;
   width: 250px;
   background-color: var(--bg-secundary);
@@ -47,8 +47,8 @@ export const SidebarLink = styled.div`
   }
 `;
 
-export const SubItems = styled.div<{ isVisible: boolean }>`
-  display: ${(props) => (props.isVisible ? "none" : "block")};
+export const SubItems = styled.div<SubItemsProps>`
+  display: ${(props) => (props.visible ? "none" : "block")};
   padding-left: 20px;
   margin-top: 10px;
 

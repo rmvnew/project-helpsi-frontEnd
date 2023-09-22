@@ -20,7 +20,7 @@ export const AppRoutes = () => {
         }
       />
       <Route path="/home/psy" element={<HomePsy />} />
-      <Route path="/signin" element={<SignIn />} />
+      <Route path="/" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login/recover-pass" element={<RecoverPass />} />
       <Route path="/login/reset-pass" element={<ResetPass />} />
