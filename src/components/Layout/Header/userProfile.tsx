@@ -4,13 +4,14 @@ import Avatar from "react-avatar";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Menu from "@material-ui/core/Menu";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
+import { getFormattedName } from "../../../common/utils/functions/toTitleCase";
 
 const styles = {
   greeting: {
     marginTop: "1rem",
   },
   profileInfo: {
-    fontSize: ".7rem",
+    fontSize: ".6rem",
     color: "#594f4f6e",
     marginTop: ".5rem",
   },
@@ -52,26 +53,30 @@ function useMenu() {
 }
 
 export const UserProfileSection = () => {
+  const { signout } = useContext(AuthContext);
+  const { anchorEl, openMenu, closeMenu } = useMenu();
   const auth = useContext(AuthContext);
+  const formattedName = getFormattedName(auth.user?.name);
 
   const handleLogout = async () => {
     await auth.signout();
   };
-  const { anchorEl, openMenu, closeMenu } = useMenu();
+  
 
   return (
     <UserProfile>
       <MyProfile>
-        <span style={styles.greeting}>Olá, usuário</span>
+        <span style={styles.greeting}>{`${formattedName ?? "Usuário"}`}</span>
         <span style={styles.profileInfo}>Meu perfil</span>
       </MyProfile>
       <Avatar
         src="link_para_foto_do_perfil"
-        size="50"
+        size="40"
         color="#9de0ad"
         round
         alt="Foto de perfil"
-        name="Usuário"
+        name={`${formattedName}`}
+        style={{ marginTop: "10px" }}
       />
 
       <Btn onClick={openMenu}>

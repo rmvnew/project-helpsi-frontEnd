@@ -3,7 +3,10 @@ import {
   Main,
 } from "../../../components/Layout/Container/ContainerHome/styled";
 import { ContainerWrapper } from "../../../components/Layout/Container/style";
-import Header from "../../../components/Layout/Header";
+import Header from "../../../components/Layout/Header/psy";
+
+
+import "./style.css";
 
 export const HomePsy = () => {
   return (

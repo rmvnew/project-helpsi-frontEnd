@@ -5,12 +5,12 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 50px;
+  padding: 15px 20px;
   background-color: #ecf0f1;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 998px) {
-    padding: 10px 20px;
+    padding: 10px 10px;
   }
 `;
 export const Logo = styled.img`
@@ -20,7 +20,7 @@ export const Logo = styled.img`
   justify-content: center;
 
   @media (max-width: 998px) {
-    margin-left: 70px;
+    margin-left: 90px;
   }
 
   @media (max-width: 768px) {
@@ -28,17 +28,9 @@ export const Logo = styled.img`
   }
 
   @media (max-width: 480px) {
-    margin-left: 30px;
+    margin-left: 50px;
   }
 `;
-
-export const RightSection = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  font-size: 1.2rem;
-`;
-
 export const UserProfile = styled.div`
   display: flex;
   align-items: center;
@@ -48,7 +40,8 @@ export const UserProfile = styled.div`
     color: var(--bg-dark);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
+    gap: 5px;
     span {
       font-size: 0.8rem;
     }
@@ -56,7 +49,7 @@ export const UserProfile = styled.div`
 `;
 
 export const Btn = styled.div`
-  margin-left: 4px;
+  margin-left: 1px;
 `;
 
 export const MyProfile = styled.div`
