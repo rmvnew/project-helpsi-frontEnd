@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { UserProfileSection } from "./userProfile";
-import SidebarComponent from "../Sidebar";
-import logo from "../../../assets/img/logo.svg";
+import { UserProfileSection } from "../userProfile";
+import SidebarComponent from "../../Sidebar/psy";
+import logo from "../../../../assets/img/logo.svg";
 import MenuIcon from "@material-ui/icons/Menu";
-import { HeaderContainer, Logo, MenuButton, RightSection } from "./styled";
+import { HeaderContainer, Logo, MenuButton } from "../styled";
 
 const Header: React.FC = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 998);
-  const [isProntuarioExpanded, setProntuarioExpanded] = useState(false);
+  const [isDocumentsExpanded, setDocumentsExpanded] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
   }, []);
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
-  const toggleProntuario = () => setProntuarioExpanded(!isProntuarioExpanded);
+  const toggleDocuments = () => setDocumentsExpanded(!isDocumentsExpanded);
 
   return (
     <>
@@ -31,15 +31,14 @@ const Header: React.FC = () => {
           <MenuIcon />
         </MenuButton>
         <Logo src={logo} alt="Logo da empresa" />
-        <RightSection>
-          <UserProfileSection />
-        </RightSection>
+
+        <UserProfileSection />
       </HeaderContainer>
 
       <SidebarComponent
         isSidebarOpen={isSidebarOpen}
-        isProntuarioExpanded={isProntuarioExpanded}
-        toggleProntuario={toggleProntuario}
+        isDocumentsExpanded={isDocumentsExpanded}
+        toggleDocuments={toggleDocuments}
       />
     </>
   );

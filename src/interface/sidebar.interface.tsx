@@ -1,5 +1,15 @@
-export interface SidebarProps {
+export interface SidebarPsyProps {
   isSidebarOpen: boolean;
-  isProntuarioExpanded: boolean;
-  toggleProntuario: () => void;
+  isDocumentsExpanded: boolean;
+  toggleDocuments: () => void;
+}
+
+export interface SidebarPatientProps {
+  isSidebarOpen: boolean;
+  isScheduleExpanded: boolean;
+  toggleSchedule: () => void;
+
+  isDailyExpanded: boolean;
+  toggleDaily: () => void;
+  
 }
