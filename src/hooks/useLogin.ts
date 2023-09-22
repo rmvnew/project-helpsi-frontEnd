@@ -5,13 +5,13 @@ import {
   toast,
   useNavigate,
 } from "../common/utils/imports/signin";
+import { api } from "./useApi";
 
-export const useLoginFunctions = () => {
+export const useLogin = () => {
   const auth = useContext(AuthContext);
   const [form, setForm] = useState({ email: "", password: "" });
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const navigate = useNavigate();
-  
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -23,34 +23,39 @@ export const useLoginFunctions = () => {
     handleLogin();
   };
 
+  const fetchUserInfo = async () => {
+    const token = localStorage.getItem("authToken");
+    try {
+      const response = await api.get("/user/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar os dados do usuário:", error);
+      return null;
+    }
+  };
+
   const handleLogin = async () => {
     setIsLoggingIn(true);
     const { email, password } = form;
     if (email && password) {
       const isLogged = await auth.signin(email, password);
       if (isLogged && isLogged.status) {
-        navigate("/");
-        toast.success(`Bem vindo !!!`);
+        const userInfo = await fetchUserInfo();
+        if (userInfo && userInfo.user_id) {
+          navigate(`/home/${userInfo.user_id}`);
+          toast.success(`Bem vindo !!!`);
+        } else {
+          toast.error("Erro ao buscar informações do usuário.");
+        }
       } else {
         toast.error("Erro ao fazer login. Verifique suas credenciais.");
       }
     }
     setIsLoggingIn(false);
-  };
-
-  const handleGoogleSuccess = async (response: any) => {
-    if (response.tokenId) {
-      const result = await auth.signinWithGoogle(response.tokenId);
-      if (result && result.status) {
-        navigate("/");
-      } else {
-        toast.error(result.message || "Erro ao fazer login com o Google.");
-      }
-    }
-  };
-
-  const handleGoogleFailure = (error: any) => {
-    console.error("Erro no login com o Google:", error);
   };
 
   return {
@@ -59,7 +64,5 @@ export const useLoginFunctions = () => {
     isLoggingIn,
     handleInputChange,
     handleFormSubmit,
-    handleGoogleSuccess,
-    handleGoogleFailure,
   };
 };

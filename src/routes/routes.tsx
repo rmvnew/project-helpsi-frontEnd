@@ -12,7 +12,7 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/home/:id"
         element={
           <RequireAuth>
             <Home />

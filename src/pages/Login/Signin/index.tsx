@@ -1,4 +1,6 @@
-import { useLoginFunctions } from "../../../hooks/useLogin";
+import { useLogin } from "../../../hooks/useLogin";
+import { useGoogleLogin } from "../../../hooks/useLoginGoogle";
+
 import {
   Logo,
   google,
@@ -17,14 +19,8 @@ import {
 } from "../../../common/utils/imports/signin";
 
 export const SignIn = () => {
-  const {
-    form,
-    isLoggingIn,
-    handleInputChange,
-    handleFormSubmit,
-    handleGoogleSuccess,
-    handleGoogleFailure,
-  } = useLoginFunctions();
+  const { form, isLoggingIn, handleInputChange, handleFormSubmit } = useLogin();
+  const { handleGoogleSuccess, handleGoogleFailure } = useGoogleLogin();
 
   return (
     <LoginBackground>
