@@ -6,13 +6,12 @@ export const Sidebar = styled.div<{ open?: boolean }>`
   top: 0;
   left: ${(props) => (props.open ? "0" : "-300px")};
   height: 100%;
-  width: 250px;
+  width: 220px;
   background-color: var(--bg-secundary);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   transition: left 0.3s ease-in-out;
   z-index: 1000;
-  padding: 10px;
-  padding-top: 20px;
+  padding-top: 80px;
 
   @media (max-width: 998px) {
     padding-top: 70px;
