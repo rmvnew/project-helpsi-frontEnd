@@ -90,15 +90,11 @@ export const DropdownMenu = styled.div<DropdownMenuProps>`
 `;
 
 export const MenuButton = styled.button`
-  display: none;
+  display: block;
   color: var(--bg-dark);
   background-color: transparent;
   border: none;
   cursor: pointer;
   z-index: 1010;
 
-  @media (max-width: 998px) {
-    display: block;
-    order: -2;
-  }
 `;

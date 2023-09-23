@@ -3,14 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  justify-content: center;
+  min-height: 90vh;
   width: 100%;
 `;
 
 export const Main = styled.main`
-  width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin: 0 auto;
 `;

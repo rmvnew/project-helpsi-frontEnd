@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { UserProfileSection } from "../userProfile";
 import SidebarComponent from "../../Sidebar/psy";
 import logo from "../../../../assets/img/logo.svg";
@@ -6,20 +6,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { HeaderContainer, Logo, MenuButton } from "../styled";
 
 const Header: React.FC = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 998);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isDocumentsExpanded, setDocumentsExpanded] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setSidebarOpen(window.innerWidth >= 998);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    handleResize();
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
   const toggleDocuments = () => setDocumentsExpanded(!isDocumentsExpanded);

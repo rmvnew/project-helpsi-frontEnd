@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-import logo from "../../../../assets/img/logo.svg";
-
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 import { Sidebar, SidebarLink } from "../styled";
@@ -18,7 +16,7 @@ const SidebarComponent: React.FC<SidebarPatientProps> = ({
   toggleDaily,
 }) => (
   <Sidebar open={isSidebarOpen}>
-    <img src={logo} alt="logo da empresa" style={{ width: "150px" }} />
+    
     <SidebarLink>
       <Link to="/">
         <HomeOutlinedIcon />
