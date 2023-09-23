@@ -10,8 +10,8 @@ export const Patients = () => {
   return (
     <>
       <ContainerWrapper>
+        <Header />
         <Container>
-          <Header />
           <Main>
             <div className="">
               <h1>Listagem de Paciente</h1>

@@ -10,8 +10,8 @@ export const HomePsy = () => {
   return (
     <>
       <ContainerWrapper>
+        <Header />
         <Container>
-          <Header />
           <Main>
             <div className="">
               <h1>Tela de Psicologo</h1>

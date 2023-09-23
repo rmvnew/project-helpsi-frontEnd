@@ -10,8 +10,8 @@ export const Scheduling = () => {
   return (
     <>
       <ContainerWrapper>
+        <Header />
         <Container>
-          <Header />
           <Main>
             <div className="">
               <h1>Tela de agendamento</h1>
