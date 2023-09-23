@@ -1,11 +1,10 @@
-
-import { ContainerWrapper } from "../Container/style";
+import { Main } from "../Container/ContainerHome/styled";
 import "./style.css";
 
 export const Loader = () => {
   return (
     <>
-      <ContainerWrapper>
+      <Main>
         <svg className="loader" width="240" height="240" viewBox="0 0 240 240">
           <circle
             className="loader-ring loader-ring-a"
@@ -54,7 +53,7 @@ export const Loader = () => {
             stroke-linecap="round"
           ></circle>
         </svg>
-      </ContainerWrapper>
+      </Main>
     </>
   );
 };

@@ -2,14 +2,14 @@ import {
   Container,
   Main,
 } from "../../../components/Layout/Container/ContainerHome/styled";
-import { ContainerWrapper } from "../../../components/Layout/Container/style";
+import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/patient";
 import "./style.css";
 
 export const Schedule = () => {
   return (
     <>
-      <ContainerWrapper>
+      <Body>
         <Header />
         <Container>
           <Main>
@@ -18,7 +18,7 @@ export const Schedule = () => {
             </div>
           </Main>
         </Container>
-      </ContainerWrapper>
+      </Body>
     </>
   );
 };

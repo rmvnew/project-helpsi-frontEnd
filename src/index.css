@@ -6,10 +6,10 @@
 }
 
 :root {
-  --bg-primary: #9fdfae83;
-  --bg-secundary: #ECF0F1;
+  --bg-primary: #9fdfae;
+  --bg-secundary: #9fdfae83;
+  --bg-body: #ecf0f1;
   --bg-dark: #594f4f;
   --bg-hover-button: #433f3f;
-  --bg-hover-primary: #7DAF91;
-  
+  --bg-hover-primary: #7daf91;
 }
