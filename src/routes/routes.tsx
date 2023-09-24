@@ -10,6 +10,7 @@ import { Scheduling } from "../pages/Patient/Scheduling";
 import { Patients } from "../pages/Psychologist/Patients";
 import { Schedule } from "../pages/Psychologist/Schedule";
 import { PatientData } from "../pages/Psychologist/Data";
+import Dashboard from "../pages/Admin";
 
 export const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ export const AppRoutes = () => {
       <Route path="/login/recover-pass" element={<RecoverPass />} />
       <Route path="/login/reset-pass" element={<ResetPass />} />
       <Route path="/scheduling" element={<Scheduling />} />
+      <Route path="/admin" element={<Dashboard />} />
     </Routes>
   );
 };
