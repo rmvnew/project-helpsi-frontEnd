@@ -1,5 +1,4 @@
 import { useLogin } from "../../../hooks/useLogin";
-import { useGoogleLogin } from "../../../hooks/useLoginGoogle";
 
 import {
   Logo,
@@ -15,12 +14,10 @@ import {
   Span,
   TextContainer,
   ToastContainer,
-  GoogleLogin,
 } from "../../../common/utils/imports/signin";
 
 export const SignIn = () => {
   const { form, isLoggingIn, handleInputChange, handleFormSubmit } = useLogin();
-  const { handleGoogleSuccess, handleGoogleFailure } = useGoogleLogin();
 
   return (
     <LoginBackground>
@@ -54,21 +51,10 @@ export const SignIn = () => {
             </button>
           </Form>
           ou
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID ?? ""}
-            onSuccess={handleGoogleSuccess}
-            onFailure={handleGoogleFailure}
-            cookiePolicy={"single_host_origin"}
-            render={(renderProps) => (
-              <Google
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                <img src={google} alt="icone google" />
-                <span>Entrar com o Google</span>
-              </Google>
-            )}
-          />
+          <Google>
+            <img src={google} alt="icone google" />
+            <span>Entrar com o Google</span>
+          </Google>
           <Span>
             Não tem uma conta?
             <Link to="/signup"> Registre-se aqui</Link>
