@@ -7,7 +7,7 @@ export const Sidebar = styled.div<{ open?: boolean }>`
   left: ${(props) => (props.open ? "0" : "-300px")};
   height: 100%;
   width: 220px;
-  background-color: var(--bg-secundary);
+  background-color: var(--bg-body);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   transition: left 0.3s ease-in-out;
   z-index: 1000;

@@ -5,6 +5,7 @@ import {
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/patient";
 import { Column, Details, HomePatient } from "./styled";
+import { AppointmentTime } from "../../../components/Patient/appointmentTime";
 
 export const Home = () => {
   return (
@@ -15,9 +16,18 @@ export const Home = () => {
           <Main>
             <HomePatient>
               <Column>
+                <Details>
+                  <span>Detalhes da consulta</span>
+                  <AppointmentTime />
+                  <p>
+                    Atenção ao sair do Consultório verificar se a porta está
+                    fechada.
+                  </p>
+                </Details>
+              </Column>
+              <Column>
                 <Details></Details>
               </Column>
-              <Column></Column>
             </HomePatient>
           </Main>
         </Container>

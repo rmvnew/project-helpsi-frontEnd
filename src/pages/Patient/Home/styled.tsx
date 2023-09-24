@@ -16,22 +16,42 @@ export const HomePatient = styled.div`
 `;
 
 export const Column = styled.div`
-  background-color: var(--bg-secundary);
+  background-color: var(--bg-primary);
   display: flex;
-  padding: 20px;
   justify-content: center;
+  padding: 80px 20px;
   width: 45vw;
   height: 70vh;
-  border-radius: 10px;
+  border-radius: 5px;
 
   @media (max-width: 998px) {
     width: 85vw;
     height: 400px;
   }
+
+  @media (max-width: 450px) {
+    height: 350px;
+    padding: 15px;
+  }
 `;
 
 export const Details = styled.div`
-  width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
   border-radius: 5px;
   background-color: white;
+  color: var(--bg-dark);
+
+  span {
+    font-size: 1.1rem;
+  }
+
+  p {
+    color: red;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 0.7rem;
+  }
 `;
