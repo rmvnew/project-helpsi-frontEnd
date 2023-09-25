@@ -114,6 +114,7 @@ export const SearchBar = styled.div`
   input {
     flex: 1;
     border: none;
+    color: var(--bg-dark);
     padding: 8px;
     border-radius: 4px;
     margin-left: 10px;

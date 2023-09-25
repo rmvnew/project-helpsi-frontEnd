@@ -10,7 +10,8 @@ import { Scheduling } from "../pages/Patient/Scheduling";
 import { Patients } from "../pages/Psychologist/Patients";
 import { Schedule } from "../pages/Psychologist/Schedule";
 import { PatientData } from "../pages/Psychologist/Data";
-import Dashboard from "../pages/Admin";
+import { Dashboard } from "../pages/Admin";
+
 
 export const AppRoutes = () => {
   return (
