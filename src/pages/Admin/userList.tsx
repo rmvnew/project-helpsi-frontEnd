@@ -5,9 +5,15 @@ import { UserItem } from "./userItem";
 type UserListProps = {
   users: User[];
   searchValue: string;
+  onEditClick?: (user: User) => void;
+  onShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const UserList: React.FC<UserListProps> = ({ users, searchValue }) => {
+export const UserList: React.FC<UserListProps> = ({
+  users,
+  searchValue,
+  onEditClick,
+}) => {
   const [currentUsers, setCurrentUsers] = useState<User[]>(users);
 
   const handleUserDeletion = (deletedUserId: string) => {
@@ -28,6 +34,7 @@ export const UserList: React.FC<UserListProps> = ({ users, searchValue }) => {
           userName={user.user_name}
           userId={user.user_id}
           onDelete={handleUserDeletion}
+          onEdit={() => onEditClick && onEditClick(user)}
         />
       ))}
     </div>

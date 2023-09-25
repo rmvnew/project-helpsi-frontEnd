@@ -9,7 +9,7 @@ export const Container = styled.div`
   padding-top: 5%;
 
   @media (max-width: 615px) {
-    width: 100%;
+    width: 90%;
   }
 `;
 
@@ -101,6 +101,15 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+`;
+
+export const ToggleFormButton = styled(Button)`
+  background-color: var(--bg-dark);
+  color: #fff;
+
+  &:hover {
+    background-color: var(--bg-hover-button);
+  }
 `;
 
 export const SearchBar = styled.div`
