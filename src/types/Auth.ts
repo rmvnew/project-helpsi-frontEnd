@@ -1,6 +1,7 @@
-import { User } from "./User";
+import { Payload } from "./Payload";
 
-export type AuthUser = User & {
+
+export type AuthUser = Payload & {
     login: string;
     profile: string;
   }

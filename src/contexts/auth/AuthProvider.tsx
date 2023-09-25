@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { User } from "../../types/User";
+
 import { useApi } from "../../hooks/useApi";
 import { AuthContext } from "./AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import jwtDecode from "jwt-decode";
+import { Payload } from "../../types/Payload";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<Payload | null>(null);
   const [loading, setLoading] = useState(true);
   const api = useApi();
   const storageData = localStorage.getItem("authToken");
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
         if (decodedToken.exp * 1000 > Date.now()) {
           
-          const userData: User = {
+          const userData: Payload = {
             name: decodedToken.name,
             email: decodedToken.email,
             
