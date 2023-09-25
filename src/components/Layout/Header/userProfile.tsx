@@ -5,6 +5,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Menu from "@material-ui/core/Menu";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { getFormattedName } from "../../../common/utils/functions/toTitleCase";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   greeting: {
@@ -53,15 +54,15 @@ function useMenu() {
 }
 
 export const UserProfileSection = () => {
-
   const { anchorEl, openMenu, closeMenu } = useMenu();
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const formattedName = getFormattedName(auth.user?.name);
 
   const handleLogout = async () => {
     await auth.signout();
+    navigate("/");
   };
-  
 
   return (
     <UserProfile>

@@ -23,16 +23,60 @@ export const AppRoutes = () => {
           </RequireAuth>
         }
       />
-      <Route path="/psy/home" element={<HomePsy />} />
-      <Route path="/psy/patients" element={<Patients />} />
-      <Route path="/psy/schedule" element={<Schedule />} />
-      <Route path="/psy/patient-data" element={<PatientData />} />
+      <Route
+        path="/psy/home/:id"
+        element={
+          <RequireAuth>
+            <HomePsy />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/admin/:id"
+        element={
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/psy/patients"
+        element={
+          <RequireAuth>
+            <Patients />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/psy/schedule"
+        element={
+          <RequireAuth>
+            <Schedule />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/psy/patient-data"
+        element={
+          <RequireAuth>
+            <PatientData />
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/scheduling"
+        element={
+          <RequireAuth>
+            <Scheduling />
+          </RequireAuth>
+        }
+      />
+
       <Route path="/" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login/recover-pass" element={<RecoverPass />} />
       <Route path="/login/reset-pass" element={<ResetPass />} />
-      <Route path="/scheduling" element={<Scheduling />} />
-      <Route path="/admin" element={<Dashboard />} />
     </Routes>
   );
 };

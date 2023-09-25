@@ -43,10 +43,23 @@ export const useLogin = () => {
     const { email, password } = form;
     if (email && password) {
       const isLogged = await auth.signin(email, password);
+
       if (isLogged && isLogged.status) {
         const userInfo = await fetchUserInfo();
+
         if (userInfo && userInfo.user_id) {
-          navigate(`/home/${userInfo.user_id}`);
+          const userProfile = localStorage.getItem("userProfile");
+
+          if (userProfile === "PATIENT") {
+            navigate(`/home/${userInfo.user_id}`);
+          } else if (userProfile === "PSYCHOLOGIST") {
+            navigate(`/psy/home/${userInfo.user_id}`);
+          } else if (userProfile === "ADMIN") {
+            navigate(`/admin/${userInfo.user_id}`);
+          } else {
+            toast.error("Perfil de usuário desconhecido.");
+          }
+
           toast.success(`Bem vindo !!!`);
         } else {
           toast.error("Erro ao buscar informações do usuário.");
