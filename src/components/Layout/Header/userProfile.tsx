@@ -4,7 +4,7 @@ import Avatar from "react-avatar";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Menu from "@material-ui/core/Menu";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
-import { getFormattedName } from "../../../common/utils/functions/formatString";
+import { getFormattedName } from "../../../common/functions/formatString";
 import { useNavigate } from "react-router-dom";
 
 const styles = {

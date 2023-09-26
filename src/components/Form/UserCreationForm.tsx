@@ -3,7 +3,7 @@ import { FormWrapper, StyledInput, StyledSelect, SubmitButton } from "./styled";
 import { toast } from "react-toastify";
 import { validateDate } from "../../common/utils/validade";
 import { UserFormProps } from "../../interface/user.form.interface";
-import { formatDate } from "../../common/utils/functions/formatString";
+import { formatDate } from "../../common/functions/formatString";
 
 
 const UserCreationForm: React.FC<UserFormProps> = ({
