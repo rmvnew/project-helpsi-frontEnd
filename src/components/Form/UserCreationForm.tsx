@@ -3,6 +3,8 @@ import { FormWrapper, StyledInput, StyledSelect, SubmitButton } from "./styled";
 import { toast } from "react-toastify";
 import { validateDate } from "../../common/utils/validade";
 import { UserFormProps } from "../../interface/user.form.interface";
+import { formatDate } from "../../common/utils/functions/formatString";
+
 
 const UserCreationForm: React.FC<UserFormProps> = ({
   handleSubmit,
@@ -15,9 +17,10 @@ const UserCreationForm: React.FC<UserFormProps> = ({
     user_email: initialValues?.user_email || "",
     user_password: "",
     user_profile_id: initialValues?.user_profile_id || 0,
-    user_date_of_birth: "",
+    user_date_of_birth: initialValues?.user_date_of_birth
+      ? formatDate(initialValues.user_date_of_birth)
+      : "",
   });
-
   const localHandleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
