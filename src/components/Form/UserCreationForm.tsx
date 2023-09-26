@@ -38,11 +38,16 @@ const UserCreationForm: React.FC<UserFormProps> = ({
       return;
     }
 
-    const result = handleSubmit(formData);
+    const dataToSend: any = { ...formData };
+    if (initialValues || !dataToSend.user_password) {
+      delete dataToSend["user_password"];
+    }
+
+    const result = handleSubmit(dataToSend);
 
     if (result !== undefined && result !== false) {
       if (onClose) {
-        onClose(); 
+        onClose();
       }
     }
   };
@@ -61,7 +66,7 @@ const UserCreationForm: React.FC<UserFormProps> = ({
         onChange={localHandleInputChange}
         placeholder="Email"
       />
-      {!initialValues && ( 
+      {!initialValues && (
         <StyledInput
           type="password"
           name="user_password"

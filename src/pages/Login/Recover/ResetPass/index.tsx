@@ -54,7 +54,7 @@ export const ResetPass = () => {
       );
 
       toast.success("Senha alterada com sucesso");
-      navigate("/signin");
+      navigate("/");
     } catch (error) {
       handleError(error);
     } finally {
