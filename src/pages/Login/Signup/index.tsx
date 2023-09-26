@@ -1,12 +1,11 @@
 import { ChangeEvent, FormEvent } from "react";
-import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 import { useSignUpLogic } from "../../../hooks/useSignUp";
 import { useFormValidation } from "../../../hooks/useFormValidation";
 import { Form } from "./styled";
 
 import Logo from "../../../assets/img/logo.svg";
 import Bonecos from "../../../assets/img/Psychologist.svg";
-import "react-toastify/dist/ReactToastify.css";
 
 import {
   FormGroup,
@@ -15,7 +14,6 @@ import {
   LoginContainer,
   TextContainer,
 } from "../../../components/Layout/Container/ContainerLogin/styled";
-import { Link } from "react-router-dom";
 
 export const SignUp = () => {
   const { formData, setFormData, isSubmitting, setIsSubmitting } =
@@ -93,13 +91,14 @@ export const SignUp = () => {
               {isSubmitting ? "Cadastrando..." : "Aceitar e continuar"}
             </button>
           </Form>
-          <Link to="/">Já tem uma conta? <strong>Faça login</strong></Link>
+          <Link to="/">
+            Já tem uma conta? <strong>Faça login</strong>
+          </Link>
         </FormGroup>
         <Image>
           <img src={Bonecos} alt="bonecos" />
         </Image>
       </LoginContainer>
-      <ToastContainer />
     </LoginBackground>
   );
 };

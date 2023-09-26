@@ -3,18 +3,21 @@ import { FormWrapper, StyledInput, StyledSelect, SubmitButton } from "./styled";
 import { toast } from "react-toastify";
 import { validateDate } from "../../common/utils/validade";
 import { UserFormProps } from "../../interface/user.form.interface";
+import { formatDate } from "../../common/functions/formatString";
 
-const UserCreationForm: React.FC<UserFormProps> = ({
+const UserEditForm: React.FC<UserFormProps> = ({
   handleSubmit,
   profiles,
+  initialValues,
   onClose,
 }) => {
   const [formData, setFormData] = useState({
-    user_name: "",
-    user_email: "",
-    user_password: "",
-    user_profile_id: 0,
-    user_date_of_birth: "",
+    user_name: initialValues?.user_name || "",
+    user_email: initialValues?.user_email || "",
+    user_profile_id: initialValues?.user_profile_id || 0,
+    user_date_of_birth: initialValues?.user_date_of_birth
+      ? formatDate(initialValues.user_date_of_birth)
+      : "",
   });
 
   const localHandleInputChange = (
@@ -30,7 +33,10 @@ const UserCreationForm: React.FC<UserFormProps> = ({
   const localHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!validateDate(formData.user_date_of_birth)) {
+    if (
+      formData.user_date_of_birth &&
+      !validateDate(formData.user_date_of_birth)
+    ) {
       toast.info(
         "Por favor, insira sua data de nascimento no formato correto: DD/MM/YYYY."
       );
@@ -61,14 +67,6 @@ const UserCreationForm: React.FC<UserFormProps> = ({
         placeholder="Email"
       />
       <StyledInput
-        type="password"
-        name="user_password"
-        value={formData.user_password}
-        onChange={localHandleInputChange}
-        placeholder="Senha"
-      />
-      <StyledInput
-        type="text"
         name="user_date_of_birth"
         value={formData.user_date_of_birth}
         onChange={localHandleInputChange}
@@ -90,4 +88,4 @@ const UserCreationForm: React.FC<UserFormProps> = ({
   );
 };
 
-export default UserCreationForm;
+export default UserEditForm;

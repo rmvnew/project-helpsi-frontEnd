@@ -56,6 +56,8 @@ export const useLogin = () => {
             navigate(`/psy/home/${userInfo.user_id}`);
           } else if (userProfile === "ADMIN") {
             navigate(`/admin/${userInfo.user_id}`);
+          } else if (userProfile === "ATTENDANT") {
+            navigate(`/admin/${userInfo.user_id}`);
           } else {
             toast.error("Perfil de usuário desconhecido.");
           }

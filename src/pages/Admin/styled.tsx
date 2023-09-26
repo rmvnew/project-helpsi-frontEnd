@@ -33,6 +33,19 @@ export const Content = styled.div`
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-dark);
+  }
 `;
 
 const Button = styled.button`
@@ -119,6 +132,8 @@ export const SearchBar = styled.div`
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
   input {
     flex: 1;

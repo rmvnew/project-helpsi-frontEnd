@@ -12,8 +12,7 @@ import {
   Form,
   Google,
   Span,
-  TextContainer,
-  ToastContainer,
+  TextContainer
 } from "../../../common/utils/imports/signin";
 
 export const SignIn = () => {
@@ -64,7 +63,7 @@ export const SignIn = () => {
           <img src={Bonecos} alt="Psychologist" />
         </Image>
       </LoginContainer>
-      <ToastContainer />
+    
     </LoginBackground>
   );
 };

@@ -1,72 +1,44 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useState } from "react";
+import { useProfiles } from "../../hooks/useProfiles";
+import { useUsers } from "../../hooks/useUsers";
+import { User } from "../../types/User";
 import { api } from "../../hooks/useApi";
 import { toast } from "react-toastify";
-import { User } from "../../types/User";
-import { Profile } from "../../types/Profile";
 
 export const useDashboardLogic = () => {
+  const { users, getUsers, loading } = useUsers();
+  const { profiles, getProfiles } = useProfiles();
+
   const [search, setSearch] = useState("");
-  const [users, setUsers] = useState<User[]>([]);
-  const [profiles, setProfiles] = useState<Profile[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [editingUser, setEditingUser] = useState<User | undefined>(undefined);
 
-  const fetchData = useCallback(async (endpoint: string) => {
-    try {
-      const response = await api.get(endpoint);
-      return response.data;
-    } catch (error) {
-      console.error(`Ocorreu um erro ao buscar ${endpoint}:`, error);
-      return null;
-    }
-  }, []);
-
-  const getUsers = useCallback(async () => {
-    const data = await fetchData("/user");
-    if (data) {
-      setUsers(data.items);
-    }
-    setLoading(false);
-  }, [fetchData]);
-
-  const getProfiles = useCallback(async () => {
-    const data = await fetchData("/profile");
-    if (data) {
-      setProfiles(data);
-    }
-  }, [fetchData]);
-
-  useEffect(() => {
-    getUsers();
-    getProfiles();
-  }, [getUsers, getProfiles]);
-
-  const handleSubmit = async (formData: any) => {
+  const handleSubmit = async (formData: User) => {
     try {
       if (editingUser) {
         await api.put(`/user/${editingUser.user_id}`, formData);
         toast.success("Usuário editado com sucesso!");
-        setEditingUser(null);
-        return true;
       } else {
         await api.post("/user", formData);
         toast.success("Usuário criado com sucesso!");
       }
-      getUsers();
+      getUsers(); 
     } catch (error: any) {
       const message =
-        error?.response?.data?.message ??
-        (editingUser ? "Erro ao editar" : "Erro ao cadastrar");
+        error?.response?.data?.message ?? (editingUser ? "Erro ao editar" : "Erro ao cadastrar");
       toast.error(message);
-      return false;
     }
   };
 
-  const initiateEdit = (user: User) => {
+  const initiateEdit = (user: User | undefined) => {
     setEditingUser(user);
     setShowForm(true);
   };
+
+  useEffect(() => {
+    getUsers();
+    getProfiles();
+  }, [getProfiles, getUsers]);
 
   return {
     search,

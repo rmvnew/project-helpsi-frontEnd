@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { SignUpInterface } from "../interface/signup.interface";
-
+import { api } from "./useApi";
 
 export const useSignUpLogic = () => {
   const navigate = useNavigate();
-  const api = process.env.REACT_APP_API_BASE_URL;
 
   const [formData, setFormData] = useState<SignUpInterface>({
     user_name: "",
@@ -20,8 +18,8 @@ export const useSignUpLogic = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const signUpUser = useCallback(() => {
-    axios
-      .post(`${api}/user/patient/public`, formData)
+    api
+      .post(`/user/patient/public`, formData)
       .then((response) => {
         const message =
           response.data.message ?? "Cadastro realizado com sucesso";
@@ -35,7 +33,7 @@ export const useSignUpLogic = () => {
       .finally(() => {
         setIsSubmitting(false);
       });
-  }, [api, formData, navigate]);
+  }, [formData, navigate]);
 
   useEffect(() => {
     if (!isSubmitting) return;
@@ -46,6 +44,6 @@ export const useSignUpLogic = () => {
     formData,
     setFormData,
     isSubmitting,
-    setIsSubmitting
+    setIsSubmitting,
   };
 };

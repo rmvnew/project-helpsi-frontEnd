@@ -11,50 +11,19 @@ import {
 } from "../../../../components/Layout/Container/ContainerLogin/styled";
 
 import { Form } from "./styled";
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../../../hooks/useApi";
-import { ToastContainer, toast } from "react-toastify";
-import { AxiosError } from "axios";
-import { ErrorResponse } from "../../../../interface/error.interface";
+import { ChangeEvent } from "react";
+import useRecovery from "../../../../hooks/useRecoverPass";
 
 export const RecoverPass = () => {
-  const [email, setEmail] = useState("");
-  const [isSending, setIsSending] = useState(false);
-  const navigate = useNavigate();
+  const { email, setEmail, isSending, sendRecoveryCode } = useRecovery();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
-
-  const sendRecoveryCode = async () => {
-    setIsSending(true)
-    try {
-      await api.post(`/user/recover-code?email=${encodeURIComponent(email)}`);
-      toast.success("Código de recuperação enviado com sucesso!");
-      navigate("/login/reset-pass");
-    } catch (error) {
-      handleError(error);
-    } finally {
-      setIsSending(false);
-    }
-  };
-
-  const handleError = (error: unknown) => {
-    const axiosErr = error as AxiosError<ErrorResponse>;
-
-    const errorMessage =
-      axiosErr?.response?.data?.message ||
-      "Erro ao enviar o código de recuperação.";
-
-    console.error("Detalhes do erro:", axiosErr.response || error);
-    toast.error(errorMessage);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendRecoveryCode();
   };
-
   return (
     <LoginBackground>
       <LoginContainer>
@@ -87,7 +56,6 @@ export const RecoverPass = () => {
           <img src={bonecos} alt="" />
         </Image>
       </LoginContainer>
-      <ToastContainer />
     </LoginBackground>
   );
 };

@@ -1,14 +1,18 @@
+import { useEffect } from "react";
 import { AddCircle } from "@material-ui/icons";
+
 import { Main } from "../../components/Layout/Container/ContainerHome/styled";
 import { Body } from "../../components/Layout/Container/style";
 import { SortSelect } from "./sortSelect";
-import { Container, Description, Content, ToggleFormButton } from "./styled";
 import { SearchComponent } from "./search";
 import { UserList } from "./userList";
 import { Loader } from "../../components/Layout/Loader";
 import Header from "../../components/Layout/Header/psy";
 import UserCreationForm from "../../components/Form/UserCreationForm";
+import UserEditForm from "../../components/Form/UserEditForm";
+
 import { useDashboardLogic } from "./dashboardLogic";
+import { Container, Description, Content, ToggleFormButton } from "./styled";
 
 export const Dashboard: React.FC = () => {
   const {
@@ -24,14 +28,30 @@ export const Dashboard: React.FC = () => {
     initiateEdit,
   } = useDashboardLogic();
 
+  useEffect(() => {
+    if (editingUser) {
+      setShowForm(true);
+    }
+  }, [editingUser, setShowForm]);
+
+  const handleToggleClick = () => {
+    if (showForm) {
+      setShowForm(false);
+    } else {
+      initiateEdit(undefined);
+      setShowForm(true);
+    }
+  };
+
   return (
     <Body>
       <Header />
+
       <Main>
         <Container>
           <Description>
             <h3>Painel de Admin</h3>
-            <ToggleFormButton onClick={() => setShowForm(!showForm)}>
+            <ToggleFormButton onClick={handleToggleClick}>
               {showForm ? (
                 "Fechar"
               ) : (
@@ -41,17 +61,27 @@ export const Dashboard: React.FC = () => {
               )}
             </ToggleFormButton>
           </Description>
+
           <SortSelect />
           <SearchComponent value={search} onChange={setSearch} />
 
           {showForm && (
             <Content>
-              <UserCreationForm
-                handleSubmit={handleSubmit}
-                profiles={profiles}
-                initialValues={editingUser || undefined}
-                onClose={() => setShowForm(false)}
-              />
+              {editingUser ? (
+                <UserEditForm
+                  key={editingUser?.user_id}
+                  handleSubmit={handleSubmit}
+                  profiles={profiles}
+                  initialValues={editingUser}
+                  onClose={() => setShowForm(false)}
+                />
+              ) : (
+                <UserCreationForm
+                  handleSubmit={handleSubmit}
+                  profiles={profiles}
+                  onClose={() => setShowForm(false)}
+                />
+              )}
             </Content>
           )}
 
