@@ -79,7 +79,7 @@ export const AddButton = styled(Button)`
 `;
 
 export const EditButton = styled(Button)`
-  background-color: var(--bg-primary);
+  background-color: var(--bg-dark);
   color: #fff;
   margin-right: 10px;
 
@@ -89,7 +89,7 @@ export const EditButton = styled(Button)`
 `;
 
 export const DeleteButton = styled(Button)`
-  background-color: #f44336;
+  background-color: #f44336d1;
   color: #fff;
 
   &:hover {
@@ -101,9 +101,18 @@ export const Item = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0;
+  padding: 15px 0 15px 15px;
   color: var(--bg-dark);
   border-bottom: 1px solid #e0e0e0;
+
+  &:nth-child(even) {
+    background-color: var(--bg-secundary);
+    border-radius: 5px 0 5px 5px;
+  }
+
+  &:nth-child(odd) {
+    background-color: white;
+  }
 
   &:last-child {
     border-bottom: none;
@@ -143,11 +152,28 @@ export const SearchBar = styled.div`
     border-radius: 4px;
     margin-left: 10px;
     outline: none;
+
+   
   }
+
+  @media (min-width: 768px) {
+      width: 50%;
+    }
 `;
 
 export const SearchIcon = styled.div`
   display: flex;
   align-items: center;
   color: #555;
+`;
+
+export const Query = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
 `;

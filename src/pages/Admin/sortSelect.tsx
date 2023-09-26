@@ -20,7 +20,7 @@ const Select = styled.select`
   border: 1px solid #d0d0d0;
   border-radius: 6px;
   font-size: 15px;
-  background-color: #f7f7f7;
+  background-color: var(--bg-secundary);
   color: var(--bg-dark);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   appearance: none;

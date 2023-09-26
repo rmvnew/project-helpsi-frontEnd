@@ -12,7 +12,13 @@ import UserCreationForm from "../../components/Form/UserCreationForm";
 import UserEditForm from "../../components/Form/UserEditForm";
 
 import { useDashboardLogic } from "./dashboardLogic";
-import { Container, Description, Content, ToggleFormButton } from "./styled";
+import {
+  Container,
+  Description,
+  Content,
+  ToggleFormButton,
+  Query,
+} from "./styled";
 
 export const Dashboard: React.FC = () => {
   const {
@@ -62,8 +68,10 @@ export const Dashboard: React.FC = () => {
             </ToggleFormButton>
           </Description>
 
-          <SortSelect />
-          <SearchComponent value={search} onChange={setSearch} />
+          <Query>
+            <SortSelect />
+            <SearchComponent value={search} onChange={setSearch} />
+          </Query>
 
           {showForm && (
             <Content>

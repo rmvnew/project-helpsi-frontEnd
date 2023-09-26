@@ -40,10 +40,10 @@ export const UserItem: React.FC<UserItemProps> = ({
       {userName}
       <ButtonContainer>
         <EditButton onClick={handleEditClick}>
-          <Edit /> Editar
+          <Edit />
         </EditButton>
         <DeleteButton onClick={deleteUser}>
-          <Delete /> Deletar
+          <Delete />
         </DeleteButton>
       </ButtonContainer>
     </Item>
