@@ -5,33 +5,32 @@ import {
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/patient";
 import { Column, Details, HomePatient } from "./styled";
-import { AppointmentTime } from "../../../components/Patient/appointmentTime";
+import { AppointmentTime } from "../../../components/Patient/AppointmentTime";
 
 export const Home = () => {
   return (
-    <>
-      <Body>
-        <Header />
-        <Container>
-          <Main>
-            <HomePatient>
-              <Column>
-                <Details>
-                  <span>Detalhes da consulta</span>
-                  <AppointmentTime />
-                  <p>
-                    Atenção ao sair do Consultório verificar se a porta está
-                    fechada.
-                  </p>
-                </Details>
-              </Column>
-              <Column>
-                <Details></Details>
-              </Column>
-            </HomePatient>
-          </Main>
-        </Container>
-      </Body>
-    </>
+    <Body>
+      <Header />
+      <Container>
+        <Main>
+          <HomePatient>
+            <Column>
+              <Details>
+                <h2>Detalhes da consulta</h2>
+                <AppointmentTime />
+                <p>
+                  Atenção ao sair do Consultório: verifique se a porta está
+                  fechada.
+                </p>
+              </Details>
+            </Column>
+
+            <Column>
+              <Details></Details>
+            </Column>
+          </HomePatient>
+        </Main>
+      </Container>
+    </Body>
   );
 };

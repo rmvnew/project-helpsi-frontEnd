@@ -19,7 +19,7 @@ export const Column = styled.div`
   background-color: var(--bg-primary);
   display: flex;
   justify-content: center;
-  padding: 80px 20px;
+  padding: 60px 20px;
   width: 45vw;
   height: 70vh;
   border-radius: 5px;
@@ -27,6 +27,7 @@ export const Column = styled.div`
   @media (max-width: 998px) {
     width: 85vw;
     height: 400px;
+    padding: 30px 20px;
   }
 
   @media (max-width: 450px) {
@@ -39,12 +40,13 @@ export const Details = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+  min-height: 100%;
   width: 100%;
   border-radius: 5px;
   background-color: white;
   color: var(--bg-dark);
 
-  span {
+  h2 {
     font-size: 1.1rem;
   }
 
