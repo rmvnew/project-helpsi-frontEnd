@@ -51,13 +51,13 @@ export const useLogin = () => {
           const userProfile = localStorage.getItem("userProfile");
 
           if (userProfile === "PATIENT") {
-            navigate(`/home/${userInfo.user_id}`);
+            navigate("/home");
           } else if (userProfile === "PSYCHOLOGIST") {
-            navigate(`/psy/home/${userInfo.user_id}`);
+            navigate("/psy/home");
           } else if (userProfile === "ADMIN") {
-            navigate(`/admin/${userInfo.user_id}`);
+            navigate("/admin");
           } else if (userProfile === "ATTENDANT") {
-            navigate(`/admin/${userInfo.user_id}`);
+            navigate("/admin");
           } else {
             toast.error("Perfil de usuário desconhecido.");
           }

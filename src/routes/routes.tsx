@@ -12,12 +12,11 @@ import { Schedule } from "../pages/Psychologist/Schedule";
 import { PatientData } from "../pages/Psychologist/Data";
 import { Dashboard } from "../pages/Admin";
 
-
 export const AppRoutes = () => {
   return (
     <Routes>
       <Route
-        path="/home/:id"
+        path="/home"
         element={
           <RequireAuth>
             <Home />
@@ -25,7 +24,7 @@ export const AppRoutes = () => {
         }
       />
       <Route
-        path="/psy/home/:id"
+        path="/psy/home"
         element={
           <RequireAuth>
             <HomePsy />
@@ -33,7 +32,7 @@ export const AppRoutes = () => {
         }
       />
       <Route
-        path="/admin/:id"
+        path="/admin"
         element={
           <RequireAuth>
             <Dashboard />
