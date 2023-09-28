@@ -11,6 +11,7 @@ export const useAllPsychologists = () => {
     const getPsychologists = async () => {
       try {
         const response = await api.get("user/allPsychologists");
+        console.log(response.data)
        
         setPsychologists(response.data);
       } catch (error) {

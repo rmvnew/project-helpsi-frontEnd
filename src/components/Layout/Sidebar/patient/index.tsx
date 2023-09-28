@@ -18,7 +18,7 @@ const SidebarComponent: React.FC<SidebarPatientProps> = ({
   <Sidebar open={isSidebarOpen}>
     
     <SidebarLink>
-      <Link to="/">
+      <Link to="/home">
         <HomeOutlinedIcon />
         Home
       </Link>
@@ -32,8 +32,8 @@ const SidebarComponent: React.FC<SidebarPatientProps> = ({
     </SidebarLink>
 
     <SubItemsWrapper visible={isScheduleExpanded}>
-      <Link to="/">Online</Link>
-      <Link to="/">Presencial</Link>
+      <Link to="/scheduling">Online</Link>
+      <Link to="/scheduling">Presencial</Link>
     </SubItemsWrapper>
 
     <SidebarLink>
@@ -41,7 +41,7 @@ const SidebarComponent: React.FC<SidebarPatientProps> = ({
     </SidebarLink>
 
     <SubItemsWrapper visible={isDailyExpanded}>
-      <Link to="/">Histórico</Link>
+      <Link to="#">Histórico</Link>
     </SubItemsWrapper>
   </Sidebar>
 );
