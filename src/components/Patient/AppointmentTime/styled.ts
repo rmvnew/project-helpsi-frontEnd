@@ -2,20 +2,26 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  height: 100%;
+  padding: 15px;   /* Adicionado para dar espaço interno ao container */
+  border-bottom: 1px solid #e0e0e0;   /* Adicionado para separar visualmente cada item */
 `;
 
 export const Hours = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 10px;
-  height: 100%;
-  width: 100%;
+
+  h3 {
+    font-size: 1rem;
+    margin: 0;
+  }
 
   span {
     font-size: 0.9rem;
+    font-family: "sans-serif";   /* Estilo padrão para os spans */
   }
 
   @media (max-width: 820px) {
@@ -32,32 +38,25 @@ export const Hours = styled.div`
 export const Psy = styled.div`
   display: flex;
   align-items: center;
-  justify-content: end;
-  height: 100%;
-  width: 100%;
   gap: 10px;
 
-  @media (min-width: 450px) {
+  @media (min-width: 450px) and (max-width: 768px) {
     gap: 20px;
-  }
-
-  @media (max-width: 768px) {
-    span {
-      font-size: 0.8rem;
-    }
   }
 `;
 
 export const DetailsPsy = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  font-size: .9rem;
+  align-items: flex-end;   /* Alinha à direita */
+  gap: 5px;
+  font-size: 0.9rem;
+
+  span {
+    text-align: right;
+  }
 
   @media (max-width: 820px) {
-    gap: 1px;
-    span {
-      font-size: .7rem;
-    }
+    font-size: 0.7rem;
   }
 `;

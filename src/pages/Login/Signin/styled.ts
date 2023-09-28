@@ -22,6 +22,7 @@ export const Form = styled.form`
     padding: 13px;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
   }
 
   a {

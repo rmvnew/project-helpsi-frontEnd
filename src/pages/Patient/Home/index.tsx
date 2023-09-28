@@ -24,7 +24,6 @@ export const Home = () => {
                 </p>
               </Details>
             </Column>
-
             <Column>
               <Details></Details>
             </Column>
