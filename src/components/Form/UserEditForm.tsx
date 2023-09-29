@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { validateDate } from "../../common/utils/validade";
 import { UserFormProps } from "../../interface/user.form.interface";
 import { formatDate } from "../../common/functions/formatString";
+import { useTranslation } from "react-i18next";
+import "../../i18next/ProfileList";
 
 const UserEditForm: React.FC<UserFormProps> = ({
   handleSubmit,
@@ -11,6 +13,8 @@ const UserEditForm: React.FC<UserFormProps> = ({
   initialValues,
   onClose,
 }) => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     user_name: initialValues?.user_name || "",
     user_email: initialValues?.user_email || "",
@@ -18,6 +22,9 @@ const UserEditForm: React.FC<UserFormProps> = ({
     user_date_of_birth: initialValues?.user_date_of_birth
       ? formatDate(initialValues.user_date_of_birth)
       : "",
+    user_phone: initialValues?.user_phone || "",
+    user_rg: initialValues?.user_rg || "",
+    user_cpf: initialValues?.user_cpf || "",
   });
 
   const localHandleInputChange = (
@@ -72,6 +79,24 @@ const UserEditForm: React.FC<UserFormProps> = ({
         onChange={localHandleInputChange}
         placeholder="Nascimento (DD/MM/YYYY)"
       />
+      <StyledInput
+        name="user_phone"
+        value={formData.user_phone}
+        onChange={localHandleInputChange}
+        placeholder="Telefone"
+      />
+      <StyledInput
+        name="user_rg"
+        value={formData.user_rg}
+        onChange={localHandleInputChange}
+        placeholder="RG"
+      />
+      <StyledInput
+        name="user_cpf"
+        value={formData.user_cpf}
+        onChange={localHandleInputChange}
+        placeholder="CPF"
+      />
       <StyledSelect
         name="user_profile_id"
         value={formData.user_profile_id}
@@ -79,7 +104,7 @@ const UserEditForm: React.FC<UserFormProps> = ({
       >
         {profiles.map((profile) => (
           <option key={profile.profile_id} value={profile.profile_id}>
-            {profile.profile_name}
+            {t(profile.profile_name)}
           </option>
         ))}
       </StyledSelect>
