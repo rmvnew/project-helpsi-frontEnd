@@ -16,12 +16,9 @@ export const Home = () => {
           <HomePatient>
             <Column>
               <Details>
-                <h2>Detalhes da consulta</h2>
+                <h2>Consultas marcadas</h2>
                 <AppointmentTime />
-                <p>
-                  Atenção ao sair do Consultório: verifique se a porta está
-                  fechada.
-                </p>
+                
               </Details>
             </Column>
             <Column>

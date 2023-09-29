@@ -1,49 +1,73 @@
-import React, { useState, useEffect } from "react";
-import Avatar from "react-avatar";
+import { useState, useEffect } from "react";
 import { api } from "../../../hooks/useApi";
-import { useAllPsychologists } from "../../../hooks/useAllPsychologists";
-import { Container, DetailsPsy, Hours, Psy } from "./styled";
 import { AppointmentData } from "../../../types/Appointment";
 import { formatTime } from "../../../common/functions/formatTime";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+
+import Avatar from "react-avatar";
+import EventNoteIcon from "@mui/icons-material/EventNote";
+
+import {
+  Container,
+  DetailsPsy,
+  Hours,
+  NoAppointmentsContainer,
+  Psy,
+} from "./styled";
+import { Loader } from "../../Layout/Loader";
 
 export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   const [appointments, setAppointments] = useState<AppointmentData[]>([]);
-  const psychologists = useAllPsychologists();
-  const currentDate = date || new Date().toISOString().split("T")[0];
+  const [hasFetchedData, setHasFetchedData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const currentUser = useCurrentUser();
+  const currentDate = date || new Date().toISOString();
 
   useEffect(() => {
     const getSchedule = async () => {
+      setIsLoading(true);
+
       try {
-        const { data } = await api.get(
-          `/scheduling/availability?date=${currentDate}`
-        );
-        setAppointments(data);
+        if (currentUser && !hasFetchedData) {
+          const { data } = await api.get(`/scheduling`, {
+            params: {
+              patient_id: currentUser.user_id,
+              start_time: currentDate,
+            },
+          });
+          setAppointments(data.items || []);
+          setHasFetchedData(true);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
-    getSchedule();
-  }, [currentDate]);
 
-  const getPsychologistNameById = (id: string): string => {
-    const found = psychologists.find((p) => p.user_id === id);
-    return found ? found.user_name : "Desconhecido";
-  };
+    getSchedule();
+  }, [currentDate, currentUser, hasFetchedData]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   if (appointments.length === 0) {
-    return <div>Nenhuma consulta marcada no momento</div>;
+    return (
+      <NoAppointmentsContainer>
+        <EventNoteIcon style={{ fontSize: 50, marginBottom: "1rem" }} />
+        <p>Nenhuma consulta marcada no momento</p>
+      </NoAppointmentsContainer>
+    );
   }
 
   return (
     <>
       {appointments.map((appointmentData) => {
-        if (!appointmentData.appointmentDetails) return null;
-
-        const { start_time, end_time } = appointmentData.appointmentDetails;
-        const appointmentId = `${start_time}-${end_time}`;
+        const { start_time, end_time } = appointmentData;
 
         return (
-          <Container key={appointmentId}>
+          <Container>
             <Hours>
               <h3>{new Date(start_time).toLocaleDateString()}</h3>
               <span>Horário da consulta</span>
@@ -53,19 +77,12 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
             </Hours>
             <Psy>
               <DetailsPsy>
-                <span>
-                  {getPsychologistNameById(appointmentData.psychologistId)}
-                </span>
+                <span>{"Nome do psicologo"}</span>
                 <span style={{ fontFamily: "sans-serif", textAlign: "end" }}>
-                  Psicólogo
+                  {"Especialidade"}
                 </span>
               </DetailsPsy>
-              <Avatar
-                size="40"
-                round
-                alt="Foto de perfil"
-                name={getPsychologistNameById(appointmentData.psychologistId)}
-              />
+              <Avatar size="40" round alt="Foto de perfil" name={"Psicologo"} />
             </Psy>
           </Container>
         );

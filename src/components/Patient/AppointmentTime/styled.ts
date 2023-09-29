@@ -5,8 +5,8 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 15px;   /* Adicionado para dar espaço interno ao container */
-  border-bottom: 1px solid #e0e0e0;   /* Adicionado para separar visualmente cada item */
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
 `;
 
 export const Hours = styled.div`
@@ -21,7 +21,7 @@ export const Hours = styled.div`
 
   span {
     font-size: 0.9rem;
-    font-family: "sans-serif";   /* Estilo padrão para os spans */
+    font-family: "sans-serif";
   }
 
   @media (max-width: 820px) {
@@ -48,7 +48,7 @@ export const Psy = styled.div`
 export const DetailsPsy = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;   /* Alinha à direita */
+  align-items: flex-end;
   gap: 5px;
   font-size: 0.9rem;
 
@@ -58,5 +58,22 @@ export const DetailsPsy = styled.div`
 
   @media (max-width: 820px) {
     font-size: 0.7rem;
+  }
+`;
+
+export const NoAppointmentsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  p {
+    margin-top: 1rem;
+    font-weight: 500;
+    color: #666;
   }
 `;

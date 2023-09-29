@@ -23,13 +23,12 @@ export const Column = styled.div`
   align-items: center;
   padding: 60px 20px;
   width: 45vw;
-  height: 70vh;
+  height: auto;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 998px) {
     width: 85vw;
-    height: auto;
     padding: 30px 20px;
   }
 
@@ -51,12 +50,5 @@ export const Details = styled.div`
   h2 {
     font-size: 1.1rem;
     margin-bottom: 10px;
-  }
-
-  p {
-    color: red;
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 0.7rem;
   }
 `;

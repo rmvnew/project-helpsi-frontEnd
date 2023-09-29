@@ -1,11 +1,10 @@
 export type AppointmentData = {
-  userId: string | undefined;
-  time: string;
-  isBooked: boolean;
-  appointmentDetails: {
-    start_time: string;
-    end_time: string;
-    registrant_name: string;
-  };
-  psychologistId: string;
+  scheduling_id: string;
+  start_time: string;
+  end_time: string;
+  registrant_name: string;
+  create_at: string;
+  update_at: string;
+  isCancelled: boolean;
+  psychologistId?: string;
 };
