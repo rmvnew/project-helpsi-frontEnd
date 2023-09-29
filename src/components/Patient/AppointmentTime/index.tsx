@@ -15,13 +15,14 @@ import {
   Psy,
 } from "./styled";
 import { Loader } from "../../Layout/Loader";
+import { DateParms } from "../../../common/functions/formatString";
 
 export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   const [appointments, setAppointments] = useState<AppointmentData[]>([]);
   const [hasFetchedData, setHasFetchedData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const currentUser = useCurrentUser();
-  const currentDate = date || new Date().toISOString();
+  const currentDate = date || DateParms;
 
   useEffect(() => {
     const getSchedule = async () => {
@@ -64,25 +65,26 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   return (
     <>
       {appointments.map((appointmentData) => {
-        const { start_time, end_time } = appointmentData;
+        const time = appointmentData;
+        const psy = appointmentData.currentPsychologist;
 
         return (
           <Container>
             <Hours>
-              <h3>{new Date(start_time).toLocaleDateString()}</h3>
+              <h3>{new Date(time.start_time).toLocaleDateString()}</h3>
               <span>Horário da consulta</span>
               <span style={{ fontFamily: "sans-serif" }}>{`${formatTime(
-                start_time
-              )} á ${formatTime(end_time)}`}</span>
+                time.start_time
+              )} á ${formatTime(time.end_time)}`}</span>
             </Hours>
             <Psy>
               <DetailsPsy>
-                <span>{"Nome do psicologo"}</span>
+                <span>{psy.user_name}</span>
                 <span style={{ fontFamily: "sans-serif", textAlign: "end" }}>
-                  {"Especialidade"}
+                  {psy.user_phone}
                 </span>
               </DetailsPsy>
-              <Avatar size="40" round alt="Foto de perfil" name={"Psicologo"} />
+              <Avatar size="40" round alt="Foto de perfil" name={psy.user_name} />
             </Psy>
           </Container>
         );

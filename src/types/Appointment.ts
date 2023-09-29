@@ -6,5 +6,14 @@ export type AppointmentData = {
   create_at: string;
   update_at: string;
   isCancelled: boolean;
-  psychologistId?: string;
+
+  currentPsychologist: {
+    user_id: string;
+    user_name: string;
+    user_email: string;
+    google_picture: null | string;
+    user_phone: null | string;
+    user_crp: null | string;
+    user_profile_id: number;
+  };
 };

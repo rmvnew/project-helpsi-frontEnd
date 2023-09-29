@@ -21,3 +21,8 @@ export const formatDate = (input: string | undefined): string => {
 
   return `${day}/${month}/${year}`;
 };
+
+export const DateParms = new Date()
+  .toISOString()
+  .split("T")[0]
+  .replace(/-/g, "/");
