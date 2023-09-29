@@ -1,0 +1,135 @@
+body {
+  font-family: 'Urbanist';
+  margin: 0;
+}
+
+#agenda {
+  background-color: #ECF0F1;
+  max-width: 2500px;
+  width: 80vw;
+  height: 87vh;
+  margin: 0 auto;
+  padding: 5px;
+  padding-right: 30px;
+  padding-bottom: 2px;
+  box-sizing: border-box;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: auto; /* Adicione overflow para adicionar uma barra de rolagem */
+}
+
+#header {
+  color: #594f4f;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  align-items: center;
+  display: flex;
+}
+
+#date {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #594F4F;
+}
+
+#date strong {
+  font-weight: bold;
+}
+
+#date span {
+  font-weight: normal;
+}
+
+#schedule {
+  background-color: #9FDFAE;
+  border: 1px solid #9FDFAE;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  position: relative;
+  margin-bottom: 10px;
+  padding: 3%;
+  border-radius: 1%;
+}
+
+.time-column {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0px;
+  margin-top: 5px;
+  border-bottom: 1px solid #594f4f;
+}
+
+.time {
+  font-weight: bold;
+  color: #594f4f;
+  text-align: left;
+  margin-left: 60px;
+  margin-bottom: 10px;
+}
+
+.appointment {
+  font-weight: bold;
+  color: #594f4f;
+  text-align: left;
+  margin-right: 100px;
+  margin-bottom: 10px;
+}
+
+.legend {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.legend-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.cancelled {
+  background-color: #FF0000;
+}
+
+.pending {
+  background-color: #FFFF00;
+}
+
+.confirmed {
+  background-color: #00FF00;
+}
+
+/* Adicione media queries conforme necessário para ajustar o layout em diferentes tamanhos de tela */
+@media (max-width: 768px) {
+  .time-column {
+    flex-direction: column;
+  }
+
+  /* Ajuste para garantir 100% de largura em telas menores */
+  .time,
+  .appointment {
+    flex: 0 0 100%;
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+
+  /* Ajuste específico para telas menores no padding da hora */
+  .time {
+    margin-left: 30px;
+    margin-bottom: 10px;
+    padding: 1px;
+  }
+}
