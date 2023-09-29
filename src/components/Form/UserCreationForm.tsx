@@ -3,18 +3,26 @@ import { FormWrapper, StyledInput, StyledSelect, SubmitButton } from "./styled";
 import { toast } from "react-toastify";
 import { validateDate } from "../../common/utils/validade";
 import { UserFormProps } from "../../interface/user.form.interface";
+import { useTranslation } from "react-i18next";
+import '../../i18next/ProfileList';
+
 
 const UserCreationForm: React.FC<UserFormProps> = ({
   handleSubmit,
   profiles,
   onClose,
 }) => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     user_name: "",
     user_email: "",
     user_password: "",
     user_profile_id: 0,
     user_date_of_birth: "",
+    user_phone: "",
+    user_rg: "",
+    user_cpf: "",
   });
 
   const localHandleInputChange = (
@@ -74,6 +82,24 @@ const UserCreationForm: React.FC<UserFormProps> = ({
         onChange={localHandleInputChange}
         placeholder="Nascimento (DD/MM/YYYY)"
       />
+      <StyledInput
+        name="user_phone"
+        value={formData.user_phone}
+        onChange={localHandleInputChange}
+        placeholder="Telefone"
+      />
+      <StyledInput
+        name="user_rg"
+        value={formData.user_rg}
+        onChange={localHandleInputChange}
+        placeholder="RG"
+      />
+      <StyledInput
+        name="user_cpf"
+        value={formData.user_cpf}
+        onChange={localHandleInputChange}
+        placeholder="CPF"
+      />
       <StyledSelect
         name="user_profile_id"
         value={formData.user_profile_id}
@@ -81,7 +107,7 @@ const UserCreationForm: React.FC<UserFormProps> = ({
       >
         {profiles.map((profile) => (
           <option key={profile.profile_id} value={profile.profile_id}>
-            {profile.profile_name}
+            {t(profile.profile_name)}
           </option>
         ))}
       </StyledSelect>
