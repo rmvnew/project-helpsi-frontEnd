@@ -17,7 +17,11 @@ export const HomePatient = styled.div`
 `;
 
 export const Column = styled.div`
-  background-color: var(--bg-secundary);
+  background: linear-gradient(
+    145deg,
+    var(--bg-secundary-lighter),
+    var(--bg-secundary-darker)
+  );
   display: flex;
   justify-content: center;
   align-items: center;

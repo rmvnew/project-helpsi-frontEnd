@@ -7,9 +7,21 @@
 
 :root {
   --bg-primary: #9fdfae;
+  --bg-primary-lighter: #b1efc0;
+  --bg-primary-darker: #89d097;
+
   --bg-secundary: #9fdfae83;
+  --bg-secundary-lighter: #b1efc0a1;
+  --bg-secundary-darker: #89d097a1;
+
   --bg-body: #ecf0f1;
+  --bg-body-lighter: #f4f7f8;
+  --bg-body-darker: #e0e6e7;
+
   --bg-dark: #594f4f;
+  --bg-dark-lighter: #716868;
+  --bg-dark-darker: #463c3c;
+
   --bg-hover-button: #433f3f;
   --bg-hover-primary: #7daf91;
 }

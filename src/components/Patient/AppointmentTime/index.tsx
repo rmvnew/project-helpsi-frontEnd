@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../../../hooks/useApi";
 import { AppointmentData } from "../../../types/Appointment";
-import { formatTime } from "../../../common/functions/formatTime";
+import { formatTimeString } from "../../../common/functions/formatTime";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 
 import Avatar from "react-avatar";
@@ -73,9 +73,9 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
             <Hours>
               <h3>{new Date(time.start_time).toLocaleDateString()}</h3>
               <span>Horário da consulta</span>
-              <span style={{ fontFamily: "sans-serif" }}>{`${formatTime(
+              <span style={{ fontFamily: "sans-serif" }}>{`${formatTimeString(
                 time.start_time
-              )} á ${formatTime(time.end_time)}`}</span>
+              )} á ${formatTimeString(time.end_time)}`}</span>
             </Hours>
             <Psy>
               <DetailsPsy>
@@ -84,7 +84,12 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
                   {psy.user_phone}
                 </span>
               </DetailsPsy>
-              <Avatar size="40" round alt="Foto de perfil" name={psy.user_name} />
+              <Avatar
+                size="40"
+                round
+                alt="Foto de perfil"
+                name={psy.user_name}
+              />
             </Psy>
           </Container>
         );
