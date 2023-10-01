@@ -63,14 +63,7 @@ export const ResetPass = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-            <input
-              type="email"
-              placeholder="Digite seu email"
-              value={form.email}
-              onChange={handleChange}
-              name="email"
-              required
-            />
+
             <button type="submit">
               {isResetting ? "Redefinindo..." : "Redefinir senha"}
             </button>

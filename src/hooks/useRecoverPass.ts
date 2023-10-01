@@ -13,7 +13,10 @@ const useRecovery = () => {
   const sendRecoveryCode = async () => {
     setIsSending(true);
     try {
-      await api.post(`/user/recover-code?email=${encodeURIComponent(email)}`);
+      await api.post("/user/recover-code", null, {
+        params: { email: email },
+      });
+      localStorage.setItem("recoveryEmail", email);
       toast.success("Código de recuperação enviado com sucesso!");
       navigate("/login/reset-pass");
     } catch (error) {
