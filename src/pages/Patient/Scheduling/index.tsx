@@ -28,6 +28,7 @@ import { getFormattedName } from "../../../common/functions/formatString";
 import { Loader } from "../../../components/Layout/Loader";
 import { DayWeek, formatTime } from "../../../common/functions/formatTime";
 import { useSchedulingData } from "../../../hooks/useScheduling";
+import { useEffect, useState } from "react";
 
 type UnavailableSlot = {
   appointmentDetails?: {
@@ -50,7 +51,16 @@ export const Scheduling = () => {
   const selectedPsy = psychologists.find(
     (psych) => psych.user_id === formData.psychologist_id
   );
- 
+
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -58,7 +68,9 @@ export const Scheduling = () => {
         <Header />
         <Container>
           <Main>
-            {loading ? (
+            {!showContent ? (
+              <Loader />
+            ) : loading ? (
               <Loader />
             ) : (
               <SchedulingContainer>
