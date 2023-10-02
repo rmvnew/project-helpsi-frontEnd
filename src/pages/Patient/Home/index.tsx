@@ -5,7 +5,7 @@ import {
 } from "../../../components/Layout/Container/ContainerHome/styled";
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/patient";
-import { Loader } from "../../../components/Layout/Loader"; // Assuming you have a Loader component, import it
+import { Loader } from "../../../components/Layout/Loader";
 import { Column, Details, HomePatient } from "./styled";
 import { AppointmentTime } from "./AppointmentTime";
 
@@ -17,7 +17,7 @@ export const Home = () => {
       setShowContent(true);
     }, 1800);
 
-    return () => clearTimeout(timer); // Clean up timer to prevent potential issues
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -26,7 +26,7 @@ export const Home = () => {
       <Container>
         <Main>
           {!showContent ? (
-            <Loader /> // Display Loader while waiting
+            <Loader />
           ) : (
             <HomePatient>
               <Column>
