@@ -1,9 +1,11 @@
 import Logo from "../../../../assets/img/logo.svg";
 import Bonecos from "../../../../assets/img/Psychologist.svg";
+import { LoginBackground } from "../../../../components/Layout/Container/ContainerLogin/background";
+
 import {
   FormGroup,
   Image,
-  LoginBackground,
+  
   LoginContainer,
   TextContainer,
 } from "../../../../components/Layout/Container/ContainerLogin/styled";

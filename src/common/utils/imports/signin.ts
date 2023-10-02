@@ -6,7 +6,6 @@ import Bonecos from "../../../assets/img/Psychologist.svg";
 import {
   FormGroup,
   Image,
-  LoginBackground,
   LoginContainer,
 } from "../../../components/Layout/Container/ContainerLogin/styled";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,7 +28,6 @@ export {
   Bonecos,
   FormGroup,
   Image,
-  LoginBackground,
   LoginContainer,
   Link,
   useNavigate,

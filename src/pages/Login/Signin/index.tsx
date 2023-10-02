@@ -6,7 +6,7 @@ import {
   Bonecos,
   FormGroup,
   Image,
-  LoginBackground,
+ 
   LoginContainer,
   Link,
   Form,
@@ -14,6 +14,7 @@ import {
   Span,
   TextContainer
 } from "../../../common/utils/imports/signin";
+import { LoginBackground } from "../../../components/Layout/Container/ContainerLogin/background";
 
 export const SignIn = () => {
   const { form, isLoggingIn, handleInputChange, handleFormSubmit } = useLogin();
