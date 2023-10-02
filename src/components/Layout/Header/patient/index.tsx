@@ -21,7 +21,6 @@ const Header: React.FC = () => {
           <MenuIcon />
         </MenuButton>
         <Logo src={logo} alt="Logo da empresa" />
-
         <UserProfileSection />
       </HeaderContainer>
 
