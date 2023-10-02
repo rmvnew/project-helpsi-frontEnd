@@ -53,6 +53,13 @@ export const MyProfile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
+
+
+  @media (max-width: 768px) {
+    span {
+      display: none;
+    }
+  }
 `;
 
 export const DropdownMenu = styled.div<DropdownMenuProps>`

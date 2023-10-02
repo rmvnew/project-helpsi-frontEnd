@@ -17,13 +17,13 @@ export const HomePatient = styled.div`
   }
 
   @media (min-width: 998px) {
-    grid-template-columns: repeat(2, 1fr);
     gap: 60px;
     padding: 60px 0;
   }
 
   @media (min-width: 1200px) {
     gap: 70px;
+    grid-template-columns: repeat(2, 1fr);
     padding: 70px 0;
   }
 `;
@@ -79,7 +79,7 @@ export const Details = styled.div`
   }
 
   @media (min-width: 768px) {
-    min-height: 480px;
+    min-height: 300px;
     gap: 18px;
     h2 {
       font-size: 1.4rem;
