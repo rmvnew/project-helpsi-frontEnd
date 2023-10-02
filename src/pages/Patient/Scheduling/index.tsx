@@ -57,7 +57,7 @@ export const Scheduling = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 1500);
+    }, 1800);
 
     return () => clearTimeout(timer);
   }, []);

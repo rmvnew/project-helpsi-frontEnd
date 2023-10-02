@@ -2,17 +2,29 @@ import styled from "styled-components";
 
 export const HomePatient = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 50px;
-  padding: 40px 0;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  padding: 30px 0;
 
-  @media (max-width: 998px) {
-    grid-template-columns: 1fr;
-    padding: 20px 0;
+  @media (min-width: 450px) {
+    gap: 40px;
+    padding: 35px 0;
   }
 
-  @media (max-width: 450px) {
-    gap: 20px;
+  @media (min-width: 768px) {
+    gap: 50px;
+    padding: 40px 0;
+  }
+
+  @media (min-width: 998px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+    padding: 60px 0;
+  }
+
+  @media (min-width: 1200px) {
+    gap: 70px;
+    padding: 70px 0;
   }
 `;
 
@@ -25,34 +37,67 @@ export const Column = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px 20px;
-  width: 45vw;
-  height: auto;
-  border-radius: 5px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px 15px;
+  min-width: 350px;
+  min-height: 200px;
+  border-radius: 8px;
 
-  @media (max-width: 998px) {
-    width: 85vw;
-    padding: 30px 20px;
+  @media (min-width: 450px) {
+    padding: 40px 20px;
   }
-
-  @media (max-width: 450px) {
-    padding: 15px;
+  @media (min-width: 768px) {
+    padding: 50px 25px;
+    min-width: 500px;
   }
 `;
 
 export const Details = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  gap: 12px;
   width: 100%;
-  border-radius: 5px;
+
+  border-radius: 8px;
   background-color: white;
   color: var(--bg-dark);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
   h2 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+    color: var(--text-primary);
+  }
+
+  @media (min-width: 450px) {
+    min-height: 450px;
+    gap: 15px;
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    min-height: 480px;
+    gap: 18px;
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+  }
+
+  @media (min-width: 998px) {
+    min-height: 500px;
+    gap: 20px;
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    min-height: 540px;
+    gap: 25px;
   }
 `;
