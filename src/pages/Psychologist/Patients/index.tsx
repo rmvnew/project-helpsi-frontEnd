@@ -68,18 +68,22 @@ export const Patients = () => {
   }, [listPatients]);
 
   useEffect(() => {
-    let ordered = [...sortedPatients];
+    const sortPatients = (patients: Patient[]) => {
+      let ordered = [...patients];
 
-    if (sorting === "a-z") {
-      ordered.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sorting === "registrationDate") {
-      ordered.sort(
-        (a, b) => a.registrationDate.getTime() - b.registrationDate.getTime()
-      );
-    }
+      if (sorting === "a-z") {
+        ordered.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sorting === "registrationDate") {
+        ordered.sort(
+          (a, b) => a.registrationDate.getTime() - b.registrationDate.getTime()
+        );
+      }
 
-    setSortedPatients(ordered);
-  }, [sorting, sortedPatients]);
+      return ordered;
+    };
+
+    setSortedPatients((prevPatients) => sortPatients(prevPatients));
+  }, [sorting]);
 
   if (isLoading) return <Loader />;
 
