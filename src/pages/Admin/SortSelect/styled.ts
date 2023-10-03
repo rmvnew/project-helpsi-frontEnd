@@ -32,6 +32,6 @@ export const Select = styled.select`
   &:focus {
     outline: none;
     border-color: var(--bg-secundary);
-    box-shadow: 0 0 0 0.2rem rgba(0, 255, 128, 0.245);
+    box-shadow: 0 0 0 0.1rem rgba(0, 255, 128, 0.245);
   }
 `;

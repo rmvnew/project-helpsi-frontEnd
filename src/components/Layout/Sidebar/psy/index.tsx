@@ -39,7 +39,7 @@ const SidebarComponent: React.FC<SidebarPsyProps> = ({
       <Link to="/encaminhamentos">Encaminhamentos</Link>
       </SubItemsWrapper>
     <SidebarLink>
-      <Link to="/link">
+      <Link to="/psy/patients">
         <PeopleAltOutlinedIcon />
         Pacientes
       </Link>
