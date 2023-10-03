@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import MenuItem from "@mui/material/MenuItem";
+import ListIcon from "@mui/icons-material/List";
 
 export const PatientContainer = styled.div`
   padding: 20px;
@@ -96,7 +98,7 @@ export const SortingSelect = styled.div`
     color: var(--bg-dark);
     border: 1px solid #ccc;
     cursor: pointer;
-    width: 70%;
+    width: 100%;
 
     &:focus {
       outline: none;
@@ -164,6 +166,7 @@ export const TitleContainer = styled(ItemContainer)`
     gap: 10px;
   }
 
+
   @media (max-width: 450px) {
     .none {
       display: none;
@@ -194,5 +197,16 @@ export const Item = styled.div`
     .none {
       display: none;
     }
+  }
+`;
+
+export const StyledListIcon = styled(ListIcon)`
+  cursor: pointer;
+`;
+
+export const StyledMenuItem = styled(MenuItem)`
+  .icon {
+    color: var(--bg-dark);
+    margin-right: 8px;
   }
 `;

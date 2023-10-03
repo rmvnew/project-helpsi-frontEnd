@@ -4,10 +4,14 @@ import { toast } from "react-toastify";
 
 // Icons
 import ListIcon from "@mui/icons-material/List";
+import Menu from "@mui/material/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArchiveIcon from "@mui/icons-material/Archive";
+import ForwardIcon from "@mui/icons-material/Forward";
+import InfoIcon from "@mui/icons-material/Info";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 // Project components and hooks
 import { Body } from "../../../components/Layout/Container/style";
@@ -27,6 +31,8 @@ import {
   TitleContainer,
   ActionLinks,
   Button,
+  StyledMenuItem,
+  StyledListIcon,
 } from "./styled";
 
 interface Patient {
@@ -44,12 +50,21 @@ export const Patients = () => {
   const [search, setSearch] = useState("");
   const [sorting, setSorting] = useState("a-z");
   const [sortedPatients, setSortedPatients] = useState<Patient[]>([]);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleMenuClick = (event: React.MouseEvent<SVGSVGElement>) => {
+    setAnchorEl(event.currentTarget as unknown as HTMLElement);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     if (listPatients.length) {
       const convertedPatients = listPatients.map((appointment) => ({
         name: appointment.currentPatient.user_name,
-        city: "Manaus",
+        city: "Manaus - AM",
         registrationDate: new Date(appointment.update_at),
       }));
 
@@ -133,12 +148,12 @@ export const Patients = () => {
         <div>
           <TitleContainer>
             <div className="profile">
-              <PersonIcon className="icon" style={{ visibility: "hidden" }} />
+              <PersonIcon style={{ visibility: "hidden" }} />
               <p>Nome</p>
             </div>
             <p className="none">Cidade</p>
             <p>Última consulta</p>
-            <ListIcon className="icon" style={{ visibility: "hidden" }} />
+            <ListIcon style={{ visibility: "hidden" }} />
           </TitleContainer>
 
           {sortedPatients
@@ -151,7 +166,32 @@ export const Patients = () => {
                 </div>
                 <p className="none">{patient.city}</p>
                 <p>{patient.registrationDate.toLocaleDateString()}</p>
-                <ListIcon />
+                <StyledListIcon onClick={handleMenuClick} />
+                <Menu
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                >
+                  <div>
+                    <StyledMenuItem onClick={handleMenuClose}>
+                      <ForwardIcon className="icon" />
+                      Encaminhar pacientes
+                    </StyledMenuItem>
+                    <StyledMenuItem onClick={handleMenuClose}>
+                      <InfoIcon className="icon" />
+                      Dados do paciente
+                    </StyledMenuItem>
+                    <StyledMenuItem onClick={handleMenuClose}>
+                      <VisibilityIcon className="icon" />
+                      Visualizar detalhes
+                    </StyledMenuItem>
+                    <StyledMenuItem onClick={handleMenuClose}>
+                      <ArchiveIcon className="icon" />
+                      Arquivar
+                    </StyledMenuItem>
+                  </div>
+                </Menu>
               </Item>
             ))}
         </div>
