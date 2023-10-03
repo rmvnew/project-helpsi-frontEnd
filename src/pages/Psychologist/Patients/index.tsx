@@ -1,12 +1,23 @@
 import { useState, useEffect } from "react";
-import { Body } from "../../../components/Layout/Container/style";
-import Header from "../../../components/Layout/Header/patient";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+// Icons
 import ListIcon from "@mui/icons-material/List";
 import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArchiveIcon from "@mui/icons-material/Archive";
 
+// Project components and hooks
+import { Body } from "../../../components/Layout/Container/style";
+import Header from "../../../components/Layout/Header/psy";
+import useListPatients from "../../../hooks/useListPatients";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { Loader } from "../../../components/Layout/Loader";
+import { getFormattedName } from "../../../common/functions/formatString";
+
+// Styled components
 import {
   FilterContainer,
   SearchContainer,
@@ -17,7 +28,6 @@ import {
   ActionLinks,
   Button,
 } from "./styled";
-import { Link } from "react-router-dom";
 
 interface Patient {
   name: string;
@@ -26,25 +36,39 @@ interface Patient {
 }
 
 export const Patients = () => {
+  const currentUser = useCurrentUser();
+  const { listPatients, isLoading, error } = useListPatients(
+    currentUser?.user_id || ""
+  );
+
   const [search, setSearch] = useState("");
   const [sorting, setSorting] = useState("a-z");
   const [sortedPatients, setSortedPatients] = useState<Patient[]>([]);
 
-  const patients: Patient[] = [
-    {
-      name: "João Silva",
-      city: "São Paulo",
-      registrationDate: new Date(2023, 8, 1),
-    },
-    {
-      name: "Maria Fernandes",
-      city: "Rio de Janeiro",
-      registrationDate: new Date(2023, 7, 21),
-    },
-  ];
+  useEffect(() => {
+    if (listPatients.length) {
+      const convertedPatients = listPatients.map((appointment) => ({
+        name: appointment.currentPatient.user_name,
+        city: "Manaus",
+        registrationDate: new Date(appointment.update_at),
+      }));
+
+      const uniqueNames = Array.from(
+        new Set(convertedPatients.map((patient) => patient.name))
+      );
+
+      const uniquePatients = uniqueNames
+        .map((name) => {
+          return convertedPatients.find((patient) => patient.name === name);
+        })
+        .filter((patient) => patient !== undefined) as Patient[];
+
+      setSortedPatients(uniquePatients);
+    }
+  }, [listPatients]);
 
   useEffect(() => {
-    let ordered = [...patients];
+    let ordered = [...sortedPatients];
 
     if (sorting === "a-z") {
       ordered.sort((a, b) => a.name.localeCompare(b.name));
@@ -55,15 +79,19 @@ export const Patients = () => {
     }
 
     setSortedPatients(ordered);
-  }, [sorting, patients]);
+  }, [sorting]);
 
+  if (isLoading) return <Loader />;
+
+  if (error) {
+    toast.error(`Error: ${error}`);
+    return null;
+  }
   return (
     <Body>
       <Header />
-
       <PatientContainer>
         <h2>Meus pacientes</h2>
-
         <FilterContainer>
           <SearchContainer>
             <SearchIcon />
@@ -92,7 +120,7 @@ export const Patients = () => {
                 onChange={(e) => setSorting(e.target.value)}
               >
                 <option value="a-z">A-Z</option>
-                <option value="registrationDate">Data de registro</option>
+                <option value="registrationDate">Última consulta</option>
               </select>
             </SortingSelect>
           </Button>
@@ -101,11 +129,11 @@ export const Patients = () => {
         <div>
           <TitleContainer>
             <div className="profile">
-              <PersonIcon className="icon" style={{ visibility: "hidden" }} />{" "}
+              <PersonIcon className="icon" style={{ visibility: "hidden" }} />
               <p>Nome</p>
             </div>
-            <p>Cidade</p>
-            <p>Data de registro</p>
+            <p className="none">Cidade</p>
+            <p>Última consulta</p>
             <ListIcon className="icon" style={{ visibility: "hidden" }} />
           </TitleContainer>
 
@@ -115,9 +143,9 @@ export const Patients = () => {
               <Item key={index}>
                 <div className="profile">
                   <PersonIcon className="icon" />
-                  <p>{patient.name}</p>
+                  <p>{getFormattedName(patient.name)}</p>
                 </div>
-                <p>{patient.city}</p>
+                <p className="none">{patient.city}</p>
                 <p>{patient.registrationDate.toLocaleDateString()}</p>
                 <ListIcon />
               </Item>

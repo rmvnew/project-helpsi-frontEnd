@@ -165,7 +165,7 @@ export const TitleContainer = styled(ItemContainer)`
   }
 
   @media (max-width: 450px) {
-    .icon {
+    .none {
       display: none;
     }
   }
@@ -190,10 +190,9 @@ export const Item = styled.div`
     gap: 10px;
   }
 
-  .icon {
-    display: none;
-  }
-
   @media (max-width: 450px) {
+    .none {
+      display: none;
+    }
   }
 `;

@@ -22,5 +22,7 @@ export type AppointmentData = {
     user_email: string;
     user_genre: null | string;
     user_phone: null | string;
+    create_at: string;
+    update_at: string;
   };
 };
