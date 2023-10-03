@@ -79,7 +79,7 @@ export const Patients = () => {
     }
 
     setSortedPatients(ordered);
-  }, [sorting]);
+  }, [sorting, sortedPatients]);
 
   if (isLoading) return <Loader />;
 

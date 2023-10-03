@@ -8,8 +8,13 @@ export const Container = styled.div`
   width: 95%;
   margin: auto;
 `;
-
 export const Main = styled.main`
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+`;
+
+export const LoadContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

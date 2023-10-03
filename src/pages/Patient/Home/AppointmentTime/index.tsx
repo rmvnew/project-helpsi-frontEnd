@@ -21,7 +21,7 @@ import {
 
 export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   const currentUser = useCurrentUser();
-  const { appointments, isLoading, error } = useAppointments(
+  const { appointments, error } = useAppointments(
     currentUser?.user_id || "",
     date || DateParms
   );
