@@ -39,7 +39,7 @@ export const Column = styled.div`
   align-items: center;
   padding: 30px 15px;
   min-width: 350px;
-  min-height: 200px;
+  min-height: 300px;
   border-radius: 8px;
 
   @media (min-width: 450px) {

@@ -18,7 +18,6 @@ import {
   TimeLabel,
   TimeSlot,
 } from "./styled";
-import { Loader } from "../../../../components/Layout/Loader";
 
 export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   const currentUser = useCurrentUser();
@@ -26,8 +25,6 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
     currentUser?.user_id || "",
     date || DateParms
   );
-
-  if (isLoading) return <Loader />;
 
   if (error) {
     toast.error(`Error: ${error}`);
@@ -37,7 +34,7 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   if (appointments.length === 0 || !currentUser?.user_id) {
     return (
       <NoAppointmentsContainer>
-        <EventNoteIcon style={{ fontSize: 50, marginBottom: "1rem" }} />
+        <EventNoteIcon style={{ fontSize: 30, marginBottom: "1rem" }} />
         <p>Nenhuma consulta marcada no momento</p>
       </NoAppointmentsContainer>
     );

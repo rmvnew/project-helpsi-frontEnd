@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import {
   Container,
-  Main,
 } from "../../../components/Layout/Container/ContainerHome/styled";
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/patient";
@@ -24,23 +23,21 @@ export const Home = () => {
     <Body>
       <Header />
       <Container>
-        <Main>
-          {!showContent ? (
-            <Loader />
-          ) : (
-            <HomePatient>
-              <Column>
-                <Details>
-                  <h2>Consultas marcadas</h2>
-                  <AppointmentTime />
-                </Details>
-              </Column>
-              <Column>
-                <Details />
-              </Column>
-            </HomePatient>
-          )}
-        </Main>
+        {!showContent ? (
+          <Loader />
+        ) : (
+          <HomePatient>
+            <Column>
+              <Details>
+                <h2>Consultas marcadas</h2>
+                <AppointmentTime />
+              </Details>
+            </Column>
+            <Column>
+              <Details />
+            </Column>
+          </HomePatient>
+        )}
       </Container>
     </Body>
   );
