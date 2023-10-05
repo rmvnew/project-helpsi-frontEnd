@@ -7,7 +7,6 @@ import ListIcon from "@mui/icons-material/List";
 import Menu from "@mui/material/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import ForwardIcon from "@mui/icons-material/Forward";
 import InfoIcon from "@mui/icons-material/Info";
@@ -124,11 +123,7 @@ export const Patients = () => {
 
           <Button>
             <ActionLinks>
-              <Link to="/trash">
-                <DeleteIcon />
-                Lixeira
-              </Link>
-              <Link to="/archived">
+              <Link to="/psy/arquived">
                 <ArchiveIcon />
                 Arquivados
               </Link>

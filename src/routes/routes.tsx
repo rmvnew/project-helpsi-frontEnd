@@ -12,6 +12,7 @@ import { Schedule } from "../pages/Psychologist/Schedule";
 import { PatientData } from "../pages/Psychologist/Data";
 import { Dashboard } from "../pages/Admin";
 import NotFound from "../pages/NotFound";
+import { ArchivedPatients } from "../pages/Psychologist/Patients/Arquived";
 
 export const AppRoutes = () => {
   return (
@@ -70,6 +71,14 @@ export const AppRoutes = () => {
         element={
           <RequireAuth>
             <Scheduling />
+          </RequireAuth>
+        }
+      />
+       <Route
+        path="/psy/arquived"
+        element={
+          <RequireAuth>
+            <ArchivedPatients />
           </RequireAuth>
         }
       />

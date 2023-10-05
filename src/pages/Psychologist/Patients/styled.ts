@@ -210,3 +210,19 @@ export const StyledMenuItem = styled(MenuItem)`
     margin-right: 8px;
   }
 `;
+
+export const NoDataContainer = styled.div`
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: #757575;
+
+   p {
+    text-align: center;
+   }
+`;
