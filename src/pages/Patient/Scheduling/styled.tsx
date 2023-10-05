@@ -13,7 +13,6 @@ export const SchedulingContainer = styled.div`
   gap: 2rem;
   align-items: center;
   padding: 3rem;
-  background-color: var(--bg-body);
   transition: all 0.3s;
 
   @media (min-width: ${breakpoints.md}) {
@@ -23,15 +22,12 @@ export const SchedulingContainer = styled.div`
   }
 `;
 export const CalendarContainer = styled.div`
-  background: linear-gradient(
-    145deg,
-    var(--bg-secundary-lighter),
-    var(--bg-secundary-darker)
-  );
+ 
   border-radius: 15px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  border: 1px solid #cecece;
 
 `;
 
@@ -98,11 +94,13 @@ export const FormElement = styled.div`
 export const Select = styled(FormElement).attrs({ as: "select" })`
   background-color: white;
   color: var(--bg-dark);
+  border: 1px solid #cecece;
 `;
 
 export const Input = styled(FormElement).attrs({ as: "input" })`
   background-color: white;
   color: var(--bg-dark);
+  border: 1px solid #cecece;
 `;
 
 export const Button = styled.button`
@@ -190,14 +188,13 @@ export const TimeLabel = styled.div`
 
 export const UnavailableItem = styled.li`
   padding: 10px;
-  border: 1px solid #71686886;
+  border: 1px solid #cecece;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 4px;
-  background-color: var(--bg-body-darker);
-
+  
   &:last-child {
     margin-bottom: 0;
   }
