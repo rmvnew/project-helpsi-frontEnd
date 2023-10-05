@@ -11,6 +11,7 @@ import { Patients } from "../pages/Psychologist/Patients";
 import { Schedule } from "../pages/Psychologist/Schedule";
 import { PatientData } from "../pages/Psychologist/Data";
 import { Dashboard } from "../pages/Admin";
+import NotFound from "../pages/NotFound";
 
 export const AppRoutes = () => {
   return (
@@ -77,6 +78,7 @@ export const AppRoutes = () => {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login/recover-pass" element={<RecoverPass />} />
       <Route path="/login/reset-pass" element={<ResetPass />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

@@ -4,6 +4,7 @@ import logo from "../../../../assets/img/logo.svg";
 import MenuIcon from "@material-ui/icons/Menu";
 import { HeaderContainer, Logo, MenuButton } from "../styled";
 import SidebarComponent from "../../Sidebar/patient";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -20,8 +21,9 @@ const Header: React.FC = () => {
         <MenuButton onClick={toggleSidebar}>
           <MenuIcon />
         </MenuButton>
-        <Logo src={logo} alt="Logo da empresa" />
-
+        <Link to="/home" >
+          <Logo src={logo} alt="Logo da empresa" />
+        </Link>
         <UserProfileSection />
       </HeaderContainer>
 

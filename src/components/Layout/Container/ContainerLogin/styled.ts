@@ -1,23 +1,15 @@
 import styled from "styled-components";
-import backgroundImage from "../../../../assets/img/background.svg";
-
-export const LoginBackground = styled.body`
-  background-image: url(${backgroundImage});
-  background-size: cover;
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const LoginContainer = styled.div`
-  background-color: var(--bg-primary);
+  background: linear-gradient(
+    145deg,
+    var(--bg-primary-lighter),
+    var(--bg-primary-darker)
+  );
   height: 600px;
   width: 90vw;
   color: var(--bg-dark);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -29,7 +21,6 @@ export const LoginContainer = styled.div`
   @media (min-width: 1300px) {
     width: 50vw;
   }
-
 `;
 
 export const TextContainer = styled.div`
@@ -42,7 +33,7 @@ export const TextContainer = styled.div`
 
   p {
     font-family: sans-serif;
-    color: var(--bg-dark);
+    color: var(--bg-dark-lighter);
   }
 `;
 
@@ -60,9 +51,13 @@ export const FormGroup = styled.div`
   }
 
   a {
-    color: var(--bg-dark);
+    color: var(--bg-dark-lighter);
     font-family: sans-serif;
     text-decoration: none;
+
+    &:hover {
+      color: var(--bg-dark-darker);
+    }
   }
 
   @media (min-width: 900px) {
@@ -75,6 +70,7 @@ export const Btn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+
   a {
     padding: 10px;
     text-align: center;
@@ -82,9 +78,13 @@ export const Btn = styled.div`
     border: none;
     width: 100%;
     background-color: var(--bg-dark);
-    color: white;
+    color: var(--bg-body);
     cursor: pointer;
     text-decoration: none;
+
+    &:hover {
+      background-color: var(--bg-hover-button);
+    }
   }
 `;
 
@@ -98,6 +98,7 @@ export const Image = styled.div`
   img {
     width: 400px;
   }
+
   @media (max-width: 900px) {
     display: none;
   }
@@ -112,5 +113,4 @@ export const Span = styled.span`
   svg {
     width: 15px;
   }
-
 `;

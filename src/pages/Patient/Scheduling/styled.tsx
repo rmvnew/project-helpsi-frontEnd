@@ -63,7 +63,7 @@ export const SchedulingForm = styled.form`
   margin: auto;
   padding: 2rem;
   gap: 1.5rem;
-  width: 80%;
+  width: 100%;
   background: linear-gradient(
     145deg,
     var(--bg-body-lighter),

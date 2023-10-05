@@ -4,7 +4,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import {
   FormGroup,
   Image,
-  LoginBackground,
+  
   LoginContainer,
   Span,
   TextContainer,
@@ -13,6 +13,7 @@ import {
 import { Form } from "./styled";
 import { ChangeEvent } from "react";
 import useRecovery from "../../../../hooks/useRecoverPass";
+import { LoginBackground } from "../../../../components/Layout/Container/ContainerLogin/background";
 
 export const RecoverPass = () => {
   const { email, setEmail, isSending, sendRecoveryCode } = useRecovery();

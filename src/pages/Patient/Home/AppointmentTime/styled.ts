@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+const commonTextStyles = `
+  font-size: 0.9rem;
+  margin: 0;
+
+  @media (max-width: 820px) {
+    font-size: 0.7rem;
+  }
+`;
+
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -13,26 +22,19 @@ export const Hours = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+`;
 
-  h3 {
-    font-size: 1rem;
-    margin: 0;
-  }
+export const DateDisplay = styled.h3`
+  ${commonTextStyles};
+`;
 
-  span {
-    font-size: 0.9rem;
-    font-family: "sans-serif";
-  }
+export const TimeLabel = styled.span`
+  ${commonTextStyles};
+`;
 
-  @media (max-width: 820px) {
-    h3 {
-      font-size: 0.8rem;
-    }
-
-    span {
-      font-size: 0.7rem;
-    }
-  }
+export const TimeSlot = styled.span`
+  ${commonTextStyles};
+  font-family: "sans-serif";
 `;
 
 export const Psy = styled.div`
@@ -50,15 +52,16 @@ export const DetailsPsy = styled.div`
   flex-direction: column;
   align-items: flex-end;
   gap: 5px;
-  font-size: 0.9rem;
+  ${commonTextStyles};
+`;
 
-  span {
-    text-align: right;
-  }
+export const PsyName = styled.span`
+  text-align: right;
+`;
 
-  @media (max-width: 820px) {
-    font-size: 0.7rem;
-  }
+export const PsyPhone = styled.span`
+  font-family: "sans-serif";
+  text-align: right;
 `;
 
 export const NoAppointmentsContainer = styled.div`
@@ -75,5 +78,6 @@ export const NoAppointmentsContainer = styled.div`
     margin-top: 1rem;
     font-weight: 500;
     color: #666;
+    ${commonTextStyles};
   }
 `;

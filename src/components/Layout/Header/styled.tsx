@@ -13,24 +13,21 @@ export const HeaderContainer = styled.header`
     padding: 10px 10px;
   }
 `;
+
 export const Logo = styled.img`
   width: 150px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
+  margin: auto;
 
   @media (max-width: 998px) {
-    margin-left: 90px;
+    width: 120px;
   }
 
   @media (max-width: 768px) {
     width: 100px;
   }
-
-  @media (max-width: 480px) {
-    margin-left: 50px;
-  }
 `;
+
 export const UserProfile = styled.div`
   display: flex;
   align-items: center;
@@ -56,6 +53,13 @@ export const MyProfile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
+
+
+  @media (max-width: 768px) {
+    span {
+      display: none;
+    }
+  }
 `;
 
 export const DropdownMenu = styled.div<DropdownMenuProps>`
@@ -96,5 +100,4 @@ export const MenuButton = styled.button`
   border: none;
   cursor: pointer;
   z-index: 1010;
-
 `;

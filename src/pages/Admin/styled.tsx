@@ -84,7 +84,7 @@ export const EditButton = styled(Button)`
   margin-right: 10px;
 
   &:hover {
-    background-color: var(--bg-hover-primary);
+    background-color: var(--bg-hover-button);
   }
 `;
 

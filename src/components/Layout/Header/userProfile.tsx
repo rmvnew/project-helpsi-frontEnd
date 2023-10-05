@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
-import { Btn, MyProfile, UserProfile } from "./styled";
-import Avatar from "react-avatar";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import Menu from "@material-ui/core/Menu";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 import { getFormattedName } from "../../../common/functions/formatString";
 import { useNavigate } from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { useContext, useState } from "react";
+import { MyProfile, UserProfile } from "./styled";
 
 const styles = {
   greeting: {
@@ -16,9 +18,7 @@ const styles = {
     color: "#594f4f6e",
     marginTop: ".5rem",
   },
-  dropDownIcon: {
-    color: "#594f4fd0",
-  },
+
   menuButton: {
     background: "#9de0ad",
     color: "white",
@@ -53,14 +53,30 @@ function useMenu() {
   };
 }
 
+function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .map((word) => word[0])
+    .join("");
+}
+
 export const UserProfileSection = () => {
-  const { anchorEl, openMenu, closeMenu } = useMenu();
+  const { closeMenu } = useMenu();
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const formattedName = getFormattedName(auth.user?.name);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   const handleLogout = async () => {
-    await auth.signout();
+    auth.signout();
     navigate("/");
   };
 
@@ -70,32 +86,34 @@ export const UserProfileSection = () => {
         <span style={styles.greeting}>{`${formattedName ?? "Usuário"}`}</span>
         <span style={styles.profileInfo}>Meu perfil</span>
       </MyProfile>
-      <Avatar
-        src="link_para_foto_do_perfil"
-        size="40"
-        color="#9de0ad"
-        round
-        alt="Foto de perfil"
-        name={`${formattedName}`}
-        style={{ marginTop: "10px" }}
-      />
-
-      <Btn onClick={openMenu}>
-        <ArrowDropDownIcon style={styles.dropDownIcon} />
-      </Btn>
-
+      <Tooltip title="Open settings">
+        <IconButton onClick={handleOpenUserMenu}>
+          <Avatar
+            alt={formattedName ?? "Usuário"}
+            sx={{ bgcolor: "#9fdfae", fontSize: ".8rem", marginTop: "10px" }}
+          >
+            {getInitials(formattedName ?? "U")}
+          </Avatar>
+        </IconButton>
+      </Tooltip>
       <Menu
-        anchorEl={anchorEl}
+        sx={{ mt: "45px" }}
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
         keepMounted
-        open={Boolean(anchorEl)}
-        onClose={closeMenu}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
       >
-        <button style={styles.menuButton} onClick={closeMenu}>
-          Config
-        </button>
-        <button style={styles.menuButton} onClick={handleLogout}>
-          Sair
-        </button>
+        <MenuItem onClick={closeMenu}>Config</MenuItem>
+        <MenuItem onClick={handleLogout}>Sair</MenuItem>
+        <MenuItem>Meu Perfil</MenuItem>
       </Menu>
     </UserProfile>
   );

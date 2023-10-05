@@ -1,9 +1,11 @@
 import Logo from "../../../../assets/img/logo.svg";
 import Bonecos from "../../../../assets/img/Psychologist.svg";
+import { LoginBackground } from "../../../../components/Layout/Container/ContainerLogin/background";
+
 import {
   FormGroup,
   Image,
-  LoginBackground,
+  
   LoginContainer,
   TextContainer,
 } from "../../../../components/Layout/Container/ContainerLogin/styled";
@@ -63,14 +65,7 @@ export const ResetPass = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
-            <input
-              type="email"
-              placeholder="Digite seu email"
-              value={form.email}
-              onChange={handleChange}
-              name="email"
-              required
-            />
+
             <button type="submit">
               {isResetting ? "Redefinindo..." : "Redefinir senha"}
             </button>

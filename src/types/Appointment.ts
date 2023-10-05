@@ -14,6 +14,15 @@ export type AppointmentData = {
     google_picture: null | string;
     user_phone: null | string;
     user_crp: null | string;
-    user_profile_id: number;
+  };
+
+  currentPatient: {
+    user_id: string;
+    user_name: string;
+    user_email: string;
+    user_genre: null | string;
+    user_phone: null | string;
+    create_at: string;
+    update_at: string;
   };
 };
