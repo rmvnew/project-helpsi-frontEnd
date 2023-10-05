@@ -6,6 +6,7 @@ export const HomePatient = styled.div`
   gap: 30px;
   padding: 30px 0;
 
+
   @media (min-width: 450px) {
     gap: 40px;
     padding: 35px 0;

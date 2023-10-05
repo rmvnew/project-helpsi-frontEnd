@@ -21,22 +21,13 @@ export const SchedulingContainer = styled.div`
     align-items: flex-start;
   }
 `;
-export const CalendarContainer = styled.div`
- 
-  border-radius: 15px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #cecece;
-
-`;
 
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  width: 100%;
+  width: 95vw;
   gap: 1rem;
   padding: 1rem;
   background: linear-gradient(
@@ -51,6 +42,13 @@ export const Column = styled.div`
     height: 70vh;
     width: 40vw;
   }
+`;
+export const CalendarContainer = styled.div`
+  border-radius: 15px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #cecece;
 `;
 
 export const SchedulingForm = styled.form`
@@ -194,7 +192,7 @@ export const UnavailableItem = styled.li`
   justify-content: space-between;
   align-items: center;
   border-radius: 4px;
-  
+
   &:last-child {
     margin-bottom: 0;
   }
