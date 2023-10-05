@@ -69,10 +69,8 @@ export const NoAppointmentsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  padding: 4rem;
 
   p {
     margin-top: 1rem;

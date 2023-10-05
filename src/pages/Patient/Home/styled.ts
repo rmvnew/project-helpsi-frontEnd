@@ -38,7 +38,6 @@ export const Column = styled.div`
   justify-content: center;
   align-items: center;
   padding: 30px 15px;
-  min-width: 350px;
   min-height: 300px;
   border-radius: 8px;
 
@@ -56,7 +55,7 @@ export const Details = styled.div`
   flex-direction: column;
   gap: 12px;
   width: 100%;
-
+  justify-content: center;
   border-radius: 8px;
   background-color: white;
   color: var(--bg-dark);

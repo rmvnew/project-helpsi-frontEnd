@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Container,
-} from "../../../components/Layout/Container/ContainerHome/styled";
+import { Container } from "../../../components/Layout/Container/ContainerHome/styled";
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/patient";
 import { Loader } from "../../../components/Layout/Loader";
@@ -23,13 +21,13 @@ export const Home = () => {
     <Body>
       <Header />
       <Container>
+        <h2 style={{color: "#594f4f"}} >Consultas marcadas</h2>
         {!showContent ? (
           <Loader />
         ) : (
           <HomePatient>
             <Column>
               <Details>
-                <h2>Consultas marcadas</h2>
                 <AppointmentTime />
               </Details>
             </Column>

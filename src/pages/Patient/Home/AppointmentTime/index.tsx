@@ -1,6 +1,5 @@
 import React from "react";
 import Avatar from "react-avatar";
-import EventNoteIcon from "@mui/icons-material/EventNote";
 import { toast } from "react-toastify";
 import useAppointments from "../../../../hooks/useAppointments";
 import { useCurrentUser } from "../../../../hooks/useCurrentUser";
@@ -18,6 +17,8 @@ import {
   TimeLabel,
   TimeSlot,
 } from "./styled";
+import { Link } from "react-router-dom";
+import { Empty, Button } from "antd";
 
 export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   const currentUser = useCurrentUser();
@@ -34,8 +35,18 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   if (appointments.length === 0 || !currentUser?.user_id) {
     return (
       <NoAppointmentsContainer>
-        <EventNoteIcon style={{ fontSize: 30, marginBottom: "1rem" }} />
-        <p>Nenhuma consulta marcada no momento</p>
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description="Nenhuma consulta marcada no momento"
+        />
+        <Link to="/scheduling">
+          <Button
+            type="primary"
+            style={{ marginTop: "1rem", backgroundColor: "#9fdfae" }}
+          >
+            Agendar
+          </Button>
+        </Link>
       </NoAppointmentsContainer>
     );
   }
