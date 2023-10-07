@@ -113,6 +113,15 @@ export const Scheduling = () => {
                           </InfoValue>
                         ))}
                       </InfoSection>
+                      <InfoSection>
+                        <InfoTitle>Horário de funcionamento:</InfoTitle>
+                      
+                      </InfoSection>
+                      <InfoSection>
+                        <InfoValue>
+                          Segunda á Sexta , das 08:00 ás 17:00
+                        </InfoValue>
+                      </InfoSection>
                     </InfoContainer>
 
                     <CalendarContainer>

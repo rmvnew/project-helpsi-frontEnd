@@ -21,7 +21,7 @@ export const HomePsy = () => {
             <div className="corpo">
               <div className="container1 center-container1">
               <div className="card card1">
-                <p></p>
+                <p className="p"></p>
                 <img className="icones" src={icon1} alt="google calender" />
                 <h1>Minha Agenda</h1>
               </div>
@@ -50,7 +50,7 @@ export const HomePsy = () => {
               <div className="card card5">
                   <p></p>
                   <img className="icones" src={icon5} alt="Encaminhamentos" />
-                  <h1>Encaminhamentos</h1>
+                  <h1 className="h1">Encaminhamentos</h1>
               </div>
               
               </div>  {/* container2 */}
