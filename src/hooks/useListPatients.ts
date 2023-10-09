@@ -13,7 +13,7 @@ const useListPatients = (userId: string) => {
       try {
         const { data } = await api.get(`/scheduling`, {
           params: {
-            logged_id: userId,
+            psychologist_id: userId,
           },
         });
         setListPatients(data.items || []);
