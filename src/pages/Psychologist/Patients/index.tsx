@@ -17,8 +17,8 @@ import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
 import useListPatients from "../../../hooks/useListPatients";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import { Loader } from "../../../components/Layout/Loader";
 import { getFormattedName } from "../../../common/functions/formatString";
+import { Skeleton } from "@mui/material";
 
 // Styled components
 import {
@@ -33,6 +33,7 @@ import {
   StyledMenuItem,
   StyledListIcon,
 } from "./styled";
+import { PatientListSkeleton } from "../../../components/Layout/Loader/Skeleton/PatientListSkeleton";
 
 interface Patient {
   name: string;
@@ -99,7 +100,9 @@ export const Patients = () => {
     setSortedPatients((prevPatients) => sortPatients(prevPatients));
   }, [sorting]);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return <PatientListSkeleton />;
+  }
 
   if (error) {
     toast.error(`Error: ${error}`);
