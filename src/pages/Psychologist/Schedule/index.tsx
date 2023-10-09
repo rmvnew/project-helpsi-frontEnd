@@ -1,101 +1,68 @@
-import {
-  Container,
-  Main,
-} from "../../../components/Layout/Container/ContainerHome/styled";
+import React from "react";
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/patient";
-import "./style.css";
+import {
+  HeaderText,
+  DateText,
+  ScheduleWrapper,
+  Container,
+  TimeText,
+  Legend,
+  LegendItem,
+  LegendCircle,
+  TimeSlot,
+  PatientName,
+  Dot,
+} from "./styled";
 
-export const Schedule = () => {
+
+export const Schedule: React.FC = () => {
+  const timeSlots = [
+    { time: "08:00", patient: "", status: "" },
+    { time: "09:00", patient: "", status: "" },
+    { time: "10:00", patient: "", status: "" },
+    { time: "11:00", patient: "", status: "" },
+    { time: "11:00", patient: "Ronald Ferreira", status: "green" },
+    { time: "12:00", patient: "", status: "" },
+    { time: "13:00", patient: "", status: "" },
+    { time: "14:00", patient: "Darlene Pereira", status: "green" },
+    { time: "15:00", patient: "", status: "" },
+    { time: "16:00", patient: "Carlos Pereira", status: "red" },
+    { time: "17:00", patient: "", status: "" },
+  ];
   return (
-    <>
-      <Body>
-        <Header />
-        <Container>
-          <Main>
-            <div id="agenda">
-              <div id="header">Minha Agenda</div>
-              
-              <div id="schedule">
-                <div id="date">Sexta-feira, 29 de setembro</div>
+    <Body>
+      <Header />
+      <Container>
+        <HeaderText>Minha Agenda</HeaderText>
 
-                <div className="time-column">
-                  <div className="time">08:00</div>
-                  <div className="appointment">Paciente 1</div>
-                </div>
+        <ScheduleWrapper>
+          <DateText>Sexta-feira, 29 de setembro</DateText>
+          {timeSlots.map((slot, index) => (
+            <TimeSlot key={index}>
+              <TimeText>{slot.time}</TimeText>
 
-                <div className="time-column">
-                  <div className="time">09:00</div>
-                  <div className="appointment">Paciente 2</div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">10:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">11:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">12:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">13:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">14:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">15:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">16:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">17:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                <div className="time-column">
-                  <div className="time">18:00</div>
-                  <div className="appointment"></div>
-                </div>
-
-                {/* Adicione outros intervalos de tempo conforme necessário */}
-                
-              </div>
-
-              <div className="legend">
-                <div className="legend-item">
-                  <div className="legend-circle cancelled"></div>
-                  Cancelado
-                </div>
-                <div className="legend-item">
-                  <div className="legend-circle pending"></div>
-                  Pendente
-                </div>
-                <div className="legend-item">
-                  <div className="legend-circle confirmed"></div>
-                  Confirmado
-                </div>
-              </div>
-            </div>
-          </Main>
-        </Container>
-      </Body>
-    </>
+              <PatientName  hasName={!!slot.patient}>
+                {slot.patient && <Dot color={slot.status} />} {slot.patient}
+              </PatientName>
+            </TimeSlot>
+          ))}
+        </ScheduleWrapper>
+        <Legend>
+          <LegendItem>
+            <LegendCircle color="#ff0000" />
+            Cancelado
+          </LegendItem>
+          <LegendItem>
+            <LegendCircle color="#ffff00" />
+            Pendente
+          </LegendItem>
+          <LegendItem>
+            <LegendCircle color="#00ff00" />
+            Confirmado
+          </LegendItem>
+        </Legend>
+      </Container>
+    </Body>
   );
 };
