@@ -1,72 +1,73 @@
 .card {
   border-radius: 15px;
-  background: #C7E9CF;
+  background: #c7e9cf;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
   margin-top: 20px;
   margin-right: 10px;
   width: 100%;
-  max-width: 300px;
-  height: 14rem;
+  height: 5rem;
   text-align: center;
   padding: 10px;
   box-sizing: border-box;
   overflow: hidden;
-  border-top: 15px solid #594F4F;
+  border-top: 15px solid var(--bg-dark);
+  text-decoration: none;
 }
 
 .icones {
-  padding-top: 10px; /* Reduzindo o espaçamento entre o ícone e o texto */
+  padding-top: 10px;
+  height: 60%;
 }
 
 .p {
   width: 100%;
-  height: 15px; /* Ajuste a altura conforme necessário */
+  height: 15px;
   border-radius: 5px;
-  background-color: #594F4F;
-  margin-bottom: 10px; /* Adicione algum espaçamento abaixo do ícone */
+  background-color: var(--bg-dark);
+  margin-bottom: 10px;
 }
 
-.h1 {
-  color: #594F4F;
+.link {
+  color: var(--bg-dark);
   text-align: center;
-  font-family: Urbanist;
-  font-size: 16px; /* Ajuste o tamanho do texto */
-  font-style: normal;
-  line-height: 20px; /* Ajuste conforme necessário */
-  letter-spacing: -0.6px;
+  font-size: 55%;
+  line-height: 1;
+  height: auto;
+  margin-top: 5px;
+  display: block;
 }
 
 .corpo {
-  max-width: 100%; /* Ajuste para 100% para evitar a barra de rolagem horizontal */
+  max-width: 100%;
   width: 80vw;
   height: 87vh;
   margin: 0 auto;
   border-radius: 5px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
   background-color: #ffff;
-  overflow: auto; /* Adicione overflow para adicionar uma barra de rolagem vertical se necessário */
+  overflow: auto;
 }
 
 .center-container1 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Isso permite que os elementos se ajustem automaticamente ao tamanho da tela */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   justify-content: center;
-  gap: 20px; /* Adicione espaçamento entre os cards */
+  gap: 10px;
   padding-top: 100px;
-  padding-left: 20px; /* Ajuste o espaçamento conforme necessário */
-  padding-right: 20px; /* Ajuste o espaçamento conforme necessário */
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .container1 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   padding-top: 100px;
 }
 
 .container2 {
   align-items: flex-start;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   grid-gap: 20px;
   justify-self: center;
   justify-content: center;
@@ -78,43 +79,33 @@
   justify-self: end;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 769px) {
   .card {
-    height: 5rem; /* Ajuste a altura conforme necessário */
-    max-width: 5rem; /* Ajuste a largura máxima conforme necessário */
-    margin: 10px; /* Adicione alguma margem entre os cards */
-    padding: 10px; /* Adicione algum padding para manter o conteúdo dentro do card */
-    box-sizing: border-box; /* Certifique-se de que o padding não afete a largura total */
-  }
-
-  .center-container1 {
-    padding-left: 10px;
-    padding-right: 10px;
-    grid-gap: 10px; /* Adicione espaçamento menor entre os cards */
-  }
-}
-
-
-@media (max-width: 768px) {
-  .card {
-    height: 5rem;
-    max-width: 5rem;
-    margin: 10px;
-    padding: 10px;
-    box-sizing: border-box;
+    height: 14rem;
+    max-width: 300px;
   }
 
   .icones {
     padding-top: 10px;
-    height: 60%;
+    height: auto;
   }
 
-  .h1 {
-    font-size: 55%; /* Ajuste o tamanho do texto conforme necessário */
-    line-height: 1; /* Mantém a altura normal da linha */
-    height: auto; /* Ajuste para altura automática para o conteúdo */
-    margin-top: 5px; /* Adicione algum espaçamento acima do texto */
+  .link {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .center-container1 {
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .container1 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .container2 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
-
-
