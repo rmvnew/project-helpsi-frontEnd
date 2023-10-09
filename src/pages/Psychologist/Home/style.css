@@ -1,22 +1,20 @@
 .card {
-  border-radius: 15px;
+  border-radius: 5px;
   background: #c7e9cf;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-  margin-top: 20px;
-  margin-right: 10px;
-  width: 100%;
-  height: 5rem;
-  text-align: center;
+  width: 80%;
+  height: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 10px;
-  box-sizing: border-box;
-  overflow: hidden;
-  border-top: 15px solid var(--bg-dark);
+  border-top: 20px solid var(--bg-dark);
   text-decoration: none;
 }
 
 .icones {
-  padding-top: 10px;
-  height: 60%;
+  height: 50%;
 }
 
 .p {
@@ -29,57 +27,31 @@
 
 .link {
   color: var(--bg-dark);
-  text-align: center;
-  font-size: 55%;
-  line-height: 1;
-  height: auto;
-  margin-top: 5px;
-  display: block;
+  padding-top: 10px;
+  font-size: 0.8rem;
 }
 
 .corpo {
   max-width: 100%;
   width: 80vw;
-  height: 87vh;
-  margin: 0 auto;
+  height: 85vh;
+  margin: auto;
   border-radius: 5px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
   background-color: #ffff;
   overflow: auto;
-}
-
-.center-container1 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
   justify-content: center;
-  gap: 10px;
-  padding-top: 100px;
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 .container1 {
   display: grid;
-  grid-template-columns: 1fr;
-  padding-top: 100px;
+  grid-template-columns: repeat(2, 1fr);
+  padding-top: 40px;
+  width: 100%;
 }
 
-.container2 {
-  align-items: flex-start;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
-  justify-self: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 50px;
-}
-
-.card4 {
-  justify-self: end;
-}
-
-@media (min-width: 769px) {
+@media (min-width: 850px) {
   .card {
     height: 14rem;
     max-width: 300px;
@@ -87,25 +59,16 @@
 
   .icones {
     padding-top: 10px;
-    height: auto;
   }
 
   .link {
     font-size: 16px;
     line-height: 20px;
-  }
-
-  .center-container1 {
-    gap: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    display: block;
   }
 
   .container1 {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .container2 {
-    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 }

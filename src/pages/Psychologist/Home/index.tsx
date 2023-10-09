@@ -20,7 +20,7 @@ export const HomePsy = () => {
         <Container>
           <Main>
             <div className="corpo">
-              <div className="container1 center-container1">
+              <div className="container1">
                 <Link to="/psy/schedule" className="card card1">
                   <img className="icones" src={icon1} alt="google calender" />
 
@@ -37,9 +37,6 @@ export const HomePsy = () => {
 
                   <span className="link">Diário de Emoções</span>
                 </Link>
-              </div>
-
-              <div className="container2">
                 <Link to="/documents" className="card card4">
                   <img className="icones" src={icon4} alt="Documentos" />
 
