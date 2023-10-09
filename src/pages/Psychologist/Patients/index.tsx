@@ -18,7 +18,6 @@ import Header from "../../../components/Layout/Header/psy";
 import useListPatients from "../../../hooks/useListPatients";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { getFormattedName } from "../../../common/functions/formatString";
-import { Skeleton } from "@mui/material";
 
 // Styled components
 import {
