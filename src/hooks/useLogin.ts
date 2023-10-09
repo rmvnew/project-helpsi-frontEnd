@@ -64,10 +64,8 @@ export const useLogin = () => {
 
           toast.success(`Bem vindo !!!`);
         } else {
-          toast.error("Erro ao buscar informações do usuário.");
+          toast.error("Erro ao fazer login. Verifique suas credenciais.");
         }
-      } else {
-        toast.error("Erro ao fazer login. Verifique suas credenciais.");
       }
     }
     setIsLoggingIn(false);

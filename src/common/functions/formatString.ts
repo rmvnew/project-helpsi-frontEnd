@@ -26,3 +26,25 @@ export const DateParms = new Date()
   .toISOString()
   .split("T")[0]
   .replace(/-/g, "/");
+
+export const getNextDay = (currentDate: string): string => {
+  const date = new Date(currentDate);
+  date.setDate(date.getDate() + 1);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}-${String(date.getDate()).padStart(2, "0")}`;
+};
+
+export const getCurrentFormattedDate = (): string => {
+  const date = new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  };
+
+  return date.toLocaleDateString('pt-BR', options);
+};
+
+

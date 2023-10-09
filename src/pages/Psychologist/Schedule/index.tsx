@@ -1,6 +1,6 @@
 import React from "react";
 import { Body } from "../../../components/Layout/Container/style";
-import Header from "../../../components/Layout/Header/patient";
+import Header from "../../../components/Layout/Header/psy";
 import {
   HeaderText,
   DateText,
@@ -14,39 +14,72 @@ import {
   PatientName,
   Dot,
 } from "./styled";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { toast } from "react-toastify";
+import {
+  DateParms,
+  getCurrentFormattedDate,
+  getNextDay,
+} from "../../../common/functions/formatString";
+import { formatTimeString } from "../../../common/functions/formatTime";
+import useSchedule from "../../../hooks/useSchedule";
 
+export const Schedule: React.FC<{ date?: string }> = ({ date }) => {
+  const currentUser = useCurrentUser();
+  const { appointments, error } = useSchedule(
+    currentUser?.user_id || "",
+    date || DateParms,
+    getNextDay(date || DateParms)
+  );
 
-export const Schedule: React.FC = () => {
-  const timeSlots = [
-    { time: "08:00", patient: "", status: "" },
-    { time: "09:00", patient: "", status: "" },
-    { time: "10:00", patient: "", status: "" },
-    { time: "11:00", patient: "", status: "" },
-    { time: "11:00", patient: "Ronald Ferreira", status: "green" },
-    { time: "12:00", patient: "", status: "" },
-    { time: "13:00", patient: "", status: "" },
-    { time: "14:00", patient: "Darlene Pereira", status: "green" },
-    { time: "15:00", patient: "", status: "" },
-    { time: "16:00", patient: "Carlos Pereira", status: "red" },
-    { time: "17:00", patient: "", status: "" },
-  ];
+  if (error) {
+    toast.error(`Error: ${error}`);
+    return null;
+  }
+
+  function generateTimeSlots() {
+    const timeSlots = [];
+    for (let hour = 8; hour <= 17; hour++) {
+      const time = `${hour}:00`;
+      timeSlots.push(time);
+    }
+    return timeSlots;
+  }
+
+  const timeSlots = generateTimeSlots();
+
   return (
     <Body>
       <Header />
       <Container>
         <HeaderText>Minha Agenda</HeaderText>
-
         <ScheduleWrapper>
-          <DateText>Sexta-feira, 29 de setembro</DateText>
-          {timeSlots.map((slot, index) => (
-            <TimeSlot key={index}>
-              <TimeText>{slot.time}</TimeText>
+          <DateText>{getCurrentFormattedDate()}</DateText>
 
-              <PatientName  hasName={!!slot.patient}>
-                {slot.patient && <Dot color={slot.status} />} {slot.patient}
-              </PatientName>
-            </TimeSlot>
-          ))}
+          {timeSlots.map((timeSlot) => {
+            const appointment = appointments.find(
+              (app) => formatTimeString(app.start_time) === timeSlot
+            );
+
+            return (
+              <TimeSlot key={timeSlot}>
+                <TimeText>{timeSlot}</TimeText>
+
+                {appointment &&
+                appointment.currentPatient &&
+                appointment.currentPatient.user_name ? (
+                  <PatientName hasName={!!appointment.currentPatient}>
+                    {appointment.currentPatient.user_name && (
+                      <Dot color="#00ff00" />
+                    )}
+                    {appointment.currentPatient.user_name}
+                  </PatientName>
+                ) : (
+                  <span></span>
+                )}
+              </TimeSlot>
+            );
+          })}
         </ScheduleWrapper>
         <Legend>
           <LegendItem>
