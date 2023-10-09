@@ -13,7 +13,7 @@ const useAppointments = (userId: string, date: string) => {
       try {
         const { data } = await api.get(`/scheduling`, {
           params: {
-            logged_id: userId,
+            patient_id: userId,
             start_time: date,
           },
         });

@@ -1,10 +1,9 @@
 import React from "react";
-import Avatar from "react-avatar";
 import { toast } from "react-toastify";
 import useAppointments from "../../../../hooks/useAppointments";
 import { useCurrentUser } from "../../../../hooks/useCurrentUser";
 import { formatTimeString } from "../../../../common/functions/formatTime";
-import { DateParms } from "../../../../common/functions/formatString";
+import { DateParms, getFormattedName } from "../../../../common/functions/formatString";
 import {
   Container,
   DateDisplay,
@@ -19,20 +18,47 @@ import {
 } from "./styled";
 import { Link } from "react-router-dom";
 import { Empty, Button } from "antd";
+import {
+  SkeletonCircle,
+  SkeletonColumn,
+  SkeletonColumnEnd,
+  SkeletonContainer,
+  SkeletonDate,
+  SkeletonPhone,
+  SkeletonTextLong,
+  SkeletonTextShort,
+} from "../../../../components/Layout/Loader/Skeleton/appointmentTime";
 
 export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   const currentUser = useCurrentUser();
-  const { appointments, error } = useAppointments(
+  const { appointments, error, isLoading } = useAppointments(
     currentUser?.user_id || "",
     date || DateParms
   );
+
+  if (isLoading) {
+    return (
+      <SkeletonContainer>
+        <SkeletonColumn>
+          <SkeletonDate variant="text" />
+          <SkeletonTextShort variant="text" />
+          <SkeletonTextLong variant="text" />
+        </SkeletonColumn>
+        <SkeletonColumnEnd>
+          <SkeletonTextLong variant="text" />
+          <SkeletonCircle variant="rectangular" />
+          <SkeletonPhone variant="text" />
+        </SkeletonColumnEnd>
+      </SkeletonContainer>
+    );
+  }
 
   if (error) {
     toast.error(`Error: ${error}`);
     return null;
   }
 
-  if (appointments.length === 0 || !currentUser?.user_id) {
+  if (appointments.length === 0 && currentUser?.user_id) {
     return (
       <NoAppointmentsContainer>
         <Empty
@@ -62,22 +88,18 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
               </DateDisplay>
               <TimeLabel>Horário da consulta</TimeLabel>
               <TimeSlot>
-                {`${formatTimeString(start_time)} - ${formatTimeString(
+                {`${formatTimeString(start_time)} até ${formatTimeString(
                   end_time
                 )}`}
               </TimeSlot>
             </Hours>
             <Psy>
               <DetailsPsy>
-                <PsyName>{currentPsychologist.user_name}</PsyName>
+                <span>Psicólogo</span>
+                <PsyName>{getFormattedName(currentPsychologist.user_name)}</PsyName>
                 <PsyPhone>{currentPsychologist.user_phone}</PsyPhone>
               </DetailsPsy>
-              <Avatar
-                size="40"
-                round
-                alt="Foto de perfil"
-                name={currentPsychologist.user_name}
-              />
+
             </Psy>
           </Container>
         )

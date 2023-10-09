@@ -6,7 +6,6 @@ export const HomePatient = styled.div`
   gap: 30px;
   padding: 30px 0;
 
-
   @media (min-width: 450px) {
     gap: 40px;
     padding: 35px 0;
@@ -35,9 +34,11 @@ export const Column = styled.div`
     var(--bg-secundary-lighter),
     var(--bg-secundary-darker)
   );
+
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   justify-content: center;
-  align-items: center;
   padding: 30px 15px;
   min-height: 300px;
   border-radius: 8px;
@@ -99,5 +100,22 @@ export const Details = styled.div`
   @media (min-width: 1200px) {
     min-height: 540px;
     gap: 25px;
+  }
+`;
+
+export const Btn = styled.button`
+  padding: 10px;
+  width: 40%;
+  align-items: flex-start;
+  background-color: var(--bg-dark);;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  cursor: pointer;
+  a {
+    text-decoration: none;
+    
+    color: white;
   }
 `;

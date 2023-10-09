@@ -5,11 +5,13 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import jwtDecode from "jwt-decode";
 import { Payload } from "../../types/Payload";
+import { useNavigate } from "react-router-dom";
 
-export const AuthProvider = ({ children }: { children: JSX.Element }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<Payload | null>(null);
   const [loading, setLoading] = useState(true);
   const api = useApi();
+  const navigate = useNavigate();
 
   const handleApiResponse = (data: any) => {
     if (data && !data.status) {
@@ -51,14 +53,18 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         } else {
           clearUserLocalStorage();
           toast.error("Sua sessão expirou. Por favor, faça login novamente.");
+
+          navigate("/");
         }
       } catch (error) {
         clearUserLocalStorage();
         toast.error("Erro ao decodificar o token.");
+
+        navigate("/");
       }
     }
     setLoading(false);
-  }, []);
+  }, [navigate]);
 
   const signin = async (email: string, password: string) => {
     const data = await api.signin(email, password);

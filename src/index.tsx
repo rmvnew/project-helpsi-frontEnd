@@ -11,11 +11,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+  <BrowserRouter>
     <AuthProvider>
-      <BrowserRouter>
+      <div>
         <App />
         <ToastContainer />
-      </BrowserRouter>
+      </div>
     </AuthProvider>
-  </React.StrictMode>
+  </BrowserRouter>
+</React.StrictMode>
+
 );
