@@ -14,47 +14,42 @@ import icon5 from "../../../assets/icons/Forward _Arrow.svg";
 export const HomePsy = () => {
   return (
     <>
-      <Body>
+            <Body>
         <Header />
         <Container>
           <Main>
             <div className="corpo">
               <div className="container1 center-container1">
-              <div className="card card1">
-                <p className="p"></p>
-                <img className="icones" src={icon1} alt="google calender" />
-                <h1>Minha Agenda</h1>
-              </div>
+                <div className="card card1">
+                  <img className="icones" src={icon1} alt="google calender" />
+                  <h1 className="h1">Minha Agenda</h1>
+                </div>
 
-              <div className="card card2">
-                  <p></p>
+                <div className="card card2">
+                 
                   <img className="icones" src={icon2} alt="Helth checkup" />
-                  <h1>Meus Pacientes</h1>
-              </div>
+                  <h1 className="h1">Meus Pacientes</h1>
+                </div>
 
-              <div className="card card3">
-              <p></p>
-              <img className="icones" src={icon3} alt="Diário de Emoções" />
-              <h1>Diário de Emoções</h1>
-              </div>
-
+                <div className="card card3">
+                  
+                  <img className="icones" src={icon3} alt="Diário de Emoções" />
+                  <h1 className="h1">Diário de Emoções</h1>
+                </div>
               </div> {/* container1 */}
 
               <div className="container2">
                 <div className="card card4">
-                  <p></p>
+                  
                   <img className="icones" src={icon4} alt="Documentos" />
-                  <h1>Documentos</h1>
+                  <h1 className="h1">Documentos</h1>
                 </div>
 
-              <div className="card card5">
-                  <p></p>
+                <div className="card card5">
                   <img className="icones" src={icon5} alt="Encaminhamentos" />
                   <h1 className="h1">Encaminhamentos</h1>
-              </div>
-              
-              </div>  {/* container2 */}
-
+                </div>
+              </div> {/* container2 */}
             </div>
           </Main>
         </Container>

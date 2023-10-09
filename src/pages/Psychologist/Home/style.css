@@ -1,75 +1,120 @@
-
 .card {
-    border-radius: 15px;
-    background: #C7E9CF;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
-    margin-top: 20px;
-    margin-right: 10px;
-    width: 18vw;
-    height: 14rem;
-    text-align: center;
+  border-radius: 15px;
+  background: #C7E9CF;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 20px;
+  margin-right: 10px;
+  width: 100%;
+  max-width: 300px;
+  height: 14rem;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-top: 15px solid #594F4F;
 }
 
 .icones {
-  padding-top: 20px;
+  padding-top: 10px; /* Reduzindo o espaçamento entre o ícone e o texto */
 }
 
 .p {
-    width: 100%;
-    height: 20px;
-    border-radius: 5px;
-    background-color: #594F4F;
+  width: 100%;
+  height: 15px; /* Ajuste a altura conforme necessário */
+  border-radius: 5px;
+  background-color: #594F4F;
+  margin-bottom: 10px; /* Adicione algum espaçamento abaixo do ícone */
 }
 
 .h1 {
   color: #594F4F;
   text-align: center;
   font-family: Urbanist;
-  font-size: 30px;
+  font-size: 16px; /* Ajuste o tamanho do texto */
   font-style: normal;
-  line-height: 50px; /* 166.667% */
+  line-height: 20px; /* Ajuste conforme necessário */
   letter-spacing: -0.6px;
 }
 
 .corpo {
-    max-width: 2500px;
-    width: 80vw;
-    height: 87vh;
-    margin: 0 auto;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-    background-color: #ffff;
-    overflow: auto; /* Adicione overflow para adicionar uma barra de rolagem */
-  }
+  max-width: 100%; /* Ajuste para 100% para evitar a barra de rolagem horizontal */
+  width: 80vw;
+  height: 87vh;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #ffff;
+  overflow: auto; /* Adicione overflow para adicionar uma barra de rolagem vertical se necessário */
+}
 
-  .center-container1 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center; /* Centralize os cards horizontalmente dentro do container1 */
-    gap: 0px; /* Adicione um espaçamento de 10px entre os cards */
-    padding-top: 100px;
-    padding-left: 50px;
-  }
+.center-container1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Isso permite que os elementos se ajustem automaticamente ao tamanho da tela */
+  justify-content: center;
+  gap: 20px; /* Adicione espaçamento entre os cards */
+  padding-top: 100px;
+  padding-left: 20px; /* Ajuste o espaçamento conforme necessário */
+  padding-right: 20px; /* Ajuste o espaçamento conforme necessário */
+}
 
 .container1 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Define 3 colunas com larguras iguais */
+  grid-template-columns: repeat(3, 1fr);
   padding-top: 100px;
-  padding-left: 100px;
 }
 
 .container2 {
-    align-items: flex-start; /* Alinhe os containers no topo */
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Define 3 colunas com larguras iguais */
-    grid-gap: 20px; /* Espaçamento entre os elementos dentro de container2 */
-    justify-self: center; /* Centralize container2 horizontalmente dentro de .corpo */
-    justify-content: center;
-    text-align: center;
-    margin-top: 50px;
+  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  justify-self: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 50px;
 }
-
 
 .card4 {
   justify-self: end;
 }
+
+@media (max-width: 768px) {
+  .card {
+    height: 5rem; /* Ajuste a altura conforme necessário */
+    max-width: 5rem; /* Ajuste a largura máxima conforme necessário */
+    margin: 10px; /* Adicione alguma margem entre os cards */
+    padding: 10px; /* Adicione algum padding para manter o conteúdo dentro do card */
+    box-sizing: border-box; /* Certifique-se de que o padding não afete a largura total */
+  }
+
+  .center-container1 {
+    padding-left: 10px;
+    padding-right: 10px;
+    grid-gap: 10px; /* Adicione espaçamento menor entre os cards */
+  }
+}
+
+
+@media (max-width: 768px) {
+  .card {
+    height: 5rem;
+    max-width: 5rem;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .icones {
+    padding-top: 10px;
+    height: 60%;
+  }
+
+  .h1 {
+    font-size: 55%; /* Ajuste o tamanho do texto conforme necessário */
+    line-height: 1; /* Mantém a altura normal da linha */
+    height: auto; /* Ajuste para altura automática para o conteúdo */
+    margin-top: 5px; /* Adicione algum espaçamento acima do texto */
+  }
+}
+
+
