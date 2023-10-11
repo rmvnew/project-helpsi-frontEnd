@@ -20,7 +20,7 @@ import {
   DateParms,
   getCurrentFormattedDate,
   getNextDay,
-} from "../../../common/functions/formatString";
+} from "../../../common/functions/formatDate";
 import { formatTimeString } from "../../../common/functions/formatTime";
 import useSchedule from "../../../hooks/useSchedule";
 

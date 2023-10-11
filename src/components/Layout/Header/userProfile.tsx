@@ -112,8 +112,9 @@ export const UserProfileSection = () => {
         onClose={handleCloseUserMenu}
       >
         <MenuItem onClick={closeMenu}>Config</MenuItem>
-        <MenuItem onClick={handleLogout}>Sair</MenuItem>
         <MenuItem>Meu Perfil</MenuItem>
+        <MenuItem onClick={handleLogout}>Sair</MenuItem>
+     
       </Menu>
     </UserProfile>
   );

@@ -1,150 +1,225 @@
-import { Container } from "../../../components/Layout/Container/ContainerHome/styled";
-import { Body } from "../../../components/Layout/Container/style";
-import Header from "../../../components/Layout/Header/patient";
-import {
-  Button,
-  CalendarContainer,
-  CalendarWrapper,
-  Column,
-  DateLabel,
-  InfoContainer,
-  InfoSection,
-  InfoTitle,
-  InfoValue,
-  Input,
-  Label,
-  PsychologistInfo,
-  SchedulingContainer,
-  SchedulingForm,
-  Select,
-} from "./styled";
-import { getFormattedName } from "../../../common/functions/formatString";
-import { Loader } from "../../../components/Layout/Loader";
-import { DayWeek } from "../../../common/functions/formatTime";
-
 import { useEffect, useState } from "react";
 import { useSchedulingData } from "../../../hooks/useSchedulingData";
-import UnavailableTimeList from "../../../components/Patient/UnavailableList";
+import {
+  Button,
+  Column,
+  Input,
+  Label,
+  SchedulingContainer,
+  SchedulingForm,
+} from "./styled";
+import { getFormattedName } from "../../../common/functions/formatString";
+
+import {
+  Checkbox,
+  FormControlLabel,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemButton,
+} from "@mui/material";
+import { Body } from "../../../components/Layout/Container/style";
+import Header from "../../../components/Layout/Header/patient";
+import { Container } from "../../../components/Layout/Container/ContainerHome/styled";
+import SchedulingSkeleton from "../../../components/Layout/Loader/Skeleton/SchedulingSkeleton";
 
 export const Scheduling = () => {
   const {
-    loading,
     formData,
     psychologists,
     unavailableSlots,
     handleChange,
     handleSubmit,
+    loading,
   } = useSchedulingData();
 
-  const selectedPsy = psychologists.find(
-    (psych) => psych.user_id === formData.psychologist_id
+  const [step, setStep] = useState(1);
+  const [timeOfDay, setTimeOfDay] = useState<"morning" | "afternoon" | null>(
+    null
   );
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
-  const [showContent, setShowContent] = useState(false);
+  const getTimeSlots = () => {
+    if (timeOfDay === "morning") {
+      return Array.from(
+        { length: 5 },
+        (_, i) => `${(8 + i).toString().padStart(2, "0")}:00`
+      );
+    } else if (timeOfDay === "afternoon") {
+      return Array.from(
+        { length: 5 },
+        (_, i) => `${(13 + i).toString().padStart(2, "0")}:00`
+      );
+    } else {
+      return [];
+    }
+  };
+
+  const timeSlots = getTimeSlots();
+
+  const isTimeUnavailable = (time: string) => {
+    const combinedDateTimeCheck = `${formData.select_date}T${time}:00.000Z`;
+    const slot = unavailableSlots.find(
+      (slot) => slot.time === combinedDateTimeCheck
+    );
+    return slot?.isBooked || false;
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowContent(true);
-    }, 1800);
+      setShowSkeleton(false);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
 
+  if (loading || showSkeleton) {
+    return <SchedulingSkeleton />;
+  }
+
   return (
-    <>
-      <Body>
-        <Header />
-        <Container>
-          {!showContent ? (
-            <Loader />
-          ) : loading ? (
-            <Loader />
-          ) : (
-            <SchedulingContainer>
-              <Column>
-                <SchedulingForm onSubmit={handleSubmit}>
-                  <Label>
-                    Selecione o Psicólogo:
-                    <Select
-                      name="psychologist_id"
-                      value={formData.psychologist_id}
-                      onChange={handleChange}
+    <Body>
+      <Header />
+      <Container>
+        <SchedulingContainer>
+          <Column>
+            <SchedulingForm onSubmit={handleSubmit}>
+              {step === 1 && (
+                <>
+                  <Label>Determine o tipo de psicólogo que atende suas necessidades:</Label>
+                  {psychologists.map((psych) => (
+                    <div key={psych.user_id}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={psych.user_id === formData.psychologist_id} 
+                          onChange={handleChange} 
+                          name="psychologist_id"
+                          value={psych.user_id}
+                          />
+                        }
+                        label={`${getFormattedName( psych.user_name )} - ${psych.specialtys 
+                          .map((specialty) => getFormattedName(specialty.specialty_name))
+                          .join(", ")}`}
+                      />
+                    </div>
+                  ))}
+                  <Button type="button" onClick={() => setStep(2)}>
+                    Próximo
+                  </Button>
+                </>
+              )}
+
+              {step === 2 && (
+                <>
+                  <Label>Para qual dia você quer agendar?</Label>
+                  <Input
+                    type="date"
+                    name="select_date"
+                    value={formData.select_date}
+                    onChange={handleChange}
+                  />
+                  <div>
+                    <Button type="button" onClick={() => setStep(1)}>
+                      Voltar
+                    </Button>
+                    <Button
+                      style={{ marginLeft: "10px" }}
+                      type="button"
+                      onClick={() => setStep(3)}
                     >
-                      {psychologists.map((psych) => (
-                        <option key={psych.user_id} value={psych.user_id}>
-                          {psych.user_name}
-                        </option>
-                      ))}
-                    </Select>
-                  </Label>
+                      Próximo
+                    </Button>
+                  </div>
+                </>
+              )}
 
-                  <Label>
-                    Escolha a Data e Hora:
-                    <Input
-                      type="datetime-local"
-                      name="select_date_time"
-                      value={formData.select_date_time}
-                      onChange={handleChange}
-                    />
-                  </Label>
+              {step === 3 && (
+                <>
+                  <Label>Qual período do dia prefere?</Label>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={timeOfDay === "morning"}
+                        onChange={() => setTimeOfDay("morning")}
+                        name="timeOfDay"
+                        value="morning"
+                      />
+                    }
+                    label="Manhã"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={timeOfDay === "afternoon"}
+                        onChange={() => setTimeOfDay("afternoon")}
+                        name="timeOfDay"
+                        value="afternoon"
+                      />
+                    }
+                    label="Tarde"
+                  />
+                  <div>
+                    <Button type="button" onClick={() => setStep(2)}>
+                      Voltar
+                    </Button>
+                    <Button
+                      style={{ marginLeft: "10px" }}
+                      type="button"
+                      onClick={() => setStep(4)}
+                    >
+                      Próximo
+                    </Button>
+                  </div>
+                </>
+              )}
 
-                  <Button type="submit">Confirmar Agendamento</Button>
-                </SchedulingForm>
-              </Column>
-
-              <Column>
-                {selectedPsy && (
-                  <PsychologistInfo>
-                    <h3>Informações do Psicólogo</h3>
-
-                    <InfoContainer>
-                      <InfoSection>
-                        <InfoTitle>Nome:</InfoTitle>
-                        <InfoValue>
-                          {getFormattedName(selectedPsy.user_name)}
-                        </InfoValue>
-                      </InfoSection>
-
-                      <InfoSection>
-                        <InfoTitle>Especialidade:</InfoTitle>
-                        {selectedPsy.specialtys.map((specialty) => (
-                          <InfoValue key={specialty.specialty_id}>
-                            {getFormattedName(specialty.specialty_name)}
-                          </InfoValue>
-                        ))}
-                      </InfoSection>
-                      <InfoSection>
-                        <InfoTitle>Horário de funcionamento:</InfoTitle>
-                      
-                      </InfoSection>
-                      <InfoSection>
-                        <InfoValue>
-                          Segunda á Sexta , das 08:00 ás 17:00
-                        </InfoValue>
-                      </InfoSection>
-                    </InfoContainer>
-
-                    <CalendarContainer>
-                      <h3>Horários Indisponíveis:</h3>
-
-                      <DateLabel>
-                        {DayWeek(formData.select_date_time)}
-                      </DateLabel>
-
-                      <CalendarWrapper>
-                        <UnavailableTimeList
-                          slots={unavailableSlots}
-                          selectedDateTime={formData.select_date_time}
-                        />
-                      </CalendarWrapper>
-                    </CalendarContainer>
-                  </PsychologistInfo>
-                )}
-              </Column>
-            </SchedulingContainer>
-          )}
-        </Container>
-      </Body>
-    </>
+              {step === 4 && (
+                <>
+                  <Label>Horários disponíveis para a data selecionada:</Label>
+                  <List>
+                    {timeSlots
+                      .filter((time) => !isTimeUnavailable(time))
+                      .map(renderTimeSlot)}
+                  </List>
+                  <div>
+                    <Button type="button" onClick={() => setStep(3)}>
+                      Voltar
+                    </Button>
+                    <Button style={{ marginLeft: "10px" }} type="submit">
+                      Confirmar Agendamento
+                    </Button>
+                  </div>
+                </>
+              )}
+            </SchedulingForm>
+          </Column>
+        </SchedulingContainer>
+      </Container>
+    </Body>
   );
+
+  function renderTimeSlot(time: string) {
+    return (
+      <ListItem key={time}>
+        <ListItemButton>
+          <Checkbox
+            edge="start"
+            checked={formData.select_time === time}
+            tabIndex={-1}
+            disableRipple
+            onChange={() => {
+              const mockEvent = {
+                target: {
+                  name: "select_time",
+                  value: time,
+                } as any,
+              } as React.ChangeEvent<HTMLInputElement>;
+              handleChange(mockEvent);
+            }}
+          />
+          <ListItemText primary={time} />
+        </ListItemButton>
+      </ListItem>
+    );
+  }
 };

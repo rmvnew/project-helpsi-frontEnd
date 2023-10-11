@@ -4,10 +4,7 @@ import { useScheduling } from "./useScheduling";
 import { useState, useEffect } from "react";
 import { useCurrentUser } from "./useCurrentUser";
 import { useAllPsychologists } from "./useAllPsychologists";
-import {
-  formattedCurrentDate,
-  isValidScheduleTime,
-} from "../common/functions/formatTime";
+import { formattedCurrentDate, isValidScheduleTime } from "../common/functions/formatTime";
 
 export const useSchedulingData = () => {
   const { scheduleAppointment } = useScheduling();
@@ -15,15 +12,15 @@ export const useSchedulingData = () => {
   const psychologists = useAllPsychologists();
 
   const [loading, setLoading] = useState(false);
-  const [unavailableSlots, setUnavailableSlots] = useState([]);
+  const [unavailableSlots, setUnavailableSlots] = useState<any[]>([]);
+
   const [formData, setFormData] = useState(
     initialFormData(currentUser, psychologists)
   );
-
   useEffect(() => {
     updateFormDataWithCurrentUser(currentUser, psychologists, setFormData);
-    fetchUnavailableSlots(formData.select_date_time, setUnavailableSlots);
-  }, [currentUser, psychologists, formData.select_date_time]);
+    fetchUnavailableSlots(formData.select_date, setUnavailableSlots);
+  }, [currentUser, psychologists, formData.select_date]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -38,15 +35,29 @@ export const useSchedulingData = () => {
     event.preventDefault();
     setLoading(true);
 
-    if (!isValidScheduleTime(formData.select_date_time)) {
+    // Convertendo formData.select_date e formData.select_time para um objeto Date
+    const dateParts = formData.select_date.split("-");
+    const timeParts = formData.select_time.split(":");
+    const dateObject = new Date(
+      parseInt(dateParts[0], 10),
+      parseInt(dateParts[1], 10) - 1,
+      parseInt(dateParts[2], 10),
+      parseInt(timeParts[0], 10),
+      parseInt(timeParts[1], 10)
+    );
+
+    const combinedDateTime = dateObject.toISOString();
+
+    if (!isValidScheduleTime(combinedDateTime)) {
       toast.error(
-        "Por favor, selecione um horário entre 8h e 16h de segunda a sexta-feira."
+        "Por favor, selecione um horário entre 8h e 17h de segunda a sexta-feira."
       );
       setLoading(false);
       return;
     }
 
     try {
+      
       const response = await scheduleAppointment(formData);
       if (response && response.data && response.data.message) {
         if (response.data.status === "success" || !response.data.error) {
@@ -77,12 +88,14 @@ export const useSchedulingData = () => {
     unavailableSlots,
     handleChange,
     handleSubmit,
+    fetchUnavailableSlots,
   };
 };
 
 const initialFormData = (currentUser: any, psychologists: any) => ({
   duration: 1,
-  select_date_time: formattedCurrentDate,
+  select_date: formattedCurrentDate,
+  select_time: "00:00",
   patient_id: currentUser?.user_id || "",
   psychologist_id: psychologists?.[0]?.user_id || "",
   registrant_name: currentUser?.user_name || "",
@@ -106,14 +119,13 @@ const updateFormDataWithCurrentUser = (
 
 const fetchUnavailableSlots = async (
   selectedDate: string,
-  setUnavailableSlots: (value: any) => void
+  setUnavailableSlots: React.Dispatch<React.SetStateAction<any[]>>
 ) => {
   try {
     const response = await api.get("/scheduling/availability", {
-      params: {
-        date: selectedDate,
-      },
+      params: { date: selectedDate },
     });
+
     setUnavailableSlots(response.data);
   } catch (error) {
     toast.error("Failed to fetch unavailable slots");

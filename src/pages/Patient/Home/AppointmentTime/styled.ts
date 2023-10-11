@@ -15,7 +15,6 @@ export const Container = styled.div`
   align-items: center;
   width: 100%;
   padding: 15px;
- 
 `;
 
 export const Hours = styled.div`

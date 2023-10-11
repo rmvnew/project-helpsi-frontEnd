@@ -22,4 +22,8 @@ export const TextArea = styled.textarea`
   &:focus {
     outline: none;
   }
+
+  @media (max-width: 450px) {
+    height: 100px;
+  }
 `;

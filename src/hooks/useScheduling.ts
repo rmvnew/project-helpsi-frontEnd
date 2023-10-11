@@ -11,7 +11,17 @@ export const useScheduling = () => {
   const scheduleAppointment = async (scheduling: Scheduling) => {
     setLoading(true);
     try {
-      const response = await api.post("/scheduling", scheduling);
+      // Combine select_date e select_time em select_date_time
+      const select_date_time = `${scheduling.select_date}T${scheduling.select_time}`;
+      
+      // Crie o objeto a ser enviado para a API
+      const apiData = {
+        ...scheduling,
+        select_date_time,
+      };
+      
+      const response = await api.post("/scheduling", apiData);  // Use apiData ao invés de scheduling
+      
       navigate("/home");
       const message =
         response.data.message ?? "Agendamento realizado com sucesso!";
@@ -23,6 +33,7 @@ export const useScheduling = () => {
       handleError(error);
     }
   };
+
 
   const handleError = (error: any) => {
     const errorMessage =

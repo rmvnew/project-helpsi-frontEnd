@@ -2,17 +2,14 @@ import { useLogin } from "../../../hooks/useLogin";
 
 import {
   Logo,
-  google,
   Bonecos,
   FormGroup,
   Image,
- 
   LoginContainer,
   Link,
   Form,
-  Google,
   Span,
-  TextContainer
+  TextContainer,
 } from "../../../common/utils/imports/signin";
 import { LoginBackground } from "../../../components/Layout/Container/ContainerLogin/background";
 
@@ -45,26 +42,24 @@ export const SignIn = () => {
               placeholder="Digite sua senha"
               required
             />
-            <Link to="/login/recover-pass">Esqueceu sua senha</Link>
+            <Link to="/login/recover-pass">Esqueceu sua senha?</Link>
             <button type="submit">
               {isLoggingIn ? "Entrando..." : "Entrar"}
             </button>
           </Form>
-          ou
-          <Google>
-            <img src={google} alt="icone google" />
-            <span>Entrar com o Google</span>
-          </Google>
+
           <Span>
             Não tem uma conta?
-            <Link to="/signup"> Registre-se aqui</Link>
+            <Link to="/signup">
+              {" "}
+              <strong>Registre-se aqui</strong>
+            </Link>
           </Span>
         </FormGroup>
         <Image>
           <img src={Bonecos} alt="Psychologist" />
         </Image>
       </LoginContainer>
-    
     </LoginBackground>
   );
 };

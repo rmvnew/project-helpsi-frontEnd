@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import useAppointments from "../../../../hooks/useAppointments";
 import { useCurrentUser } from "../../../../hooks/useCurrentUser";
 import { formatTimeString } from "../../../../common/functions/formatTime";
-import { DateParms, getFormattedName } from "../../../../common/functions/formatString";
+import { DateParms } from "../../../../common/functions/formatDate";
 import {
   Container,
   DateDisplay,
@@ -16,8 +16,8 @@ import {
   TimeLabel,
   TimeSlot,
 } from "./styled";
-import { Link } from "react-router-dom";
-import { Empty, Button } from "antd";
+
+import { Empty } from "antd";
 import {
   SkeletonCircle,
   SkeletonColumn,
@@ -27,7 +27,8 @@ import {
   SkeletonPhone,
   SkeletonTextLong,
   SkeletonTextShort,
-} from "../../../../components/Layout/Loader/Skeleton/appointmentTime";
+} from "../../../../components/Layout/Loader/Skeleton/AppointmentTime";
+import { getFormattedName } from "../../../../common/functions/formatString";
 
 export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   const currentUser = useCurrentUser();
@@ -65,14 +66,6 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
           image={Empty.PRESENTED_IMAGE_SIMPLE}
           description="Nenhuma consulta marcada no momento"
         />
-        <Link to="/scheduling">
-          <Button
-            type="primary"
-            style={{ marginTop: "1rem", backgroundColor: "#9fdfae" }}
-          >
-            Agendar
-          </Button>
-        </Link>
       </NoAppointmentsContainer>
     );
   }
@@ -96,10 +89,11 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
             <Psy>
               <DetailsPsy>
                 <span>Psicólogo</span>
-                <PsyName>{getFormattedName(currentPsychologist.user_name)}</PsyName>
+                <PsyName>
+                  {getFormattedName(currentPsychologist.user_name)}
+                </PsyName>
                 <PsyPhone>{currentPsychologist.user_phone}</PsyPhone>
               </DetailsPsy>
-
             </Psy>
           </Container>
         )

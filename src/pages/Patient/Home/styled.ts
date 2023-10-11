@@ -1,5 +1,23 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: auto;
+
+  .title_appointments {
+    color: var(--bg-dark);
+    margin-top: 30px;
+    text-align: center;
+
+    @media (max-width: 500px) {
+      font-size: 1.2rem;
+      text-align: start;
+    }
+  }
+`;
+
 export const HomePatient = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -16,15 +34,21 @@ export const HomePatient = styled.div`
     padding: 40px 0;
   }
 
-  @media (min-width: 998px) {
-    gap: 60px;
+  @media (min-width: 850px) {
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
     padding: 60px 0;
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1024px) {
     gap: 70px;
-    grid-template-columns: repeat(2, 1fr);
+
     padding: 70px 0;
+  }
+
+  @media (min-width: 1200px) {
+    width: 90vw;
+    margin: auto;
   }
 `;
 
@@ -48,7 +72,7 @@ export const Column = styled.div`
   }
   @media (min-width: 768px) {
     padding: 50px 25px;
-    min-width: 500px;
+    min-width: 400px;
   }
 `;
 
@@ -60,6 +84,7 @@ export const Details = styled.div`
   justify-content: center;
   border-radius: 8px;
   background-color: white;
+  height: 200px;
   color: var(--bg-dark);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -71,7 +96,7 @@ export const Details = styled.div`
   }
 
   @media (min-width: 450px) {
-    min-height: 450px;
+    min-height: 300px;
     gap: 15px;
     h2 {
       font-size: 1.3rem;
@@ -80,7 +105,7 @@ export const Details = styled.div`
   }
 
   @media (min-width: 768px) {
-    min-height: 300px;
+    min-height: 500px;
     gap: 18px;
     h2 {
       font-size: 1.4rem;
@@ -89,7 +114,7 @@ export const Details = styled.div`
   }
 
   @media (min-width: 998px) {
-    min-height: 500px;
+    
     gap: 20px;
     h2 {
       font-size: 1.5rem;
@@ -97,8 +122,8 @@ export const Details = styled.div`
     }
   }
 
-  @media (min-width: 1200px) {
-    min-height: 540px;
+  @media (min-width: 1024px) {
+    min-height: 350px;
     gap: 25px;
   }
 `;
@@ -107,7 +132,7 @@ export const Btn = styled.button`
   padding: 10px;
   width: 40%;
   align-items: flex-start;
-  background-color: var(--bg-dark);;
+  background-color: var(--bg-dark);
   border: none;
   border-radius: 5px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -115,7 +140,7 @@ export const Btn = styled.button`
   cursor: pointer;
   a {
     text-decoration: none;
-    
+
     color: white;
   }
 `;

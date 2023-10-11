@@ -71,8 +71,7 @@ export const ResetPass = () => {
             </button>
           </Form>
           <Resend onClick={sendRecoveryCode}>
-            Não recebeu o código? Digite seu email e clique em
-            <strong> Reenviar</strong>
+            Não recebeu o código? <strong> Reenviar</strong>
           </Resend>
         </FormGroup>
         <Image>

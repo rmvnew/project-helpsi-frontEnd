@@ -51,7 +51,7 @@ export const FormGroup = styled.div`
   }
 
   a {
-    color: var(--bg-dark-lighter);
+    color: var(--bg-dark);
     font-family: sans-serif;
     text-decoration: none;
 

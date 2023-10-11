@@ -44,20 +44,17 @@ export const DayWeek = (inputDate: string): string => {
 };
 
 const currentDate = new Date();
-currentDate.setHours(0, 0, 0, 0);
 
 export const formattedCurrentDate = `${currentDate.getFullYear()}-${String(
   currentDate.getMonth() + 1
-).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}T${String(
-  currentDate.getHours()
-).padStart(2, "0")}:${String(currentDate.getMinutes()).padStart(2, "0")}`;
+).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
 
 export const isValidScheduleTime = (dateTime: string) => {
   const selectedDate = new Date(dateTime);
   const hour = selectedDate.getHours();
   const dayOfWeek = selectedDate.getDay();
 
-  if (hour < 8 || hour >= 16) {
+  if (hour < 8 || hour >= 18) {
     return false;
   }
 

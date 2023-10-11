@@ -14,6 +14,7 @@ export const SchedulingContainer = styled.div`
   align-items: center;
   padding: 3rem;
   transition: all 0.3s;
+  color: var(--bg-dark);
 
   @media (min-width: ${breakpoints.md}) {
     flex-direction: row;
@@ -24,31 +25,22 @@ export const SchedulingContainer = styled.div`
 
 export const Column = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1;
+  margin: auto 0;
+  height: 80vh;
   width: 95vw;
-  gap: 1rem;
   padding: 1rem;
   background: linear-gradient(
     145deg,
     var(--bg-secundary-lighter),
     var(--bg-secundary-darker)
   );
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 
   @media (min-width: ${breakpoints.md}) {
-    height: 70vh;
-    width: 40vw;
+    margin: auto;
+    width: 70vw;
   }
-`;
-export const CalendarContainer = styled.div`
-  border-radius: 15px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #cecece;
 `;
 
 export const SchedulingForm = styled.form`
@@ -57,7 +49,7 @@ export const SchedulingForm = styled.form`
   margin: auto;
   padding: 2rem;
   gap: 1.5rem;
-  width: 100%;
+  width: 60%;
   background: linear-gradient(
     145deg,
     var(--bg-body-lighter),
@@ -65,13 +57,17 @@ export const SchedulingForm = styled.form`
   );
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 998px) {
+    width: 100%;
+  }
 `;
 
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--bg-dark);
 `;
 
@@ -109,60 +105,13 @@ export const Button = styled.button`
   color: var(--bg-body);
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
 
   &:hover,
   &:focus {
     background: linear-gradient(145deg, var(--bg-hover-button), var(--bg-dark));
-    transform: scale(1.05);
+
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
-`;
-
-export const InfoContainer = styled.div`
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-export const PsychologistInfo = styled.div`
-  padding: 2rem;
-  background: linear-gradient(
-    145deg,
-    var(--bg-body-lighter),
-    var(--bg-body-darker)
-  );
-  border-radius: 14px;
-  color: var(--bg-dark);
-  max-height: calc(70vh - 4rem);
-  overflow-y: auto;
-
-  h3 {
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #71686824;
-    padding-bottom: 1rem;
-    color: var(--bg-dark);
-  }
-`;
-
-export const InfoSection = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const InfoTitle = styled.strong`
-  margin-right: 10px;
-`;
-
-export const InfoValue = styled.p`
-  margin: 0;
-  font-family: sans-serif;
-`;
-
-export const CalendarWrapper = styled.div`
-  max-width: 500px;
-  width: 100%;
-  overflow-x: auto;
 `;
 
 export const UnavailableList = styled.ul`
@@ -172,11 +121,6 @@ export const UnavailableList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`;
-
-export const DateLabel = styled.div`
-  font-family: sans-serif;
-  color: var(--bg-dark);
 `;
 
 export const TimeLabel = styled.div`
