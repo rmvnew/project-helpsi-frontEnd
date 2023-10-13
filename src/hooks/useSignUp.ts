@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { SignUpInterface } from "../interface/signup.interface";
 import { api } from "./useApi";
 
-export const useSignUpLogic = () => {
+export const useSignUp = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<SignUpInterface>({
@@ -13,6 +13,19 @@ export const useSignUpLogic = () => {
     user_password: "",
     user_password_confirmation: "",
     user_date_of_birth: "",
+    user_phone: "",
+    psychologist_id: '',
+    user_genre: "",
+    user_rg: "",
+    user_cpf: "",
+    address: {
+      address_zipcode: "",
+      address_state: "",
+      address_city: "",
+      address_district: "",
+      address_street: "",
+      address_home_number: "",
+    },
   });
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);

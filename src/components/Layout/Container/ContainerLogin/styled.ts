@@ -6,8 +6,7 @@ export const LoginContainer = styled.div`
     var(--bg-primary-lighter),
     var(--bg-primary-darker)
   );
-  height: 600px;
-  width: 90vw;
+  width: 95vw;
   color: var(--bg-dark);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
@@ -39,7 +38,7 @@ export const TextContainer = styled.div`
 
 export const FormGroup = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 600px;
   display: flex;
   padding: 20px 0;
   justify-content: space-between;
@@ -54,6 +53,7 @@ export const FormGroup = styled.div`
     color: var(--bg-dark);
     font-family: sans-serif;
     text-decoration: none;
+    margin-top: 20px;
 
     &:hover {
       color: var(--bg-dark-darker);
