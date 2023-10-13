@@ -107,4 +107,5 @@ export const StepTitle = styled.h2`
   margin-bottom: 20px;
   text-align: center;
   width: 90%;
+  font-family: sans-serif;
 `;

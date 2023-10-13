@@ -91,6 +91,7 @@ export const SignUp = () => {
           <Form onSubmit={handleSubmit}>
             {step === 1 && (
               <>
+                <StepTitle>Preencha seus dados de acesso:</StepTitle>
                 <input
                   type="text"
                   placeholder="Nome completo"
@@ -137,6 +138,7 @@ export const SignUp = () => {
             )}
             {step === 2 && (
               <>
+                <StepTitle>Preencha seus dados pessoais:</StepTitle>
                 <input
                   type="text"
                   placeholder="Nascimento (DD/MM/YYYY)"
@@ -206,6 +208,7 @@ export const SignUp = () => {
 
             {step === 3 && (
               <>
+                <StepTitle>Preencha seu endereço:</StepTitle>
                 <input
                   type="text"
                   placeholder="CEP"
