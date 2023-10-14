@@ -3,24 +3,23 @@ import { api } from "./useApi";
 import { useScheduling } from "./useScheduling";
 import { useState, useEffect } from "react";
 import { useCurrentUser } from "./useCurrentUser";
-import { useAllPsychologists } from "./useAllPsychologists";
-import { formattedCurrentDate, isValidScheduleTime } from "../common/functions/formatTime";
+import {
+  formattedCurrentDate,
+  isValidScheduleTime,
+} from "../common/functions/formatTime";
 
 export const useSchedulingData = () => {
   const { scheduleAppointment } = useScheduling();
   const currentUser = useCurrentUser();
-  const psychologists = useAllPsychologists();
 
   const [loading, setLoading] = useState(false);
   const [unavailableSlots, setUnavailableSlots] = useState<any[]>([]);
+  const [formData, setFormData] = useState(initialFormData(currentUser));
 
-  const [formData, setFormData] = useState(
-    initialFormData(currentUser, psychologists)
-  );
   useEffect(() => {
-    updateFormDataWithCurrentUser(currentUser, psychologists, setFormData);
+    updateFormDataWithCurrentUser(currentUser, setFormData);
     fetchUnavailableSlots(formData.select_date, setUnavailableSlots);
-  }, [currentUser, psychologists, formData.select_date]);
+  }, [currentUser, formData.select_date]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -57,7 +56,6 @@ export const useSchedulingData = () => {
     }
 
     try {
-      
       const response = await scheduleAppointment(formData);
       if (response && response.data && response.data.message) {
         if (response.data.status === "success" || !response.data.error) {
@@ -84,7 +82,6 @@ export const useSchedulingData = () => {
   return {
     loading,
     formData,
-    psychologists,
     unavailableSlots,
     handleChange,
     handleSubmit,
@@ -92,18 +89,17 @@ export const useSchedulingData = () => {
   };
 };
 
-const initialFormData = (currentUser: any, psychologists: any) => ({
+const initialFormData = (currentUser: any) => ({
   duration: 1,
   select_date: formattedCurrentDate,
   select_time: "00:00",
   patient_id: currentUser?.user_id || "",
-  psychologist_id: psychologists?.[0]?.user_id || "",
+  psychologist_id: currentUser?.basicPsychologist?.user_id || "",
   registrant_name: currentUser?.user_name || "",
 });
 
 const updateFormDataWithCurrentUser = (
   currentUser: any,
-  psychologists: any,
   setFormData: (value: any) => void
 ) => {
   if (currentUser) {
@@ -111,8 +107,7 @@ const updateFormDataWithCurrentUser = (
       ...prev,
       patient_id: currentUser.user_id,
       registrant_name: currentUser.user_name,
-      psychologist_id:
-        prev.psychologist_id || psychologists?.[0]?.user_id || "",
+      psychologist_id: currentUser?.basicPsychologist?.user_id || "",
     }));
   }
 };

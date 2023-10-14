@@ -24,14 +24,8 @@ import { Container } from "../../../components/Layout/Container/ContainerHome/st
 import SchedulingSkeleton from "../../../components/Layout/Loader/Skeleton/SchedulingSkeleton";
 
 export const Scheduling = () => {
-  const {
-    formData,
-    psychologists,
-    unavailableSlots,
-    handleChange,
-    handleSubmit,
-    loading,
-  } = useSchedulingData();
+  const { formData, unavailableSlots, handleChange, handleSubmit, loading } =
+    useSchedulingData();
 
   const [step, setStep] = useState(1);
   const [timeOfDay, setTimeOfDay] = useState<"morning" | "afternoon" | null>(
@@ -86,31 +80,6 @@ export const Scheduling = () => {
             <SchedulingForm onSubmit={handleSubmit}>
               {step === 1 && (
                 <>
-                  <Label>Determine o tipo de psicólogo que atende suas necessidades:</Label>
-                  {psychologists.map((psych) => (
-                    <div key={psych.user_id}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox checked={psych.user_id === formData.psychologist_id} 
-                          onChange={handleChange} 
-                          name="psychologist_id"
-                          value={psych.user_id}
-                          />
-                        }
-                        label={`${getFormattedName( psych.user_name )} - ${psych.specialtys 
-                          .map((specialty) => getFormattedName(specialty.specialty_name))
-                          .join(", ")}`}
-                      />
-                    </div>
-                  ))}
-                  <Button type="button" onClick={() => setStep(2)}>
-                    Próximo
-                  </Button>
-                </>
-              )}
-
-              {step === 2 && (
-                <>
                   <Label>Para qual dia você quer agendar?</Label>
                   <Input
                     type="date"
@@ -125,7 +94,7 @@ export const Scheduling = () => {
                     <Button
                       style={{ marginLeft: "10px" }}
                       type="button"
-                      onClick={() => setStep(3)}
+                      onClick={() => setStep(2)}
                     >
                       Próximo
                     </Button>
@@ -133,7 +102,7 @@ export const Scheduling = () => {
                 </>
               )}
 
-              {step === 3 && (
+              {step === 2 && (
                 <>
                   <Label>Qual período do dia prefere?</Label>
                   <FormControlLabel
@@ -159,13 +128,13 @@ export const Scheduling = () => {
                     label="Tarde"
                   />
                   <div>
-                    <Button type="button" onClick={() => setStep(2)}>
+                    <Button type="button" onClick={() => setStep(1)}>
                       Voltar
                     </Button>
                     <Button
                       style={{ marginLeft: "10px" }}
                       type="button"
-                      onClick={() => setStep(4)}
+                      onClick={() => setStep(3)}
                     >
                       Próximo
                     </Button>
@@ -173,7 +142,7 @@ export const Scheduling = () => {
                 </>
               )}
 
-              {step === 4 && (
+              {step === 3 && (
                 <>
                   <Label>Horários disponíveis para a data selecionada:</Label>
                   <List>
@@ -182,7 +151,7 @@ export const Scheduling = () => {
                       .map(renderTimeSlot)}
                   </List>
                   <div>
-                    <Button type="button" onClick={() => setStep(3)}>
+                    <Button type="button" onClick={() => setStep(2)}>
                       Voltar
                     </Button>
                     <Button style={{ marginLeft: "10px" }} type="submit">
