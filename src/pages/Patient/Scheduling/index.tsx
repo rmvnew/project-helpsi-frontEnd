@@ -8,7 +8,7 @@ import {
   SchedulingContainer,
   SchedulingForm,
 } from "./styled";
-import { getFormattedName } from "../../../common/functions/formatString";
+
 
 import {
   Checkbox,
