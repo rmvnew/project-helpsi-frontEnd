@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "./useApi";
 import { toast } from "react-toastify";
-import { Psychologist } from "../types/Psychologist";
+import { Psychologist } from "../interface/psychologist.interface";
 
 export const useAllPsychologists = () => {
   const [psychologists, setPsychologists] = useState<Psychologist[]>([]);

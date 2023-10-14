@@ -1,3 +1,5 @@
+import { Address } from "./address.interface";
+
 export interface SignUpInterface {
   user_name: string;
   user_email: string;
@@ -10,13 +12,4 @@ export interface SignUpInterface {
   user_rg: string;
   user_cpf: string;
   address: Address;
-}
-
-interface Address {
-  address_zipcode: string;
-  address_state: string;
-  address_city: string;
-  address_district: string;
-  address_street: string;
-  address_home_number: string;
 }

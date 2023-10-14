@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "./useApi";
-import { AppointmentData } from "../types/Appointment";
 import { getNextDay } from "../common/functions/formatDate";
+import { AppointmentData } from "../interface/appointment.interface";
 
 const useSchedule = (userId: string, date: string, nextDay: string) => {
   const [appointments, setAppointments] = useState<AppointmentData[]>([]);

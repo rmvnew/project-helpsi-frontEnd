@@ -21,9 +21,9 @@ import { LoginBackground } from "../../../components/Layout/Container/ContainerL
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useAllPsychologists } from "../../../hooks/useAllPsychologists";
-import { Psychologist } from "../../../types/Psychologist";
 import { getFormattedName } from "../../../common/functions/formatString";
 import { allFieldsFilled } from "../../../common/functions/validateSignUp";
+import { Psychologist } from "../../../interface/psychologist.interface";
 
 export const SignUp = () => {
   const { formData, setFormData, setIsSubmitting } = useSignUp();

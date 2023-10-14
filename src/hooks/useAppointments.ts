@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { api } from "./useApi";
-import { AppointmentData } from "../types/Appointment";
+import { AppointmentData } from "../interface/appointment.interface";
 
 const useAppointments = (userId: string, date: string) => {
   const [appointments, setAppointments] = useState<AppointmentData[]>([]);

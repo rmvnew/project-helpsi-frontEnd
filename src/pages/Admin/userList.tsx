@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { User } from "../../types/User";
 import { UserItem } from "./userItem";
+import { User } from "../../interface/user.interface";
 
 type UserListProps = {
   users: User[];

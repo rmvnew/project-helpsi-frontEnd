@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
 import { api } from "./useApi";
-import { User } from "../types/User";
+import { User } from "../interface/user.interface";
+
+
 
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);

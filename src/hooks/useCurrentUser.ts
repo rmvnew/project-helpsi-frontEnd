@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { api } from "./useApi";
 import { toast } from "react-toastify";
-import { User } from "../types/User";
+import { User } from "../interface/user.interface";
+
 
 export const useCurrentUser = () => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -12,6 +13,7 @@ export const useCurrentUser = () => {
       try {
         const response = await api.get("user/me");
         setCurrentUser(response.data);
+        console.log(response.data)
       } catch (error) {
         toast.error("Erro ao buscar o usuário logado.");
         console.error("Erro ao buscar o usuário logado:", error);

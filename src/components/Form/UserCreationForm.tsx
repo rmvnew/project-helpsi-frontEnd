@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { FormWrapper, StyledInput, StyledSelect, SubmitButton } from "./styled";
 import { toast } from "react-toastify";
 import { validateDate } from "../../common/utils/validade";
-import { UserFormProps } from "../../interface/user.form.interface";
 import { useTranslation } from "react-i18next";
 import '../../i18next/ProfileList';
+import { UserFormProps } from "../../types/UserForm";
 
 
 const UserCreationForm: React.FC<UserFormProps> = ({

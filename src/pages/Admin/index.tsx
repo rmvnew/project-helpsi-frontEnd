@@ -11,7 +11,7 @@ import Header from "../../components/Layout/Header/psy";
 import UserCreationForm from "../../components/Form/UserCreationForm";
 import UserEditForm from "../../components/Form/UserEditForm";
 
-import { useDashboardLogic } from "./dashboardLogic";
+import { useAdmin } from "../../hooks/useAdmin";
 import {
   Container,
   Description,
@@ -32,7 +32,7 @@ export const Dashboard: React.FC = () => {
     editingUser,
     handleSubmit,
     initiateEdit,
-  } = useDashboardLogic();
+  } = useAdmin();
 
   useEffect(() => {
     if (editingUser) {

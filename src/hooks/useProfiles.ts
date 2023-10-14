@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { api } from "./useApi";
-import { Profile } from "../types/Profile";
+import { Profile } from "../interface/profile.interface";
 
 export const useProfiles = () => {
   const [profiles, setProfiles] = useState<Profile[]>([]);

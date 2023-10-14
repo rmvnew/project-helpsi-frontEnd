@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useProfiles } from "../../hooks/useProfiles";
-import { useUsers } from "../../hooks/useUsers";
-import { User } from "../../types/User";
-import { api } from "../../hooks/useApi";
-import { toast } from "react-toastify";
+import { useProfiles } from "./useProfiles";
+import { useUsers } from "./useUsers";
 
-export const useDashboardLogic = () => {
+import { api } from "./useApi";
+import { toast } from "react-toastify";
+import { User } from "../interface/user.interface";
+
+export const useAdmin = () => {
   const { users, getUsers, loading } = useUsers();
   const { profiles, getProfiles } = useProfiles();
 
