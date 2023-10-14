@@ -26,7 +26,7 @@ import { allFieldsFilled } from "../../../common/functions/validateSignUp";
 import { Psychologist } from "../../../interface/psychologist.interface";
 
 export const SignUp = () => {
-  const { formData, setFormData, setIsSubmitting } = useSignUp();
+  const { formData, setFormData, setIsSubmitting, isSubmitting } = useSignUp();
   const psychologists: Psychologist[] = useAllPsychologists();
 
   const [step, setStep] = useState(1);
@@ -313,7 +313,9 @@ export const SignUp = () => {
                   <button type="button" onClick={() => setStep(3)}>
                     Voltar
                   </button>
-                  <button type="submit">Finalizar cadastro</button>
+                  <button type="submit">
+                    {isSubmitting ? "Cadastrando..." : "Finalizar cadastro"}
+                  </button>
                 </ButtonContainer>
               </>
             )}
