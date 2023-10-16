@@ -11,7 +11,7 @@ import useResetPassword from "../../../../hooks/useResetPass";
 import { Form } from "../RecoverPass/styled";
 import { Resend } from "./styled";
 
-import { InputAdornment, IconButton } from "@mui/material";
+import { InputAdornment } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
