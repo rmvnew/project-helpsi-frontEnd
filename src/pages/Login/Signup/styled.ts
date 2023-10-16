@@ -1,35 +1,31 @@
-import styled from "styled-components";
+import { styled } from "@mui/system";
+import { TextField, Select, Button } from "@mui/material";
 
-export const Form = styled.form`
+export const Form = styled("form")`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap: 5px;
+  gap: 10px;
+`;
 
-  input {
+export const StyledInput = styled(TextField)`
+  && {
     font-family: sans-serif;
     font-size: 16px;
     width: 80%;
-    padding: 13px;
-    border: none;
     border-radius: 5px;
   }
+`;
 
-  select {
+export const StyledSelect = styled(Select)`
+  && {
     font-family: sans-serif;
-    color: var(--bg-dark);
-    font-size: 16px;
     width: 80%;
-    padding: 13px;
-    border: none;
     border-radius: 5px;
-    background-color: #f8f8f8;
-    appearance: none;
-    position: relative;
     transition: background-color 0.3s;
 
-    &::after {
+    .MuiSelect-icon {
       font-size: 10px;
       position: absolute;
       right: 15px;
@@ -37,37 +33,21 @@ export const Form = styled.form`
       transform: translateY(-50%);
     }
   }
+`;
 
-  option {
-    padding: 10px;
-    background-color: white;
-    font-family: sans-serif;
-    font-size: 16px;
-  }
-
-  button {
+export const StyledButton = styled(Button)`
+  && {
     width: 80%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-size: 10px;
     padding: 10px;
     border-radius: 5px;
     border: none;
     background-color: var(--bg-dark);
     color: white;
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-  p {
-    margin-top: 10px;
-    font-size: 0.8rem;
-    font-family: sans-serif;
-    width: 80%;
-    text-align: center;
   }
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   width: 80%;
@@ -75,7 +55,7 @@ export const ButtonContainer = styled.div`
   gap: 10px;
 `;
 
-export const PsychologistContainer = styled.div`
+export const PsychologistContainer = styled("div")`
   background-color: #f9f9f9;
   width: 80%;
   padding: 12px 20px;
@@ -87,22 +67,22 @@ export const PsychologistContainer = styled.div`
     background-color: #e9e9e9;
   }
 
-  .MuiFormControlLabel-label {
+  & .psychologist-label .MuiTypography-root {
     font-family: sans-serif;
     font-size: 16px;
     font-weight: 500;
   }
 
-  .MuiCheckbox-root {
+  & .psychologist-checkbox.Mui-checked {
     color: var(--bg-dark);
   }
 
-  .Mui-checked {
+  & .psychologist-checkbox {
     color: var(--bg-dark);
   }
 `;
 
-export const StepTitle = styled.h2`
+export const StepTitle = styled("h2")`
   font-size: 18px;
   margin-bottom: 20px;
   text-align: center;

@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { ResetPass } from "../pages/Login/Recover/ResetPass";
 import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
 import { SignIn } from "../pages/Login/Signin";
-import { SignUp } from "../pages/Login/Signup";
+import  SignUp  from "../pages/Login/Signup";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
 import { Home } from "../pages/Patient/Home";
 import { HomePsy } from "../pages/Psychologist/Home";

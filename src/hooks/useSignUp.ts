@@ -3,6 +3,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { SignUpInterface } from "../interface/signup.interface";
 import { api } from "./useApi";
+import { AxiosError } from "axios";
+import { ErrorResponse } from "../interface/error.interface";
 
 export const useSignUp = () => {
   const navigate = useNavigate();
@@ -14,8 +16,8 @@ export const useSignUp = () => {
     user_password_confirmation: "",
     user_date_of_birth: "",
     user_phone: "",
-    psychologist_id: '',
-    user_genre: "",
+    psychologist_id: "",
+    user_genre: "MALE",
     user_rg: "",
     user_cpf: "",
     address: {
@@ -30,23 +32,36 @@ export const useSignUp = () => {
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const signUpUser = useCallback(() => {
-    api
-      .post(`/user/patient/public`, formData)
-      .then((response) => {
-        const message =
-          response.data.message ?? "Cadastro realizado com sucesso";
-        toast.success(message);
-        navigate("/");
-      })
-      .catch((error) => {
-        const message = error.response.data.message ?? "Erro ao cadastrar";
-        toast.error(message);
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+  const signUpUser = useCallback(async () => {
+    setIsSubmitting(true);
+    try {
+      const response = await api.post(`/user/patient/public`, formData);
+      const message = response.data.message ?? "Cadastro realizado com sucesso";
+      toast.success(message);
+      navigate("/");
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   }, [formData, navigate]);
+
+  const handleError = (error: unknown) => {
+    const axiosErr = error as AxiosError<ErrorResponse>;
+
+    let errorMessage = "Erro ao cadastrar";
+    if (
+      axiosErr?.response?.data?.message &&
+      Array.isArray(axiosErr.response.data.message)
+    ) {
+      errorMessage = axiosErr.response.data.message.join("\n");
+    } else if (typeof axiosErr?.response?.data?.message === "string") {
+      errorMessage = axiosErr.response.data.message;
+    }
+
+    console.error("Detalhes do erro:", axiosErr.response || error);
+    toast.error(errorMessage);
+  };
 
   useEffect(() => {
     if (!isSubmitting) return;

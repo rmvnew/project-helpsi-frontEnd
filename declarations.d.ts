@@ -1,4 +1,4 @@
-
+declare module "react-input-mask";
 
 declare module "*.jpg" {
   const content: string;
@@ -18,5 +18,3 @@ declare module "*.svg" {
   const src: string;
   export default src;
 }
-
-

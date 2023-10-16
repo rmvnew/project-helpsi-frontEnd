@@ -1,16 +1,29 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { useSignUp } from "../../../hooks/useSignUp";
+import InputMask from "react-input-mask";
+import {
+  MenuItem,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+  SelectChangeEvent,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 import {
   ButtonContainer,
   Form,
   PsychologistContainer,
   StepTitle,
+  StyledButton,
+  StyledInput,
+  StyledSelect,
 } from "./styled";
 
 import Logo from "../../../assets/img/logo.svg";
 import Bonecos from "../../../assets/img/Psychologist.svg";
-
 import {
   FormGroup,
   Image,
@@ -18,23 +31,76 @@ import {
   TextContainer,
 } from "../../../components/Layout/Container/ContainerLogin/styled";
 import { LoginBackground } from "../../../components/Layout/Container/ContainerLogin/background";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import { useSignUp } from "../../../hooks/useSignUp";
 import { useAllPsychologists } from "../../../hooks/useAllPsychologists";
-import { getFormattedName } from "../../../common/functions/formatString";
-import { allFieldsFilled } from "../../../common/functions/validateSignUp";
 import { Psychologist } from "../../../interface/psychologist.interface";
+import { allFieldsFilled } from "../../../common/functions/validateSignUp";
+import {
+  isAtLeastFourYearsOld,
+  isValidCPF,
+  isValidEmail,
+} from "../../../common/utils/validade";
+import { getFormattedName } from "../../../common/functions/formatString";
 
-export const SignUp = () => {
+const SignUp = () => {
   const { formData, setFormData, setIsSubmitting, isSubmitting } = useSignUp();
   const psychologists: Psychologist[] = useAllPsychologists();
-
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [rgError, setRgError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
   const [step, setStep] = useState(1);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+
+    if (name === "user_password") {
+      if (value.length < 5 || value.length > 15) {
+        setPasswordError("A senha deve ter entre 5 e 15 caracteres.");
+      } else {
+        setPasswordError(null);
+      }
+    }
+
+    if (name === "user_rg") {
+      if (value.length < 5 || value.length > 11) {
+        setRgError("O RG deve ter entre 5 e 11 caracteres.");
+      } else {
+        setRgError(null);
+      }
+    }
+    if (name === "user_phone") {
+      const isValid = /^(?!([0-9])\1+$)[1-9]{2}9?[0-9]{8}$/.test(value);
+      if (!isValid) {
+        setPhoneError("Número de telefone inválido!");
+      } else {
+        setPhoneError(null);
+      }
+    }
+
+    setFormData((prev) => {
+      const keys = name.split(".");
+      if (keys.length > 1) {
+        return {
+          ...prev,
+          [keys[0]]: {
+            ...(prev as any)[keys[0]],
+            [keys[1]]: value,
+          },
+        };
+      } else {
+        return {
+          ...prev,
+          [name]: value,
+        };
+      }
+    });
+  };
+
+  const handleChangeForSelect = (e: SelectChangeEvent<unknown>) => {
+    const name = e.target.name ?? "";
+    const value = e.target.value;
 
     setFormData((prev) => {
       const keys = name.split(".");
@@ -79,6 +145,22 @@ export const SignUp = () => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] =
+    useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleTogglePasswordConfirmation = () => {
+    setShowPasswordConfirmation(!showPasswordConfirmation);
+  };
+
+  const passwordsMatch = () => {
+    return formData.user_password === formData.user_password_confirmation;
+  };
+
   return (
     <LoginBackground>
       <LoginContainer>
@@ -91,41 +173,82 @@ export const SignUp = () => {
           <Form onSubmit={handleSubmit}>
             {step === 1 && (
               <>
-                <StepTitle>Preencha seus dados de acesso:</StepTitle>
-                <input
-                  type="text"
-                  placeholder="Nome completo"
-                  required
+                <Typography variant="h6">
+                  Preencha seus dados de acesso:
+                </Typography>
+                <StyledInput
+                  label="Nome completo"
                   name="user_name"
                   value={formData.user_name}
                   onChange={handleChange}
                 />
-                <input
+                <StyledInput
+                  label="Email"
                   type="email"
-                  placeholder="Digite seu email"
-                  required
                   name="user_email"
                   value={formData.user_email}
                   onChange={handleChange}
+                  error={
+                    !isValidEmail(formData.user_email) &&
+                    formData.user_email !== ""
+                  }
+                  helperText={
+                    !isValidEmail(formData.user_email) &&
+                    formData.user_email !== ""
+                      ? "Por favor, insira um email válido"
+                      : ""
+                  }
                 />
-                <input
-                  type="password"
-                  placeholder="Crie uma senha"
-                  required
+                <StyledInput
+                  label="Senha"
+                  type={showPassword ? "text" : "password"}
                   name="user_password"
                   value={formData.user_password}
                   onChange={handleChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleTogglePassword} edge="end">
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  variant="outlined"
+                  error={!!passwordError}
+                  helperText={passwordError}
                 />
-                <input
-                  type="password"
-                  placeholder="Confirme a senha"
-                  required
+
+                <StyledInput
+                  label="Confirme a senha"
+                  type={showPasswordConfirmation ? "text" : "password"}
                   name="user_password_confirmation"
                   value={formData.user_password_confirmation}
                   onChange={handleChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handleTogglePasswordConfirmation}
+                          edge="end"
+                        >
+                          {showPasswordConfirmation ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  error={!passwordsMatch()}
+                  helperText={!passwordsMatch() && "Senhas não coincidem"}
+                  variant="outlined"
                 />
-                <button
-                  type="button"
+
+                <StyledButton
+                  variant="contained"
+                  style={{ marginTop: "1rem" }}
                   onClick={() => {
                     if (allFieldsFilled(formData, step)) {
                       setStep(2);
@@ -133,67 +256,94 @@ export const SignUp = () => {
                   }}
                 >
                   Próximo
-                </button>
+                </StyledButton>
               </>
             )}
             {step === 2 && (
               <>
-                <StepTitle>Preencha seus dados pessoais:</StepTitle>
-                <input
-                  type="text"
-                  placeholder="Nascimento (DD/MM/YYYY)"
-                  required
-                  name="user_date_of_birth"
+                <Typography variant="h6">
+                  Preencha seus dados pessoais:
+                </Typography>
+                <InputMask
+                  mask="99/99/9999"
                   value={formData.user_date_of_birth}
                   onChange={handleChange}
-                />
-
-                <select
+                >
+                  {(inputProps: any) => (
+                    <StyledInput
+                      {...inputProps}
+                      label="Nascimento"
+                      name="user_date_of_birth"
+                      error={
+                        !isAtLeastFourYearsOld(formData.user_date_of_birth) &&
+                        formData.user_date_of_birth !== ""
+                      }
+                      helperText={
+                        !isAtLeastFourYearsOld(formData.user_date_of_birth) &&
+                        formData.user_date_of_birth !== ""
+                          ? "Por favor, insira uma data válida. A idade deve estar entre 4 e 100 anos."
+                          : ""
+                      }
+                    />
+                  )}
+                </InputMask>
+                <StyledSelect
+                  label="Gênero"
                   name="user_genre"
                   value={formData.user_genre}
-                  onChange={handleChange}
-                  required
+                  onChange={handleChangeForSelect}
                 >
-                  <option value="" disabled>
-                    Selecione seu gênero
-                  </option>
-                  <option value="MALE">Masculino</option>
-                  <option value="FEMALE">Feminino</option>
-                </select>
-
-                <input
+                  <MenuItem value="MALE">Masculino</MenuItem>
+                  <MenuItem value="FEMALE">Feminino</MenuItem>
+                </StyledSelect>
+                <StyledInput
+                  label="Número de telefone"
                   type="tel"
-                  placeholder="Número de telefone"
-                  required
                   name="user_phone"
                   value={formData.user_phone}
                   onChange={handleChange}
+                  error={!!phoneError}
+                  helperText={phoneError}
                 />
 
-                <input
-                  type="text"
-                  placeholder="RG"
-                  required
+                <StyledInput
+                  label="RG"
                   name="user_rg"
                   value={formData.user_rg}
                   onChange={handleChange}
+                  error={!!rgError}
+                  helperText={rgError}
                 />
-
-                <input
-                  type="text"
-                  placeholder="CPF"
-                  required
-                  name="user_cpf"
+                <InputMask
+                  mask="999.999.999-99"
                   value={formData.user_cpf}
                   onChange={handleChange}
-                />
-
+                >
+                  {(inputProps: any) => (
+                    <StyledInput
+                      {...inputProps}
+                      label="CPF"
+                      name="user_cpf"
+                      error={
+                        !isValidCPF(formData.user_cpf) &&
+                        formData.user_cpf.replace(/[\s.-]*/gim, "").length ===
+                          11
+                      }
+                      helperText={
+                        !isValidCPF(formData.user_cpf) &&
+                        formData.user_cpf.replace(/[\s.-]*/gim, "").length ===
+                          11
+                          ? "CPF inválido"
+                          : ""
+                      }
+                    />
+                  )}
+                </InputMask>
                 <ButtonContainer>
-                  <button type="button" onClick={() => setStep(1)}>
-                    Voltar
-                  </button>
-                  <button
-                    type="button"
+                  <StyledButton onClick={() => setStep(1)}>Voltar</StyledButton>
+                  <StyledButton
+                    variant="contained"
+                    color="primary"
                     onClick={() => {
                       if (allFieldsFilled(formData, step)) {
                         setStep(3);
@@ -201,74 +351,70 @@ export const SignUp = () => {
                     }}
                   >
                     Próximo
-                  </button>
+                  </StyledButton>
                 </ButtonContainer>
               </>
             )}
 
             {step === 3 && (
               <>
-                <StepTitle>Preencha seu endereço:</StepTitle>
-                <input
-                  type="text"
-                  placeholder="CEP"
-                  required
-                  name="address.address_zipcode"
+                <Typography variant="h6">Preencha seu endereço:</Typography>
+
+                <InputMask
+                  mask="99999-999"
                   value={formData.address.address_zipcode}
                   onChange={handleChange}
-                />
+                >
+                  {(inputProps: any) => (
+                    <StyledInput
+                      {...inputProps}
+                      label="CEP"
+                      name="address.address_zipcode"
+                    />
+                  )}
+                </InputMask>
 
-                <input
-                  type="text"
-                  placeholder="Estado"
-                  required
+                <StyledInput
+                  label="Estado"
                   name="address.address_state"
                   value={formData.address.address_state}
                   onChange={handleChange}
                 />
 
-                <input
-                  type="text"
-                  placeholder="Cidade"
-                  required
+                <StyledInput
+                  label="Cidade"
                   name="address.address_city"
                   value={formData.address.address_city}
                   onChange={handleChange}
                 />
 
-                <input
-                  type="text"
-                  placeholder="Bairro"
-                  required
+                <StyledInput
+                  label="Bairro"
                   name="address.address_district"
                   value={formData.address.address_district}
                   onChange={handleChange}
                 />
 
-                <input
-                  type="text"
-                  placeholder="Rua"
-                  required
+                <StyledInput
+                  label="Rua"
                   name="address.address_street"
                   value={formData.address.address_street}
                   onChange={handleChange}
                 />
 
-                <input
-                  type="text"
-                  placeholder="Número da casa"
-                  required
+                <StyledInput
+                  label="Número da casa"
                   name="address.address_home_number"
                   value={formData.address.address_home_number}
                   onChange={handleChange}
                 />
 
                 <ButtonContainer>
-                  <button type="button" onClick={() => setStep(2)}>
-                    Voltar
-                  </button>
-                  <button
-                    type="button"
+                  <StyledButton onClick={() => setStep(2)}>Voltar</StyledButton>
+
+                  <StyledButton
+                    variant="contained"
+                    color="primary"
                     onClick={() => {
                       if (allFieldsFilled(formData, step)) {
                         setStep(4);
@@ -276,7 +422,7 @@ export const SignUp = () => {
                     }}
                   >
                     Próximo
-                  </button>
+                  </StyledButton>
                 </ButtonContainer>
               </>
             )}
@@ -286,6 +432,7 @@ export const SignUp = () => {
                 <StepTitle>
                   Determine o tipo de psicólogo que atende suas necessidades:
                 </StepTitle>
+
                 {psychologists.map((psych) => (
                   <PsychologistContainer key={psych.user_id}>
                     <FormControlLabel
@@ -309,13 +456,18 @@ export const SignUp = () => {
                     />
                   </PsychologistContainer>
                 ))}
+
                 <ButtonContainer>
-                  <button type="button" onClick={() => setStep(3)}>
-                    Voltar
-                  </button>
-                  <button type="submit">
+                  <StyledButton onClick={() => setStep(3)}>Voltar</StyledButton>
+
+                  <StyledButton
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
                     {isSubmitting ? "Cadastrando..." : "Finalizar cadastro"}
-                  </button>
+                  </StyledButton>
                 </ButtonContainer>
               </>
             )}
@@ -332,3 +484,5 @@ export const SignUp = () => {
     </LoginBackground>
   );
 };
+
+export default SignUp;

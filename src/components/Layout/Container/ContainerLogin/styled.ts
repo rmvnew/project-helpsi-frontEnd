@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
 export const LoginContainer = styled.div`
-  background: linear-gradient(
-    145deg,
-    var(--bg-primary-lighter),
-    var(--bg-primary-darker)
-  );
   width: 95vw;
   color: var(--bg-dark);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
