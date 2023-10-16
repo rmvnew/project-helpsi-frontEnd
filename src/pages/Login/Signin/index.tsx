@@ -1,20 +1,32 @@
-import { useLogin } from "../../../hooks/useLogin";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { isValidEmail } from "../../../common/utils/validade";
+import { Form, Span, TextContainer } from "./styled";
 
 import {
-  Logo,
-  Bonecos,
   FormGroup,
   Image,
   LoginContainer,
-  Link,
-  Form,
-  Span,
-  TextContainer,
 } from "../../../common/utils/imports/signin";
+
 import { LoginBackground } from "../../../components/Layout/Container/ContainerLogin/background";
+
+import { useLogin } from "../../../hooks/useLogin";
+
+import Logo from "../../../assets/img/logo.svg";
+import Bonecos from "../../../assets/img/Psychologist.svg";
+import { StyledButton, StyledIconButton, StyledInput } from "../../../components/Form/styledForm";
 
 export const SignIn = () => {
   const { form, isLoggingIn, handleInputChange, handleFormSubmit } = useLogin();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <LoginBackground>
@@ -26,26 +38,41 @@ export const SignIn = () => {
             <p>Acesse sua conta agora mesmo</p>
           </TextContainer>
           <Form onSubmit={handleFormSubmit}>
-            <input
+            <StyledInput
+              label="Email"
               type="email"
               name="email"
               value={form.email}
               onChange={handleInputChange}
-              placeholder="Digite seu email"
-              required
+              error={!isValidEmail(form.email) && form.email !== ""}
+              helperText={
+                !isValidEmail(form.email) && form.email !== ""
+                  ? "Por favor, insira um email válido"
+                  : ""
+              }
             />
-            <input
-              type="password"
+            <StyledInput
+              label="Senha"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={form.password}
               onChange={handleInputChange}
-              placeholder="Digite sua senha"
-              required
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <StyledIconButton  onClick={handleTogglePassword} edge="end">
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </StyledIconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
+
             <Link to="/login/recover-pass">Esqueceu sua senha?</Link>
-            <button type="submit">
+
+            <StyledButton type="submit" variant="contained">
               {isLoggingIn ? "Entrando..." : "Entrar"}
-            </button>
+            </StyledButton>
           </Form>
 
           <Span>

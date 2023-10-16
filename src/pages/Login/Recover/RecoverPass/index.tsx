@@ -1,10 +1,9 @@
-import logo from "../../../../assets/img/logo.svg";
 import bonecos from "../../../../assets/img/Psychologist.svg";
 import LockIcon from "@mui/icons-material/Lock";
+
 import {
   FormGroup,
   Image,
-  
   LoginContainer,
   Span,
   TextContainer,
@@ -14,22 +13,26 @@ import { Form } from "./styled";
 import { ChangeEvent } from "react";
 import useRecovery from "../../../../hooks/useRecoverPass";
 import { LoginBackground } from "../../../../components/Layout/Container/ContainerLogin/background";
+import { StyledInput } from "../../../../components/Form/styledForm";
+import { isValidEmail } from "../../../../common/utils/validade";
 
 export const RecoverPass = () => {
   const { email, setEmail, isSending, sendRecoveryCode } = useRecovery();
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendRecoveryCode();
   };
+
   return (
     <LoginBackground>
       <LoginContainer>
         <FormGroup>
-          <img src={logo} alt="logo da empresa" />
+          <img src={bonecos} alt="Logo da empresa" />
           <TextContainer>
             <h2>Você esqueceu sua senha?</h2>
             <p>
@@ -37,12 +40,19 @@ export const RecoverPass = () => {
               vinculado à sua conta
             </p>
           </TextContainer>
-          <Form onSubmit={handleSubmit}>
-            <input
+          <Form onSubmit={handleFormSubmit}>
+            <StyledInput
+              label="Email"
               type="email"
-              placeholder="Digite seu email"
+              name="email"
               value={email}
-              onChange={handleEmailChange}
+              onChange={handleInputChange}
+              error={!isValidEmail(email) && email !== ""}
+              helperText={
+                !isValidEmail(email) && email !== ""
+                  ? "Por favor, insira um email válido"
+                  : ""
+              }
             />
             <button type="submit">
               {isSending ? "Enviando..." : "Envie o código"}
@@ -54,7 +64,7 @@ export const RecoverPass = () => {
           </Span>
         </FormGroup>
         <Image>
-          <img src={bonecos} alt="" />
+          <img src={bonecos} alt="Ilustração de Psicólogos" />
         </Image>
       </LoginContainer>
     </LoginBackground>

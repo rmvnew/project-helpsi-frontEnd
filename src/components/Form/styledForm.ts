@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { TextField, Select, Button } from "@mui/material";
+import { TextField, Select, Button, IconButton } from "@mui/material";
 
 export const Form = styled("form")`
   display: flex;
@@ -36,14 +36,16 @@ export const StyledSelect = styled(Select)`
 `;
 
 export const StyledButton = styled(Button)`
-  && {
-    width: 80%;
-    font-size: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: var(--bg-dark);
-    color: white;
+  width: 80%;
+  font-size: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--bg-dark);
+  color: white;
+
+  &:hover {
+    background-color: var(--bg-hover-button);
   }
 `;
 
@@ -88,4 +90,9 @@ export const StepTitle = styled("h2")`
   text-align: center;
   width: 90%;
   font-family: sans-serif;
+`;
+
+export const StyledIconButton = styled(IconButton)`
+  background-color: transparent !important;
+  color: var(--bg-dark) !important;
 `;

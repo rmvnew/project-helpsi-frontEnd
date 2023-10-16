@@ -19,11 +19,20 @@ const useResetPassword = () => {
   });
 
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string | null>(null);
   const [isResetting, setIsResetting] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    if (name === "password") {
+      
+      if (value.length < 5 || value.length > 15) {
+        setPasswordError("A senha deve ter entre 5 e 15 caracteres.");
+      } else {
+        setPasswordError(null);
+      }
+    }
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -97,6 +106,7 @@ const useResetPassword = () => {
     handleChange,
     sendCode,
     sendRecoveryCode,
+    passwordError
   };
 };
 

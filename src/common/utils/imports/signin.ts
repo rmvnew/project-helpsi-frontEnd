@@ -9,12 +9,7 @@ import {
   LoginContainer,
 } from "../../../components/Layout/Container/ContainerLogin/styled";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Form,
-  Google,
-  Span,
-  TextContainer,
-} from "../../../pages/Login/Signin/styled";
+import { Form, Span, TextContainer } from "../../../pages/Login/Signin/styled";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../../contexts/auth/AuthContext";
 
@@ -32,7 +27,6 @@ export {
   Link,
   useNavigate,
   Form,
-  Google,
   Span,
   TextContainer,
   ToastContainer,

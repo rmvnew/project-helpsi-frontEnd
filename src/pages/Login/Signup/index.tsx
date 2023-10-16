@@ -18,9 +18,10 @@ import {
   PsychologistContainer,
   StepTitle,
   StyledButton,
+  StyledIconButton,
   StyledInput,
   StyledSelect,
-} from "./styled";
+} from "../../../components/Form/styledForm";
 
 import Logo from "../../../assets/img/logo.svg";
 import Bonecos from "../../../assets/img/Psychologist.svg";
@@ -208,9 +209,9 @@ const SignUp = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <IconButton onClick={handleTogglePassword} edge="end">
+                        <StyledIconButton  onClick={handleTogglePassword} edge="end">
                           {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
+                        </StyledIconButton>
                       </InputAdornment>
                     ),
                   }}
@@ -228,7 +229,7 @@ const SignUp = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <IconButton
+                        <StyledIconButton 
                           onClick={handleTogglePasswordConfirmation}
                           edge="end"
                         >
@@ -237,7 +238,7 @@ const SignUp = () => {
                           ) : (
                             <Visibility />
                           )}
-                        </IconButton>
+                        </StyledIconButton>
                       </InputAdornment>
                     ),
                   }}
