@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import styled from "styled-components";
-import pageNotFound from "../../assets/img/pageNotFound.svg";
+import unauthorized from "../../assets/img/unauthorized.svg";
 
 const Container = styled.div`
   display: flex;
@@ -8,6 +8,20 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
+`;
+
+const Message = styled.h2`
+  margin: 20px 0;
+  color: var(--bg-dark);
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+  }
 `;
 
 const StyledImage = styled.img`
@@ -44,13 +58,14 @@ const BackButton = styled.button`
   }
 `;
 
-const NotFound = () => {
+const Unauthorized = () => {
   return (
     <Container>
-      <StyledImage src={pageNotFound} alt="Page Not Found" />
+      <StyledImage src={unauthorized} alt="Acesso não autorizado" />
+      <Message>Acesso não autorizado.</Message>
       <BackButton onClick={() => window.history.back()}>Voltar</BackButton>
     </Container>
   );
 };
 
-export default NotFound;
+export default Unauthorized;

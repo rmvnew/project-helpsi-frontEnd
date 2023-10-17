@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { ResetPass } from "../pages/Login/Recover/ResetPass";
 import { RecoverPass } from "../pages/Login/Recover/RecoverPass";
 import { SignIn } from "../pages/Login/Signin";
-import  SignUp  from "../pages/Login/Signup";
+import SignUp from "../pages/Login/Signup";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
 import { Home } from "../pages/Patient/Home";
 import { HomePsy } from "../pages/Psychologist/Home";
@@ -20,7 +20,7 @@ export const AppRoutes = () => {
       <Route
         path="/home"
         element={
-          <RequireAuth>
+          <RequireAuth allowedProfiles={["PATIENT"]}>
             <Home />
           </RequireAuth>
         }
@@ -28,7 +28,7 @@ export const AppRoutes = () => {
       <Route
         path="/psy/home"
         element={
-          <RequireAuth>
+          <RequireAuth allowedProfiles={["PSYCHOLOGIST"]}>
             <HomePsy />
           </RequireAuth>
         }
@@ -36,7 +36,7 @@ export const AppRoutes = () => {
       <Route
         path="/admin"
         element={
-          <RequireAuth>
+          <RequireAuth allowedProfiles={["ADMIN"]}>
             <Dashboard />
           </RequireAuth>
         }
@@ -44,7 +44,7 @@ export const AppRoutes = () => {
       <Route
         path="/psy/patients"
         element={
-          <RequireAuth>
+          <RequireAuth allowedProfiles={["PSYCHOLOGIST"]}>
             <Patients />
           </RequireAuth>
         }
@@ -52,7 +52,7 @@ export const AppRoutes = () => {
       <Route
         path="/psy/schedule"
         element={
-          <RequireAuth>
+          <RequireAuth allowedProfiles={["PSYCHOLOGIST"]}>
             <Schedule />
           </RequireAuth>
         }
@@ -60,7 +60,7 @@ export const AppRoutes = () => {
       <Route
         path="/psy/patient-data"
         element={
-          <RequireAuth>
+          <RequireAuth allowedProfiles={["PSYCHOLOGIST"]}>
             <PatientData />
           </RequireAuth>
         }
@@ -69,15 +69,15 @@ export const AppRoutes = () => {
       <Route
         path="/scheduling"
         element={
-          <RequireAuth>
+          <RequireAuth allowedProfiles={["PATIENT"]}>
             <Scheduling />
           </RequireAuth>
         }
       />
-       <Route
+      <Route
         path="/psy/arquived"
         element={
-          <RequireAuth>
+          <RequireAuth allowedProfiles={["PSYCHOLOGIST"]}>
             <ArchivedPatients />
           </RequireAuth>
         }
