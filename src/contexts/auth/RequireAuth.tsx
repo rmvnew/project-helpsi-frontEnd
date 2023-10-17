@@ -13,14 +13,13 @@ export const RequireAuth = ({
   const [userProfile, setUserProfile] = useState<string | null>(null);
 
   useEffect(() => {
-    // Suponhamos que o perfil do usuário seja armazenado com a chave 'userProfile'
     const profile = localStorage.getItem("userProfile");
     setUserProfile(profile);
     setLoading(false);
   }, []);
 
   if (loading) {
-    return null; // ou algum componente de loading
+    return null;
   }
 
   if (!userProfile) {
@@ -28,9 +27,7 @@ export const RequireAuth = ({
   }
 
   if (allowedProfiles.length && !allowedProfiles.includes(userProfile)) {
-    // Você pode redirecionar para uma página de "Acesso Negado" ou qualquer outra
-    // ação que você queira tomar quando um usuário não tem a permissão correta.
-    return <Unauthorized/>;
+    return <Unauthorized />;
   }
 
   return children;
