@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -15,7 +15,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 // Project components and hooks
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
-import useListPatients from "../../../hooks/useListPatients";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { getFormattedName } from "../../../common/functions/formatString";
 
@@ -33,22 +32,21 @@ import {
   StyledListIcon,
 } from "./styled";
 import { PatientListSkeleton } from "../../../components/Layout/Loader/Skeleton/PatientListSkeleton";
+import usePsychologistById from "../../../hooks/usePsychologistData";
 
-interface Patient {
+type PatientDisplayData = {
+  id: string;
   name: string;
   city: string;
-  registrationDate: Date;
-}
+  phone: string;
+};
 
 export const Patients = () => {
   const currentUser = useCurrentUser();
-  const { listPatients, isLoading, error } = useListPatients(
+  const { psychologistData, isLoading, error } = usePsychologistById(
     currentUser?.user_id || ""
   );
 
-  const [search, setSearch] = useState("");
-  const [sorting, setSorting] = useState("a-z");
-  const [sortedPatients, setSortedPatients] = useState<Patient[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenuClick = (event: React.MouseEvent<SVGSVGElement>) => {
@@ -59,45 +57,30 @@ export const Patients = () => {
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    if (listPatients.length) {
-      const convertedPatients = listPatients.map((appointment) => ({
-        name: appointment.currentPatient.user_name,
-        city: "Manaus - AM",
-        registrationDate: new Date(appointment.update_at),
-      }));
+  const [search, setSearch] = useState("");
+  const [sorting, setSorting] = useState("a-z");
+  const [sortedPatients, setSortedPatients] = useState<PatientDisplayData[]>(
+    []
+  );
 
-      const uniqueNames = Array.from(
-        new Set(convertedPatients.map((patient) => patient.name))
+  const patientsList = useMemo(() => {
+    return psychologistData?.patients || [];
+  }, [psychologistData]);
+
+  useEffect(() => {
+    if (patientsList.length) {
+      const convertedPatients: PatientDisplayData[] = patientsList.map(
+        (patient) => ({
+          id: patient.user_id,
+          name: patient.user_name,
+          city: patient.address?.address_city || "Unknown",
+          phone: patient.user_phone,
+        })
       );
 
-      const uniquePatients = uniqueNames
-        .map((name) => {
-          return convertedPatients.find((patient) => patient.name === name);
-        })
-        .filter((patient) => patient !== undefined) as Patient[];
-
-      setSortedPatients(uniquePatients);
+      setSortedPatients(convertedPatients);
     }
-  }, [listPatients]);
-
-  useEffect(() => {
-    const sortPatients = (patients: Patient[]) => {
-      let ordered = [...patients];
-
-      if (sorting === "a-z") {
-        ordered.sort((a, b) => a.name.localeCompare(b.name));
-      } else if (sorting === "registrationDate") {
-        ordered.sort(
-          (a, b) => a.registrationDate.getTime() - b.registrationDate.getTime()
-        );
-      }
-
-      return ordered;
-    };
-
-    setSortedPatients((prevPatients) => sortPatients(prevPatients));
-  }, [sorting]);
+  }, [patientsList]);
 
   if (isLoading) {
     return <PatientListSkeleton />;
@@ -107,6 +90,7 @@ export const Patients = () => {
     toast.error(`Error: ${error}`);
     return null;
   }
+
   return (
     <Body>
       <Header />
@@ -155,14 +139,14 @@ export const Patients = () => {
 
           {sortedPatients
             .filter((patient) => patient.name.includes(search))
-            .map((patient, index) => (
-              <Item key={index}>
+            .map((patient) => (
+              <Item key={patient.id}>
                 <div className="profile">
                   <PersonIcon className="icon" />
                   <p>{getFormattedName(patient.name)}</p>
                 </div>
                 <p className="none">{patient.city}</p>
-                <p>{patient.registrationDate.toLocaleDateString()}</p>
+                <p>{patient.phone}</p>
                 <StyledListIcon onClick={handleMenuClick} />
                 <Menu
                   anchorEl={anchorEl}
