@@ -1,4 +1,10 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import {
+  useState,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useCallback,
+} from "react";
 import { Link } from "react-router-dom";
 import InputMask from "react-input-mask";
 import {
@@ -41,6 +47,7 @@ import {
   isValidEmail,
 } from "../../../common/utils/validade";
 import { getFormattedName } from "../../../common/functions/formatString";
+import useAddressFromCEP from "../../../hooks/useCEP";
 
 const SignUp = () => {
   const { formData, setFormData, setIsSubmitting, isSubmitting } = useSignUp();
@@ -49,54 +56,100 @@ const SignUp = () => {
   const [rgError, setRgError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [step, setStep] = useState(1);
+  const addressFromCEP = useAddressFromCEP(formData.address.address_zipcode);
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
+  const handleChange = useCallback(
+    (
+      e:
+        | ChangeEvent<
+            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+          >
+        | { target: { name: string; value: string } }
+    ) => {
+      const { name, value } = e.target;
 
-    if (name === "user_password") {
-      if (value.length < 5 || value.length > 15) {
-        setPasswordError("A senha deve ter entre 5 e 15 caracteres.");
-      } else {
-        setPasswordError(null);
+      if (name === "user_password") {
+        if (value.length < 5 || value.length > 15) {
+          setPasswordError("A senha deve ter entre 5 e 15 caracteres.");
+        } else {
+          setPasswordError(null);
+        }
+      }
+
+      if (name === "user_rg") {
+        if (value.length < 5 || value.length > 11) {
+          setRgError("O RG deve ter entre 5 e 11 caracteres.");
+        } else {
+          setRgError(null);
+        }
+      }
+
+      if (name === "user_phone") {
+        const isValid = /^(?!([0-9])\1+$)[1-9]{2}9?[0-9]{8}$/.test(value);
+        if (!isValid) {
+          setPhoneError("Número de telefone inválido!");
+        } else {
+          setPhoneError(null);
+        }
+      }
+
+      setFormData((prev) => {
+        const keys = name.split(".");
+        if (keys.length > 1) {
+          return {
+            ...prev,
+            [keys[0]]: {
+              ...(prev as any)[keys[0]],
+              [keys[1]]: value,
+            },
+          };
+        } else {
+          return {
+            ...prev,
+            [name]: value,
+          };
+        }
+      });
+    },
+    [setFormData]
+  );
+
+  useEffect(() => {
+    if (addressFromCEP) {
+      if (addressFromCEP.uf) {
+        handleChange({
+          target: {
+            name: "address.address_state",
+            value: addressFromCEP.uf,
+          } as any,
+        });
+      }
+      if (addressFromCEP.localidade) {
+        handleChange({
+          target: {
+            name: "address.address_city",
+            value: addressFromCEP.localidade,
+          } as any,
+        });
+      }
+      if (addressFromCEP.bairro) {
+        handleChange({
+          target: {
+            name: "address.address_district",
+            value: addressFromCEP.bairro,
+          } as any,
+        });
+      }
+      if (addressFromCEP.logradouro) {
+        handleChange({
+          target: {
+            name: "address.address_street",
+            value: addressFromCEP.logradouro,
+          } as any,
+        });
       }
     }
-
-    if (name === "user_rg") {
-      if (value.length < 5 || value.length > 11) {
-        setRgError("O RG deve ter entre 5 e 11 caracteres.");
-      } else {
-        setRgError(null);
-      }
-    }
-    if (name === "user_phone") {
-      const isValid = /^(?!([0-9])\1+$)[1-9]{2}9?[0-9]{8}$/.test(value);
-      if (!isValid) {
-        setPhoneError("Número de telefone inválido!");
-      } else {
-        setPhoneError(null);
-      }
-    }
-
-    setFormData((prev) => {
-      const keys = name.split(".");
-      if (keys.length > 1) {
-        return {
-          ...prev,
-          [keys[0]]: {
-            ...(prev as any)[keys[0]],
-            [keys[1]]: value,
-          },
-        };
-      } else {
-        return {
-          ...prev,
-          [name]: value,
-        };
-      }
-    });
-  };
+  }, [addressFromCEP, handleChange]);
 
   const handleChangeForSelect = (e: SelectChangeEvent<unknown>) => {
     const name = e.target.name ?? "";
@@ -208,7 +261,10 @@ const SignUp = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <StyledIconButton  onClick={handleTogglePassword} edge="end">
+                        <StyledIconButton
+                          onClick={handleTogglePassword}
+                          edge="end"
+                        >
                           {showPassword ? <VisibilityOff /> : <Visibility />}
                         </StyledIconButton>
                       </InputAdornment>
@@ -228,7 +284,7 @@ const SignUp = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <StyledIconButton 
+                        <StyledIconButton
                           onClick={handleTogglePasswordConfirmation}
                           edge="end"
                         >
