@@ -60,7 +60,7 @@ export const AppRoutes = () => {
       <Route
         path="/psy/patient-data"
         element={
-          <RequireAuth allowedProfiles={["PATIENT"]}>
+          <RequireAuth allowedProfiles={["PSYCHOLOGIST"]}>
             <PatientData />
           </RequireAuth>
         }
