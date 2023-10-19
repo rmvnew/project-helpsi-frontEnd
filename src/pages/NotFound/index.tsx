@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import pageNotFound from "../../assets/img/pageNotFound.svg";
 
@@ -11,7 +10,7 @@ const Container = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width: 700px;
+  width: 350px;
   max-width: 90%; 
 
   @media (max-width: 768px) {

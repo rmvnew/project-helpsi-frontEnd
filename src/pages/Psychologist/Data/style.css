@@ -1,56 +1,87 @@
-
 .main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secundary);
+  padding: 20px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 90%;
+  margin: 10px auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 20px;
+  width: 100%;
+  margin:  auto;
+}
+
+.card-data,
+.single-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+  background-color: #ffffff;
+  color: var(--bg-dark);
+  border-radius: 10px;
+  box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.1);
+  font-size: .8rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.single-card {
+  width: 100%;
+  margin-left: 0;
+  margin-top: 20px;
+}
+
+.icon {
+  margin-top: 25%;
+  width: 40px;
+  display: block;
+  margin: 20px auto 0;
+}
+
+@media (min-width: 820px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    width: calc(100% - 25vh - 10px);
+  }
+
+  .single-card {
+    width: 25vh;
+    margin-top: 0;
+    margin-left: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
-    margin: 0;
-  }
-  .titulo {
-    margin-right: 100px;
+    flex-direction: column;
   }
 
-  .container {
-    display: flex;
-    background-color: #9DE0AD;
-    padding: 20px 10px 20px 20px;
-    border-radius: 10px;
-    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra na parte inferior */
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-  }
-  
-  .card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    text-align: center;
-    width: 25vh; 
-    background-color: #FFFFFF;
-    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra na parte inferior */
-
-  }
-  
+  .card-data,
   .single-card {
-    border: 1px solid #ccc;
     padding: 20px;
-    width: 25vh;
-    text-align: center;
-    margin-left: 10px;
-    background-color: #FFFFFF;
+    font-size: 1rem;
   }
-  
+
   .icon {
-    margin-top: 25%;
-    height: 70px;
+    width: 70px;
   }
-
-  .iconl {
-    margin-top: 90%;
-    height: 70px;
-  }
-
-  
+}

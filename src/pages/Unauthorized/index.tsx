@@ -25,7 +25,7 @@ const Message = styled.h2`
 `;
 
 const StyledImage = styled.img`
-  width: 700px;
+  width: 350px;
   max-width: 90%; 
 
   @media (max-width: 768px) {
@@ -38,7 +38,7 @@ const StyledImage = styled.img`
 `;
 
 const BackButton = styled.button`
-  margin-top: 50px;
+  margin-top: 10px;
   padding: 10px 20px;
   font-size: 16px;
   background-color: var(--bg-primary);
