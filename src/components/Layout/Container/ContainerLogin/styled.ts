@@ -23,6 +23,7 @@ export const TextContainer = styled.div`
 
   h2 {
     margin-bottom: 10px;
+    font-size: 1.3rem;
   }
 
   p {
@@ -33,7 +34,7 @@ export const TextContainer = styled.div`
 
 export const FormGroup = styled.div`
   width: 100%;
-  min-height: 600px;
+  min-height: 500px;
   display: flex;
   padding: 20px 0;
   justify-content: space-between;
