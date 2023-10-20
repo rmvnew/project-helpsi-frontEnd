@@ -4,7 +4,7 @@ import { SortSelect } from "./sortSelect";
 import { SearchComponent } from "./search";
 import { UserList } from "./userList";
 import { Loader } from "../../components/Layout/Loader";
-import Header from "../../components/Layout/Header/psy";
+import Header from "../../components/Layout/Header/admin";
 
 import UserEditForm from "../../components/Form/UserEditForm";
 
@@ -23,6 +23,7 @@ export const Dashboard: React.FC = () => {
     setSearch,
     users,
     profiles,
+    specialties,
     loading,
     showForm,
     setShowForm,
@@ -69,6 +70,7 @@ export const Dashboard: React.FC = () => {
                 key={editingUser?.user_id}
                 handleSubmit={handleSubmit}
                 profiles={profiles}
+                specialties={specialties}
                 initialValues={editingUser}
                 onClose={() => setShowForm(false)}
               />

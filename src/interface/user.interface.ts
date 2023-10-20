@@ -1,5 +1,6 @@
 import { Address } from "./address.interface";
 import { Psychologist } from "./psychologist.interface";
+import { Specialty } from "./specialty.interface";
 
 
 export interface User {
@@ -20,4 +21,5 @@ export interface User {
   user_phone: string;
   user_rg: string;
   user_status: boolean;
+  specialtys: Specialty[];
 }
