@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 80%;
-  height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding-top: 5%;
+  margin: auto;
 
   @media (max-width: 615px) {
     width: 90%;
+    padding-top: 10%;
   }
 `;
 
@@ -86,6 +87,7 @@ export const EditButton = styled(Button)`
   &:hover {
     background-color: var(--bg-hover-button);
   }
+
 `;
 
 export const DeleteButton = styled(Button)`
@@ -116,6 +118,10 @@ export const Item = styled.div`
 
   &:last-child {
     border-bottom: none;
+  }
+
+  @media (max-width: 450px) {
+    font-size: .8rem;
   }
 `;
 

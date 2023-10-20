@@ -12,10 +12,10 @@ const resources = {
   },
   pt: {
     translation: {
-      ADMIN: "ADMINISTRADOR",
-      PATIENT: "PACIENTE",
-      PSYCHOLOGIST: "PSICÓLOGO",
-      ATTENDANT: "ATENDENTE",
+      ADMIN: "Administrador",
+      PATIENT: "Paciente",
+      PSYCHOLOGIST: "Psicólogo",
+      ATTENDANT: "Atendente",
     },
   },
 };

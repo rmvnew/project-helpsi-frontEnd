@@ -1,4 +1,5 @@
 import { Profile } from "../interface/profile.interface";
+import { Specialty } from "../interface/specialty.interface";
 import { User } from "../interface/user.interface";
 
 export type UserFormProps = {
@@ -7,4 +8,6 @@ export type UserFormProps = {
   initialValues?: User | null;
   onClose?: () => void;
   user?: User;
+  specialties: Specialty[];
 };
+

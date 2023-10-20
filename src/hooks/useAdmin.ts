@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useProfiles } from "./useProfiles";
 import { useUsers } from "./useUsers";
+import { useSpecialties } from "./useSpecialties";
 
 import { api } from "./useApi";
 import { toast } from "react-toastify";
@@ -9,6 +10,7 @@ import { User } from "../interface/user.interface";
 export const useAdmin = () => {
   const { users, getUsers, loading } = useUsers();
   const { profiles, getProfiles } = useProfiles();
+  const { specialties, getSpecialties } = useSpecialties();
 
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
@@ -23,10 +25,11 @@ export const useAdmin = () => {
         await api.post("/user", formData);
         toast.success("Usuário criado com sucesso!");
       }
-      getUsers(); 
+      getUsers();
     } catch (error: any) {
       const message =
-        error?.response?.data?.message ?? (editingUser ? "Erro ao editar" : "Erro ao cadastrar");
+        error?.response?.data?.message ??
+        (editingUser ? "Erro ao editar" : "Erro ao cadastrar");
       toast.error(message);
     }
   };
@@ -39,13 +42,15 @@ export const useAdmin = () => {
   useEffect(() => {
     getUsers();
     getProfiles();
-  }, [getProfiles, getUsers]);
+    getSpecialties();
+  }, [getProfiles, getUsers, getSpecialties]);
 
   return {
     search,
     setSearch,
     users,
     profiles,
+    specialties,
     loading,
     showForm,
     setShowForm,
