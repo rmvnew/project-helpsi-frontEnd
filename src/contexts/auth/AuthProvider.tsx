@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       } catch (error) {
         clearUserLocalStorage();
-        toast.error("Erro ao decodificar o token.");
+        console.error("Erro ao decodificar o token.");
 
         navigate("/");
       }

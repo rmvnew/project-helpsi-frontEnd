@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const BaseText = styled.div`
   color: var(--bg-dark);
@@ -28,9 +30,17 @@ export const HeaderText = styled(BaseText)`
   display: flex;
 `;
 
+export const DateContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  margin-bottom: 20px;
+`;
+
 export const DateText = styled(BaseText)`
   font-size: 1.5rem;
-  margin-bottom: 10px;
 
   @media (max-width: 768px) {
     font-size: 1.25rem;
@@ -106,4 +116,22 @@ export const PatientName = styled.span<{ hasName?: boolean }>`
   @media (max-width: 768px) {
     font-size: 0.875rem;
   }
+`;
+
+export const ArrowButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+`;
+
+export const StyledArrowBackIcon = styled(ArrowBackIcon)`
+  color: var(--bg-dark);
+`;
+
+export const StyledArrowForwardIcon = styled(ArrowForwardIcon)`
+  color: var(--bg-dark);
 `;

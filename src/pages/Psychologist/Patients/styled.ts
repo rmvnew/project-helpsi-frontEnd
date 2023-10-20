@@ -166,7 +166,6 @@ export const TitleContainer = styled(ItemContainer)`
     gap: 10px;
   }
 
-
   @media (max-width: 450px) {
     .none {
       display: none;
@@ -197,6 +196,10 @@ export const Item = styled.div`
     .none {
       display: none;
     }
+
+    p {
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -222,7 +225,7 @@ export const NoDataContainer = styled.div`
   font-size: 1.2rem;
   color: #757575;
 
-   p {
+  p {
     text-align: center;
-   }
+  }
 `;

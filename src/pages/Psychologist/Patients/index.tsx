@@ -22,7 +22,6 @@ import { getFormattedName } from "../../../common/functions/formatString";
 import {
   FilterContainer,
   SearchContainer,
-  SortingSelect,
   PatientContainer,
   Item,
   TitleContainer,
@@ -58,7 +57,6 @@ export const Patients = () => {
   };
 
   const [search, setSearch] = useState("");
-  const [sorting, setSorting] = useState("a-z");
   const [sortedPatients, setSortedPatients] = useState<PatientDisplayData[]>(
     []
   );
@@ -69,11 +67,15 @@ export const Patients = () => {
 
   useEffect(() => {
     if (patientsList.length) {
+      patientsList.forEach((patient) => {
+        console.log("Individual patient data:", patient);
+      });
+
       const convertedPatients: PatientDisplayData[] = patientsList.map(
         (patient) => ({
           id: patient.user_id,
           name: patient.user_name,
-          city: patient.address?.address_city || "Unknown",
+          city: patient.address?.address_city || "Manaus",
           phone: patient.user_phone,
         })
       );
@@ -114,15 +116,6 @@ export const Patients = () => {
                 Arquivados
               </Link>
             </ActionLinks>
-            <SortingSelect>
-              <select
-                value={sorting}
-                onChange={(e) => setSorting(e.target.value)}
-              >
-                <option value="a-z">A-Z</option>
-                <option value="registrationDate">Última consulta</option>
-              </select>
-            </SortingSelect>
           </Button>
         </FilterContainer>
 
@@ -133,7 +126,7 @@ export const Patients = () => {
               <p>Nome</p>
             </div>
             <p className="none">Cidade</p>
-            <p>Última consulta</p>
+            <p>Contato</p>
             <ListIcon style={{ visibility: "hidden" }} />
           </TitleContainer>
 
@@ -142,7 +135,7 @@ export const Patients = () => {
             .map((patient) => (
               <Item key={patient.id}>
                 <div className="profile">
-                  <PersonIcon className="icon" />
+                  <PersonIcon />
                   <p>{getFormattedName(patient.name)}</p>
                 </div>
                 <p className="none">{patient.city}</p>
