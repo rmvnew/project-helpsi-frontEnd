@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-import { AddCircle } from "@material-ui/icons";
-
-import { Main } from "../../components/Layout/Container/ContainerHome/styled";
 import { Body } from "../../components/Layout/Container/style";
 import { SortSelect } from "./sortSelect";
 import { SearchComponent } from "./search";
 import { UserList } from "./userList";
 import { Loader } from "../../components/Layout/Loader";
 import Header from "../../components/Layout/Header/psy";
-import UserCreationForm from "../../components/Form/UserCreationForm";
+
 import UserEditForm from "../../components/Form/UserEditForm";
 
 import { useAdmin } from "../../hooks/useAdmin";
@@ -53,18 +50,11 @@ export const Dashboard: React.FC = () => {
     <Body>
       <Header />
 
-      <Main>
         <Container>
           <Description>
             <h3>Painel de Admin</h3>
             <ToggleFormButton onClick={handleToggleClick}>
-              {showForm ? (
-                "Fechar"
-              ) : (
-                <>
-                  <AddCircle /> Adicionar
-                </>
-              )}
+              {showForm ? "Fechar" : "Editar"}
             </ToggleFormButton>
           </Description>
 
@@ -75,21 +65,13 @@ export const Dashboard: React.FC = () => {
 
           {showForm && (
             <Content>
-              {editingUser ? (
-                <UserEditForm
-                  key={editingUser?.user_id}
-                  handleSubmit={handleSubmit}
-                  profiles={profiles}
-                  initialValues={editingUser}
-                  onClose={() => setShowForm(false)}
-                />
-              ) : (
-                <UserCreationForm
-                  handleSubmit={handleSubmit}
-                  profiles={profiles}
-                  onClose={() => setShowForm(false)}
-                />
-              )}
+              <UserEditForm
+                key={editingUser?.user_id}
+                handleSubmit={handleSubmit}
+                profiles={profiles}
+                initialValues={editingUser}
+                onClose={() => setShowForm(false)}
+              />
             </Content>
           )}
 
@@ -106,7 +88,7 @@ export const Dashboard: React.FC = () => {
             )}
           </Content>
         </Container>
-      </Main>
+  
     </Body>
   );
 };

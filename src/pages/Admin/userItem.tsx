@@ -37,7 +37,7 @@ export const UserItem: React.FC<UserItemProps> = ({
 
   return (
     <Item key={userId}>
-      {userName}
+      <span>{userName}</span>
       <ButtonContainer>
         <EditButton onClick={handleEditClick}>
           <Edit />
