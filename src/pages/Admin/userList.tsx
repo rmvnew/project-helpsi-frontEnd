@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserItem } from "./userItem";
 import { User } from "../../interface/user.interface";
 
@@ -21,6 +21,10 @@ export const UserList: React.FC<UserListProps> = ({
       prevUsers.filter((user) => user.user_id !== deletedUserId)
     );
   };
+
+  useEffect(() => {
+    setCurrentUsers(users);
+  }, [users]);
 
   const filteredUsers = currentUsers.filter((user) =>
     user.user_name.toLowerCase().includes(searchValue.toLowerCase())
