@@ -158,6 +158,7 @@ export const SearchBar = styled.div`
     border-radius: 4px;
     margin-left: 10px;
     outline: none;
+    font-size: 16px;
 
    
   }

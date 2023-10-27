@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   FlexContainer,
   FormWrapper,
@@ -10,14 +10,19 @@ import {
   StyledInput,
   StyledSelect,
   SubmitButton,
-} from "./styled";
+} from "./adminForm";
 import { toast } from "react-toastify";
-import { validateDate } from "../../common/utils/validade";
+import {
+  isAtLeastFourYearsOld,
+  isValidCPF,
+  validateDate,
+} from "../../common/utils/validade";
 import { formatDate } from "../../common/functions/formatDate";
 import { useTranslation } from "react-i18next";
 import "../../i18next/ProfileList";
 import { UserFormProps } from "../../types/UserForm";
 import { FormControl } from "@mui/material";
+import InputMask from "react-input-mask";
 
 const UserEditForm: React.FC<UserFormProps> = ({
   handleSubmit,
@@ -28,6 +33,8 @@ const UserEditForm: React.FC<UserFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const [showSpecialties, setShowSpecialties] = useState(false);
+  const [rgError, setRgError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     user_name: initialValues?.user_name || "",
@@ -77,9 +84,24 @@ const UserEditForm: React.FC<UserFormProps> = ({
   };
 
   const localHandleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    if (name === "user_rg") {
+      if (value.length < 5 || value.length > 11) {
+        setRgError("O RG deve ter entre 5 e 11 caracteres.");
+      } else {
+        setRgError(null);
+      }
+    }
+    if (name === "user_phone") {
+      const isValid = /^(?!([0-9])\1+$)[1-9]{2}9?[0-9]{8}$/.test(value);
+      if (!isValid) {
+        setPhoneError("Número de telefone inválido!");
+      } else {
+        setPhoneError(null);
+      }
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -117,14 +139,31 @@ const UserEditForm: React.FC<UserFormProps> = ({
             name="user_name"
             value={formData.user_name}
             onChange={localHandleInputChange}
-            placeholder="Usuário"
+            label="Nome completo"
           />
-          <StyledInput
-            name="user_date_of_birth"
+          <InputMask
+            mask="99/99/9999"
             value={formData.user_date_of_birth}
             onChange={localHandleInputChange}
-            placeholder="Nascimento"
-          />
+          >
+            {(inputProps: any) => (
+              <StyledInput
+                {...inputProps}
+                label="Nascimento"
+                name="user_date_of_birth"
+                error={
+                  !isAtLeastFourYearsOld(formData.user_date_of_birth) &&
+                  formData.user_date_of_birth !== ""
+                }
+                helperText={
+                  !isAtLeastFourYearsOld(formData.user_date_of_birth) &&
+                  formData.user_date_of_birth !== ""
+                    ? "Por favor, insira uma data válida. A idade deve estar entre 4 e 100 anos."
+                    : ""
+                }
+              />
+            )}
+          </InputMask>
           <StyledSelect
             name="user_genre"
             value={formData.user_genre}
@@ -143,20 +182,36 @@ const UserEditForm: React.FC<UserFormProps> = ({
             name="user_rg"
             value={formData.user_rg}
             onChange={localHandleInputChange}
-            placeholder="RG"
+            label="RG"
+            error={!!rgError}
+            helperText={rgError}
           />
-          <StyledInput
-            name="user_cpf"
+          <InputMask
+            mask="999.999.999-99"
             value={formData.user_cpf}
             onChange={localHandleInputChange}
-            placeholder="CPF"
-          />
-          <StyledInput
-            name="user_crp"
+          >
+            {(inputProps: any) => (
+              <StyledInput
+                {...inputProps}
+                label="CPF"
+                name="user_cpf"
+                error={!isValidCPF(formData.user_cpf)}
+                helperText={
+                  !isValidCPF(formData.user_cpf) ? "CPF inválido" : ""
+                }
+              />
+            )}
+          </InputMask>
+          <InputMask
+            mask="99999/9-9"
             value={formData.user_crp}
             onChange={localHandleInputChange}
-            placeholder="CRP"
-          />
+          >
+            {(inputProps: any) => (
+              <StyledInput {...inputProps} label="CRP" name="user_crp" />
+            )}
+          </InputMask>
         </FlexContainer>
       </SectionWrapper>
 
@@ -167,13 +222,15 @@ const UserEditForm: React.FC<UserFormProps> = ({
             name="user_email"
             value={formData.user_email}
             onChange={localHandleInputChange}
-            placeholder="Email"
+            label="Email"
           />
           <StyledInput
             name="user_phone"
             value={formData.user_phone}
             onChange={localHandleInputChange}
-            placeholder="Telefone"
+            label="Telefone"
+            error={!!phoneError}
+            helperText={phoneError}
           />
         </FlexContainer>
       </SectionWrapper>

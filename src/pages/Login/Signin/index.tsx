@@ -70,7 +70,7 @@ export const SignIn = () => {
 
             <Link to="/login/recover-pass">Esqueceu sua senha?</Link>
 
-            <StyledButton type="submit" variant="contained">
+            <StyledButton type="submit">
               {isLoggingIn ? "Entrando..." : "Entrar"}
             </StyledButton>
           </Form>
