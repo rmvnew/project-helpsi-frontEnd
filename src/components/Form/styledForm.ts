@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { TextField, Select, Button, IconButton } from "@mui/material";
+import { TextField, Select, IconButton } from "@mui/material";
 
 export const Form = styled("form")`
   display: flex;
@@ -10,12 +10,7 @@ export const Form = styled("form")`
 `;
 
 export const StyledInput = styled(TextField)`
-  && {
-    font-family: sans-serif;
-    font-size: 16px;
-    width: 80%;
-    border-radius: 5px;
-  }
+  width: 80%;
 `;
 
 export const StyledSelect = styled(Select)`
@@ -35,9 +30,9 @@ export const StyledSelect = styled(Select)`
   }
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled("button")`
   width: 80%;
-  font-size: 10px;
+  font-size: 16px;
   padding: 10px;
   border-radius: 5px;
   border: none;

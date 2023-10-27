@@ -303,7 +303,6 @@ const SignUp = () => {
                 />
 
                 <StyledButton
-                  variant="contained"
                   style={{ marginTop: "1rem" }}
                   onClick={() => {
                     if (allFieldsFilled(formData, step)) {
@@ -380,17 +379,9 @@ const SignUp = () => {
                       {...inputProps}
                       label="CPF"
                       name="user_cpf"
-                      error={
-                        !isValidCPF(formData.user_cpf) &&
-                        formData.user_cpf.replace(/[\s.-]*/gim, "").length ===
-                          11
-                      }
+                      error={!isValidCPF(formData.user_cpf)}
                       helperText={
-                        !isValidCPF(formData.user_cpf) &&
-                        formData.user_cpf.replace(/[\s.-]*/gim, "").length ===
-                          11
-                          ? "CPF inválido"
-                          : ""
+                        !isValidCPF(formData.user_cpf) ? "CPF inválido" : ""
                       }
                     />
                   )}
@@ -398,8 +389,6 @@ const SignUp = () => {
                 <ButtonContainer>
                   <StyledButton onClick={() => setStep(1)}>Voltar</StyledButton>
                   <StyledButton
-                    variant="contained"
-                    color="primary"
                     onClick={() => {
                       if (allFieldsFilled(formData, step)) {
                         setStep(3);
@@ -469,8 +458,6 @@ const SignUp = () => {
                   <StyledButton onClick={() => setStep(2)}>Voltar</StyledButton>
 
                   <StyledButton
-                    variant="contained"
-                    color="primary"
                     onClick={() => {
                       if (allFieldsFilled(formData, step)) {
                         setStep(4);
@@ -516,12 +503,7 @@ const SignUp = () => {
                 <ButtonContainer>
                   <StyledButton onClick={() => setStep(3)}>Voltar</StyledButton>
 
-                  <StyledButton
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
+                  <StyledButton type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Cadastrando..." : "Finalizar cadastro"}
                   </StyledButton>
                 </ButtonContainer>

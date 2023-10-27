@@ -28,7 +28,10 @@ import {
   SkeletonTextLong,
   SkeletonTextShort,
 } from "../../../../components/Layout/Loader/Skeleton/AppointmentTime";
-import { getFormattedName } from "../../../../common/functions/formatString";
+import {
+  formatPhoneNumber,
+  getFormattedName,
+} from "../../../../common/functions/formatString";
 
 export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
   const currentUser = useCurrentUser();
@@ -92,7 +95,9 @@ export const AppointmentTime: React.FC<{ date?: string }> = ({ date }) => {
                 <PsyName>
                   {getFormattedName(currentPsychologist.user_name)}
                 </PsyName>
-                <PsyPhone>{currentPsychologist.user_phone}</PsyPhone>
+                <PsyPhone>
+                  {formatPhoneNumber(currentPsychologist.user_phone)}
+                </PsyPhone>
               </DetailsPsy>
             </Psy>
           </Container>

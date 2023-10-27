@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { AddButton, Content } from "../../pages/Admin/styled";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+} from "@mui/material";
 
 export const FormWrapper = styled.form`
   ${Content};
@@ -23,7 +28,7 @@ export const SectionTitle = styled.h2`
 `;
 
 export const StyledFormGroup = styled(FormGroup)`
-  padding-top: 10px;
+  padding-top: 1.5rem;
   padding-left: 10px;
   gap: 10px;
 `;
@@ -32,37 +37,30 @@ export const FlexContainer = styled.div`
   justify-content: space-between;
   gap: 10px;
 
-  @media (max-width: 768px) { 
+  @media (max-width: 768px) {
     flex-direction: column;
-    
   }
 `;
 
-
-
-export const StyledInput = styled.input`
-  padding: 10px;
-  font-family: sans-serif;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-  transition: border-color 0.3s;
+export const StyledInput = styled(TextField)`
   width: 100%;
-
-  &:focus {
-    border-color: var(--bg-primary);
-  }
 `;
 
 export const StyledSelect = styled.select`
-  padding: 10px;
+  padding: 15px;
+  font-size: 16px;
   border: 1px solid #ccc;
   background-color: white;
   color: var(--bg-dark);
   border-radius: 4px;
   outline: none;
   width: 100%;
+  font-family: sans-serif;
   transition: border-color 0.3s;
+
+  > option {
+    font-family: sans-serif;
+  }
 
   &:focus {
     border-color: var(--bg-primary);
@@ -71,7 +69,8 @@ export const StyledSelect = styled.select`
 
 export const StyledFormControlLabel = styled(FormControlLabel)`
   .MuiFormControlLabel-label {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+    color: var(--bg-dark);
   }
 `;
 
@@ -80,9 +79,12 @@ export const StyledCheckbox = styled(Checkbox)`
     width: 24px;
     height: 24px;
   }
-  svg {
-    width: 18px;
-    height: 18px;
+
+  @media (max-width: 450px) {
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 `;
 
