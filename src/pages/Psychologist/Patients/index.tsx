@@ -4,19 +4,15 @@ import { toast } from "react-toastify";
 
 // Icons
 import ListIcon from "@mui/icons-material/List";
-import Menu from "@mui/material/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
 import ArchiveIcon from "@mui/icons-material/Archive";
-import ForwardIcon from "@mui/icons-material/Forward";
-import InfoIcon from "@mui/icons-material/Info";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 
 // Project components and hooks
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import { getFormattedName } from "../../../common/functions/formatString";
+import { formatPhoneNumber, getFormattedName } from "../../../common/functions/formatString";
 
 // Styled components
 import {
@@ -27,11 +23,11 @@ import {
   TitleContainer,
   ActionLinks,
   Button,
-  StyledMenuItem,
   StyledListIcon,
 } from "./styled";
 import { PatientListSkeleton } from "../../../components/Layout/Loader/Skeleton/PatientListSkeleton";
 import usePsychologistById from "../../../hooks/usePsychologistData";
+import { Menu, MenuItem } from "@mui/material";
 
 type PatientDisplayData = {
   id: string;
@@ -56,10 +52,7 @@ export const Patients = () => {
     setAnchorEl(null);
   };
 
-  const [search, setSearch] = useState("");
-  const [sortedPatients, setSortedPatients] = useState<PatientDisplayData[]>(
-    []
-  );
+  const [patients, setPatients] = useState<PatientDisplayData[]>([]);
 
   const patientsList = useMemo(() => {
     return psychologistData?.patients || [];
@@ -80,7 +73,7 @@ export const Patients = () => {
         })
       );
 
-      setSortedPatients(convertedPatients);
+      setPatients(convertedPatients);
     }
   }, [patientsList]);
 
@@ -101,12 +94,7 @@ export const Patients = () => {
         <FilterContainer>
           <SearchContainer>
             <SearchIcon />
-            <input
-              type="text"
-              placeholder="Pesquisar paciente..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+            <input type="text" placeholder="Pesquisar paciente..." />
           </SearchContainer>
 
           <Button>
@@ -130,44 +118,28 @@ export const Patients = () => {
             <ListIcon style={{ visibility: "hidden" }} />
           </TitleContainer>
 
-          {sortedPatients
-            .filter((patient) => patient.name.includes(search))
-            .map((patient) => (
-              <Item key={patient.id}>
-                <div className="profile">
-                  <PersonIcon />
-                  <p>{getFormattedName(patient.name)}</p>
-                </div>
-                <p className="none">{patient.city}</p>
-                <p>{patient.phone}</p>
-                <StyledListIcon onClick={handleMenuClick} />
-                <Menu
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={handleMenuClose}
-                >
-                  <div>
-                    <StyledMenuItem onClick={handleMenuClose}>
-                      <ForwardIcon className="icon" />
-                      Encaminhar pacientes
-                    </StyledMenuItem>
-                    <StyledMenuItem onClick={handleMenuClose}>
-                      <InfoIcon className="icon" />
-                      Dados do paciente
-                    </StyledMenuItem>
-                    <StyledMenuItem onClick={handleMenuClose}>
-                      <VisibilityIcon className="icon" />
-                      Visualizar detalhes
-                    </StyledMenuItem>
-                    <StyledMenuItem onClick={handleMenuClose}>
-                      <ArchiveIcon className="icon" />
-                      Arquivar
-                    </StyledMenuItem>
-                  </div>
-                </Menu>
-              </Item>
-            ))}
+          {patients.map((patient) => (
+            <Item key={patient.id}>
+              <div className="profile">
+                <PersonIcon />
+                <p>{getFormattedName(patient.name)}</p>
+              </div>
+              <p className="none">{patient.city}</p>
+              <p>{formatPhoneNumber(patient.phone )}</p>
+              <StyledListIcon onClick={handleMenuClick} />
+              <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+                <MenuItem onClick={handleMenuClose}>Arquivar paciente</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Dados do paciente</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Visualizar detalhes</MenuItem>
+                <MenuItem onClick={handleMenuClose}>Encaminhar paciente</MenuItem>
+              </Menu>
+            </Item>
+          ))}
         </div>
       </PatientContainer>
     </Body>

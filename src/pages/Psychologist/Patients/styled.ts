@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import MenuItem from "@mui/material/MenuItem";
 import ListIcon from "@mui/icons-material/List";
 
 export const PatientContainer = styled.div`
@@ -51,14 +50,13 @@ export const SearchContainer = styled.div`
     margin-bottom: 0;
   }
 
-  @media (max-width: 450px) {
-  }
   input {
     border: 1px solid #ccc;
     padding: 15px 8px 15px 45px;
     border-radius: 8px;
     width: 100%;
     font-size: 16px;
+    font-family: sans-serif;
 
     &:focus {
       outline: none;
@@ -185,11 +183,15 @@ export const Item = styled.div`
   border-radius: 5px;
 
   .profile,
-  p {
+  > p {
     flex: 1;
     display: flex;
     align-items: center;
     gap: 10px;
+  }
+  
+  p {
+    font-family: sans-serif;
   }
 
   @media (max-width: 450px) {
@@ -197,7 +199,7 @@ export const Item = styled.div`
       display: none;
     }
 
-    p {
+    > p {
       font-size: 0.8rem;
     }
   }
@@ -205,13 +207,6 @@ export const Item = styled.div`
 
 export const StyledListIcon = styled(ListIcon)`
   cursor: pointer;
-`;
-
-export const StyledMenuItem = styled(MenuItem)`
-  .icon {
-    color: var(--bg-dark);
-    margin-right: 8px;
-  }
 `;
 
 export const NoDataContainer = styled.div`
