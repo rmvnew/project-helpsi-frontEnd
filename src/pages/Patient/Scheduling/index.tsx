@@ -3,6 +3,7 @@ import { useSchedulingData } from "../../../hooks/useSchedulingData";
 import {
   Button,
   Column,
+  ContainerButton,
   Input,
   Label,
   SchedulingContainer,
@@ -85,18 +86,11 @@ export const Scheduling = () => {
                   value={formData.select_date}
                   onChange={handleChange}
                 />
-                <div>
-                  <Button type="button" onClick={() => setStep(1)}>
-                    Voltar
-                  </Button>
-                  <Button
-                    style={{ marginLeft: "10px" }}
-                    type="button"
-                    onClick={() => setStep(2)}
-                  >
+                <ContainerButton>
+                  <Button type="button" onClick={() => setStep(2)}>
                     Próximo
                   </Button>
-                </div>
+                </ContainerButton>
               </>
             )}
 
@@ -125,7 +119,7 @@ export const Scheduling = () => {
                   }
                   label="Tarde"
                 />
-                <div>
+                <ContainerButton>
                   <Button type="button" onClick={() => setStep(1)}>
                     Voltar
                   </Button>
@@ -136,7 +130,7 @@ export const Scheduling = () => {
                   >
                     Próximo
                   </Button>
-                </div>
+                </ContainerButton>
               </>
             )}
 
@@ -148,14 +142,14 @@ export const Scheduling = () => {
                     .filter((time) => !isTimeUnavailable(time))
                     .map(renderTimeSlot)}
                 </List>
-                <div>
+                <ContainerButton>
                   <Button type="button" onClick={() => setStep(2)}>
                     Voltar
                   </Button>
                   <Button style={{ marginLeft: "10px" }} type="submit">
-                    Confirmar Agendamento
+                    Confirmar
                   </Button>
-                </div>
+                </ContainerButton>
               </>
             )}
           </SchedulingForm>
