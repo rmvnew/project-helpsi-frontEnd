@@ -3,12 +3,12 @@ import { useSchedulingData } from "../../../hooks/useSchedulingData";
 import {
   Button,
   Column,
+  ContainerButton,
   Input,
   Label,
   SchedulingContainer,
   SchedulingForm,
 } from "./styled";
-
 
 import {
   Checkbox,
@@ -20,7 +20,6 @@ import {
 } from "@mui/material";
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/patient";
-import { Container } from "../../../components/Layout/Container/ContainerHome/styled";
 import SchedulingSkeleton from "../../../components/Layout/Loader/Skeleton/SchedulingSkeleton";
 
 export const Scheduling = () => {
@@ -74,96 +73,88 @@ export const Scheduling = () => {
   return (
     <Body>
       <Header />
-      <Container>
-        <SchedulingContainer>
-          <Column>
-            <SchedulingForm onSubmit={handleSubmit}>
-              {step === 1 && (
-                <>
-                  <Label>Para qual dia você quer agendar?</Label>
-                  <Input
-                    type="date"
-                    name="select_date"
-                    value={formData.select_date}
-                    onChange={handleChange}
-                  />
-                  <div>
-                    <Button type="button" onClick={() => setStep(1)}>
-                      Voltar
-                    </Button>
-                    <Button
-                      style={{ marginLeft: "10px" }}
-                      type="button"
-                      onClick={() => setStep(2)}
-                    >
-                      Próximo
-                    </Button>
-                  </div>
-                </>
-              )}
 
-              {step === 2 && (
-                <>
-                  <Label>Qual período do dia prefere?</Label>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={timeOfDay === "morning"}
-                        onChange={() => setTimeOfDay("morning")}
-                        name="timeOfDay"
-                        value="morning"
-                      />
-                    }
-                    label="Manhã"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={timeOfDay === "afternoon"}
-                        onChange={() => setTimeOfDay("afternoon")}
-                        name="timeOfDay"
-                        value="afternoon"
-                      />
-                    }
-                    label="Tarde"
-                  />
-                  <div>
-                    <Button type="button" onClick={() => setStep(1)}>
-                      Voltar
-                    </Button>
-                    <Button
-                      style={{ marginLeft: "10px" }}
-                      type="button"
-                      onClick={() => setStep(3)}
-                    >
-                      Próximo
-                    </Button>
-                  </div>
-                </>
-              )}
+      <SchedulingContainer>
+        <Column>
+          <SchedulingForm onSubmit={handleSubmit}>
+            {step === 1 && (
+              <>
+                <Label>Para qual dia você quer agendar?</Label>
+                <Input
+                  type="date"
+                  name="select_date"
+                  value={formData.select_date}
+                  onChange={handleChange}
+                />
+                <ContainerButton>
+                  <Button type="button" onClick={() => setStep(2)}>
+                    Próximo
+                  </Button>
+                </ContainerButton>
+              </>
+            )}
 
-              {step === 3 && (
-                <>
-                  <Label>Horários disponíveis para a data selecionada:</Label>
-                  <List>
-                    {timeSlots
-                      .filter((time) => !isTimeUnavailable(time))
-                      .map(renderTimeSlot)}
-                  </List>
-                  <div>
-                    <Button type="button" onClick={() => setStep(2)}>
-                      Voltar
-                    </Button>
-                    <Button style={{ marginLeft: "10px" }} type="submit">
-                      Confirmar Agendamento
-                    </Button>
-                  </div>
-                </>
-              )}
-            </SchedulingForm>
-          </Column>
-        </SchedulingContainer>
-      </Container>
+            {step === 2 && (
+              <>
+                <Label>Qual período do dia prefere?</Label>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={timeOfDay === "morning"}
+                      onChange={() => setTimeOfDay("morning")}
+                      name="timeOfDay"
+                      value="morning"
+                    />
+                  }
+                  label="Manhã"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={timeOfDay === "afternoon"}
+                      onChange={() => setTimeOfDay("afternoon")}
+                      name="timeOfDay"
+                      value="afternoon"
+                    />
+                  }
+                  label="Tarde"
+                />
+                <ContainerButton>
+                  <Button type="button" onClick={() => setStep(1)}>
+                    Voltar
+                  </Button>
+                  <Button
+                    style={{ marginLeft: "10px" }}
+                    type="button"
+                    onClick={() => setStep(3)}
+                  >
+                    Próximo
+                  </Button>
+                </ContainerButton>
+              </>
+            )}
+
+            {step === 3 && (
+              <>
+                <Label>Horários disponíveis para a data selecionada:</Label>
+                <List>
+                  {timeSlots
+                    .filter((time) => !isTimeUnavailable(time))
+                    .map(renderTimeSlot)}
+                </List>
+                <ContainerButton>
+                  <Button type="button" onClick={() => setStep(2)}>
+                    Voltar
+                  </Button>
+                  <Button style={{ marginLeft: "10px" }} type="submit">
+                    Confirmar
+                  </Button>
+                </ContainerButton>
+              </>
+            )}
+          </SchedulingForm>
+        </Column>
+      </SchedulingContainer>
     </Body>
   );
 

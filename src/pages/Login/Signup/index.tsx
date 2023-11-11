@@ -6,7 +6,6 @@ import {
   useCallback,
 } from "react";
 import { Link } from "react-router-dom";
-import InputMask from "react-input-mask";
 import {
   MenuItem,
   Checkbox,
@@ -16,7 +15,6 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
 import {
   ButtonContainer,
   Form,
@@ -27,9 +25,6 @@ import {
   StyledInput,
   StyledSelect,
 } from "../../../components/Form/styledForm";
-
-import Logo from "../../../assets/img/logo.svg";
-import Bonecos from "../../../assets/img/Psychologist.svg";
 import {
   FormGroup,
   Image,
@@ -49,23 +44,27 @@ import {
 import { getFormattedName } from "../../../common/functions/formatString";
 import useAddressFromCEP from "../../../hooks/useCEP";
 
+import InputMask from "react-input-mask";
+import Logo from "../../../assets/img/logo.svg";
+import Bonecos from "../../../assets/img/Psychologist.svg";
+
 const SignUp = () => {
-  const { formData, setFormData, setIsSubmitting, isSubmitting } = useSignUp();
+
   const psychologists: Psychologist[] = useAllPsychologists();
+  
+  const { formData, setFormData, setIsSubmitting, isSubmitting } = useSignUp();
+
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [rgError, setRgError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [step, setStep] = useState(1);
+
   const addressFromCEP = useAddressFromCEP(formData.address.address_zipcode);
 
-  const handleChange = useCallback(
-    (
-      e:
-        | ChangeEvent<
-            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-          >
-        | { target: { name: string; value: string } }
-    ) => {
+  const handleChange = useCallback((e: | ChangeEvent< HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement > | { 
+    
+    target: { name: string; value: string } }) => {
+
       const { name, value } = e.target;
 
       if (name === "user_password") {
@@ -152,6 +151,7 @@ const SignUp = () => {
   }, [addressFromCEP, handleChange]);
 
   const handleChangeForSelect = (e: SelectChangeEvent<unknown>) => {
+    
     const name = e.target.name ?? "";
     const value = e.target.value;
 
@@ -174,10 +174,8 @@ const SignUp = () => {
     });
   };
 
-  const handleCheckboxChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    psychologistId: string
-  ) => {
+  const handleCheckboxChange = ( e: ChangeEvent<HTMLInputElement>, psychologistId: string ) => {
+
     if (e.target.checked) {
       setFormData((prev) => ({
         ...prev,
@@ -191,24 +189,17 @@ const SignUp = () => {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (allFieldsFilled(formData, step)) {
-      setIsSubmitting(true);
-    }
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {e.preventDefault();
+
+    if (allFieldsFilled(formData, step)) { setIsSubmitting(true)}
+
   };
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirmation, setShowPasswordConfirmation] =
-    useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
-  const handleTogglePassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleTogglePasswordConfirmation = () => {
-    setShowPasswordConfirmation(!showPasswordConfirmation);
-  };
+  const handleTogglePassword = () => { setShowPassword(!showPassword)};
+  const handleTogglePasswordConfirmation = () => { setShowPasswordConfirmation(!showPasswordConfirmation);};
 
   const passwordsMatch = () => {
     return formData.user_password === formData.user_password_confirmation;

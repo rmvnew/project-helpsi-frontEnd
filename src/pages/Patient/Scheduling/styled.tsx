@@ -97,13 +97,19 @@ export const Input = styled(FormElement).attrs({ as: "input" })`
   border: 1px solid #cecece;
 `;
 
+export const ContainerButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 export const Button = styled.button`
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1rem;
   border: none;
   border-radius: 10px;
   background: linear-gradient(145deg, var(--bg-dark), var(--bg-dark-darker));
   color: var(--bg-body);
-  font-weight: 600;
+  width: 100%;
   cursor: pointer;
 
   &:hover,

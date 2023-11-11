@@ -84,7 +84,6 @@ export const Details = styled.div`
   justify-content: center;
   border-radius: 8px;
   background-color: white;
-  height: 200px;
   color: var(--bg-dark);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -114,7 +113,6 @@ export const Details = styled.div`
   }
 
   @media (min-width: 998px) {
-    
     gap: 20px;
     h2 {
       font-size: 1.5rem;
