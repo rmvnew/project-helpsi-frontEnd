@@ -171,6 +171,8 @@ const UserEditForm: React.FC<UserFormProps> = ({
           >
             <option value="FEMALE">Feminino</option>
             <option value="MALE">Masculino</option>
+            <option value="NON_BINARY">Não-Binário </option>
+            <option value="OTHER">Outro</option>
           </StyledSelect>
         </FlexContainer>
       </SectionWrapper>

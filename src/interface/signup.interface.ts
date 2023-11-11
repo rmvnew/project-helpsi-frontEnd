@@ -8,7 +8,7 @@ export interface SignUpInterface {
   user_date_of_birth: string;
   user_phone: string;
   psychologist_id: string;
-  user_genre: "MALE" | "FEMALE" | "";
+  user_genre: "MALE" | "FEMALE" | "NON_BINARY" | "OTHER";
   user_rg: string;
   user_cpf: string;
   address: Address;

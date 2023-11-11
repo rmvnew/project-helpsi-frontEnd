@@ -341,6 +341,9 @@ const SignUp = () => {
                 >
                   <MenuItem value="MALE">Masculino</MenuItem>
                   <MenuItem value="FEMALE">Feminino</MenuItem>
+                  <MenuItem value="NON_BINARY">Não-Binário </MenuItem>
+                  <MenuItem value="OTHER">Outro</MenuItem>
+                 
                 </StyledSelect>
                 <StyledInput
                   label="Número de telefone"
