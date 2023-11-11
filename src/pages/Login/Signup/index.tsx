@@ -1,58 +1,36 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
-import InputMask from "react-input-mask";
-import {
-  MenuItem,
-  Checkbox,
-  FormControlLabel,
-  Typography,
-  SelectChangeEvent,
-  InputAdornment,
-} from "@mui/material";
+import {MenuItem,Checkbox,FormControlLabel,Typography,SelectChangeEvent,InputAdornment,} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
-import {
-  ButtonContainer,
-  Form,
-  PsychologistContainer,
-  StepTitle,
-  StyledButton,
-  StyledIconButton,
-  StyledInput,
-  StyledSelect,
-} from "../../../components/Form/styledForm";
-
-import Logo from "../../../assets/img/logo.svg";
-import Bonecos from "../../../assets/img/Psychologist.svg";
-import {
-  FormGroup,
-  Image,
-  LoginContainer,
-  TextContainer,
-} from "../../../components/Layout/Container/ContainerLogin/styled";
+import { ButtonContainer,Form,PsychologistContainer,StepTitle,StyledButton,StyledIconButton,StyledInput,StyledSelect,} from "../../../components/Form/styledForm";
+import { FormGroup,Image,LoginContainer,TextContainer,} from "../../../components/Layout/Container/ContainerLogin/styled";
 import { LoginBackground } from "../../../components/Layout/Container/ContainerLogin/background";
 import { useSignUp } from "../../../hooks/useSignUp";
 import { useAllPsychologists } from "../../../hooks/useAllPsychologists";
 import { Psychologist } from "../../../interface/psychologist.interface";
 import { allFieldsFilled } from "../../../common/functions/validateSignUp";
-import {
-  isAtLeastFourYearsOld,
-  isValidCPF,
-  isValidEmail,
-} from "../../../common/utils/validade";
+import {isAtLeastFourYearsOld,isValidCPF,isValidEmail,} from "../../../common/utils/validade";
 import { getFormattedName } from "../../../common/functions/formatString";
 
+
+import InputMask from "react-input-mask";
+import Logo from "../../../assets/img/logo.svg";
+import Bonecos from "../../../assets/img/Psychologist.svg";
+
 const SignUp = () => {
-  const { formData, setFormData, setIsSubmitting, isSubmitting } = useSignUp();
+
   const psychologists: Psychologist[] = useAllPsychologists();
+
+  const { formData, setFormData, setIsSubmitting, isSubmitting } = useSignUp();
+
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [rgError, setRgError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [step, setStep] = useState(1);
+ 
+  
+  const handleChange = ( e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
     const { name, value } = e.target;
 
     if (name === "user_password") {
@@ -99,6 +77,7 @@ const SignUp = () => {
   };
 
   const handleChangeForSelect = (e: SelectChangeEvent<unknown>) => {
+
     const name = e.target.name ?? "";
     const value = e.target.value;
 
@@ -121,10 +100,8 @@ const SignUp = () => {
     });
   };
 
-  const handleCheckboxChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    psychologistId: string
-  ) => {
+  const handleCheckboxChange = ( e: ChangeEvent<HTMLInputElement>,psychologistId: string ) => {
+
     if (e.target.checked) {
       setFormData((prev) => ({
         ...prev,
@@ -138,16 +115,16 @@ const SignUp = () => {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => { e.preventDefault();
+
     if (allFieldsFilled(formData, step)) {
       setIsSubmitting(true);
     }
+
   };
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirmation, setShowPasswordConfirmation] =
-    useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -160,6 +137,8 @@ const SignUp = () => {
   const passwordsMatch = () => {
     return formData.user_password === formData.user_password_confirmation;
   };
+
+
 
   return (
     <LoginBackground>
@@ -335,13 +314,14 @@ const SignUp = () => {
                 </InputMask>
                 <ButtonContainer>
                   <StyledButton onClick={() => setStep(1)}>Voltar</StyledButton>
-                  <StyledButton
-                    onClick={() => {
+                  <StyledButton onClick={() => {
+
                       if (allFieldsFilled(formData, step)) {
                         setStep(3);
                       }
-                    }}
-                  >
+
+                    }}>
+                      
                     Próximo
                   </StyledButton>
                 </ButtonContainer>
@@ -461,6 +441,7 @@ const SignUp = () => {
           <Link to="/">
             Já tem uma conta? <strong>Faça login</strong>
           </Link>
+        
         </FormGroup>
         <Image>
           <img src={Bonecos} alt="bonecos" />
