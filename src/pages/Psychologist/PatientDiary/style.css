@@ -1,0 +1,80 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300&display=swap');
+
+body {
+  font-family: 'Urbanist', sans-serif;
+  color: #594f4f;
+  margin: 0;
+}
+
+.diary-title {
+  color: #594f4f;
+}
+
+.diary-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-container {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #594f4f;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: #C7E9CF;
+  border-top: 15px solid #594f4f;
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  height: 0;
+  padding-bottom: 50%;
+  position: relative;
+}
+
+.date-info {
+  margin-top: 20px; 
+  font-weight: bold;
+}
+
+.date-text {
+  margin-top: 25px; 
+  font-weight: bold;
+}
+
+.view-button {
+  background-color: #594f4f;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 10%; 
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  font-size: 14px; 
+}
+
+
+.view-button:hover {
+  background-color: #4a4040;
+}
+
+
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+
+  .view-button {
+    margin-top: 5%;
+  }
+}
