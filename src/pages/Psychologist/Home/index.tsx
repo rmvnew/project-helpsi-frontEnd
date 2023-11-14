@@ -23,7 +23,7 @@ export const HomePsy = () => {
                 Meus Pacientes
                 <img src={icon2} alt="Helth checkup" className="icon" />
               </Link>
-              <Link to="/daily" className="card-data">
+              <Link to="/psy/patient-diary" className="card-data">
                 Diário de Emoções
                 <img src={icon3} alt="Diário de Emoções" className="icon" />
               </Link>
