@@ -19,7 +19,7 @@ export const PatientData = () => {
         <div className="main-container">
           <div className="container">
             <div className="grid">
-              <Link to="#" className="card-data">
+              <Link to="/psy/service-report" className="card-data">
                 Relatório de atendimento
                 <img src={Task} alt="notes" className="icon" />
               </Link>
