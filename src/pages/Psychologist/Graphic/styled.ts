@@ -22,11 +22,8 @@ export const Container = styled.div`
 export const GraphicContainer = styled.div`
   height: 50vh;
   padding: 20px;
-`;
-
-export const ChartContainer = styled.div`
-  color: white;
-  font-size: 12px;
+  margin: auto;
+  
 `;
 
 export const Title = styled.h2`
