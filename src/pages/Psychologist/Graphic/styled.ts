@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const GraphicContainer = styled.div`
+export const Container = styled.div`
   text-align: center;
   padding: 20px;
   border-radius: 8px;
@@ -17,7 +17,16 @@ export const GraphicContainer = styled.div`
   & > * {
     margin-bottom: 15px;
   }
+`;
 
+export const GraphicContainer = styled.div`
+  height: 50vh;
+  padding: 20px;
+`;
+
+export const ChartContainer = styled.div`
+  color: white;
+  font-size: 12px;
 `;
 
 export const Title = styled.h2`
