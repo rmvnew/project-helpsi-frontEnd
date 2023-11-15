@@ -1,6 +1,7 @@
 import "./style.css";
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
+import { Link } from "react-router-dom";
 
 export const PatientDiary = () => {
   return (
@@ -8,7 +9,10 @@ export const PatientDiary = () => {
       <Body>
         <Header />
         <div className="diary-container">
-          <h2 className="diary-title">Diário dos Pacientes</h2>
+          <div className="align">
+            <h2 className="diary-title">Diário dos Pacientes</h2>
+            <Link to="/psy/graphic" className="view-button">Gráfico de emoções</Link>
+          </div>
 
           <div className="content-container grid-container">
             {/* Card 1 */}

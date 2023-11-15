@@ -15,6 +15,8 @@ import NotFound from "../pages/NotFound";
 import { ArchivedPatients } from "../pages/Psychologist/Patients/Arquived";
 import { PatientDiary } from "../pages/Psychologist/PatientDiary";
 import { PatientDetails } from "../pages/Psychologist/PatientDetails";
+import Graphic from "../pages/Psychologist/Graphic";
+
 
 
 export const AppRoutes = () => {
@@ -100,6 +102,15 @@ export const AppRoutes = () => {
         element={
           <RequireAuth allowedProfiles={["PSYCHOLOGIST"]}>
             <PatientDetails />
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/psy/graphic"
+        element={
+          <RequireAuth allowedProfiles={["PSYCHOLOGIST"]}>
+            <Graphic />
           </RequireAuth>
         }
       />

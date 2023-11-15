@@ -1,5 +1,14 @@
 .diary-title {
   color: #594f4f;
+  font-size: 20px;
+}
+
+.align {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  
 }
 
 .diary-container {
@@ -7,6 +16,7 @@
   margin: 0 auto;
   padding: 25px;
   margin-top: 20px;
+ 
 }
 
 .content-container {
@@ -50,8 +60,10 @@
   cursor: pointer;
   margin-top: 10%;
   border-radius: 5px;
+  text-align: center;
   transition: background-color 0.3s;
-  font-size: 14px;
+  font-size: 12px;
+  text-decoration: none;
 }
 
 .view-button:hover {
