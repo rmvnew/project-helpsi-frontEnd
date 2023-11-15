@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "./useApi";
-import { DiaryEntry } from "../interface/diaryEntry.interface";
+import { PatientDetailsInterface } from "../interface/diaryEntry.interface";
 
-interface UseServiceReport {
+
+interface UsePatientDetails {
     
-    formData: DiaryEntry;
+    formData: PatientDetailsInterface;
     handleTextFieldChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleSelectChange: ( event: React.ChangeEvent<{ name?: string; value: unknown }>) => void;
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
   }
   
 
-export const useServiceReport = (initialFormData: DiaryEntry): UseServiceReport => {
-  const [formData, setFormData] = useState<DiaryEntry>(initialFormData);
+export const usePatientDetails = (initialFormData: PatientDetailsInterface): UsePatientDetails => {
+  const [formData, setFormData] = useState<PatientDetailsInterface>(initialFormData);
   
 
   const handleTextFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {

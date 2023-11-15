@@ -2,11 +2,11 @@ import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import Header from "../../../components/Layout/Header/psy";
 import { Body } from "../../../components/Layout/Container/style";
 import usePsychologistById from "../../../hooks/usePsychologistData";
-import { useServiceReport } from "../../../hooks/useServiceReport";
 import { StyledForm, StyledSubmitButton, StyledTitle } from "./styled";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { usePatientDetails } from "../../../hooks/usePatientDetails";
 
-export const ServiceReport = () => {
+export const PatientDetails = () => {
     const initialFormData = {
       consultation_reason: "",
       therapy_type: "",
@@ -21,7 +21,7 @@ export const ServiceReport = () => {
     const psychologistId = currentUser?.user_id || "";
   
     const { formData, handleTextFieldChange, handleSelectChange, handleSubmit } =
-      useServiceReport(initialFormData);
+      usePatientDetails(initialFormData);
   
     const { psychologistData } = usePsychologistById(psychologistId);
   

@@ -1,4 +1,4 @@
-export interface DiaryEntry {
+export interface PatientDetailsInterface {
   consultation_reason: string;
   therapy_type: string;
   last_session_date: Date;
