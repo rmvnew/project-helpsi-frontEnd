@@ -21,7 +21,8 @@ export const Container = styled.div`
 
 export const GraphicContainer = styled.div`
   height: 50vh;
-  padding: 20px;
+  padding: 10px;
+  width: 100%;
   margin: auto;
   
 `;
