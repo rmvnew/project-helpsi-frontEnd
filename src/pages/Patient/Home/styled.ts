@@ -128,6 +128,7 @@ export const Details = styled.div`
 
 export const Btn = styled.button`
   padding: 10px;
+  margin-top: 10px;
   width: 40%;
   align-items: flex-start;
   background-color: var(--bg-dark);
