@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "./useApi";
-import { PatientDetailsInterface } from "../interface/diaryEntry.interface";
+import { PatientDetailsInterface } from "../interface/patientDetails.interface";
 
 
 interface UsePatientDetails {

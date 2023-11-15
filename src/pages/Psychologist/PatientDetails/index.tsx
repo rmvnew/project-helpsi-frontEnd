@@ -7,24 +7,23 @@ import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { usePatientDetails } from "../../../hooks/usePatientDetails";
 
 export const PatientDetails = () => {
-    const initialFormData = {
-      consultation_reason: "",
-      therapy_type: "",
-      last_session_date: new Date(),
-      diagnosis: "",
-      session_frequency: "",
-      current_status: "",
-      patient_id: "",
-    };
-  
-    const currentUser = useCurrentUser();
-    const psychologistId = currentUser?.user_id || "";
-  
-    const { formData, handleTextFieldChange, handleSelectChange, handleSubmit } =
-      usePatientDetails(initialFormData);
-  
-    const { psychologistData } = usePsychologistById(psychologistId);
-  
+  const initialFormData = {
+    consultation_reason: "",
+    therapy_type: "",
+    last_session_date: new Date(),
+    diagnosis: "",
+    session_frequency: "",
+    current_status: "",
+    patient_id: "",
+  };
+
+  const currentUser = useCurrentUser();
+  const psychologistId = currentUser?.user_id || "";
+
+  const { formData, handleTextFieldChange, handleSelectChange, handleSubmit } =
+    usePatientDetails(initialFormData);
+
+  const { psychologistData } = usePsychologistById(psychologistId);
 
   return (
     <Body>
@@ -71,7 +70,11 @@ export const PatientDetails = () => {
         <InputLabel>Paciente</InputLabel>
         <Select
           value={formData.patient_id}
-          onChange={(event) => handleSelectChange(event as React.ChangeEvent<{ name?: string; value: unknown }>)}
+          onChange={(event) =>
+            handleSelectChange(
+              event as React.ChangeEvent<{ name?: string; value: unknown }>
+            )
+          }
           label="Paciente"
           name="patient_id"
         >
