@@ -8,6 +8,12 @@ import { User } from "../interface/user.interface";
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const [paginationMeta, setPaginationMeta] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    itemCount: 0,
+  });
+
   const { profiles, getProfiles } = useProfiles();
   const { specialties, getSpecialties } = useSpecialties();
 
@@ -17,24 +23,36 @@ export const useUsers = () => {
   const [deletingUserId, setDeletingUserId] = useState<string | undefined>(
     undefined
   );
+  const [page, setPage] = useState<number>(1);
 
-  const getUsers = useCallback(async (searchTerm = "") => {
-    try {
-      const response = await api.get("/user", {
-        params: {
-          user_name: searchTerm,
-        },
-      });
+  const getUsers = useCallback(
+    async (searchTerm = "", limit = 5) => {
+      try {
+        const response = await api.get("/user", {
+          params: {
+            page,
+            user_name: searchTerm,
+            limit,
+          },
+        });
 
-      if (response.data) {
-        setUsers(response.data.items);
+        if (response.data) {
+          setUsers(response.data.items);
+
+          setPaginationMeta({
+            currentPage: response.data.meta.currentPage,
+            totalPages: response.data.meta.totalPages,
+            itemCount: response.data.meta.itemCount,
+          });
+        }
+      } catch (error) {
+        console.error(`Ocorreu um erro ao buscar usuários:`, error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error(`Ocorreu um erro ao buscar usuários:`, error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+    },
+    [page]
+  );
 
   const handleSubmit = async (formData: User) => {
     try {
@@ -78,6 +96,8 @@ export const useUsers = () => {
     initiateEdit,
     deletingUserId,
     setDeletingUserId,
-   
+    paginationMeta,
+    page,
+    setPage,
   };
 };

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import { Body } from "../../components/Layout/Container/style";
 import { SortSelect } from "./sortSelect";
 import { SearchComponent } from "./search";
 import { UserList } from "./userList";
 import { Loader } from "../../components/Layout/Loader";
 import Header from "../../components/Layout/Header/admin";
-
 import UserEditForm from "../../components/Form/UserEditForm";
-
 import { useUsers } from "../../hooks/useUsers";
 import {
   Container,
@@ -30,12 +30,17 @@ export const Dashboard = () => {
     setShowForm,
     editingUser,
     handleSubmit,
-
     initiateEdit,
     getUsers,
+    paginationMeta,
+    setPage,
   } = useUsers();
 
   const debouncedSearch = useDebounce(search, 100);
+  const itemsPerPage = 5;
+  const startIndex = (paginationMeta.currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedUsers = users.slice(startIndex, endIndex);
 
   useEffect(() => {
     if (editingUser) {
@@ -51,10 +56,17 @@ export const Dashboard = () => {
     }
   };
 
+  const handleChangePage = async (
+    _event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+    getUsers();
+  };
+
   useEffect(() => {
     getUsers(debouncedSearch);
-  }, [debouncedSearch, getUsers]);
-
+  }, [debouncedSearch, getUsers, paginationMeta.currentPage]);
   return (
     <Body>
       <Header />
@@ -89,12 +101,23 @@ export const Dashboard = () => {
           {loading ? (
             <Loader />
           ) : (
-            <UserList
-              users={users}
-              searchValue={search}
-              onEditClick={initiateEdit}
-              onShowForm={setShowForm}
-            />
+            <>
+              <UserList
+                users={paginatedUsers}
+                searchValue={search}
+                onEditClick={initiateEdit}
+                onShowForm={setShowForm}
+              />
+              <Stack style={{ marginTop: "20px"}}>
+                <Pagination
+                  count={paginationMeta.totalPages}
+                  page={paginationMeta.currentPage}
+                  onChange={handleChangePage}
+                  variant="outlined"
+                  shape="rounded"
+                />
+              </Stack>
+            </>
           )}
         </Content>
       </Container>
