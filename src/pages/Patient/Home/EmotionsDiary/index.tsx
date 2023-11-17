@@ -4,10 +4,13 @@ import { api } from "../../../../hooks/useApi";
 import { Btn } from "../styled";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { StyledTextarea } from "../../../Psychologist/Graphic/styled";
 
 export const EmotionsDiary = () => {
   const [emotionText, setEmotionText] = useState("");
-  const [patientDetailsId, setPatientDetailsId] = useState("7133c099-26f2-4067-8b9e-3896837f6b0a");
+  const [patientDetailsId, setPatientDetailsId] = useState(
+    "7133c099-26f2-4067-8b9e-3896837f6b0a"
+  );
 
   const handleSaveEntry = async () => {
     try {
@@ -30,11 +33,12 @@ export const EmotionsDiary = () => {
     <Container>
       <Title>Meu Diário de emoções</Title>
 
-      <TextArea
-        placeholder="Como você está se sentindo hoje?"
+      <StyledTextarea
+        aria-label="Digite algo"
+        placeholder="Digite algo"
         value={emotionText}
         onChange={(e) => setEmotionText(e.target.value)}
-      ></TextArea>
+      />
 
       <Btn onClick={handleSaveEntry}>Salvar</Btn>
 

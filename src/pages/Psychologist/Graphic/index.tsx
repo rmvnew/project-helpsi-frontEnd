@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import TextField from "@mui/material/TextField";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
 import { StyledSubmitButton } from "../PatientDetails/styled";
-import { Container, GraphicContainer, Title } from "./styled";
+import { Container, GraphicContainer, StyledTextarea, Title } from "./styled";
 import { useState, ChangeEvent } from "react";
 import { api } from "../../../hooks/useApi";
 
@@ -82,7 +82,7 @@ const Graphic = () => {
     }
   }, [emotionResult]);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(event.target.value);
   };
 
@@ -105,9 +105,10 @@ const Graphic = () => {
       <Header />
       <Container>
         <Title>Grafico de emoções</Title>
-        <TextField
-          label="Digite algo"
-          variant="outlined"
+
+        <StyledTextarea
+          aria-label="Digite algo"
+          placeholder="Digite algo"
           value={inputText}
           onChange={handleInputChange}
         />

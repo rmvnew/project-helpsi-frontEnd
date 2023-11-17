@@ -1,3 +1,4 @@
+import { TextareaAutosize } from "@mui/material";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -23,10 +24,29 @@ export const GraphicContainer = styled.div`
   height: 50vh;
   padding: 10px;
   width: 100%;
-  margin: auto;
+  display: flex;
+  justify-content: center;
   
 `;
 
 export const Title = styled.h2`
   color: var(--bg-dark);
+`;
+
+
+export const StyledTextarea = styled(TextareaAutosize)`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 80px;
+  font-size: 16px;
+  font-family: sans-serif;
+  color: var(--bg-dark);
+
+  &:focus {
+    outline: none;
+    border-color: var(--bg-primary);
+  }
 `;
