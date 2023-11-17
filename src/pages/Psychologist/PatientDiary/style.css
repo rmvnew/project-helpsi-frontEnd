@@ -7,8 +7,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  
 }
 
 .diary-container {
@@ -16,7 +14,6 @@
   margin: 0 auto;
   padding: 25px;
   margin-top: 20px;
- 
 }
 
 .content-container {
@@ -37,9 +34,19 @@
   border-radius: 10px;
   padding: 10px;
   text-align: center;
-  height: 0;
-  padding-bottom: 50%;
   position: relative;
+}
+
+.card-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.card-profile > img {
+  width: 40px;
 }
 
 .date-info {
@@ -68,6 +75,42 @@
 
 .view-button:hover {
   background-color: #4a4040;
+}
+
+.modal-title {
+  width: 100%;
+  text-align: center;
+}
+
+.modal-title > span {
+  font-size: 1rem;
+  color: var(--bg-dark);
+}
+
+.modal-text {
+  text-align: center;
+  width: 100%;
+  color: var(--bg-dark);
+  font-family: sans-serif;
+}
+
+.modal-date {
+  text-align: end;
+}
+
+.modal-date > span {
+  color: var(--bg-dark);
+  font-size: .6rem;
+  font-family: sans-serif;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 500px;
+  border: 7px solid var(--bg-primary);
+  margin: 5px;
 }
 
 @media screen and (max-width: 768px) {

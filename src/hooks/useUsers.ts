@@ -26,7 +26,7 @@ export const useUsers = () => {
   const [page, setPage] = useState<number>(1);
 
   const getUsers = useCallback(
-    async (searchTerm = "", limit = 5) => {
+    async (searchTerm = "", limit = 8) => {
       try {
         const response = await api.get("/user", {
           params: {

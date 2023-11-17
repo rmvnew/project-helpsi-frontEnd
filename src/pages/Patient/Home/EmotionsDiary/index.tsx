@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const EmotionsDiary = () => {
   const [emotionText, setEmotionText] = useState("");
-  const [patientDetailsId, setPatientDetailsId] = useState("");
+  const [patientDetailsId, setPatientDetailsId] = useState("7133c099-26f2-4067-8b9e-3896837f6b0a");
 
   const handleSaveEntry = async () => {
     try {
