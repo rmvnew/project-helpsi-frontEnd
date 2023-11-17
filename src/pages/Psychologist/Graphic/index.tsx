@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
 import { StyledSubmitButton } from "../PatientDetails/styled";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, TextArea, Title } from "./styled";
+import { Container, Title } from "./styled";
 import { api } from "../../../../hooks/useApi";
 import { Btn } from "../styled";
 import { ToastContainer, toast } from "react-toastify";
