@@ -37,10 +37,6 @@ export const Dashboard = () => {
   } = useUsers();
 
   const debouncedSearch = useDebounce(search, 100);
-  const itemsPerPage = 5;
-  const startIndex = (paginationMeta.currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedUsers = users.slice(startIndex, endIndex);
 
   useEffect(() => {
     if (editingUser) {
@@ -103,12 +99,12 @@ export const Dashboard = () => {
           ) : (
             <>
               <UserList
-                users={paginatedUsers}
+                users={users}
                 searchValue={search}
                 onEditClick={initiateEdit}
                 onShowForm={setShowForm}
               />
-              <Stack style={{ marginTop: "20px"}}>
+              <Stack style={{ marginTop: "20px" }}>
                 <Pagination
                   count={paginationMeta.totalPages}
                   page={paginationMeta.currentPage}
