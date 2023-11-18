@@ -100,7 +100,7 @@
 
 .modal-date > span {
   color: var(--bg-dark);
-  font-size: .6rem;
+  font-size: 0.6rem;
   font-family: sans-serif;
 }
 
@@ -108,9 +108,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  min-height: 500px;
-  border: 7px solid var(--bg-primary);
-  margin: 5px;
+  width: 600px;
 }
 
 .page {
@@ -119,10 +117,9 @@
   width: 100%;
 }
 
-
 .items > label {
- color: var(--bg-dark);
- margin-right: 10px;
+  color: var(--bg-dark);
+  margin-right: 10px;
 }
 
 .items > select {
@@ -131,13 +128,17 @@
   border-radius: 5px;
   padding: 2px;
   width: 50px;
- 
 }
 
 .items > select > option {
   border: none;
   color: var(--bg-dark);
+}
 
+.container-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 @media screen and (max-width: 768px) {
@@ -153,7 +154,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
   }
-  
+
+  .modal-content {
+    max-width: 300px;
+    max-height: 500px;
+  }
 }

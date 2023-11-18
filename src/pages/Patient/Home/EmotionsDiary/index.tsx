@@ -6,13 +6,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { StyledTextarea } from "../../../Psychologist/Graphic/styled";
 import { useCurrentUser } from "../../../../hooks/useCurrentUser";
+import { useNavigate } from "react-router-dom";
 
 export const EmotionsDiary = () => {
   const [emotionText, setEmotionText] = useState("");
   const [patientDetailsId, setPatientDetailsId] = useState("");
+  const navigate = useNavigate();
   const currentUser = useCurrentUser();
 
   useEffect(() => {
+    
     const fetchPatientDetailsId = async () => {
       try {
         if (currentUser && currentUser.user_id) {
@@ -27,6 +30,7 @@ export const EmotionsDiary = () => {
             setPatientDetailsId(fetchedPatientDetailsId);
           }
         }
+
       } catch (error) {
         console.error("Erro ao obter detalhes do paciente:", error);
         toast.error("Erro ao obter detalhes do paciente");
@@ -46,8 +50,8 @@ export const EmotionsDiary = () => {
       });
 
       setEmotionText("");
-
       toast.success("Diário salvo com sucesso!");
+      navigate("/diary-list");
     } catch (error) {
       console.error("Erro ao salvar entrada no diário:", error);
       toast.error("Erro ao salvar entrada no diário");
