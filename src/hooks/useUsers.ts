@@ -20,9 +20,7 @@ export const useUsers = () => {
   const [search, setSearch] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [editingUser, setEditingUser] = useState<User | undefined>(undefined);
-  const [deletingUserId, setDeletingUserId] = useState<string | undefined>(
-    undefined
-  );
+  const [deletingUserId, setDeletingUserId] = useState<string | undefined>(undefined);
   const [page, setPage] = useState<number>(1);
 
   const getUsers = useCallback(

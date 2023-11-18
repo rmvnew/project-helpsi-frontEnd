@@ -1,22 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { Body } from "../../components/Layout/Container/style";
-import { SortSelect } from "./sortSelect";
 import { SearchComponent } from "./search";
 import { UserList } from "./userList";
 import { Loader } from "../../components/Layout/Loader";
 import Header from "../../components/Layout/Header/admin";
 import UserEditForm from "../../components/Form/UserEditForm";
 import { useUsers } from "../../hooks/useUsers";
-import {
-  Container,
-  Description,
-  Content,
-  ToggleFormButton,
-  Query,
-} from "./styled";
+import {Container,Description,Content,ToggleFormButton,Query,} from "./styled";
 import { useDebounce } from "../../hooks/useDebounce";
+import "../Psychologist/PatientDiary/style.css";
+
 
 export const Dashboard = () => {
   const {
@@ -36,6 +31,7 @@ export const Dashboard = () => {
     setPage,
   } = useUsers();
 
+  const [itemsPerPage, setItemsPerPage] = useState(8);
   const debouncedSearch = useDebounce(search, 100);
 
   useEffect(() => {
@@ -52,17 +48,15 @@ export const Dashboard = () => {
     }
   };
 
-  const handleChangePage = async (
-    _event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
+  const handleChangePage = async ( _event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
     getUsers();
   };
 
   useEffect(() => {
-    getUsers(debouncedSearch);
-  }, [debouncedSearch, getUsers, paginationMeta.currentPage]);
+    getUsers(debouncedSearch, itemsPerPage);
+  }, [debouncedSearch, getUsers, paginationMeta.currentPage, itemsPerPage]);
+
   return (
     <Body>
       <Header />
@@ -76,7 +70,7 @@ export const Dashboard = () => {
         </Description>
 
         <Query>
-          <SortSelect />
+       
           <SearchComponent value={search} onChange={setSearch} />
         </Query>
 
@@ -104,15 +98,26 @@ export const Dashboard = () => {
                 onEditClick={initiateEdit}
                 onShowForm={setShowForm}
               />
-              <Stack style={{ marginTop: "20px" }}>
-                <Pagination
-                  count={paginationMeta.totalPages}
-                  page={paginationMeta.currentPage}
-                  onChange={handleChangePage}
-                  variant="outlined"
-                  shape="rounded"
-                />
-              </Stack>
+              <div className="page">
+                <Stack style={{ marginTop: "20px" }}>
+                  <Pagination
+                    count={paginationMeta.totalPages}
+                    page={paginationMeta.currentPage}
+                    onChange={handleChangePage}
+                    variant="outlined"
+                    shape="rounded"
+                  />
+                </Stack>
+                
+              <div className="items" style={{ marginTop: "20px" }}>
+                <label>Itens por página:</label>
+                <select value={itemsPerPage} onChange={(e) => setItemsPerPage(Number(e.target.value))}>
+                  <option value={5}>5</option>
+                  <option value={8}>8</option>
+                  <option value={10}>10</option>
+                </select>
+              </div>
+              </div>
             </>
           )}
         </Content>

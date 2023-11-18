@@ -137,7 +137,7 @@ export const PatientDiary = () => {
               shape="rounded"
               style={{ marginTop: "20px" }}
             />
-            <div className="items">
+            <div className="items"  style={{ marginTop: "20px" }}>
               <label>Itens por página:</label>
               <select value={limit} onChange={handleChangeLimit}>
                 <option value={5}>5</option>

@@ -148,4 +148,12 @@
   .view-button {
     margin-top: 5%;
   }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+  }
+  
 }
