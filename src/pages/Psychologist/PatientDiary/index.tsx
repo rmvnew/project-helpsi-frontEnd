@@ -8,6 +8,7 @@ import { Dialog, DialogTitle, DialogContent, Typography } from "@mui/material";
 import "./style.css";
 import ptBR from "date-fns/locale/pt-BR";
 import profile from "../../../assets/icons/icon_user_diary.svg";
+import { getFirstNameFormatted } from "../../../common/functions/formatString";
 
 interface DiaryEntry {
   is_active: boolean;
@@ -27,6 +28,7 @@ interface DiaryEntry {
     current_status: string;
     user: {
       user_id: string;
+      user_name: string;
     };
   };
 }
@@ -35,7 +37,7 @@ interface ApiResponse {
   items: DiaryEntry[];
 }
 
-export const PatientDiary: React.FC = () => {
+export const PatientDiary = () => {
   const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
   const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -79,7 +81,7 @@ export const PatientDiary: React.FC = () => {
               <div key={entry.diary_entry_id} className="card">
                 <div className="card-profile">
                   <img src={profile} alt="" />
-                  <h3> Nome do Paciente</h3>
+                  <p>{entry.patient_details.user.user_name}</p>
                 </div>
                 <p className="date-info">
                   Escrito dia
@@ -109,7 +111,12 @@ export const PatientDiary: React.FC = () => {
             <>
               <DialogContent className="modal-content">
                 <DialogTitle className="modal-title">
-                  <span>Diário de Fulano da Silva</span>
+                  <span>
+                    Diário de{" "}
+                    {getFirstNameFormatted(
+                      selectedEntry.patient_details.user.user_name
+                    )}
+                  </span>
                 </DialogTitle>
                 <Typography className="modal-text">
                   {selectedEntry.text}
