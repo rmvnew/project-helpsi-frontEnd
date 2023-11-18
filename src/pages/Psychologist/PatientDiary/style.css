@@ -113,6 +113,33 @@
   margin: 5px;
 }
 
+.page {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.items > label {
+ color: var(--bg-dark);
+ margin-right: 10px;
+}
+
+.items > select {
+  border: 1px solid rgb(193, 191, 191);
+  color: var(--bg-dark);
+  border-radius: 5px;
+  padding: 2px;
+  width: 50px;
+ 
+}
+
+.items > select > option {
+  border: none;
+  color: var(--bg-dark);
+
+}
+
 @media screen and (max-width: 768px) {
   .grid-container {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));

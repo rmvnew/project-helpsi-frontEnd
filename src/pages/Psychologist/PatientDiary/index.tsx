@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { api } from "../../../hooks/useApi";
 import { Dialog, DialogTitle, DialogContent, Typography } from "@mui/material";
-import "./style.css";
+import Pagination from "@mui/material/Pagination";
 import ptBR from "date-fns/locale/pt-BR";
 import profile from "../../../assets/icons/icon_user_diary.svg";
 import { getFirstNameFormatted } from "../../../common/functions/formatString";
+import "./style.css";
 
 interface DiaryEntry {
   is_active: boolean;
@@ -35,25 +36,35 @@ interface DiaryEntry {
 
 interface ApiResponse {
   items: DiaryEntry[];
+  total: number;
 }
 
 export const PatientDiary = () => {
   const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
   const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get<ApiResponse>("/diary-entry");
+        const response = await api.get<ApiResponse>("/diary-entry", {
+          params: {
+            page,
+            limit,
+          },
+        });
         setDiaryEntries(response.data.items);
+        setTotalPages(Math.ceil(response.data.total / limit));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [page, limit]);
 
   const handleViewClick = (entry: DiaryEntry) => {
     setSelectedEntry(entry);
@@ -62,6 +73,18 @@ export const PatientDiary = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleChangePage = (
+    _event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
+
+  const handleChangeLimit = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setLimit(event.target.value as number);
+    setPage(1);
   };
 
   return (
@@ -103,6 +126,25 @@ export const PatientDiary = () => {
                 </button>
               </div>
             ))}
+          </div>
+
+          <div className="page">
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={handleChangePage}
+              variant="outlined"
+              shape="rounded"
+              style={{ marginTop: "20px" }}
+            />
+            <div className="items">
+              <label>Itens por página:</label>
+              <select value={limit} onChange={handleChangeLimit}>
+                <option value={5}>5</option>
+                <option value={8}>8</option>
+                <option value={10}>10</option>
+              </select>
+            </div>
           </div>
         </div>
 
