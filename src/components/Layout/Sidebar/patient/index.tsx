@@ -1,22 +1,14 @@
 import { Link } from "react-router-dom";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import EventIcon from "@mui/icons-material/Event";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
 import { Sidebar, SidebarLink } from "../styled";
-import { ScheduleLink } from "../../Header/patient/schedule";
 import { SidebarPatientProps } from "../../../../interface/sidebar.interface";
-import { DailyLink } from "../../Header/patient/daily";
-import { SubItemsWrapper } from "../SubItemsWrapper";
 
-const SidebarComponent: React.FC<SidebarPatientProps> = ({
-  isSidebarOpen,
-  isScheduleExpanded,
-  isDailyExpanded,
-  toggleSchedule,
-  toggleDaily,
-}) => (
+const SidebarComponent: React.FC<SidebarPatientProps> = ({ isSidebarOpen }) => (
   <Sidebar open={isSidebarOpen}>
-    
     <SidebarLink>
       <Link to="/home">
         <HomeOutlinedIcon />
@@ -25,24 +17,16 @@ const SidebarComponent: React.FC<SidebarPatientProps> = ({
     </SidebarLink>
 
     <SidebarLink>
-      <ScheduleLink
-        isScheduleExpanded={isScheduleExpanded}
-        toggleSchedule={toggleSchedule}
-      />
+      <Link to="/scheduling">
+        <EventIcon /> Agendar
+      </Link>
     </SidebarLink>
-
-    <SubItemsWrapper visible={isScheduleExpanded}>
-      <Link to="/scheduling">Online</Link>
-      <Link to="/scheduling">Presencial</Link>
-    </SubItemsWrapper>
 
     <SidebarLink>
-      <DailyLink isDailyExpanded={isDailyExpanded} toggleDaily={toggleDaily} />
+      <Link to="/diary-list">
+        <AutoStoriesOutlinedIcon /> Meus diários
+      </Link>
     </SidebarLink>
-
-    <SubItemsWrapper visible={isDailyExpanded}>
-      <Link to="#">Histórico</Link>
-    </SubItemsWrapper>
   </Sidebar>
 );
 

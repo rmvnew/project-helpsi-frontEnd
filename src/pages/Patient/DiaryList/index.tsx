@@ -15,10 +15,11 @@ import { toast } from "react-toastify";
 import Header from "../../../components/Layout/Header/patient";
 import { useDiaryEntries } from "../../../hooks/useDiaryEntries";
 import useFetchPatientDetailsId from "../../../hooks/useFetchPatientDetailsId";
+import { Loader } from "../../../components/Layout/Loader";
 
 export const DiaryList = () => {
   const currentUser = useCurrentUser();
-  const { diaryEntries, totalPages, fetchDiaryEntries } = useDiaryEntries();
+  const { diaryEntries, loading, fetchDiaryEntries, paginationMeta } = useDiaryEntries();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -31,10 +32,13 @@ export const DiaryList = () => {
   const [editedText, setEditedText] = useState<string>("");
   const patientDetailsId = useFetchPatientDetailsId(editedText);
 
-  const fetchDiaryEntriesMemoized = useCallback( () => fetchDiaryEntries(page, limit, currentUser?.user_id),
+  const fetchDiaryEntriesMemoized = useCallback(
+    () => {
+      fetchDiaryEntries(page, limit, currentUser?.user_id);
+    },
     [page, limit, currentUser?.user_id]
   );
-
+  
   useEffect(() => {
     fetchDiaryEntriesMemoized();
   }, [fetchDiaryEntriesMemoized]);
@@ -120,53 +124,52 @@ export const DiaryList = () => {
             <h2 className="diary-title">Meus diários</h2>
           </div>
 
+          {loading ? (
+            <Loader />
+          ) : (
+
           <div className="content-container grid-container">
+
             {diaryEntries.map((entry) => (
               <div key={entry.diary_entry_id} className="card">
                 <p className="date-info">
-                  Escrito dia
-                  {format(new Date(entry.register_date), " d'/'MM'/'yyyy", {
+                  Escrito dia {format(new Date(entry.register_date), " d'/'MM'/'yyyy", {
                     locale: ptBR,
                   })}
                 </p>
                 <p className="date-text">
-                  Última edição
-                  {format(new Date(entry.update_at), " d'/'MM'/'yyyy", {
+                  Última edição {format(new Date(entry.update_at), " d'/'MM'/'yyyy", {
                     locale: ptBR,
                   })}
                 </p>
+
                 <div className="container-button">
-                  <button
-                    className="view-button"
-                    onClick={() => handleViewClick(entry)}
-                  >
+                  <button className="view-button" onClick={() => handleViewClick(entry)} >
                     Visualizar
                   </button>
-                  <button
-                    className="view-button"
-                    onClick={() => handleOpenEditModal(entry)}
-                  >
+                  <button className="view-button" onClick={() => handleOpenEditModal(entry)} >
                     Editar
                   </button>
-                  <button
-                    className="view-button"
-                    onClick={() => handleDelete()}
-                  >
+                  <button className="view-button" onClick={() => handleDelete()} >
                     Excluir
                   </button>
                 </div>
               </div>
             ))}
+
           </div>
+
+          )}
 
           <div className="page">
             <Pagination
-              count={totalPages}
-              page={page}
+              count={paginationMeta.totalPages}
+              page={paginationMeta.currentPage}
               onChange={handleChangePage}
               variant="outlined"
               shape="rounded"
               style={{ marginTop: "20px" }}
+              
             />
             <div className="items" style={{ marginTop: "20px" }}>
               <label>Itens por página:</label>

@@ -18,7 +18,7 @@ const SidebarComponent: React.FC<SidebarPsyProps> = ({
   <Sidebar open={isSidebarOpen}>
     <img src={logo} alt="logo da empresa" style={{ width: "150px" }} />
     <SidebarLink>
-      <Link to="/">
+      <Link to="/psy/home">
         <HomeOutlinedIcon />
         Home
       </Link>
@@ -32,11 +32,8 @@ const SidebarComponent: React.FC<SidebarPsyProps> = ({
     </SidebarLink>
 
     <SubItemsWrapper visible={isDocumentsExpanded}>
-      <Link to="/relatorio">Relatório</Link>
-      <Link to="/laudo">Laudo</Link>
-      <Link to="/declaracao">Declaração</Link>
-      <Link to="/recibos">Recibos</Link>
-      <Link to="/encaminhamentos">Encaminhamentos</Link>
+      <Link to="/psy/service-report">Relatório</Link>
+      
       </SubItemsWrapper>
     <SidebarLink>
       <Link to="/psy/patients">
