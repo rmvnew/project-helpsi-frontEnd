@@ -10,54 +10,48 @@ import ptBR from "date-fns/locale/pt-BR";
 import profile from "../../../assets/icons/icon_user_diary.svg";
 import { getFirstNameFormatted } from "../../../common/functions/formatString";
 import "./style.css";
+import { DiaryListInterface } from "../../../interface/diaryList.interface";
 
-interface DiaryEntry {
-  is_active: boolean;
-  create_at: string;
-  update_at: string;
-  diary_entry_id: string;
-  register_date: string;
-  text: string;
-  patient_details: {
-    patient_details_id: string;
-    start_date: string;
-    consultation_reason: string;
-    previous_diagnosis: string | null;
-    diagnosis: string;
-    session_frequency: string;
-    last_session_date: string | null;
-    current_status: string;
-    user: {
-      user_id: string;
-      user_name: string;
-    };
-  };
-}
-
-interface ApiResponse {
-  items: DiaryEntry[];
-  total: number;
-}
 
 export const PatientDiary = () => {
-  const [diaryEntries, setDiaryEntries] = useState<DiaryEntry[]>([]);
-  const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | null>(null);
+
+  const [selectedEntry, setSelectedEntry] = useState<DiaryListInterface | null>(null);
+  const [diaryEntries, setDiaryEntries] = useState<DiaryListInterface[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const [totalPages, setTotalPages] = useState(1);
+  const [paginationMeta, setPaginationMeta] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    itemCount: 0,
+  });
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get<ApiResponse>("/diary-entry", {
+        const response = await api.get("/diary-entry", {
           params: {
             page,
             limit,
           },
         });
-        setDiaryEntries(response.data.items);
+
+
+        if (response.data) {
+          setDiaryEntries(response.data.items);
+  
+          setPaginationMeta({
+              currentPage: response.data.meta.currentPage,
+              totalPages: response.data.meta.totalPages,
+              itemCount: response.data.meta.itemCount,
+            });
+      
+        }
+        
         setTotalPages(Math.ceil(response.data.total / limit));
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -66,7 +60,7 @@ export const PatientDiary = () => {
     fetchData();
   }, [page, limit]);
 
-  const handleViewClick = (entry: DiaryEntry) => {
+  const handleViewClick = (entry: DiaryListInterface ) => {
     setSelectedEntry(entry);
     setIsModalOpen(true);
   };
@@ -130,8 +124,8 @@ export const PatientDiary = () => {
 
           <div className="page">
             <Pagination
-              count={totalPages}
-              page={page}
+              count={paginationMeta.totalPages}
+              page={paginationMeta.currentPage}
               onChange={handleChangePage}
               variant="outlined"
               shape="rounded"
