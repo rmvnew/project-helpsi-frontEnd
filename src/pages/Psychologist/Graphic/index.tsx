@@ -1,15 +1,17 @@
-import { useEffect, useRef } from "react";
-import Chart from "chart.js/auto";
+import { useEffect, useRef, ChangeEvent } from "react";
+import { useState } from "react";
+import { api } from "../../../hooks/useApi";
 import { Body } from "../../../components/Layout/Container/style";
-import Header from "../../../components/Layout/Header/psy";
 import { StyledSubmitButton } from "../PatientDetails/styled";
 import { Container, GraphicContainer, StyledTextarea, Title } from "./styled";
-import { useState, ChangeEvent } from "react";
-import { api } from "../../../hooks/useApi";
+
+import Chart from "chart.js/auto";
+import Header from "../../../components/Layout/Header/psy";
 
 const Graphic = () => {
   const [inputText, setInputText] = useState("");
   const [emotionResult, setEmotionResult] = useState<any>(null);
+  const [loading, setLoading] = useState(false); 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chartRef = useRef<Chart<"bar", number[], string> | null>(null);
 
@@ -21,15 +23,40 @@ const Graphic = () => {
     };
   }, []);
 
+  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputText(event.target.value);
+  };
+
+  const handleButtonClick = async () => {
+    setLoading(true);
+
+    try {
+      const response = await api.get("/diary-entry/emotion/min", {
+        params: {
+          text: inputText,
+        },
+      });
+
+      const { data } = response.data;
+
+      setEmotionResult({
+        text: data.text,
+        emotion: data.emotion,
+      });
+    } catch (error) {
+      console.error("Erro ao chamar a API:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (canvasRef.current && emotionResult) {
       const ctx = canvasRef.current.getContext("2d");
 
       if (ctx) {
         const emotions = Object.keys(emotionResult.emotion);
-        const data = emotions.map((emotion) =>
-          parseFloat(emotionResult.emotion[emotion])
-        );
+        const data = emotions.map((emotion) => emotionResult.emotion[emotion]);
 
         if (chartRef.current) {
           chartRef.current.data.labels = emotions;
@@ -81,24 +108,6 @@ const Graphic = () => {
     }
   }, [emotionResult]);
 
-  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setInputText(event.target.value);
-  };
-
-  const handleButtonClick = async () => {
-    try {
-      const response = await api.get("/diary-entry/emotion", {
-        params: {
-          text: inputText,
-        },
-      });
-
-      setEmotionResult(response.data);
-    } catch (error) {
-      console.error("Erro ao chamar a API:", error);
-    }
-  };
-
   return (
     <Body>
       <Header />
@@ -111,9 +120,11 @@ const Graphic = () => {
           value={inputText}
           onChange={handleInputChange}
         />
+
         <StyledSubmitButton onClick={handleButtonClick}>
-          Mostrar gráfico
+          {loading ? "Carregando..." : "Mostrar gráfico"}
         </StyledSubmitButton>
+
         <GraphicContainer>
           <canvas ref={canvasRef} width={900} height={900}></canvas>
         </GraphicContainer>
