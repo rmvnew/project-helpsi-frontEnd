@@ -1,25 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSchedulingData } from "../../../hooks/useSchedulingData";
-import {
-  Button,
-  Column,
-  ContainerButton,
-  Input,
-  Label,
-  SchedulingContainer,
-  SchedulingForm,
-} from "./styled";
 
-import {
-  Checkbox,
-  FormControlLabel,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemButton,
-} from "@mui/material";
 import { Body } from "../../../components/Layout/Container/style";
+import { Button, Column, ContainerButton, Input, Label, SchedulingContainer, SchedulingForm } from "./styled";
+
 import Header from "../../../components/Layout/Header/patient";
+
+import { Checkbox, FormControlLabel, List, ListItem, ListItemText, ListItemButton } from "@mui/material";
+
 import SchedulingSkeleton from "../../../components/Layout/Loader/Skeleton/SchedulingSkeleton";
 
 export const Scheduling = () => {
@@ -27,12 +15,11 @@ export const Scheduling = () => {
     useSchedulingData();
 
   const [step, setStep] = useState(1);
-  const [timeOfDay, setTimeOfDay] = useState<"morning" | "afternoon" | null>(
-    null
-  );
+  const [timeOfDay, setTimeOfDay] = useState<"morning" | "afternoon" | null>( null);
   const [showSkeleton, setShowSkeleton] = useState(true);
 
   const getTimeSlots = () => {
+
     if (timeOfDay === "morning") {
       return Array.from(
         { length: 5 },
@@ -51,6 +38,7 @@ export const Scheduling = () => {
   const timeSlots = getTimeSlots();
 
   const isTimeUnavailable = (time: string) => {
+
     const combinedDateTimeCheck = `${formData.select_date}T${time}:00.000Z`;
     const slot = unavailableSlots.find(
       (slot) => slot.time === combinedDateTimeCheck
@@ -75,7 +63,8 @@ export const Scheduling = () => {
       <Header />
 
       <SchedulingContainer>
-        <Column>
+  
+        
           <SchedulingForm onSubmit={handleSubmit}>
             {step === 1 && (
               <>
@@ -153,7 +142,9 @@ export const Scheduling = () => {
               </>
             )}
           </SchedulingForm>
-        </Column>
+       
+
+
       </SchedulingContainer>
     </Body>
   );

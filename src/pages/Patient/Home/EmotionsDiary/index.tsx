@@ -63,8 +63,8 @@ export const EmotionsDiary = () => {
       <Title>Meu Diário de emoções</Title>
 
       <StyledTextarea
-        aria-label="Digite algo"
-        placeholder="Digite algo"
+        
+        placeholder="Como você está se sentindo?"
         value={emotionText}
         onChange={(e) => setEmotionText(e.target.value)}
       />

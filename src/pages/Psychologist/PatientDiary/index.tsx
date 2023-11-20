@@ -11,6 +11,8 @@ import profile from "../../../assets/icons/icon_user_diary.svg";
 import { getFirstNameFormatted } from "../../../common/functions/formatString";
 import "./style.css";
 import { DiaryListInterface } from "../../../interface/diaryList.interface";
+import { NoAppointmentsContainer } from "../../Patient/Home/AppointmentTime/styled";
+import { Empty } from "antd";
 
 
 export const PatientDiary = () => {
@@ -80,6 +82,25 @@ export const PatientDiary = () => {
     setLimit(event.target.value as number);
     setPage(1);
   };
+
+  if (diaryEntries.length === 0 ) {
+    return (
+
+    <Body>
+        <Header />
+        <div className="diary-container">
+          <div className="content-container">
+            <NoAppointmentsContainer>
+              <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="Nenhum diário no momento"
+              />
+            </NoAppointmentsContainer>
+          </div>
+        </div>
+    </Body>
+    );
+  }
 
   return (
     <>

@@ -8,6 +8,7 @@ export const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  
 
   @media (min-width: 900px) {
     width: 70vw;

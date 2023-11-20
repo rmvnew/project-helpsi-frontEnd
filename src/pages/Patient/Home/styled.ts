@@ -63,8 +63,7 @@ export const Column = styled.div`
   flex-direction: column;
   gap: 20px;
   justify-content: center;
-  padding: 30px 15px;
-  min-height: 300px;
+  padding: 15px;
   border-radius: 8px;
 
   @media (min-width: 450px) {
@@ -128,7 +127,7 @@ export const Details = styled.div`
 
 export const Btn = styled.button`
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
   width: 40%;
   align-items: flex-start;
   background-color: var(--bg-dark);

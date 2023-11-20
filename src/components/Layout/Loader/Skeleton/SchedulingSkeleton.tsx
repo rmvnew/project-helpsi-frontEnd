@@ -9,15 +9,9 @@ const StyledSchedulingContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+
   width: 95vw;
-  background: linear-gradient(
-    145deg,
-    var(--bg-secundary-lighter),
-    var(--bg-secundary-darker)
-  );
   border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 
   @media (min-width: 768px) {
     width: 70vw;
@@ -28,21 +22,14 @@ const StyledSchedulingContainer = styled.div`
 const StyledColumn = styled.div`
   width: 60%;
   padding: 20px;
-  background: linear-gradient(
-    145deg,
-    var(--bg-body-lighter),
-    var(--bg-body-darker)
-  );
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 450px) {
-    min-height: 450px;
     width: 95%;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    
   }
 `;
 

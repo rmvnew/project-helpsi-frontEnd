@@ -9,24 +9,22 @@ const breakpoints = {
 
 export const SchedulingContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  margin: auto;
   gap: 2rem;
-  align-items: center;
-  padding: 3rem;
-  transition: all 0.3s;
+  padding: 10px;
   color: var(--bg-dark);
+  min-height: 70vh;
 
-  @media (min-width: ${breakpoints.md}) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+
+  @media (min-width: 768px) {
+    width: 50vw;
   }
+  
 `;
 
 export const Column = styled.div`
   display: flex;
   margin: auto 0;
-  height: 80vh;
   width: 95vw;
   padding: 1rem;
   background: linear-gradient(
@@ -39,7 +37,11 @@ export const Column = styled.div`
 
   @media (min-width: ${breakpoints.md}) {
     margin: auto;
-    width: 70vw;
+    width: 50vw;
+  }
+
+  @media (min-width: ${breakpoints.xl}) {
+    width: 30vw;
   }
 `;
 
@@ -49,11 +51,12 @@ export const SchedulingForm = styled.form`
   margin: auto;
   padding: 2rem;
   gap: 1.5rem;
-  width: 60%;
+  width: 90%;
   background: linear-gradient(
     145deg,
-    var(--bg-body-lighter),
-    var(--bg-body-darker)
+    var(--bg-primary-lighter),
+    var(--bg-primary-darker)
+    
   );
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);

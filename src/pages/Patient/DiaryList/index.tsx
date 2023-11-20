@@ -15,6 +15,8 @@ import Header from "../../../components/Layout/Header/patient";
 import { useDiaryEntries } from "../../../hooks/useDiaryEntries";
 import useOnePatient from "../../../hooks/useOnePatient";
 import { Loader } from "../../../components/Layout/Loader";
+import { NoAppointmentsContainer } from "../Home/AppointmentTime/styled";
+import { Empty } from "antd";
 
 export const DiaryList = () => {
  
@@ -96,6 +98,26 @@ export const DiaryList = () => {
     setLimit(event.target.value as number);
     setPage(1);
   };
+
+  if (diaryEntries.length === 0 ) {
+    return (
+
+    <Body>
+        <Header />
+        <div className="diary-container">
+          <div className="content-container">
+            <NoAppointmentsContainer>
+              <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="Nenhum diário escrito no momento"
+              />
+            </NoAppointmentsContainer>
+          </div>
+        </div>
+    </Body>
+    );
+  }
+
 
   return (
     <>
