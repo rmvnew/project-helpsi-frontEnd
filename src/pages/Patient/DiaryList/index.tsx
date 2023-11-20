@@ -5,7 +5,7 @@ import { api } from "../../../hooks/useApi";
 import { Dialog, DialogTitle, DialogContent, Typography } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import ptBR from "date-fns/locale/pt-BR";
-import { getFirstNameFormatted } from "../../../common/functions/formatString";
+import { getFirstNameFormatted, truncateString } from "../../../common/functions/formatString";
 import "../../Psychologist/PatientDiary/style.css";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { StyledSubmitButton } from "../../Psychologist/PatientDetails/styled";
@@ -131,16 +131,10 @@ export const DiaryList = () => {
           <div className="content-container grid-container">
 
             {diaryEntries.map((entry) => (
-              <div key={entry.diary_entry_id} className="card">
-                <p className="date-info">
-                  Escrito dia {format(new Date(entry.register_date), " d'/'MM'/'yyyy", {
-                    locale: ptBR,
-                  })}
-                </p>
-                <p className="date-text">
-                  Última edição {format(new Date(entry.update_at), " d'/'MM'/'yyyy", {
-                    locale: ptBR,
-                  })}
+              
+              <div key={entry.diary_entry_id} className="diary-patient">
+                <p style={{fontFamily: "sans-serif", textAlign: "center"}}>
+                 {  truncateString(entry.text, 300) }
                 </p>
 
                 <div className="container-button">

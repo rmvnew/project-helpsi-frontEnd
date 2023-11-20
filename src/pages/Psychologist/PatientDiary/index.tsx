@@ -107,7 +107,7 @@ export const PatientDiary = () => {
                   })}
                 </p>
                 <p className="date-text">
-                  Última edição em
+                  Última edição
                   {format(new Date(entry.update_at), " d'/'MM'/'yyyy", {
                     locale: ptBR,
                   })}
