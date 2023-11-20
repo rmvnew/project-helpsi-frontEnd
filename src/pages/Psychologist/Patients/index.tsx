@@ -1,48 +1,78 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
-// Icons
-import ListIcon from "@mui/icons-material/List";
+import { Menu, MenuItem, Pagination } from "@mui/material";
 import PersonIcon from "@material-ui/icons/Person";
+import ListIcon from "@mui/icons-material/List";
 import SearchIcon from "@material-ui/icons/Search";
 import ArchiveIcon from "@mui/icons-material/Archive";
 
-// Project components and hooks
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
+
+import { formatPhoneNumber, getFormattedName, truncateString } from "../../../common/functions/formatString";
+import { FilterContainer, SearchContainer, PatientContainer, Item, TitleContainer, ActionLinks, Button, StyledListIcon } from "./styled";
+
+import { User } from "../../../interface/user.interface";
+import { api } from "../../../hooks/useApi";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import { formatPhoneNumber, getFormattedName } from "../../../common/functions/formatString";
 
-// Styled components
-import {
-  FilterContainer,
-  SearchContainer,
-  PatientContainer,
-  Item,
-  TitleContainer,
-  ActionLinks,
-  Button,
-  StyledListIcon,
-} from "./styled";
-import { PatientListSkeleton } from "../../../components/Layout/Loader/Skeleton/PatientListSkeleton";
-import usePsychologistById from "../../../hooks/usePsychologistData";
-import { Menu, MenuItem } from "@mui/material";
+export const Patients: React.FC = () => {
 
-type PatientDisplayData = {
-  id: string;
-  name: string;
-  city: string;
-  phone: string;
-};
-
-export const Patients = () => {
   const currentUser = useCurrentUser();
-  const { psychologistData, isLoading, error } = usePsychologistById(
-    currentUser?.user_id || ""
-  );
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [patients, setPatients] = useState<User[]>([]);
+
+  const [paginationMeta, setPaginationMeta] = useState({ currentPage: 1, totalPages: 1, itemCount: 0 });
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+
+
+  useEffect(() => {
+    const getPatients = async () => {
+      try {
+        const userId = currentUser?.user_id;
+        const response = await api.get("/user/all-patients/psychologist", {
+          params: { 
+            user_id: userId, 
+            page, 
+            limit, 
+          },
+        });
+        
+
+        if (response.data) {
+          setPatients(response.data.items);
+  
+          setPaginationMeta({
+              currentPage: response.data.meta.currentPage,
+              totalPages: response.data.meta.totalPages,
+              itemCount: response.data.meta.itemCount,
+            });
+      
+        }
+        
+        setTotalPages(Math.ceil(response.data.total / limit));
+      } catch (error) {
+        console.error("Error fetching patient data:", error);
+      }
+    };
+
+    if (currentUser) {
+      getPatients();
+    }
+  }, [currentUser, page, limit, totalPages]);
+
+
+  const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+  const handleChangeLimit = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setLimit(event.target.value as number);
+    setPage(1);
+  };
 
   const handleMenuClick = (event: React.MouseEvent<SVGSVGElement>) => {
     setAnchorEl(event.currentTarget as unknown as HTMLElement);
@@ -51,40 +81,6 @@ export const Patients = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-
-  const [patients, setPatients] = useState<PatientDisplayData[]>([]);
-
-  const patientsList = useMemo(() => {
-    return psychologistData?.patients || [];
-  }, [psychologistData]);
-
-  useEffect(() => {
-    if (patientsList.length) {
-      patientsList.forEach((patient) => {
-        console.log("Individual patient data:", patient);
-      });
-
-      const convertedPatients: PatientDisplayData[] = patientsList.map(
-        (patient) => ({
-          id: patient.user_id,
-          name: patient.user_name,
-          city: patient.address?.address_city || "Manaus",
-          phone: patient.user_phone,
-        })
-      );
-
-      setPatients(convertedPatients);
-    }
-  }, [patientsList]);
-
-  if (isLoading) {
-    return <PatientListSkeleton />;
-  }
-
-  if (error) {
-    toast.error(`Error: ${error}`);
-    return null;
-  }
 
   return (
     <Body>
@@ -108,6 +104,7 @@ export const Patients = () => {
         </FilterContainer>
 
         <div>
+
           <TitleContainer>
             <div className="profile">
               <PersonIcon style={{ visibility: "hidden" }} />
@@ -118,14 +115,16 @@ export const Patients = () => {
             <ListIcon style={{ visibility: "hidden" }} />
           </TitleContainer>
 
+          
           {patients.map((patient) => (
-            <Item key={patient.id}>
+            <Item key={patient.user_id}>
               <div className="profile">
                 <PersonIcon />
-                <p>{getFormattedName(patient.name)}</p>
+                
+                <p className="p">{ truncateString(getFormattedName(patient.user_name), 17) }</p>
               </div>
-              <p className="none">{patient.city}</p>
-              <p>{formatPhoneNumber(patient.phone )}</p>
+              <p className="none p">{patient.address?.address_city}</p>
+              <p className="p">{formatPhoneNumber(patient.user_phone)}</p>
               <StyledListIcon onClick={handleMenuClick} />
               <Menu
                 anchorEl={anchorEl}
@@ -137,10 +136,35 @@ export const Patients = () => {
                 <MenuItem onClick={handleMenuClose}>Dados do paciente</MenuItem>
                 <MenuItem onClick={handleMenuClose}>Visualizar detalhes</MenuItem>
                 <MenuItem onClick={handleMenuClose}>Encaminhar paciente</MenuItem>
+
               </Menu>
             </Item>
           ))}
+
         </div>
+
+        <div className="page">
+
+          <Pagination
+            count={paginationMeta.totalPages}
+            page={paginationMeta.currentPage}
+            onChange={handleChangePage}
+            variant="outlined"
+            shape="rounded"
+            style={{ marginTop: "20px" }}
+            
+          />
+          <div className="items" style={{ marginTop: "20px" }}>
+            <label>Itens por página:</label>
+              <select value={limit} onChange={handleChangeLimit}>
+                <option value={5}>5</option>
+                <option value={8}>8</option>
+                <option value={10}>10</option>
+              </select>
+          </div>
+
+        </div>
+
       </PatientContainer>
     </Body>
   );

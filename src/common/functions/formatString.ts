@@ -29,3 +29,11 @@ export function formatPhoneNumber(phone: string) {
   return `(${areaCode}) ${firstPart}-${secondPart}`;
 }
 
+export function truncateString(inputString: string, maxLength: number): string {
+  
+  if (inputString.length <= maxLength) {
+    return inputString;
+  } else {
+    return inputString.substring(0, maxLength - 3) + '...';
+  }
+}

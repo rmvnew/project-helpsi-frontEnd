@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ListIcon from "@mui/icons-material/List";
 
 export const PatientContainer = styled.div`
-  padding: 20px;
+  padding: 10px;
   max-width: 95%;
   min-height: 70vh;
   margin: 30px auto;
@@ -182,6 +182,7 @@ export const Item = styled.div`
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 
+  
   .profile,
   > p {
     flex: 1;
@@ -199,9 +200,12 @@ export const Item = styled.div`
       display: none;
     }
 
-    > p {
-      font-size: 0.8rem;
-    }
+    .p {
+    font-size: .8rem;
+  }
+
+
+    
   }
 `;
 
