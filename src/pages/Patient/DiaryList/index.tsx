@@ -7,7 +7,6 @@ import Pagination from "@mui/material/Pagination";
 import ptBR from "date-fns/locale/pt-BR";
 import { getFirstNameFormatted, truncateString } from "../../../common/functions/formatString";
 import "../../Psychologist/PatientDiary/style.css";
-import { StyledSubmitButton } from "../../Psychologist/PatientDetails/styled";
 import { StyledTextarea } from "../../Psychologist/Graphic/styled";
 import { DiaryListInterface } from "../../../interface/diaryList.interface";
 import { toast } from "react-toastify";
@@ -17,6 +16,7 @@ import useOnePatient from "../../../hooks/useOnePatient";
 import { Loader } from "../../../components/Layout/Loader";
 import { NoAppointmentsContainer } from "../Home/AppointmentTime/styled";
 import { Empty } from "antd";
+import { StyledSubmitButton } from "./styled";
 
 export const DiaryList = () => {
  

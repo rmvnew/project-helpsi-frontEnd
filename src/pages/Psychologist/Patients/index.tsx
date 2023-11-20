@@ -7,33 +7,34 @@ import ListIcon from "@mui/icons-material/List";
 import SearchIcon from "@material-ui/icons/Search";
 import ArchiveIcon from "@mui/icons-material/Archive";
 
-import { PhoneOutlined, EmailOutlined, HomeOutlined, PersonOutlineOutlined } from '@mui/icons-material';
-
+import { PhoneOutlined, EmailOutlined, HomeOutlined, PersonOutlineOutlined} from '@mui/icons-material';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
 
 import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
 
 import { formatPhoneNumber, getFormattedName, truncateString } from "../../../common/functions/formatString";
-import { FilterContainer, SearchContainer, PatientContainer, Item, TitleContainer, ActionLinks, Button, StyledListIcon, ModalContainer, Info, Data, Diagnosis } from "./styled";
+import { FilterContainer, SearchContainer, PatientContainer, Item, TitleContainer, ActionLinks, Button, StyledListIcon, ModalContainer, Info, Data, Diagnosis, Text } from "./styled";
 
 import { User } from "../../../interface/user.interface";
 import { api } from "../../../hooks/useApi";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 
-import { useTranslation } from "react-i18next";
-import "../../../i18next/GenderLst";
-
 import ptBR from "date-fns/locale/pt-BR";
 import { format } from "date-fns";
+import { StyledSubmitButton } from "../../Patient/DiaryList/styled";
+import { EditModal } from "./editModal";
+
 
 export const Patients: React.FC = () => {
 
   const currentUser = useCurrentUser();
-  const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedPatient, setSelectedPatient] = useState<User | null>(null);
   const [openModal, setOpenModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [patients, setPatients] = useState<User[]>([]);
 
   const [paginationMeta, setPaginationMeta] = useState({currentPage: 1,totalPages: 1,itemCount: 0});
@@ -42,8 +43,11 @@ export const Patients: React.FC = () => {
   const [limit, setLimit] = useState(5);
 
   useEffect(() => {
+
     const getPatients = async () => {
+
       try {
+
         const userId = currentUser?.user_id;
         const response = await api.get("/user/all-patients/psychologist", {
           params: {
@@ -52,7 +56,7 @@ export const Patients: React.FC = () => {
             limit,
           },
         });
-
+        
         if (response.data) {
           setPatients(response.data.items);
 
@@ -65,6 +69,7 @@ export const Patients: React.FC = () => {
         }
 
         setTotalPages(Math.ceil(response.data.total / limit));
+        
       } catch (error) {
         console.error("Error fetching patient data:", error);
       }
@@ -91,7 +96,14 @@ export const Patients: React.FC = () => {
     setSelectedPatient(patient);
     setOpenModal(true);
     handleMenuClose();
+    
   };
+
+  const handleEditDiagnosis = () => {
+    setOpenModal(false);
+    setOpenEditModal(true);
+  };
+
 
   const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -194,8 +206,8 @@ export const Patients: React.FC = () => {
               <Info>
                 <Data>
                   <span><PersonOutlineOutlined /> {getFormattedName(selectedPatient.user_name)}</span>
-                  <span><PersonOutlineOutlined /> {t(getFormattedName(selectedPatient.user_genre))}</span>
-                  <span><PersonOutlineOutlined /> Cadastrado no dia: {format(new Date(selectedPatient.create_at), " d'/'MM'/'yyyy", { locale: ptBR })}</span>
+                  <span><CalendarMonthOutlinedIcon /> Nascimento: {format(new Date(selectedPatient.user_date_of_birth), " d'/'MM'/'yyyy", { locale: ptBR })}</span>
+                  <span><EditCalendarOutlinedIcon  /> Registro: {format(new Date(selectedPatient.create_at), " d'/'MM'/'yyyy", { locale: ptBR })}</span>
                 </Data>
                 <Data>
                   <span><PhoneOutlined /> {formatPhoneNumber(selectedPatient.user_phone)}</span>
@@ -212,23 +224,48 @@ export const Patients: React.FC = () => {
               </Info>
 
               <Diagnosis>
-                <h3>Diagnóstico</h3>
-                <p>{selectedPatient.patientDetail.diagnosis}</p>
+                <Text>
+                  <h3>Diagnóstico</h3>
+                  <p>{selectedPatient.patientDetail.diagnosis}</p>
+                </Text>
               </Diagnosis>
 
               <Diagnosis>
-                <h3>Frequência de sessões</h3>
-                <p>{selectedPatient.patientDetail.session_frequency}</p>
+                <Text>
+                  <h3>Motivo da consulta</h3>
+                  <p>{selectedPatient.patientDetail.consultation_reason}</p>
+                </Text>
               </Diagnosis>
+
               <Diagnosis>
-                <h3>Status Atual</h3>
-                <p>{selectedPatient.patientDetail.current_status}</p>
+                <Text>
+                  <h3>Frequência de sessões</h3>
+                  <p>{selectedPatient.patientDetail.session_frequency}</p>
+                </Text>
               </Diagnosis>
+              
+
+              <Diagnosis>
+                <Text>
+                  <h3>Status Atual</h3>
+                  <p>{selectedPatient.patientDetail.current_status}</p>
+                </Text>
+              </Diagnosis>
+
+
+              <StyledSubmitButton type="submit" onClick={handleEditDiagnosis}>Editar Relatório</StyledSubmitButton>
                             
             </ModalContainer>
           )}
         </DialogContent>
       </Dialog>
+
+      <EditModal
+        open={openEditModal}
+        onClose={() => setOpenEditModal(false)}
+        patient={selectedPatient}
+      />
+      
       </PatientContainer>
 
     </Body>

@@ -226,7 +226,10 @@ export const NoDataContainer = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  height: 762px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   > h2 {
     padding-bottom: 10px;
@@ -237,8 +240,11 @@ export const ModalContainer = styled.div`
 
 export const Info = styled.div`
   display: flex;
-  gap: 10px;
-  margin-top: 30px;
+  gap: 100px;
+
+  @media (max-width: 450px) {
+    gap: 10px;
+  }
 `;
 
 export const Data = styled.div`
@@ -260,7 +266,6 @@ export const Data = styled.div`
 `;
 
 export const Diagnosis = styled.div`
-  margin-top: 30px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -271,4 +276,20 @@ export const Diagnosis = styled.div`
     font-family: sans-serif;
     text-align: center;
   }
+`;
+
+export const Text = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+
+  > p {
+    width: 70%;
+  }
+`;
+
+export const TitleEdit = styled.h3`
+  color: var(--bg-dark);
 `;

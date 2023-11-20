@@ -2,11 +2,12 @@ import { useEffect, useRef, ChangeEvent } from "react";
 import { useState } from "react";
 import { api } from "../../../hooks/useApi";
 import { Body } from "../../../components/Layout/Container/style";
-import { StyledSubmitButton } from "../PatientDetails/styled";
+
 import { Container, GraphicContainer, StyledTextarea, Title } from "./styled";
 
 import Chart from "chart.js/auto";
 import Header from "../../../components/Layout/Header/psy";
+import { StyledSubmitButton } from "../../Patient/DiaryList/styled";
 
 const Graphic = () => {
   const [inputText, setInputText] = useState("");

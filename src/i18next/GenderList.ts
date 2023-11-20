@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-const resources = {
+export const resources = {
   en: {
     translation: {
       MALE: "MALE",
@@ -12,10 +12,10 @@ const resources = {
   },
   pt: {
     translation: {
-        MALE: "MASCULINO",
-        FEMALE: "FEMININO",
-        NON_BINARY: "NÃO-BINÁRIO",
-        OTHER: "OUTRO",
+      MALE: "Masculino",
+      FEMALE: "Feminino",
+      NON_BINARY: "Não-binário",
+      OTHER: "Outro",
     },
   },
 };
@@ -30,3 +30,4 @@ i18n.use(initReactI18next).init({
 });
 
 export default i18n;
+
