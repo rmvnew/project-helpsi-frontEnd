@@ -3,7 +3,6 @@ import Header from "../../../components/Layout/Header/psy";
 import icon1 from "../../../assets/icons/Google_Calendar.svg";
 import icon2 from "../../../assets/icons/Health_Checkup.svg";
 import icon3 from "../../../assets/icons/Journal.svg";
-import icon4 from "../../../assets/icons/Google_Docs.svg";
 import { Link } from "react-router-dom";
 
 export const HomePsy = () => {
@@ -27,10 +26,7 @@ export const HomePsy = () => {
                 Diário de Emoções
                 <img src={icon3} alt="Diário de Emoções" className="icon" />
               </Link>
-              <Link to="/psy/patient-data" className="card-data">
-                Documentos
-                <img src={icon4} alt="Documentos" className="icon" />
-              </Link>
+          
             </div>
           </div>
         </div>

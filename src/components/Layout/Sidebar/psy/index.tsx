@@ -3,18 +3,15 @@ import { Link } from "react-router-dom";
 import logo from "../../../../assets/img/logo.svg";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import SignalCellularAltOutlinedIcon from "@mui/icons-material/SignalCellularAltOutlined";
 
 import { Sidebar, SidebarLink } from "../styled";
-import { DocumentsLink } from "../../Header/psy/documents";
 import { SidebarPsyProps } from "../../../../interface/sidebar.interface";
-import { SubItemsWrapper } from "../SubItemsWrapper";
 
-const SidebarComponent: React.FC<SidebarPsyProps> = ({
-  isSidebarOpen,
-  isDocumentsExpanded,
-  toggleDocuments,
-}) => (
+const SidebarComponent: React.FC<SidebarPsyProps> = ({ isSidebarOpen }) => (
   <Sidebar open={isSidebarOpen}>
     <img src={logo} alt="logo da empresa" style={{ width: "150px" }} />
     <SidebarLink>
@@ -25,20 +22,30 @@ const SidebarComponent: React.FC<SidebarPsyProps> = ({
     </SidebarLink>
 
     <SidebarLink>
-      <DocumentsLink
-        isDocumentsExpanded={isDocumentsExpanded}
-        toggleDocuments={toggleDocuments}
-      />
-    </SidebarLink>
-
-    <SubItemsWrapper visible={isDocumentsExpanded}>
-      <Link to="/psy/service-report">Relatório</Link>
-      
-      </SubItemsWrapper>
-    <SidebarLink>
       <Link to="/psy/patients">
         <PeopleAltOutlinedIcon />
         Pacientes
+      </Link>
+    </SidebarLink>
+
+    <SidebarLink>
+      <Link to="/psy/schedule">
+        <CalendarMonthOutlinedIcon />
+        Minha Agenda
+      </Link>
+    </SidebarLink>
+
+    <SidebarLink>
+      <Link to="/psy/patient-diary">
+        <MenuBookOutlinedIcon />
+        Diários
+      </Link>
+    </SidebarLink>
+
+    <SidebarLink>
+      <Link to="/psy/graphic">
+        <SignalCellularAltOutlinedIcon />
+        Emoções
       </Link>
     </SidebarLink>
   </Sidebar>
