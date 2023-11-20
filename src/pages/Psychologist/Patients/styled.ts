@@ -262,6 +262,11 @@ export const Data = styled.div`
     > svg {
       width: 25px;
     }
+
+    @media (max-width: 450px) {
+      font-size: 0.7rem;
+    }
+    
   }
 `;
 
@@ -287,6 +292,10 @@ export const Text = styled.div`
 
   > p {
     width: 70%;
+
+    @media (max-width: 450px) {
+      font-size: 0.8rem;
+    }
   }
 `;
 
