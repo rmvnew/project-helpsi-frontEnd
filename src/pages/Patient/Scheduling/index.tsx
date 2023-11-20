@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSchedulingData } from "../../../hooks/useSchedulingData";
 
 import { Body } from "../../../components/Layout/Container/style";
-import { Button, Column, ContainerButton, Input, Label, SchedulingContainer, SchedulingForm } from "./styled";
+import { Button,  ContainerButton, Input, Label, SchedulingContainer, SchedulingForm } from "./styled";
 
 import Header from "../../../components/Layout/Header/patient";
 

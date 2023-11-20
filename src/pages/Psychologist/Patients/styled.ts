@@ -182,7 +182,6 @@ export const Item = styled.div`
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 
-  
   .profile,
   > p {
     flex: 1;
@@ -190,7 +189,7 @@ export const Item = styled.div`
     align-items: center;
     gap: 10px;
   }
-  
+
   p {
     font-family: sans-serif;
   }
@@ -201,11 +200,8 @@ export const Item = styled.div`
     }
 
     .p {
-    font-size: .8rem;
-  }
-
-
-    
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -225,6 +221,54 @@ export const NoDataContainer = styled.div`
   color: #757575;
 
   p {
+    text-align: center;
+  }
+`;
+
+export const ModalContainer = styled.div`
+  height: 762px;
+
+  > h2 {
+    padding-bottom: 10px;
+    border-bottom: 2px solid black;
+    width: 300px;
+  }
+`;
+
+export const Info = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+`;
+
+export const Data = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > span {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+
+    > svg {
+      width: 25px;
+    }
+  }
+`;
+
+export const Diagnosis = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+
+  > h3,
+  p {
+    font-family: sans-serif;
     text-align: center;
   }
 `;

@@ -1,7 +1,7 @@
 import { Address } from "./address.interface";
+import { PatientDetailsInterface } from "./patientDetails.interface";
 import { Psychologist } from "./psychologist.interface";
 import { Specialty } from "./specialty.interface";
-
 
 export interface User {
   address: Address;
@@ -22,4 +22,5 @@ export interface User {
   user_rg: string;
   user_status: boolean;
   specialtys: Specialty[];
+  patientDetail: PatientDetailsInterface;
 }
