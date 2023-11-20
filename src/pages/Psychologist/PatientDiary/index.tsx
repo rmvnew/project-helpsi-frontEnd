@@ -58,7 +58,7 @@ export const PatientDiary = () => {
     };
 
     fetchData();
-  }, [page, limit]);
+  }, [page, limit, totalPages]);
 
   const handleViewClick = (entry: DiaryListInterface ) => {
     setSelectedEntry(entry);

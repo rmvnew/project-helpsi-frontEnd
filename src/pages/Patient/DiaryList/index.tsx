@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { Body } from "../../../components/Layout/Container/style";
 import { format } from "date-fns";
 import { api } from "../../../hooks/useApi";
@@ -7,7 +7,6 @@ import Pagination from "@mui/material/Pagination";
 import ptBR from "date-fns/locale/pt-BR";
 import { getFirstNameFormatted, truncateString } from "../../../common/functions/formatString";
 import "../../Psychologist/PatientDiary/style.css";
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { StyledSubmitButton } from "../../Psychologist/PatientDetails/styled";
 import { StyledTextarea } from "../../Psychologist/Graphic/styled";
 import { DiaryListInterface } from "../../../interface/diaryList.interface";
@@ -18,34 +17,21 @@ import useOnePatient from "../../../hooks/useOnePatient";
 import { Loader } from "../../../components/Layout/Loader";
 
 export const DiaryList = () => {
-  const currentUser = useCurrentUser();
-  const { diaryEntries, loading, fetchDiaryEntries, paginationMeta } = useDiaryEntries();
+ 
+  const { diaryEntries, loading, paginationMeta,  setLimit, setPage, limit, getDiaryEntries } = useDiaryEntries();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const [selectedEntry, setSelectedEntry] = useState<DiaryListInterface | null>(null);
 
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
-
   const [editedText, setEditedText] = useState<string>("");
   const patientDetailsId = useOnePatient(editedText);
-
-  const fetchDiaryEntriesMemoized = useCallback(
-    () => {
-      fetchDiaryEntries(page, limit, currentUser?.user_id);
-    },
-    [page, limit, currentUser?.user_id]
-  );
-  
-  useEffect(() => {
-    fetchDiaryEntriesMemoized();
-  }, [fetchDiaryEntriesMemoized]);
 
   const handleEdit = async () => {
 
     try {
+      
       if (selectedEntry) {
 
         await api.put(`/diary-entry/${selectedEntry.diary_entry_id}`, {
@@ -54,11 +40,9 @@ export const DiaryList = () => {
           patient_details_id: patientDetailsId,
         });
 
-        fetchDiaryEntries(page, limit, currentUser?.user_id);
-
         toast.success("Diário editado com sucesso");
-
         handleCloseEditModal();
+        getDiaryEntries();
       }
       
       } catch (error) {
@@ -74,11 +58,9 @@ export const DiaryList = () => {
       if (selectedEntry) {
         await api.delete(`/diary-entry/${selectedEntry.diary_entry_id}`);
 
-        fetchDiaryEntries(page, limit, currentUser?.user_id);
-
         toast.success("Diário excluído com sucesso");
         handleCloseModal();
-
+        getDiaryEntries();
       }
 
       } catch (error) {
@@ -87,7 +69,7 @@ export const DiaryList = () => {
       }
   };
 
-  const handleViewClick = (entry: DiaryListInterface) => {
+  const handleView = (entry: DiaryListInterface) => {
     setSelectedEntry(entry);
     setIsModalOpen(true);
   };
@@ -138,7 +120,7 @@ export const DiaryList = () => {
                 </p>
 
                 <div className="container-button">
-                  <button className="view-button" onClick={() => handleViewClick(entry)} >
+                  <button className="view-button" onClick={() => handleView(entry)} >
                     Visualizar
                   </button>
                   <button className="view-button" onClick={() => handleOpenEditModal(entry)} >
