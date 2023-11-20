@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { Body } from "../../../components/Layout/Container/style";
+import { useState, useEffect } from "react";
+
 import Header from "../../../components/Layout/Header/psy";
-import { Link } from "react-router-dom";
+import profile from "../../../assets/icons/icon_user_diary.svg";
+
+import { Body } from "../../../components/Layout/Container/style";
+import { GraphicResultChart } from "./GraphicResultChart";
+import { NoAppointmentsContainer } from "../../Patient/Home/AppointmentTime/styled";
+import { StyledSubmitButton } from "../../Patient/DiaryList/styled";
+import "./style.css";
+
+import ptBR from "date-fns/locale/pt-BR";
 import { format } from "date-fns";
+import { Empty } from "antd";
+
 import { api } from "../../../hooks/useApi";
+
 import { Dialog, DialogTitle, DialogContent, Typography } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-import ptBR from "date-fns/locale/pt-BR";
-import profile from "../../../assets/icons/icon_user_diary.svg";
+
 import { getFirstNameFormatted } from "../../../common/functions/formatString";
-import "./style.css";
 import { DiaryListInterface } from "../../../interface/diaryList.interface";
-import { NoAppointmentsContainer } from "../../Patient/Home/AppointmentTime/styled";
-import { Empty } from "antd";
+
 
 
 export const PatientDiary = () => {
-
   const [selectedEntry, setSelectedEntry] = useState<DiaryListInterface | null>(null);
   const [diaryEntries, setDiaryEntries] = useState<DiaryListInterface[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGraphModalOpen, setIsGraphModalOpen] = useState(false);
+  const [graphResult, setGraphResult] = useState<any>(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const [paginationMeta, setPaginationMeta] = useState({
-    currentPage: 1,
-    totalPages: 1,
-    itemCount: 0,
-  });
-  
+  const [paginationMeta, setPaginationMeta] = useState({ currentPage: 1, totalPages: 1, itemCount: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,20 +44,17 @@ export const PatientDiary = () => {
           },
         });
 
-
         if (response.data) {
           setDiaryEntries(response.data.items);
-  
+
           setPaginationMeta({
-              currentPage: response.data.meta.currentPage,
-              totalPages: response.data.meta.totalPages,
-              itemCount: response.data.meta.itemCount,
-            });
-      
+            currentPage: response.data.meta.currentPage,
+            totalPages: response.data.meta.totalPages,
+            itemCount: response.data.meta.itemCount,
+          });
         }
-        
+
         setTotalPages(Math.ceil(response.data.total / limit));
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -62,7 +63,7 @@ export const PatientDiary = () => {
     fetchData();
   }, [page, limit, totalPages]);
 
-  const handleViewClick = (entry: DiaryListInterface ) => {
+  const handleViewClick = (entry: DiaryListInterface) => {
     setSelectedEntry(entry);
     setIsModalOpen(true);
   };
@@ -71,10 +72,30 @@ export const PatientDiary = () => {
     setIsModalOpen(false);
   };
 
-  const handleChangePage = (
-    _event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
+  const handleGenerateGraphClick = async () => {
+    handleCloseModal();
+
+    try {
+      const response = await api.get("/diary-entry/emotion/min", {
+        params: {
+          text: selectedEntry?.text,
+        },
+      });
+
+      const { data } = response.data;
+
+      setGraphResult({
+        text: data.text,
+        emotion: data.emotion,
+      });
+
+      setIsGraphModalOpen(true);
+    } catch (error) {
+      console.error("Erro ao chamar a API:", error);
+    }
+  };
+
+  const handleChangePage = ( _event: React.ChangeEvent<unknown>, value: number ) => {
     setPage(value);
   };
 
@@ -83,25 +104,23 @@ export const PatientDiary = () => {
     setPage(1);
   };
 
-  if (diaryEntries.length === 0 ) {
+  if (diaryEntries.length === 0) {
     return (
-
-    <Body>
+      <Body>
         <Header />
         <div className="diary-container">
           <div className="content-container">
             <NoAppointmentsContainer>
               <Empty
-              image={Empty.PRESENTED_IMAGE_SIMPLE}
-              description="Nenhum diário no momento"
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="Nenhum diário no momento"
               />
             </NoAppointmentsContainer>
           </div>
         </div>
-    </Body>
+      </Body>
     );
   }
-
   return (
     <>
       <Body>
@@ -109,9 +128,7 @@ export const PatientDiary = () => {
         <div className="diary-container">
           <div className="align">
             <h2 className="diary-title">Diário dos Pacientes</h2>
-            <Link to="/psy/graphic" className="view-button">
-              Gráfico de emoções
-            </Link>
+            
           </div>
 
           <div className="content-container grid-container">
@@ -152,7 +169,7 @@ export const PatientDiary = () => {
               shape="rounded"
               style={{ marginTop: "20px" }}
             />
-            <div className="items"  style={{ marginTop: "20px" }}>
+            <div className="items" style={{ marginTop: "20px" }}>
               <label>Itens por página:</label>
               <select value={limit} onChange={handleChangeLimit}>
                 <option value={5}>5</option>
@@ -187,10 +204,36 @@ export const PatientDiary = () => {
                     )}
                   </span>
                 </Typography>
+
+                
+                <StyledSubmitButton
+                  style={{ marginTop: "20px" }}
+                  onClick={handleGenerateGraphClick}
+                >
+                  Gerar gráfico de emoções
+                </StyledSubmitButton>
               </DialogContent>
             </>
           )}
         </Dialog>
+
+        
+        <Dialog open={isGraphModalOpen} onClose={() => setIsGraphModalOpen(false)}>
+          {graphResult && (
+            <>
+              <DialogContent className="modal-content">
+
+                {selectedEntry && ( 
+                <DialogTitle className="modal-title">
+                  <span> Emoções de { getFirstNameFormatted( selectedEntry.patient_details.user.user_name )} </span>
+                </DialogTitle> )}
+                
+                <GraphicResultChart emotion={graphResult.emotion} />
+                
+                </DialogContent>
+              </>
+            )}
+          </Dialog>
       </Body>
     </>
   );

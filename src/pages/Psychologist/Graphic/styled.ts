@@ -30,7 +30,6 @@ export const GraphicContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  
 `;
 
 export const Title = styled.h2`
