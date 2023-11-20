@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-
 import { toast } from "react-toastify";
 import { useCurrentUser } from "./useCurrentUser";
 import { api } from "./useApi";
 
-const useFetchPatientDetailsId = (editedText: string) => {
+const useOnePatient = (editedText: string) => {
+
   const currentUser = useCurrentUser();
   const [patientDetailsId, setPatientDetailsId] = useState("");
 
   useEffect(() => {
-    const fetchPatientDetailsId = async () => {
+    const getOnePatient = async () => {
       try {
         if (currentUser && currentUser.user_id) {
           const response = await api.get("/user/one-patient", {
@@ -29,11 +29,11 @@ const useFetchPatientDetailsId = (editedText: string) => {
     };
 
     if (currentUser && editedText) {
-      fetchPatientDetailsId();
+      getOnePatient();
     }
   }, [currentUser, editedText]);
 
   return patientDetailsId;
 };
 
-export default useFetchPatientDetailsId;
+export default useOnePatient;

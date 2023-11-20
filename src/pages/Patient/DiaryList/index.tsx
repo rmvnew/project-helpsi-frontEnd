@@ -14,7 +14,7 @@ import { DiaryListInterface } from "../../../interface/diaryList.interface";
 import { toast } from "react-toastify";
 import Header from "../../../components/Layout/Header/patient";
 import { useDiaryEntries } from "../../../hooks/useDiaryEntries";
-import useFetchPatientDetailsId from "../../../hooks/useFetchPatientDetailsId";
+import useOnePatient from "../../../hooks/useOnePatient";
 import { Loader } from "../../../components/Layout/Loader";
 
 export const DiaryList = () => {
@@ -30,7 +30,7 @@ export const DiaryList = () => {
   const [limit, setLimit] = useState(5);
 
   const [editedText, setEditedText] = useState<string>("");
-  const patientDetailsId = useFetchPatientDetailsId(editedText);
+  const patientDetailsId = useOnePatient(editedText);
 
   const fetchDiaryEntriesMemoized = useCallback(
     () => {
