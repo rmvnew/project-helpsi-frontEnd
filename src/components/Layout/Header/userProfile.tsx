@@ -1,5 +1,5 @@
 import { AuthContext } from "../../../contexts/auth/AuthContext";
-import { getFormattedName } from "../../../common/functions/formatString";
+import { getFirstNameFormatted, getFormattedName } from "../../../common/functions/formatString";
 import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
@@ -65,6 +65,7 @@ export const UserProfileSection = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const formattedName = getFormattedName(auth.user?.name);
+  const firstName = getFirstNameFormatted(auth.user?.name ?? "");
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -92,7 +93,7 @@ export const UserProfileSection = () => {
             alt={formattedName ?? "Usuário"}
             sx={{ bgcolor: "#9fdfae", fontSize: ".8rem", marginTop: "10px" }}
           >
-            {getInitials(formattedName ?? "U")}
+            {getInitials(firstName ?? "U")}
           </Avatar>
         </IconButton>
       </Tooltip>
