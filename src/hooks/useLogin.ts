@@ -1,10 +1,6 @@
 import { ChangeEvent } from "react";
 import { useContext, useState } from "../common/utils/imports/signin";
-import {
-  AuthContext,
-  toast,
-  useNavigate,
-} from "../common/utils/imports/signin";
+import { AuthContext, toast, useNavigate } from "../common/utils/imports/signin";
 import { api } from "./useApi";
 
 export const useLogin = () => {
@@ -41,34 +37,39 @@ export const useLogin = () => {
   const handleLogin = async () => {
     setIsLoggingIn(true);
     const { email, password } = form;
-    if (email && password) {
-      const isLogged = await auth.signin(email, password);
-
-      if (isLogged && isLogged.status) {
-        const userInfo = await fetchUserInfo();
-
-        if (userInfo && userInfo.user_id) {
-          const userProfile = localStorage.getItem("userProfile");
-
-          if (userProfile === "PATIENT") {
-            navigate("/home");
-          } else if (userProfile === "PSYCHOLOGIST") {
-            navigate("/psy/home");
-          } else if (userProfile === "ADMIN") {
-            navigate("/admin");
-          } else if (userProfile === "ATTENDANT") {
-            navigate("/admin");
+  
+    try {
+      if (email && password) {
+        const isLogged = await auth.signin(email, password);
+  
+        if (isLogged && isLogged.status) {
+          const userInfo = await fetchUserInfo();
+  
+          if (userInfo && userInfo.user_id) {
+            const userProfile = localStorage.getItem("userProfile");
+  
+            if (userProfile === "PATIENT") {
+              navigate("/home");
+            } else if (userProfile === "PSYCHOLOGIST") {
+              navigate("/psy/home");
+            } else if (userProfile === "ADMIN") {
+              navigate("/admin");
+            } else if (userProfile === "ATTENDANT") {
+              navigate("/admin");
+            } else {
+              toast.error("Perfil de usuário desconhecido.");
+            }
           } else {
-            toast.error("Perfil de usuário desconhecido.");
+            toast.error("Erro ao fazer login. Verifique suas credenciais.");
           }
-
-          toast.success(`Bem vindo !!!`);
-        } else {
-          toast.error("Erro ao fazer login. Verifique suas credenciais.");
         }
       }
-    }
-    setIsLoggingIn(false);
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+      toast.error("Ocorreu um erro durante o login. Por favor, tente novamente.");
+    } finally {
+      setIsLoggingIn(false);
+    };
   };
 
   return {
