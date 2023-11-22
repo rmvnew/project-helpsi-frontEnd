@@ -9,8 +9,31 @@ export const StyledSubmitButton = styled("button")`
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  margin-top: 10px;
 
   &:hover {
     background-color: #78ba8b;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+`;
+
+export const DeleteButton = styled.button`
+
+  background-color: #f44336d1;
+  color: #fff;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #d32f2f;
+    color: #fff;
   }
 `;

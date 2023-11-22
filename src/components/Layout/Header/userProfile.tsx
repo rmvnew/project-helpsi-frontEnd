@@ -1,5 +1,8 @@
 import { AuthContext } from "../../../contexts/auth/AuthContext";
-import { getFirstNameFormatted, getFormattedName } from "../../../common/functions/formatString";
+import {
+  getFirstNameFormatted,
+  getFormattedName,
+} from "../../../common/functions/formatString";
 import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
@@ -85,7 +88,7 @@ export const UserProfileSection = () => {
     <UserProfile>
       <MyProfile>
         <span style={styles.greeting}>{`${formattedName ?? "Usuário"}`}</span>
-        <span style={styles.profileInfo}>Meu perfil</span>
+        <span style={styles.profileInfo} onClick={closeMenu} >Meu perfil</span>
       </MyProfile>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu}>
@@ -112,10 +115,7 @@ export const UserProfileSection = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem onClick={closeMenu}>Config</MenuItem>
-        <MenuItem>Meu Perfil</MenuItem>
         <MenuItem onClick={handleLogout}>Sair</MenuItem>
-     
       </Menu>
     </UserProfile>
   );

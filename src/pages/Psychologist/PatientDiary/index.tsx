@@ -20,6 +20,7 @@ import Pagination from "@mui/material/Pagination";
 
 import { getFirstNameFormatted } from "../../../common/functions/formatString";
 import { DiaryListInterface } from "../../../interface/diaryList.interface";
+import { Loader } from "../../../components/Layout/Loader";
 
 
 
@@ -32,11 +33,14 @@ export const PatientDiary = () => {
   const [graphResult, setGraphResult] = useState<any>(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
+  const [loading, setLoading] = useState(true);
   const [paginationMeta, setPaginationMeta] = useState({ currentPage: 1, totalPages: 1, itemCount: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
+
         const response = await api.get("/diary-entry", {
           params: {
             page,
@@ -57,6 +61,8 @@ export const PatientDiary = () => {
         setTotalPages(Math.ceil(response.data.total / limit));
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -108,17 +114,13 @@ export const PatientDiary = () => {
     return (
       <Body>
         <Header />
+        
         <div className="diary-container">
           <div className="content-container">
-            <NoAppointmentsContainer>
-              <Empty
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description="Nenhum diário no momento"
-              />
-            </NoAppointmentsContainer>
+            <Loader />
           </div>
         </div>
-      </Body>
+    </Body>
     );
   }
   return (
@@ -126,12 +128,24 @@ export const PatientDiary = () => {
       <Body>
         <Header />
         <div className="diary-container">
-          <div className="align">
-            <h2 className="diary-title">Diário dos Pacientes</h2>
-            
-          </div>
+
+          <h2 className="diary-title">Diário dos Pacientes</h2>
+
+          {loading ? (
+           <div className="diary-container">
+            <div className="content-container">
+              <NoAppointmentsContainer>
+                <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="Nenhum diário escrito no momento"
+                />
+              </NoAppointmentsContainer>
+           </div>
+         </div>
+          ) : (
 
           <div className="content-container grid-container">
+
             {diaryEntries.map((entry) => (
               <div key={entry.diary_entry_id} className="card">
                 <div className="card-profile">
@@ -159,6 +173,8 @@ export const PatientDiary = () => {
               </div>
             ))}
           </div>
+
+          )}
 
           <div className="page">
             <Pagination

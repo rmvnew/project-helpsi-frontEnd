@@ -25,6 +25,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import { format } from "date-fns";
 import { StyledSubmitButton } from "../../Patient/DiaryList/styled";
 import { EditModal } from "./editModal";
+import { Loader } from "../../../components/Layout/Loader";
 
 
 export const Patients: React.FC = () => {
@@ -41,12 +42,15 @@ export const Patients: React.FC = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
+  const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
-
     const getPatients = async () => {
 
       try {
+
+        setLoading(true);
 
         const userId = currentUser?.user_id;
         const response = await api.get("/user/all-patients/psychologist", {
@@ -56,7 +60,7 @@ export const Patients: React.FC = () => {
             limit,
           },
         });
-        
+
         if (response.data) {
           setPatients(response.data.items);
 
@@ -66,12 +70,14 @@ export const Patients: React.FC = () => {
             itemCount: response.data.meta.itemCount,
           });
 
+          setTotalPages(Math.ceil(response.data.total / limit));
         }
 
-        setTotalPages(Math.ceil(response.data.total / limit));
-        
+        setLoading(false);
+
       } catch (error) {
         console.error("Error fetching patient data:", error);
+        setLoading(false);
       }
     };
 
@@ -137,7 +143,7 @@ export const Patients: React.FC = () => {
 
         <div>
 
-          <TitleContainer>
+        <TitleContainer>
             <div className="profile">
               <PersonIcon style={{ visibility: "hidden" }} />
               <p>Nome</p>
@@ -145,32 +151,34 @@ export const Patients: React.FC = () => {
             <p className="none">Cidade</p>
             <p>Contato</p>
             <ListIcon style={{ visibility: "hidden" }} />
-          </TitleContainer>
+        </TitleContainer>
 
-          
-          {patients.map((patient) => (
-            <Item key={patient.user_id}>
-              <div className="profile">
-                <PersonIcon />
-                
-                <p className="p">{ truncateString(getFormattedName(patient.user_name), 17) }</p>
-              </div>
-              <p className="none p">{patient.address?.address_city}</p>
-              <p className="p">{formatPhoneNumber(patient.user_phone)}</p>
-              <StyledListIcon onClick={(event) => handleMenuClick(event, patient)} />
-              <Menu
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-              >
-                <MenuItem onClick={() => handleMenuClose()}>Arquivar paciente</MenuItem>
-                <MenuItem onClick={() => handleViewDetails(selectedPatient)}>Visualizar detalhes</MenuItem>
-
-              </Menu>
-            </Item>
-          ))}
-
+          {loading ? (
+            <Loader/>
+          ) : (
+            <div>
+              {patients.map((patient) => (
+                <Item key={patient.user_id}>
+                  <div className="profile">
+                    <PersonIcon />
+                    <p className="p">{truncateString(getFormattedName(patient.user_name), 17)}</p>
+                  </div>
+                  <p className="none p">{patient.address?.address_city}</p>
+                  <p className="p">{formatPhoneNumber(patient.user_phone)}</p>
+                  <StyledListIcon onClick={(event) => handleMenuClick(event, patient)} />
+                  <Menu
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleMenuClose}
+                  >
+                    <MenuItem onClick={() => handleMenuClose()}>Arquivar paciente</MenuItem>
+                    <MenuItem onClick={() => handleViewDetails(selectedPatient)}>Visualizar detalhes</MenuItem>
+                  </Menu>
+                </Item>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="page">

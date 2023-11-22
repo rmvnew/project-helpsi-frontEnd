@@ -16,7 +16,8 @@ import useOnePatient from "../../../hooks/useOnePatient";
 import { Loader } from "../../../components/Layout/Loader";
 import { NoAppointmentsContainer } from "../Home/AppointmentTime/styled";
 import { Empty } from "antd";
-import { StyledSubmitButton } from "./styled";
+import { ButtonContainer, DeleteButton, StyledSubmitButton } from "./styled";
+import {  Delete } from "@material-ui/icons";
 
 export const DiaryList = () => {
  
@@ -60,8 +61,8 @@ export const DiaryList = () => {
       if (selectedEntry) {
         await api.delete(`/diary-entry/${selectedEntry.diary_entry_id}`);
 
-        toast.success("Diário excluído com sucesso");
-        handleCloseModal();
+        toast.success("Diário excluído com sucesso!!");
+        handleCloseEditModal();
         getDiaryEntries();
       }
 
@@ -104,7 +105,7 @@ export const DiaryList = () => {
 
     <Body>
         <Header />
-
+        
         <div className="diary-container">
           <div className="content-container">
             <Loader/>
@@ -120,9 +121,7 @@ export const DiaryList = () => {
       <Body>
         <Header />
         <div className="diary-container">
-          <div className="align">
             <h2 className="diary-title">Meus diários</h2>
-          </div>
 
           {loading ? (
            <div className="diary-container">
@@ -153,9 +152,7 @@ export const DiaryList = () => {
                   <button className="view-button" onClick={() => handleOpenEditModal(entry)} >
                     Editar
                   </button>
-                  <button className="view-button" onClick={() => handleDelete()} >
-                    Excluir
-                  </button>
+                  
                 </div>
               </div>
             ))}
@@ -226,12 +223,14 @@ export const DiaryList = () => {
                 placeholder="Digite o texto do diário aqui..."
               />
 
-              <StyledSubmitButton
-                style={{ marginTop: "10px" }}
-                onClick={() => handleEdit()}
-              >
-                Salvar
-              </StyledSubmitButton>
+              <ButtonContainer>
+                <StyledSubmitButton onClick={() => handleEdit()}>
+                  Salvar
+                </StyledSubmitButton>
+                <DeleteButton  onClick={() => handleDelete()} >
+                <Delete />
+                </DeleteButton>
+              </ButtonContainer>
             </DialogContent>
           </>
         </Dialog>

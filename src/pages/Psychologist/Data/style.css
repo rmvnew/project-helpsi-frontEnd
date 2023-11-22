@@ -24,36 +24,32 @@
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 20px;
   width: 100%;
-  margin:  auto;
+  margin: auto;
 }
 
-.card-data,
-.single-card {
+.card-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   border: 1px solid #ccc;
   padding: 15px;
-  text-align: center;
   width: 100%;
+  height: 120px;
   background-color: #ffffff;
   color: var(--bg-dark);
   border-radius: 10px;
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.1);
-  font-size: .8rem;
+  font-size: 1rem;
   text-decoration: none;
   cursor: pointer;
 }
 
-.single-card {
-  width: 100%;
-  margin-left: 0;
-  margin-top: 20px;
+.card-data > svg {
+  width: 200px;
 }
 
-.icon {
-  margin-top: 25%;
-  width: 40px;
-  display: block;
-  margin: 20px auto 0;
-}
 
 @media (min-width: 820px) {
   .container {
@@ -61,27 +57,14 @@
   }
 
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     width: calc(100% - 25vh - 10px);
   }
 
-  .single-card {
-    width: 25vh;
-    margin-top: 0;
-    margin-left: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .card-data,
-  .single-card {
+  .card-data {
+    width: 200px;
     padding: 20px;
     font-size: 1rem;
   }
 
-  .icon {
-    width: 70px;
-  }
 }
