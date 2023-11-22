@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
-import { Container, Title } from "./styled";
-import { api } from "../../../../hooks/useApi";
-import { Btn } from "../styled";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { StyledTextarea } from "../../../Psychologist/Graphic/styled";
-import { useCurrentUser } from "../../../../hooks/useCurrentUser";
 import { useNavigate } from "react-router-dom";
 
+import { api } from "../../../../hooks/useApi";
+
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+
+import { StyledTextarea } from "../../../Psychologist/Graphic/styled";
+import { useCurrentUser } from "../../../../hooks/useCurrentUser";
+import { Btn } from "../styled";
+import { Container, Title } from "./styled";
+
+
 export const EmotionsDiary = () => {
+
   const [emotionText, setEmotionText] = useState("");
   const [patientDetailsId, setPatientDetailsId] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
   const navigate = useNavigate();
   const currentUser = useCurrentUser();
 
@@ -43,7 +49,14 @@ export const EmotionsDiary = () => {
   }, [currentUser]);
 
   const handleSaveEntry = async () => {
+
+    if (isSaving) {
+      return;
+    }
+
     try {
+      setIsSaving(true); 
+
       await api.post("/diary-entry", {
         text: emotionText,
         patient_details_id: patientDetailsId,
@@ -55,6 +68,10 @@ export const EmotionsDiary = () => {
     } catch (error) {
       console.error("Erro ao salvar entrada no diário:", error);
       toast.error("Erro ao salvar entrada no diário");
+    } finally {
+
+      setIsSaving(false);
+       
     }
   };
 

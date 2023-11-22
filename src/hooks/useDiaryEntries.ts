@@ -54,5 +54,5 @@ export const useDiaryEntries = () => {
     }
   }, [currentUser, limit, page, getDiaryEntries]);
 
-  return { diaryEntries, totalPages, loading, paginationMeta, setLimit, setPage , limit, getDiaryEntries};
+  return { diaryEntries, totalPages, loading, paginationMeta, setLimit, setPage , limit, getDiaryEntries, currentUser};
 };

@@ -20,7 +20,7 @@ import { StyledSubmitButton } from "./styled";
 
 export const DiaryList = () => {
  
-  const { diaryEntries, loading, paginationMeta,  setLimit, setPage, limit, getDiaryEntries } = useDiaryEntries();
+  const { diaryEntries, loading, paginationMeta,  setLimit, setPage, limit, getDiaryEntries, currentUser } = useDiaryEntries();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -99,19 +99,15 @@ export const DiaryList = () => {
     setPage(1);
   };
 
-  if (diaryEntries.length === 0 ) {
+  if (diaryEntries.length === 0 && currentUser?.user_id ) {
     return (
 
     <Body>
         <Header />
+
         <div className="diary-container">
           <div className="content-container">
-            <NoAppointmentsContainer>
-              <Empty
-              image={Empty.PRESENTED_IMAGE_SIMPLE}
-              description="Nenhum diário escrito no momento"
-              />
-            </NoAppointmentsContainer>
+            <Loader/>
           </div>
         </div>
     </Body>
@@ -129,7 +125,16 @@ export const DiaryList = () => {
           </div>
 
           {loading ? (
-            <Loader />
+           <div className="diary-container">
+            <div className="content-container">
+              <NoAppointmentsContainer>
+                <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="Nenhum diário escrito no momento"
+                />
+              </NoAppointmentsContainer>
+           </div>
+         </div>
           ) : (
 
           <div className="content-container grid-container">

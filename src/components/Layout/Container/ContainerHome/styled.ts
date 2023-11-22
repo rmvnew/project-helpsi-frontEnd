@@ -18,5 +18,6 @@ export const LoadContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 250px;
   
 `;
