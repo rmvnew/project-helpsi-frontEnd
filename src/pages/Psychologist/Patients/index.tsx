@@ -1,11 +1,11 @@
 import { useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+
 
 import {Dialog, DialogContent, Menu, MenuItem, Pagination } from "@mui/material";
 import PersonIcon from "@material-ui/icons/Person";
 import ListIcon from "@mui/icons-material/List";
 import SearchIcon from "@material-ui/icons/Search";
-import ArchiveIcon from "@mui/icons-material/Archive";
+
 
 import { PhoneOutlined, EmailOutlined, HomeOutlined, PersonOutlineOutlined} from '@mui/icons-material';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -15,7 +15,7 @@ import { Body } from "../../../components/Layout/Container/style";
 import Header from "../../../components/Layout/Header/psy";
 
 import { formatPhoneNumber, getFormattedName, truncateString } from "../../../common/functions/formatString";
-import { FilterContainer, SearchContainer, PatientContainer, Item, TitleContainer, ActionLinks, Button, StyledListIcon, ModalContainer, Info, Data, Diagnosis, Text } from "./styled";
+import { FilterContainer, SearchContainer, PatientContainer, Item, TitleContainer, StyledListIcon, ModalContainer, Info, Data, Diagnosis, Text } from "./styled";
 
 import { User } from "../../../interface/user.interface";
 import { api } from "../../../hooks/useApi";
@@ -131,14 +131,7 @@ export const Patients: React.FC = () => {
             <input type="text" placeholder="Pesquisar paciente..." />
           </SearchContainer>
 
-          <Button>
-            <ActionLinks>
-              <Link to="/psy/arquived">
-                <ArchiveIcon />
-                Arquivados
-              </Link>
-            </ActionLinks>
-          </Button>
+          
         </FilterContainer>
 
         <div>
@@ -172,7 +165,7 @@ export const Patients: React.FC = () => {
                     open={Boolean(anchorEl)}
                     onClose={handleMenuClose}
                   >
-                    <MenuItem onClick={() => handleMenuClose()}>Arquivar paciente</MenuItem>
+                    
                     <MenuItem onClick={() => handleViewDetails(selectedPatient)}>Visualizar detalhes</MenuItem>
                   </Menu>
                 </Item>

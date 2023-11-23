@@ -29,7 +29,7 @@ export const HomePsy = () => {
                 Diário de Emoções
                 <MenuBookOutlinedIcon />
               </Link>
-              <Link to="/psy/patient-diary" className="card-data">
+              <Link to="/psy/graphic" className="card-data">
                 Gráfico de Emoções
                 <SignalCellularAltOutlinedIcon  />
               </Link>

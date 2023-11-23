@@ -12,13 +12,15 @@ interface EditModalProps { open: boolean; onClose: () => void; patient: User | n
 export const EditModal: React.FC<EditModalProps> = ({ open, onClose, patient }) => {
 
   const [formData, setFormData] = useState({
+
     consultation_reason: "",
-    previousDiagnosis: "",
+    previousDiagnosis: "string",
     diagnosis: "",
-    therapyType: "",
+    therapyType: "string",
     session_frequency: "",
-    lastSessionDate: "",
+    lastSessionDate: "string",
     current_status: "",
+
   });
 
 

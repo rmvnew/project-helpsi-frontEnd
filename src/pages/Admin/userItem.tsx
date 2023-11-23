@@ -25,7 +25,7 @@ export const UserItem: React.FC<UserItemProps> = ({
         onDelete(userId);
       }
     } catch (error) {
-      toast.error("Error ao deletar o usuário!");
+      toast.error("Este usuário não pode ser deletado!");
     }
   };
 
